@@ -12,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class StudentSta
  */
-@WebServlet("/StudentSta")
-public class StudentSta extends HttpServlet {
+@WebServlet("/StuAnalysis")
+public class StuAnalysis extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentSta() {
+    public StuAnalysis() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ServletContext context = request.getServletContext();
-		context.getRequestDispatcher("/view/studentSta.jsp").forward(request, response);
+		context.getRequestDispatcher("/view/stuanalysis.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
