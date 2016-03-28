@@ -257,7 +257,7 @@ a.text-success:focus {
 
 .myform-row input[type=text],
 .myform-row input[type=password]{
-  /*é—ç ªhromeæ¶“å¬¬æ®‘æ¦›æ¨¿î…»æ¾¶Ñƒçš¬*/
+  /*¼´chromeÏÂµÄÄ¬ÈÏ´óĞ¡*/
   height: 16px;
   width: 170px;
 }
@@ -343,7 +343,7 @@ input[type=checkbox]{
 
 
 /* tab STARTS */
-/* é—ˆæ¬ï¿½tab */
+/* ¾²Ì¬tab */
 ul.static-tabs{
   background: url(http://mooctest.net/public/images/leftNavBg.png) repeat-x;
   border-bottom: 1px solid #d5d5d5;
@@ -659,7 +659,7 @@ table th[class*="span"],
   font-weight: normal;
 }
 .table-search-input{
-  /*firefoxæ¶“å¬®ç®æ´ï¸¿ç¬‰æ¶“ï¿½åš§*/
+  /*firefoxÏÂ¸ß¶È²»Ò»ÖÂ*/
   /*height: 24px;*/
   padding: 2px 4px;
 }
@@ -710,7 +710,7 @@ table th[class*="span"],
 }
 .modal-large{
   width: 800px;
-  margin-left: -400px;/*widthé¨å‹ªç«´é—ï¿½/
+  margin-left: -400px;/*widthµÄÒ»°ë*/
 }
 
 .modal.fade {
@@ -785,7 +785,7 @@ table th[class*="span"],
 /* ======== */
 /* specific */
 /* ======== */
-/* é‚æ¿ç¼“é”ç†»å…˜ */
+/* ĞÂ½¨¹¦ÄÜ */
 .add-item-div{
   margin-top: 20px;
   padding-left: 8px;
@@ -797,7 +797,7 @@ table th[class*="span"],
   text-decoration: underline;
 }
 
-/* é½æ¨¿î›¦orç€¹æ°«ç®Ÿé’æ¥„ã€ƒ */
+/* ÕªÒªor¶¨ÒåÁĞ±í */
 ul.item-list{
   font-size: 14px;
   list-style: none;
@@ -829,7 +829,7 @@ ul.item-list.tabled .item-value{
   display: table-cell;
 }
 
-/* éî… éª‡é’æ¥„ã€ƒ */
+/* °à¼¶ÁĞ±í */
 .single-class{
   border: 2px solid #E5E5E5;
   color: #444;
@@ -861,7 +861,7 @@ ul.item-list.tabled .item-value{
   text-align: center;
 }
 
-/* é’å—˜ç€½å¦¯â€³æ½¡ */
+/* ·ÖÎöÄ£¿é */
 .analysis-block{
   margin-bottom: 20px;
 }
@@ -895,7 +895,7 @@ ul.item-list.tabled .item-value{
   border: none;
 }
 
-/* æµ ï½‡çˆœé„å‰§ãš */
+/* ´úÂëÏÔÊ¾ */
 pre{
   display: block;
   word-break: break-all;
@@ -1093,12 +1093,12 @@ pre code{
 /* ========== */
 /* my plugins */
 /* ========== */
-/* ç›ã„¥å´Ÿç¼‚æ ¬ç·« */
+/* ±íµ¥±à¼­ */
 .myAjaxEditable-static{
   display: inline-block;
   line-height: 26px;
   min-height: 26px;
-  /*é—ƒå‰î„›å¨Œâ„ƒæ¹éå‘­î†éƒç§idthæ¶“ï¿½*/
+  /*·ÀÖ¹Ã»ÓĞÄÚÈİÊ±widthÎª0*/
   min-width: 100%;
 }
 .myAjaxEditable-trigger-link{
@@ -1116,12 +1116,12 @@ pre code{
   display: none;
 }
 .myAjaxEditable-btn-group{
-  /*chromeæ¶“åª¡extareaéšåº¡î‡®æ¶“å¶‰ç¶ˆé”›ä¸¡Eæ¶“å¬«î„œçº­ï¿½/
+  /*chromeÏÂtextareaºó¶Ô²»Æë£¡IEÏÂÕıÈ·*/
   /*vertical-align: text-bottom;*/
 }
 
 
-/* ç›ã„¦ç‰¸ç¼‚æ ¬ç·« */
+/* ±í¸ñ±à¼­ */
 .myTableEditable input[type=text]{
   height: 21px;
   width: 98%;
@@ -1135,6 +1135,7 @@ pre code{
 }
 
 
+/* ×Ô¶¨ÒåitemÌí¼Ó */
 .myCustomAppend-remove-link{
   margin-left: 10px;
 }
@@ -1143,6 +1144,12 @@ pre code{
 }
 
 
+
+/* ========== */
+/* ÌØÊâid     */
+/* ========== */
+/* ÑéÖ¤Âë */
+/* Ã¿¸öÒ³Ãæ×î¶àÖ»ÓĞ1¸ö */
 #vcodeLink{
   display: inline-block;
   margin-left: 5px;
@@ -1151,7 +1158,7 @@ pre code{
   vertical-align: middle;
 }
 
-/* ajaxæè—‰å†æ¶“ï¿½*/
+/* ajaxÔØÈëÖĞ */
 .loading-icon,
 #loadingIcon{
   display: none;
@@ -1159,7 +1166,7 @@ pre code{
 }
 
 
-/* headeré–®ã„¥å */
+/* header²¿·Ö */
 #topWrapper{
   margin: 20px auto 10px;
   *zoom: 1;
@@ -1176,7 +1183,7 @@ pre code{
 #bigTitle{
   color: #133161;
   float: left;
-  font-family: "æ¦›æˆœç¶‹","ç€¹å¬©ç¶‹","å¯°î†¿è’‹é—†å‘´ç²¦";
+  font-family: "ºÚÌå","ËÎÌå","Î¢ÈíÑÅºÚ";
   font-size: 24px;
   line-height: 75px;
 }
