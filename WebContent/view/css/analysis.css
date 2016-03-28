@@ -1,0 +1,20 @@
+.middleNav { float: right; margin-right: 1px; }
+.middleNav ul li { height: 55px;  text-align: center; display: block; float: left; margin-left: 25px; position: relative; }
+.middleNav ul li a { display: block; border: 1px solid #d5d5d5; background: url(http://mooctest.net/public/images/middlebg.png) repeat-x 0 0; -moz-border-radius: 2px; -webkit-border-radius: 2px; -khtml-border-radius: 2px; border-radius: 2px; color: #595858; font-size: 12px; position: relative; -moz-box-shadow: 0 2px 1px #fff; -webkit-box-shadow: 0 2px 1px #fff; box-shadow: 0 2px 1px #fff; }
+.middleNav ul li a span { display: block; padding: 34px 10px 0 10px; min-width: 48px; }
+
+.middleNav ul li.iMes a span { background: url(http://mooctest.net/public/images/icons/middlenav/dialog.png) no-repeat 50% 8px; }
+.middleNav ul li.iStats a span { background: url(http://mooctest.net/public/images/icons/middlenav/stats.png) no-repeat 50% 8px; }
+.middleNav ul li.iUser a span { background: url(http://mooctest.net/public/images/icons/middlenav/users.png) no-repeat 50% 8px; }
+.middleNav ul li.iOrders a span { background: url(http://mooctest.net/public/images/icons/middlenav/money.png) no-repeat 50% 8px; }
+.middleNav ul li.iLogoff a span { background: url(http://mooctest.net/public/images/icons/middlenav/logoff.png) no-repeat 50% 8px; }
+.middleNav ul li.iAdd a span { background: url(http://mooctest.net/public/images/icons/middlenav/add.png) no-repeat 50% 8px; }
+.middleNav ul li.iUpload a span { background: url(http://mooctest.net/public/images/icons/middlenav/arrowUp.png) no-repeat 50% 8px; }
+.middleNav ul li.iExam a span { background: url(http://mooctest.net/public/images/icons/middlenav/archive.png) no-repeat 50% 8px; }
+.middleNav ul li.iClass a span { background: url(http://mooctest.net/public/images/icons/middlenav/home2.png) no-repeat 50% 8px; }
+.middleNav ul li.iGuide a span { background: url(http://mooctest.net/public/images/icons/middlenav/balloons.png) no-repeat 50% 8px; }
+.middleNav ul li.iDownload a span { background: url(http://mooctest.net/public/images/icons/middlenav/inbox2.png) no-repeat 50% 8px; }
+.middleNav ul li.iFinish a span { background: url(http://mooctest.net/public/images/icons/middlenav/finishFlag.png) no-repeat 50% 8px; }
+
+.middleNav ul li a:hover { background: #f6f6f6; }
+.middleNav ul li a:active { background: #f1f1f1; }
