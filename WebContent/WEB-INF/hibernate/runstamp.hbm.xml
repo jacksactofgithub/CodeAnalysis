@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding='UTF-8'?>
-<!DOCTYPE hibernate-mapping PUBLIC
-	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+	
 <hibernate-mapping package="lmooc.modulize.entity">
-	<class name="Attendence" table="attendence" > 
-		<id name="attendID" column="attend_id" type="java.long.String">
-		<generator class="sequence"></generator>
-		</id>
+	<class name="Attendence" table="attendence">
+	<id name="attendID" column="attend_id" type="java.long.String">
+		<generator class="sequence"></generator></id>
 		<id name="studentID" column="stu_id" type = "java.long.String"></id>
 		<id name="subjectID" column="subject_id" type="java.long.String"></id>
 		<id name="second" column="second" type="int"></id>
