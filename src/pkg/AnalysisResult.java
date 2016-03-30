@@ -5,19 +5,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pkg.dao.AttendenceDAO;
 import pkg.entity.Attendence;
-import pkg.impl.AttendenceImpl;
 
 /**
  * Servlet implementation class AnalysisResult
  */
 @Controller
 public class AnalysisResult{
+	
+	@Autowired
+	AttendenceDAO dao;
 	
     public AnalysisResult() {
         super();
@@ -26,7 +29,7 @@ public class AnalysisResult{
     
     @RequestMapping("/result")
     public String showResult(Model model,HttpServletRequest request){
-    	System.out.println("result");
+    	
     	test();
     	JSONObject runResultJson = null;//
     	try {
@@ -76,7 +79,6 @@ public class AnalysisResult{
     
     private void test(){
     	Attendence attendence = new Attendence("1", "1", "1", 1, 1, 1, 1, 1, 1);
-    	AttendenceDAO dao = new AttendenceImpl();
     	System.out.println(dao.addAttendence(attendence));
     }
 

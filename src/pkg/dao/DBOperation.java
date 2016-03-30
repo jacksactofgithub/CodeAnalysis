@@ -27,6 +27,7 @@ public class DBOperation extends HibernateServiceSupport{
 	public int save(Object entity){
 		
 		try{
+			//this.save(entity);
 			this.getHibernateTemplate().save(entity);
 		}catch(Exception e){
 			e.printStackTrace();
