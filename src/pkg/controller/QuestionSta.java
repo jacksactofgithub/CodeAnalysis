@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -19,7 +18,7 @@ public class QuestionSta {
     }
 
     @RequestMapping("/questionSta")
-    public String showStatistics(Model model,HttpServletRequest request){
+    public String showStatistics(HttpServletRequest request){
     	JSONObject runResultJson = null;
 		try {
     		String obj1="{'stuid':121250088,'examNo':1,'questionNo':'1','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"

@@ -3,7 +3,6 @@ package pkg.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -16,8 +15,14 @@ public class StuAnalysis {
         super();
     }
     
+    /**
+     * 学生点击考试分析页面;显示自己参加过的考试
+     * @param request
+     * @return
+     */
+    
     @RequestMapping("/stuAnalysis")
-    public String studentAnalysis(Model model,HttpServletRequest request){
+    public String studentAnalysis(HttpServletRequest request){
 		return "view/stuanalysis";
 	}
 
