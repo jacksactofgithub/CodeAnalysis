@@ -9,6 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pkg.dao.AttendenceDAO;
+import pkg.entity.Attendence;
+import pkg.impl.AttendenceImpl;
+
 /**
  * Servlet implementation class AnalysisResult
  */
@@ -22,6 +26,8 @@ public class AnalysisResult{
     
     @RequestMapping("/result")
     public String showResult(Model model,HttpServletRequest request){
+    	System.out.println("result");
+    	test();
     	JSONObject runResultJson = null;//
     	try {
     		String obj1="{'stuid':121250088,'examNo':1,'questionNo':'1','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"
@@ -66,6 +72,12 @@ public class AnalysisResult{
     
     public void reverse(String str){//
     	
+    }
+    
+    private void test(){
+    	Attendence attendence = new Attendence("1", "1", "1", 1, 1, 1, 1, 1, 1);
+    	AttendenceDAO dao = new AttendenceImpl();
+    	System.out.println(dao.addAttendence(attendence));
     }
 
 }

@@ -14,7 +14,7 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
   http://www.springframework.org/schema/context   
    http://www.springframework.org/schema/context/spring-context-2.5.xsd
 ">
-	<context:component-scan  base-package="pkg"/>   
+	<context:component-scan  base-package="lmooc.modulize.dao"/>   
 	<!-- 支持aop注解 -->
 	<aop:aspectj-autoproxy />
 	
@@ -29,7 +29,6 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
             <property name="password" value=""></property>
             <property name="initialPoolSize" value="1"></property>
 			<property name="maxPoolSize" value="200"></property>
-       	     
     </bean>
 
    <bean id="sessionFactory"  
@@ -47,9 +46,7 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
                    <prop key="hibernate.hbm2ddl.auto">update</prop>
                </props>
            </property>
-		<property name="packagesToScan">
-			<value>lmooc.modulize.dao</value>
-		</property>
+		
    </bean>  
 <!-- <bean id="init" class="cn.ztweb.manager.impl.InitDataService"></bean> -->
 <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" >
