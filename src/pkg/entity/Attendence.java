@@ -19,39 +19,39 @@ public class Attendence implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String attendID;
-	private String studentID;
-	private String subjectID;
+	private int attend_id;
+	private String student_id;
+	private String subject_id;
 	private int second;
-	private int lineCount;
-	private int noteCount;
-	private int methodCount;
-	private int varCount;
-	private int maxCyclomaticCpl;
+	private int line_count;
+	private int note_count;
+	private int method_count;
+	private int var_count;
+	private int max_cyclomaticcpl;
 	
-	public Attendence(String attendID,String studentID,String subjectID,int second ,
+	public Attendence(int attendID,String studentID,String subjectID,int second ,
 			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl){
-		this.attendID = attendID;
-		this.studentID = studentID;
-		this.subjectID = subjectID;
+		this.attend_id = attendID;
+		this.student_id = studentID;
+		this.subject_id = subjectID;
 		this.second = second;
-		this.lineCount = lineCount;
-		this.noteCount = noteCount;
-		this.methodCount = methodCount;
-		this.varCount = varCount;
-		this.maxCyclomaticCpl = maxCyclomaticCpl;
+		this.line_count = lineCount;
+		this.note_count = noteCount;
+		this.method_count = methodCount;
+		this.var_count = varCount;
+		this.max_cyclomaticcpl = maxCyclomaticCpl;
 	}
 	
-	public String getAttendID(){
-		return attendID;
+	public int getAttendID(){
+		return attend_id;
 	}
 	
 	public String getStudentID(){
-		return studentID;
+		return student_id;
 	}
 	
 	public String getSubjectID(){
-		return subjectID;
+		return subject_id;
 	}
 	
 	public int getSecond(){
@@ -59,23 +59,23 @@ public class Attendence implements Serializable{
 	}
 	
 	public int getLineCount(){
-		return lineCount;
+		return line_count;
 	}
 	
 	public int getNoteCount(){
-		return noteCount;
+		return note_count;
 	}
 	
 	public int getMethodCount(){
-		return methodCount;
+		return method_count;
 	}
 	
 	public int getVarCount(){
-		return varCount;
+		return var_count;
 	}
 	
 	public int getMaxCyclomaticCpl(){
-		return maxCyclomaticCpl;
+		return max_cyclomaticcpl;
 	}
 	
 }

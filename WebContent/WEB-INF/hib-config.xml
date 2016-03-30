@@ -14,7 +14,7 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
   http://www.springframework.org/schema/context   
    http://www.springframework.org/schema/context/spring-context-2.5.xsd
 ">
-	<context:component-scan  base-package="lmooc.modulize.dao"/>   
+	<context:component-scan  base-package="pkg"/>   
 	<!-- 支持aop注解 -->
 	<aop:aspectj-autoproxy />
 	
@@ -46,6 +46,8 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
                    <prop key="hibernate.hbm2ddl.auto">update</prop>
                </props>
            </property>
+           
+           <property name="packagesToScan" value="pkg"></property>
 		
    </bean>  
 <!-- <bean id="init" class="cn.ztweb.manager.impl.InitDataService"></bean> -->

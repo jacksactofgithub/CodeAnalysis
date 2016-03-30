@@ -78,7 +78,7 @@ public class AnalysisResult{
     }
     
     private void test(){
-    	Attendence attendence = new Attendence("1", "1", "1", 1, 1, 1, 1, 1, 1);
+    	Attendence attendence = new Attendence(1, "1", "1", 1, 1, 1, 1, 1, 1);
     	System.out.println(dao.addAttendence(attendence));
     }
 
