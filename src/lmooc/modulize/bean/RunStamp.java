@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 public class RunStamp {
 
 	private long millisecond;
-	private String className;
+	private String proName;
 	private Map<String , Boolean> tests;
 	
 	public RunStamp(long millisecond , String className , Map<String , Boolean> tests){
 		this.millisecond = millisecond;
-		this.className = className;
+		this.proName = className;
 		this.tests = tests;
 	}
 	
@@ -21,7 +21,7 @@ public class RunStamp {
 	}
 	
 	public String getClassName(){
-		return className;
+		return proName;
 	}
 	
 	public Iterator<Entry<String , Boolean>> getTests(){

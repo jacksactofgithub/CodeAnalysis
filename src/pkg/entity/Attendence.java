@@ -20,8 +20,8 @@ public class Attendence implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int attend_id;
-	private String student_id;
-	private String subject_id;
+	private int student_id;
+	private int subject_id;
 	private int second;
 	private int line_count;
 	private int note_count;
@@ -29,7 +29,7 @@ public class Attendence implements Serializable{
 	private int var_count;
 	private int max_cyclomaticcpl;
 	
-	public Attendence(int attendID,String studentID,String subjectID,int second ,
+	public Attendence(int attendID,int studentID,int subjectID,int second ,
 			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl){
 		this.attend_id = attendID;
 		this.student_id = studentID;
@@ -46,11 +46,11 @@ public class Attendence implements Serializable{
 		return attend_id;
 	}
 	
-	public String getStudentID(){
+	public int getStudentID(){
 		return student_id;
 	}
 	
-	public String getSubjectID(){
+	public int getSubjectID(){
 		return subject_id;
 	}
 	
