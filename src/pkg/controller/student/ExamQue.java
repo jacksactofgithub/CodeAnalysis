@@ -1,5 +1,5 @@
 
-package pkg.controller;
+package pkg.controller.student;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,7 +23,7 @@ public class ExamQue{
     
     @RequestMapping("/examQue")
     public String showQuestions(HttpServletRequest request){
-    	return "view/examQue";
+    	return "view/student/examQue";
     }
 
 }
