@@ -216,8 +216,8 @@
             s.parentNode.insertBefore(hm, s);
         })();
         </script>
+</head>
 <body>
-
 <div id="header" class="wrapper">
     <div id="loginInfo">
         <img src="http://mooctest.net/public/images/userPic.png" alt=""/>
@@ -260,63 +260,92 @@
     </div>
 </div>
 
-	<div class="wrapper">
+<div class="wrapper">
 		<!-- Content -->
 		<div class="content">
 			<div class="title">
-				<h5>考试列表</h5>
+				<h5>考试分析</h5>
 			</div>
 
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
 					<ul id="breadCrumbList">
-						<li class="firstB"><a href="http://mooctest.net/stu/home" title="主页">主页</a></li>
-						<li>考试列表</li>
+						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
+						<!-- 这里是stuanalysis页面 -->
+						<li ><a href="http://mooctest.net/tea/home" title="考试分析">考试分析</a></li>
+						<li class="firstB">Java覆盖练习1</li><!-- 从request中取得考试信息类中的考试名 -->
 					</ul>
 				</div>
 			</div>
-			
-						<div class="widget">
-				<ul class="static-tabs">
-					<li class="active"><a
-						href="http://mooctest.net/stu/exam/list?type=all">全部考试</a></li>
-					<!-- <li><a href="/stu/exam/list?type=missed">错过的考试</a></li> -->
-				</ul>
 
-				<div class="static-tab-container">
-					<div class="static-tab-content">
-						<table class="table table-striped" id="examTable">
-							<thead>
-								<tr>
-									<th class="span3">考试名称</th>
-									<th class="span3">开始时间</th>
-									<th class="span3">结束时间</th>
-									<th class="span2">考试时长</th>
-									<th class="span2">平均得分</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><!-- 此处id是从后台得到 -->
-										<a href="/tea/analysis/exam?id=51" class="underline problem-analysis-link">2015性能测试1-备用</a>
-									</td>
-									<td>2015-07-01 10:00</td>
-									<td>2015-07-01 12:00</td>
-									<td>60&nbsp;分钟</td>
-									<td>83.0</td>
-								</tr>
-							</tbody>
-						</table>
 
-						<!-- 错过的考试（不等于没提交的考试） -->
-						<!-- 分页暂时去掉
-					<div class="pagination" id="examTablePagination" data-pn="1"
-						data-tpn="1"></div>  -->
+
+			<div class="widget">
+				<div class="head">
+					<h5 class="iInfo">考试信息</h5>
+				</div>
+				<div class="body">
+					<ul class="item-list tabled">
+						<li class="item">
+							<div class="item-name">考试名称</div>
+							<div class="item-value">Java覆盖练习1</div>
+						</li>
+						<li class="item">
+							<div class="item-name">考试日期</div>
+							<div class="item-value">2015-02-01</div>
+						</li>
+						<li class="item">
+							<div class="item-name">考试人数</div>
+							<div class="item-value">10</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="widget">
+				<div class="head">
+					<h5 class="iBook">考题列表</h5>
+				</div>
+				<div class="body">
+					<div class="problem-section">
+						<div class="info">
+							<ul class="item-list">
+								<li class="item">
+									<div class="item-name">第1题</div>
+									<div class="item-value">
+										<span>考题类型：Java覆盖测试；</span> <span>权重：30%</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="detail">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th class="span2">考题名称</th>
+										<th>难度</th>
+										<th>得分</th>
+										<th>最高分</th>
+										<th>考题描述</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<!-- 此处跳转至考生的具体题目代码分析 -->
+										<td><a href="/tea/analysis/problem?exam=51&pro=1"
+											class="underline">ArrayPartition</a></td>
+										<td>1</td>
+										<td>84.6</td>
+										<td>100.0</td>
+										<td>第一题</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-				<div class="fix"></div>
 			</div>
-			
 		</div>
 	</div>
 

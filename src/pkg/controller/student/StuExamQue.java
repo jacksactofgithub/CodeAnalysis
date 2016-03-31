@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Servlet implementation class ExamQue
  */
 @Controller
-public class ExamQue{
+public class StuExamQue{
        
-    public ExamQue() {
+    public StuExamQue() {
         super();
     }
     /**
@@ -21,9 +21,9 @@ public class ExamQue{
      * @return
      */
     
-    @RequestMapping("/examQue")
+    @RequestMapping("/stuExamQue")
     public String showQuestions(HttpServletRequest request){
-    	return "view/student/examQue";
+    	return "view/student/stuExamQue";
     }
 
 }
