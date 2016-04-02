@@ -299,6 +299,7 @@
 								<tr>
 									<td><!-- 此处id是从后台得到 -->
 										<a href="/tea/analysis/exam?id=51" class="underline problem-analysis-link">2015性能测试1-备用</a>
+										<a href="/tea/analysis/exam?id=51" class="underline problem-analysis-link">学生成绩分析</a>
 									</td>
 									<td>2015-07-01 10:00</td>
 									<td>2015-07-01 12:00</td>

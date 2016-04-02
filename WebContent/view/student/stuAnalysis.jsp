@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="org.json.JSONException"%>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
 <head>
 <title>慕测平台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -297,16 +301,31 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td><!-- 此处id是从后台得到 -->
-										<a href="/tea/analysis/exam?id=51" class="underline problem-analysis-link">2015性能测试1-备用</a>
-									</td>
-									<td>陈振宇</td>
-									<td>2015-07-01 10:00</td>
-									<td>2015-07-01 12:00</td>
-									<td>60&nbsp;分钟</td>
-									<td>83.0</td>
-								</tr>
+								<%JSONArray examArray = (JSONArray)request.getAttribute("examArray");
+								int len = examArray.length();
+								//{id:,exam_name:,teacher_name:,exam_begin_time:,exam_end_time:,exam_Duration:,score:,}
+ 								for(int i = 0;i<len;i++){
+									JSONObject exam = (JSONObject)examArray.get(i);
+									String teacher_name = exam.getString("teacher_name");
+									String exam_name = exam.getString("exam_name");
+									int id = exam.getInt("id");
+									String exam_begin_time = exam.getString("exam_begin_time");
+									String exam_end_time = exam.getString("exam_end_time");
+									int exam_Duration =exam.getInt("exam_Duration");
+									double score = exam.getDouble("score");
+									%>
+									<tr>
+										<td>
+											<a href="http://mooctest.net/tea/analysis/exam?id=<%=id%>" class="underline problem-analysis-link">
+											<%=exam_name %></a>
+										</td>
+										<td><%=teacher_name %></td>
+										<td><%=exam_begin_time %></td>
+										<td><%=exam_end_time %></td>
+										<td><%=exam_Duration %></td>
+										<td><%=score %></td>
+									</tr>
+								<%}%>
 							</tbody>
 						</table>
 

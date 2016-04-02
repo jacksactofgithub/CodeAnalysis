@@ -6,21 +6,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TeacherAnalysis {
-
-	public TeacherAnalysis() {
-
-	}
+public class ExamDetail {
 
 	/**
-	 * 教师点击考试分析查看
+	 * 教师查看一次考试的学生答题情况
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/teacherAnalysis")
+	@RequestMapping("/ExamDetail")
 	public String studentAnalysis(HttpServletRequest request) {
-		String teacherId = request.getParameter("teacherId");//得到教师id;getAttribute
-		return "view/teacher/teacherAnalysis";
+		return "view/teacher/examDetail";
 	}
-
+	
 }

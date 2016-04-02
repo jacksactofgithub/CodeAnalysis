@@ -278,8 +278,6 @@
 				</div>
 			</div>
 
-
-
 			<div class="widget">
 				<div class="head">
 					<h5 class="iInfo">考试信息</h5>
@@ -324,7 +322,7 @@
 									<tr>
 										<th class="span2">考题名称</th>
 										<th>难度</th>
-										<th>得分</th>
+										<th>平均分</th>
 										<th>最高分</th>
 										<th>考题描述</th>
 									</tr>

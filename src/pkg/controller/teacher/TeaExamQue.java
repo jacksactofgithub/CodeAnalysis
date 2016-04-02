@@ -7,10 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TeaExamQue {
-	
-	 @RequestMapping("/teaExamQue")
-	 public String studentAnalysis(HttpServletRequest request){
-			return "view/teacher/teaExamQue";
-	 }
+
+	/**
+	 * 教师查看一次考试的考题列表
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/teaExamQue")
+	public String studentAnalysis(HttpServletRequest request) {
+		return "view/teacher/teaExamQue";
+	}
 
 }
