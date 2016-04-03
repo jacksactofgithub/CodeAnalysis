@@ -219,6 +219,11 @@
             var s = document.getElementsByTagName("script")[0]; 
             s.parentNode.insertBefore(hm, s);
         })();
+        
+        function jump(){
+        	document.toanalysis.submit();
+        }
+        
         </script>
 </head>
 <body>
@@ -246,10 +251,12 @@
 						<li class="iClass"><a
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
-						<li class="iExam"><a
-							href="http://mooctest.net/stu/class/list" title=""><span>考试分析</span></a>
-						</li>
+						<li class="iExam"><a id="analysis" onclick="jump()"><span>考试分析</span></a>
+						</li><!-- 如果session无法共用 此处可以使用一个表单 -->
 					</ul>
+					<form action="/CodeAnalysis/result" name = "toanalysis" method="post">
+						<input type="hidden" name="account" value = "ls1995429">
+					</form>
 				</div>
 				<div class="middleNav pull-right">
 					<ul>
@@ -316,7 +323,7 @@
 									%>
 									<tr>
 										<td>
-											<a href="http://mooctest.net/tea/analysis/exam?id=<%=id%>" class="underline problem-analysis-link">
+											<a href="/CodeAnalysis/stuExamQue?id=<%=id%>" class="underline problem-analysis-link">
 											<%=exam_name %></a>
 										</td>
 										<td><%=teacher_name %></td>

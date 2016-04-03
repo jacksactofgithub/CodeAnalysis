@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="org.json.JSONException"%>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
 <head>
 <title>慕测平台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -271,13 +275,12 @@
 				<div class="breadCrumb module">
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
-						<!-- 这里是stuanalysis页面 -->
-						<li ><a href="http://mooctest.net/tea/home" title="考试分析">考试分析</a></li>
-						<li class="firstB">Java覆盖练习1</li><!-- 从request中取得考试信息类中的考试名 -->
+						<!-- 这里是stuanalysis页面 参数可能更改 -->
+						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li class="firstB"><%=request.getAttribute("exam_name") %></li>
 					</ul>
 				</div>
 			</div>
-
 
 
 			<div class="widget">
@@ -288,15 +291,11 @@
 					<ul class="item-list tabled">
 						<li class="item">
 							<div class="item-name">考试名称</div>
-							<div class="item-value">Java覆盖练习1</div>
+							<div class="item-value"><%=((JSONObject)request.getAttribute("exam")).getString("exam_name") %></div>
 						</li>
 						<li class="item">
 							<div class="item-name">考试日期</div>
 							<div class="item-value">2015-02-01</div>
-						</li>
-						<li class="item">
-							<div class="item-name">考试人数</div>
-							<div class="item-value">10</div>
 						</li>
 					</ul>
 				</div>
