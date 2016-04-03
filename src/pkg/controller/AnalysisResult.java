@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pkg.dao.AttendenceDAO;
@@ -27,8 +26,8 @@ public class AnalysisResult{
     }
 
     
-    @RequestMapping("/result")
-    public String showResult(Model model,HttpServletRequest request){
+    @RequestMapping("/analysisResult")
+    public String showResult(HttpServletRequest request){
     	
     	test();
     	JSONObject runResultJson = null;//

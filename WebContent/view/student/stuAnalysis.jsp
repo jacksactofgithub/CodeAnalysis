@@ -254,7 +254,7 @@
 						<li class="iExam"><a id="analysis" onclick="jump()"><span>考试分析</span></a>
 						</li><!-- 如果session无法共用 此处可以使用一个表单 -->
 					</ul>
-					<form action="/CodeAnalysis/result" name = "toanalysis" method="post">
+					<form action="/CodeAnalysis/stuAnalysis" name = "toanalysis" method="post">
 						<input type="hidden" name="account" value = "ls1995429">
 					</form>
 				</div>

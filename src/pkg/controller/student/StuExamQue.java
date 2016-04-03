@@ -35,7 +35,7 @@ public class StuExamQue{
     	String stu_account = (String) request.getAttribute("stu_account");
     	JSONObject exam = service.getExamDetail(stu_account, id);//此处可能接口更改
     	request.setAttribute("exam", exam);
-    	JSONArray problemArray = service.getProblems(id);
+    	JSONArray problemArray = service.getProblems(id,stu_account);
     	request.setAttribute("problemArray",problemArray);
     	return "view/student/stuExamQue";
     }

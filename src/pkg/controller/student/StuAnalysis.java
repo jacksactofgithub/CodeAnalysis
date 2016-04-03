@@ -28,6 +28,8 @@ public class StuAnalysis {
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request){
     	String stu_account = (String) request.getAttribute("stu_account");
+    	//String stu_account = (String) request.getParameter("stu_account");
+    	//request.setAttribute("stu_account",stu_account);//根据提供参数的方法不同更改
     	JSONArray examArray = service.getExams(stu_account);
     	request.setAttribute("examArray", examArray);
 		return "view/student/stuAnalysis";

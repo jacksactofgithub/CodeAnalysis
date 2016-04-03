@@ -34,9 +34,12 @@ public class StudentService {
 		return null;
 	}
 
-	public JSONArray getProblems(int exam_id){
+	public JSONArray getProblems(int exam_id,String stu_account){
 		try {
-			return new JSONArray("[]");
+			return new JSONArray("[{'problem_name':'题目一','problem_id':2, 'difficulty':1,'score':80,'ave_score':85,"
+					+ "'description':'题目一',},{'problem_name':'题目二','problem_id':3, 'difficulty':1,'score':80,'ave_score':85,"
+					+ "'description':'题目二',},{'problem_name':'题目三','problem_id':5, 'difficulty':1,'score':82,'ave_score':87,"
+					+ "'description':'题目三',}]");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
