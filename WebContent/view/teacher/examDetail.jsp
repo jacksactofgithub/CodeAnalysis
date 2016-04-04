@@ -279,7 +279,6 @@
 						<li class="firstB"><a href="http://mooctest.net/tea/home"
 							title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 -->
-						<li><a href="http://mooctest.net/tea/home" title="考试分析">考试分析</a></li>
 						<li class="firstB"><%=exam.getString("exam_name")%></li>
 						<!-- 从request中取得考试信息类中的考试名 -->
 					</ul>
@@ -327,8 +326,8 @@
 									<th class="span2" data-sorter="false">姓名</th>
 									<th class="span1" data-empty="zero">总成绩</th>
 									<th class="span1" data-empty="zero">题目一得分</th>
-									<th class="span1" data-empty="zero">题目二得分</th>
-									<th class="span1" data-empty="zero">题目三得分</th>
+									<th class="span1" data-empty="zero" id="th6">题目二得分</th>
+									<th class="span1" data-empty="zero" id="th7">题目三得分</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -344,23 +343,23 @@
 									double p1_score = student.getDouble("problem1_score");
 									double p2_score = student.getDouble("problem2_score");
 									double p3_score = student.getDouble("problem3_score");
-									%>
+									int problem1_id = student.getInt("problem1_id");
+									int problem2_id = student.getInt("problem2_id");
+									int problem3_id = student.getInt("problem3_id");
+								%>
 								<tr data-mem="0">
-									<td>uni_name</td>
-									<td>stu_no</td>
-									<td>stu_name</td>
+									<td><%=uni_name %></td>
+									<td><%=stu_no %></td>
+									<td><%=stu_name %></td>
 									<td><span class="text-success"> <span
-											class="final-score">score</span> 分
+											class="final-score"><%=score %></span> 分
 									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">p1_score</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">p2_score</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">p3_score</span> 分
-									</span></td>
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?exam_id=<%=exam.getString("id") %>&problem_id=<%=problem1_id%>" title="查看题目代码统计">
+									<span class="final-score"><%=p1_score %></span>分</a></td>
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?exam_id=<%=exam.getString("id") %>&problem_id=<%=problem2_id%>" title="查看题目代码统计">
+									<span class="final-score"><%=p2_score %></span>分</a></td>
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?exam_id=<%=exam.getString("id") %>&problem_id=<%=problem3_id%>" title="查看题目代码统计">
+									<span class="final-score"><%=p3_score %></span>分</a></td>
 								</tr>
 							<%} %>
 							</tbody>
@@ -449,7 +448,18 @@
         <script type="text/javascript">
         
         $(document).ready(function(){ //隐藏table的某行
-        	$('table tr').find('td:eq(6)').hide();//隐藏第六列
+        	var tag6 = '<%=request.getAttribute("problem2_id")%>';
+        	var tag7 = '<%=request.getAttribute("problem3_id")%>';
+        	if(tag6=="-1"){
+            	$('table tr').find('td:eq(6)').hide();//隐藏第六列
+            	$('#th6').hide();//隐藏第六列
+        	}
+        	
+        	if(tag7=="-1"){
+            	$('table tr').find('td:eq(7)').hide();//隐藏第六列
+            	$('#th7').hide();//隐藏第六列
+        	}
+
        	}); 
         
         $(function(){
@@ -504,7 +514,7 @@ $(function(){
 
         // keys
         var HOME = "主页";
-        var EXAM_LIST = "考试列表";
+        var EXAM_LIST = "考试分析";
         var EXAM_CREATE = "新建考试";
         var EXAM_VIEW = "<%=exam.getString("exam_name")%>";
         var CLASS_LIST = "班级列表";
@@ -523,7 +533,7 @@ $(function(){
         // 导航链接
         var LINKS = {};
         LINKS[HOME] = '/tea/home';
-        LINKS[EXAM_LIST] = '/tea/exam/list';
+        LINKS[EXAM_LIST] = '<%=request.getContextPath() %>/teacherAnalysis';
         LINKS[EXAM_CREATE] = '/tea/exam/create';
         LINKS[EXAM_VIEW] = '#';
         LINKS[CLASS_LIST] = '/tea/class/list';
