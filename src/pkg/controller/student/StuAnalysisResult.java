@@ -21,7 +21,7 @@ public class StuAnalysisResult{
     }
 
     
-    @RequestMapping("/analysisResult")
+    @RequestMapping("/stuAnalysisResult")
     public String showResult(HttpServletRequest request,HttpSession session){
     	
     	@SuppressWarnings("unused")

@@ -21,11 +21,11 @@ public class TeaAnalysisResult{
     }
 
     
-    @RequestMapping("/analysisResult")
+    @RequestMapping("/teaAnalysisResult")
     public String showResult(HttpServletRequest request,HttpSession session){
     	
     	@SuppressWarnings("unused")
-		String stu_account = (String) session.getAttribute("stu_account");
+		String stu_account = (String) session.getAttribute("tea_account");
     	
     	JSONObject runResultJson = null;
     	try {
