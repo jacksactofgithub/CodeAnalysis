@@ -32,7 +32,7 @@ public class StuAnalysis {
     	request.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
     	request.setAttribute("stu_name", "刘硕");
     	request.setAttribute("uni_name", "南京大学");
-    	
+    	//在第一次进的时候如果request中带了参数则将session中参数设置为登录信息;否则session中信息不变(如果是本网站的请求)
     	session.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
     	session.setAttribute("stu_name", "刘硕");
     	session.setAttribute("uni_name", "南京大学");

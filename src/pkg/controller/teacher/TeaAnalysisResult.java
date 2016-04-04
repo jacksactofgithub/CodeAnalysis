@@ -1,36 +1,33 @@
-package pkg.controller;
+package pkg.controller.teacher;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import pkg.dao.AttendenceDAO;
-import pkg.entity.Attendence;
 
 /**
  * Servlet implementation class AnalysisResult
  */
 @Controller
-public class AnalysisResult{
+public class TeaAnalysisResult{
 	
-	@Autowired
-	AttendenceDAO dao;
 	
-    public AnalysisResult() {
+    public TeaAnalysisResult() {
         super();
     }
 
     
     @RequestMapping("/analysisResult")
-    public String showResult(HttpServletRequest request){
+    public String showResult(HttpServletRequest request,HttpSession session){
     	
-    	test();
-    	JSONObject runResultJson = null;//
+    	@SuppressWarnings("unused")
+		String stu_account = (String) session.getAttribute("stu_account");
+    	
+    	JSONObject runResultJson = null;
     	try {
     		String obj1="{'stuid':121250088,'examNo':1,'questionNo':'1','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"
     				+ "{'time':3,'passNo':[1,2,3]},{'time':8,'passNo':[1,2,3,4]},{'time':11,'passNo':[1,2,3,4,5]},"
@@ -74,11 +71,6 @@ public class AnalysisResult{
     
     public void reverse(String str){//
     	
-    }
-    
-    private void test(){
-    	Attendence attendence = new Attendence(1, 1, 1, 1, 1, 1, 1, 1, 1);
-    	System.out.println(dao.addAttendence(attendence));
     }
 
 }

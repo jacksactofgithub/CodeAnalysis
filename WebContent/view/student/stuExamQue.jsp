@@ -55,8 +55,8 @@
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
-				<span class="text-info">刘硕</span>student!
-			</span> <span>南京大学</span>
+				<span class="text-info"><%=session.getAttribute("stu_name") %></span>student!
+			</span> <span><%=session.getAttribute("uni_name") %></span>
 		</div>
 
 		<div class="clearfix"></div>
@@ -76,7 +76,7 @@
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
 						<li class="iExam"><a
-							href="http://mooctest.net/stu/class/list" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>考试分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -166,8 +166,8 @@
 								<tbody>
 									<tr>
 										<!-- 此处跳转至考生的具体题目代码分析 -->
-										<td><a href="/CodeAnalysis/analysisResult?problem_id=<%=problem.getDouble("problem_id")%>&stu_account=<%=request.getAttribute("stu_account") %>"
-											class="underline"><%=problem.getString("problem_name") %></a></td>
+										<td><a href="<%=request.getContextPath() %>/analysisResult?problem_id=<%=problem.getInt("problem_id")%>"
+											class="underline" title="查看考题统计"><%=problem.getString("problem_name") %></a></td>
 										<td><%=problem.getString("difficulty") %></td>
 										<td><%=problem.getString("score") %></td>
 										<td><%=problem.getDouble("ave_score")%></td>
@@ -308,7 +308,7 @@ $(function(){
 
         // keys
         var HOME = "主页";
-        var EXAM_LIST = "考试列表";
+        var EXAM_LIST = "考试分析";
         var EXAM_CREATE = "新建考试";
         var EXAM_VIEW = "考试";
         var CLASS_LIST = "班级列表";
@@ -327,7 +327,7 @@ $(function(){
         // 导航链接
         var LINKS = {};
         LINKS[HOME] = '/tea/home';
-        LINKS[EXAM_LIST] = '/tea/exam/list';
+        LINKS[EXAM_LIST] = '<%=request.getContextPath() %>/stuAnalysis';
         LINKS[EXAM_CREATE] = '/tea/exam/create';
         LINKS[EXAM_VIEW] = '#';
         LINKS[CLASS_LIST] = '/tea/class/list';

@@ -2,6 +2,7 @@
 package pkg.controller.student;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,9 +31,9 @@ public class StuExamQue{
      */
     
     @RequestMapping("/stuExamQue")
-    public String showQuestions(HttpServletRequest request){
+    public String showQuestions(HttpServletRequest request,HttpSession session){
     	int id = Integer.parseInt(request.getParameter("id"));
-    	String stu_account = (String) request.getAttribute("stu_account");
+    	String stu_account = (String) session.getAttribute("stu_account");
     	JSONObject exam = service.getExamDetail(stu_account, id);//此处可能接口更改
     	request.setAttribute("exam", exam);
     	JSONArray problemArray = service.getProblems(id,stu_account);

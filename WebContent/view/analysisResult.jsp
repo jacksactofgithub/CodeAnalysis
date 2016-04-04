@@ -88,8 +88,8 @@
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
-				<span class="text-info">刘硕</span>student!
-			</span> <span>南京大学</span>
+				<span class="text-info"><%=session.getAttribute("stu_name") %></span>student!
+			</span> <span><%=session.getAttribute("uni_name") %></span>
 		</div>
 
 		<div class="clearfix"></div>
@@ -109,7 +109,7 @@
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
 						<li class="iExam"><a
-							href="http://mooctest.net/stu/class/list" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>考试分析</span></a>
 						</li>
 					</ul>
 				</div>
