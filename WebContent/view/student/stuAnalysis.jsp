@@ -231,8 +231,8 @@
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
-				<span class="text-info">刘硕</span>student!
-			</span> <span>南京大学</span>
+				<span class="text-info"><%=session.getAttribute("stu_name") %></span>student!
+			</span> <span><%=session.getAttribute("uni_name") %></span>
 		</div>
 
 		<div class="clearfix"></div>
@@ -254,8 +254,8 @@
 						<li class="iExam"><a id="analysis" onclick="jump()"><span>考试分析</span></a>
 						</li><!-- 如果session无法共用 此处可以使用一个表单 -->
 					</ul>
-					<form action="/CodeAnalysis/result" name = "toanalysis" method="post">
-						<input type="hidden" name="account" value = "ls1995429">
+					<form action="<%=request.getContextPath()%>/stuAnalysis" name = "toanalysis" method="post">
+						<input type="hidden" name="account" value = "<%=session.getAttribute("stu_account")%>">
 					</form>
 				</div>
 				<div class="middleNav pull-right">
@@ -310,7 +310,7 @@
 							<tbody>
 								<%JSONArray examArray = (JSONArray)request.getAttribute("examArray");
 								int len = examArray.length();
-								//{id:,exam_name:,teacher_name:,exam_begin_time:,exam_end_time:,exam_Duration:,score:,}
+								//{id:,exam_name:,teacher_name:,exam_begin_time:,exam_end_time:,exam_duration:,score:,}
  								for(int i = 0;i<len;i++){
 									JSONObject exam = (JSONObject)examArray.get(i);
 									String teacher_name = exam.getString("teacher_name");
@@ -318,18 +318,18 @@
 									int id = exam.getInt("id");
 									String exam_begin_time = exam.getString("exam_begin_time");
 									String exam_end_time = exam.getString("exam_end_time");
-									int exam_Duration =exam.getInt("exam_Duration");
+									int exam_duration =exam.getInt("exam_duration");
 									double score = exam.getDouble("score");
 									%>
 									<tr>
 										<td>
-											<a href="/CodeAnalysis/stuExamQue?id=<%=id%>" class="underline problem-analysis-link">
+											<a href="<%=request.getContextPath()%>/stuExamQue?id=<%=id%>" title="查看考题详情"class="underline problem-analysis-link">
 											<%=exam_name %></a>
 										</td>
 										<td><%=teacher_name %></td>
 										<td><%=exam_begin_time %></td>
 										<td><%=exam_end_time %></td>
-										<td><%=exam_Duration %></td>
+										<td><%=exam_duration %></td>
 										<td><%=score %></td>
 									</tr>
 								<%}%>

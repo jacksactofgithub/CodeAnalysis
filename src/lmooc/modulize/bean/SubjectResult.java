@@ -17,6 +17,14 @@ public class SubjectResult {
 		this.run = run;
 	}
 	
+	public Iterator<CodeStamp> getCodeStamps(){
+		return code;
+	}
+	
+	public Iterator<RunStamp> getRunStamps(){
+		return run;
+	}
+	
 	public JSONArray getCodeJSON() {
 		
 		JSONArray array = new JSONArray();

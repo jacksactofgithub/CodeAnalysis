@@ -24,6 +24,18 @@ public class Test {
 	private String test_name;
 	private boolean test_result;
 	
+	public void setRun(Run run){
+		this.run = run;
+	}
+	
+	public void setTest_name(String testName){
+		this.test_name = testName;
+	}
+	
+	public void setTest_result(boolean testResult){
+		this.test_result = testResult;
+	}
+	
 	public int getTest_Id(){
 		return test_id;
 	}

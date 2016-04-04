@@ -1,0 +1,347 @@
+/* created by LYN */
+/* 用于移动web 响应式 */
+
+/* layout STARTS */
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
+}
+
+.inline-block{
+  display: inline-block;
+}
+.hide {
+  display: none;
+}
+/* layout ENDS */
+
+
+
+/* text STARTS */
+.text-red{
+  color: red;
+}
+.text-greed{
+  color: green;
+}
+
+.text-warning {
+  color: #c09853;
+}
+.text-error {
+  color: #b94a48;
+}
+.text-info {
+  color: #3a87ad;
+}
+.text-success {
+  color: #468847;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+/* text ENDS */
+
+
+
+/* link STARTS */
+a{
+  cursor: pointer;
+}
+a.default{
+  color: inherit;
+}
+a.default:hover{
+  color: #0088cc;
+}
+a.info{
+  color: #0088cc;
+}
+a.inverse:hover{
+  color: #fff;
+}
+a.underline:hover{
+  text-decoration: underline;
+}
+
+a.text-warning:hover,
+a.text-warning:focus {
+  color: #a47e3c;
+}
+a.text-error:hover,
+a.text-error:focus {
+  color: #953b39;
+}
+a.text-info:hover,
+a.text-info:focus {
+  color: #2d6987;
+}
+a.text-success:hover,
+a.text-success:focus {
+  color: #356635;
+}
+/* link ENDS */
+
+
+
+/* ==========  Buttons ========== */
+
+input[type=submit], input[type=reset], input[type=button], button, .button {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 12px;
+  text-transform: uppercase;
+  padding: 5px 14px 6px 14px;
+  width: 100%;
+}
+a.button { display: inline-block; }
+
+.basicBtn {  background: url(/public/images/ui/basicBtn.png) repeat-x 0 0; border: 1px solid #d5d5d5; color: #525252; }
+.basicBtn:hover { background-position: 0 -25px; border-color: #c9c9c9; }
+.basicBtn:active { background-position: 0 -50px; }
+
+.blueBtn { background: url(/public/images/ui/blueBtn.png) repeat-x 0 0; border: 1px solid #3581c1; color: #fff; }
+.blueBtn:hover { background-position: 0 -25px; }
+.blueBtn:active { background-position: 0 -50px; }
+
+.redBtn { background: url(/public/images/ui/redBtn.png) repeat-x 0 0; border: 1px solid #9d342a; color: #fff; }
+.redBtn:hover { background-position: 0 -25px; }
+.redBtn:active { background-position: 0 -50px; }
+
+.seaBtn { background: url(/public/images/ui/seaBtn.png) repeat-x 0 0; border: 1px solid #306873; color: #fff; }
+.seaBtn:hover { background-position: 0 -25px; }
+.seaBtn:active { background-position: 0 -50px; }
+
+.blackBtn { background: url(/public/images/ui/blackBtn.png) repeat-x 0 0; border: 1px solid #353535; color: #fff; }
+.blackBtn:hover { background-position: 0 -25px; }
+.blackBtn:active { background-position: 0 -50px; }
+
+.greyishBtn { background: url(/public/images/ui/greyishBtn.png) repeat-x 0 0; border: 1px solid #4f5a68; color: #fff; }
+.greyishBtn:hover { background-position: 0 -25px; }
+.greyishBtn:active { background-position: 0 -50px; }
+
+.greenBtn { background: url(/public/images/ui/greenBtn.png) repeat-x 0 0; border: 1px solid #418d4f; color: #fff; }
+.greenBtn:hover { background-position: 0 -25px; }
+.greenBtn:active { background-position: 0 -50px; }
+
+
+
+/* button STARTS */
+.btn-mini {
+  padding: 0 6px;
+  font-size: 10.5px;
+}
+.btn-small {
+  padding: 2px 10px;
+  font-size: 13px;
+}
+.btn-medium {
+  padding: 6px 14px;
+  font-size: 15px;
+}
+.btn-large {
+  padding: 11px 19px;
+  font-size: 18px;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.close:hover,
+.close:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+/* button ENDS */
+
+
+
+/* form STARTS */
+.myform{
+  /*padding: 10px 15px;*/
+}
+.myform-row{
+  display: block;
+  margin: 20px 0;
+}
+.myform-row:first-child{
+  margin-top: 0;
+}
+.myform-btn-row{
+  display: block;
+  margin-top: 20px;
+  text-align: right;
+}
+.myform-error-row{
+  display: block;
+  margin: 10px 0 0 62px;
+}
+.myform-row > label{
+  cursor: pointer;
+  display: inline-block;
+  width: 20%;
+}
+.myform-right{
+  display: inline-block;
+  width: 75%;
+}
+.myform-row input[type=text],
+.myform-row input[type=password],
+.myform-row textarea{
+  background: #fff;
+  border: 1px solid #d5d5d5;
+  font-size: 14px;
+  padding: 5px;
+  width: 100%;
+}
+.myform-row input[type=text]:hover,
+.myform-row input[type=password]:hover,
+.myform-row textarea:hover{
+  background: #fcfcfc;
+  border: 1px solid #d1d1d1;
+}
+.myform-row input[type=text]:focus,
+.myform-row input[type=password]:focus,
+.myform-row textarea:focus{
+  background: #fff;
+  border: 1px solid #bbc1c9;
+}
+
+label.required-label{
+  *zoom: 1;
+}
+label.required-label:after{
+  content: "*";
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+  left: 3px;
+  position: relative;
+  top: 5px;
+}
+
+.input-mini {
+  width: 60px;
+}
+.input-small {
+  width: 90px;
+}
+.input-medium {
+  width: 150px;
+}
+.input-large {
+  width: 240px;
+}
+.input-xlarge {
+  width: 360px;
+}
+.input-full {
+  width: 99%;
+}
+
+input[disabled],
+select[disabled],
+textarea[disabled] {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+}
+
+input[type=radio],
+input[type=checkbox]{
+  vertical-align: middle;
+}
+
+.radio-input,
+.check-input{
+  display: block;
+  margin: 20px 0;
+}
+.radio-input input,
+.check-input input{
+  cursor: pointer;
+  margin: 0 4px 2px 0;
+  vertical-align: middle;
+}
+.radio-input label,
+.check-input label{
+  cursor: pointer;
+  word-break: break-all;
+}
+
+.help-block,
+.help-inline {
+  color: #595959;
+}
+.help-block {
+  display: block;
+  margin-top: 10px;
+}
+.help-inline {
+  display: inline-block;
+  *display: inline;
+  padding-left: 5px;
+  vertical-align: middle;
+  *zoom: 1;
+}
+/* form ENDS */
+
+
+
+/* 摘要or定义列表 */
+ul.item-list{
+  font-size: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+li.item{
+  border-bottom: 1px solid #fff;
+  display: inline-block;
+}
+li.item > div{
+  display: inline-block;
+  height: 20px;
+  min-width: 120px;
+  padding: 6px 10px;
+  vertical-align: bottom;
+}
+li.item .item-name{
+  background-color: #99bfe6;
+  font-weight: bold;
+}
+li.item .item-value{
+  background-color: #ebf2fa;
+}

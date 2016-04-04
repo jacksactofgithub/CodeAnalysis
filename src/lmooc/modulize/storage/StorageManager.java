@@ -15,17 +15,24 @@ import lmooc.modulize.bean.run.RunResult;
 import lmooc.modulize.io.Reader;
 import lmooc.modulize.model.FileStateHandler;
 import lmooc.modulize.model.loganalyser.LogAnalyser;
+import pkg.service.CodeService;
+import pkg.service.RunService;
+import pkg.service.impl.CodeServiceImpl;
+import pkg.service.impl.RunServiceImpl;
 
 public class StorageManager {
 
 	private static Reader reader = new Reader();
 	
+	private static CodeService codeService = new CodeServiceImpl();
+	private static RunService runService = new RunServiceImpl();
+	
 	/**
 	 * 将参加某一场考试的所有的学生的考试分析数据进行存储
 	 * @param examID
 	 */
-	public static void startStore(int examID){
-		
+	public static void startStore(int examID , int tea_id){
+//		Iterator<Integer> stuList = 
 	}
 	
 	/**
@@ -33,8 +40,12 @@ public class StorageManager {
 	 * @param examID
 	 * @param stu_id
 	 */
-	public static void storeOne(int examID , int stu_id){
-		SubjectResult result = loadResult(examID+"", stu_id+"");
+	public static void storeOne(int examID , int stuID){
+		SubjectResult result = loadResult(examID+"", stuID+"");
+		
+		codeService.saveStamps(result.getCodeStamps() , stuID, examID);
+		runService.saveRunStamp(result.getRunStamps(), stuID);
+		
 	}
 	
 	

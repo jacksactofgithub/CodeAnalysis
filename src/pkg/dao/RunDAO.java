@@ -6,8 +6,8 @@ import pkg.entity.Run;
 
 public interface RunDAO {
 
-	public int addRun(int subject_id , int student_id);
+	public Run addRun(String proName , int student_id);
 	
-	public List<Run> queryRuns(int student_id , int subject_id);
+	public List<Run> queryRuns(int student_id , String proName);
 	
 }
