@@ -32,10 +32,12 @@ public class StuExamQue{
     
     @RequestMapping("/stuExamQue")
     public String showQuestions(HttpServletRequest request,HttpSession session){
+    	//点击一次考试传入了一次考试的id
     	int id = Integer.parseInt(request.getParameter("id"));
     	String stu_account = (String) session.getAttribute("stu_account");
     	JSONObject exam = service.getExamDetail(stu_account, id);//此处可能接口更改
     	request.setAttribute("exam", exam);
+    	//将一次考试的json写入request
     	JSONArray problemArray = service.getProblems(id,stu_account);
     	request.setAttribute("problemArray",problemArray);
     	return "view/student/stuExamQue";

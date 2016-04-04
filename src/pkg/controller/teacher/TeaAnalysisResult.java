@@ -66,7 +66,7 @@ public class TeaAnalysisResult{
 			e.printStackTrace();
 		}
     	
-    	return "view/analysisResult";
+    	return "view/teacher/teaAnalysisResult";
     }
     
     public void reverse(String str){//
