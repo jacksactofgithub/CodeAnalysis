@@ -32,25 +32,25 @@ public class AnalysisDataManager {
 
 	private static Reader reader = new Reader();
 
-	public static SubjectResult getResult(String examID, String studentNum, String subjectName) {
-		String key = examID + "/" + studentNum + "/" + subjectName;
-		if (!RESULT_CACHE.containsKey(key)) {
-			SubjectResult result = loadResult(examID, studentNum, subjectName);
-			RESULT_CACHE.put(key, result);
-			return result;
-		}
+	public static SubjectResult getResult(String examID, String studentNum, String problemName) {
+		String key = examID + "/" + studentNum + "/" + problemName;
+//		if (!RESULT_CACHE.containsKey(key)) {
+//			SubjectResult result = loadResult(examID, studentNum, problemName);
+//			RESULT_CACHE.put(key, result);
+//			return result;
+//		}
 		return RESULT_CACHE.get(key);
 	}
 
-	private static SubjectResult loadResult(String examID, String studentNum, String subjectName) {
+	private static SubjectResult loadResult(String examID, String studentNum, String problemName) {
 
 		Iterator<String> logs = reader.readLog(examID, studentNum);
 		LogAnalyser analyser = new LogAnalyser();
 		LogBean logBean;
 		try {
 			logBean = analyser.analyse(logs);
-			Iterator<CodeStamp> codes = codeOutput(logBean.getFileStates(),examID , studentNum , subjectName);
-			Iterator<RunStamp> runs = runOutput(logBean.getRuns(), subjectName);
+			Iterator<CodeStamp> codes = codeOutput(logBean.getFileStates(),examID , studentNum , problemName);
+			Iterator<RunStamp> runs = runOutput(logBean.getRuns(), problemName);
 			
 			// JSONObject run = runOutput(logBean.getRuns());
 			
@@ -64,18 +64,19 @@ public class AnalysisDataManager {
 	}
 
 	private static Iterator<CodeStamp> codeOutput(Iterator<FileState> states, String examID, String stuID,
-			String subjectName) {
+			String problemName) {
 		FileStateHandler handler = new FileStateHandler(stuID, examID);
 		
-		return handler.hanleFileStates(states, subjectName);
+//		return handler.hanleFileStates(states, problemName);
+		return null;
 	}
 
-	private static Iterator<RunStamp> runOutput(Iterator<RunResult> runs, String subjectName) {
+	private static Iterator<RunStamp> runOutput(Iterator<RunResult> runs, String problemName) {
 
 		List<RunStamp> stampList = new LinkedList<RunStamp>();
 		while(runs.hasNext()){
 			RunResult result = runs.next();
-			if(result.getProName().equals(subjectName)){
+			if(result.getProName().equals(problemName)){
 				RunStamp stamp = result.toStamp();
 				stampList.add(stamp);
 			}
@@ -83,5 +84,4 @@ public class AnalysisDataManager {
 		
 		return stampList.iterator();
 	}
-
 }

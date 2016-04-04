@@ -38,7 +38,7 @@ public class SubjectResult {
 	private JSONObject formCode(CodeStamp stamp) throws JSONException{
 		
 		JSONObject json = new JSONObject();
-		json.put("timestamp", stamp.getToSecond());
+		json.put("timestamp", stamp.getRelativeTime());
 		json.put("source", stamp.getSourceName());
 		json.put("lineCount", stamp.getLineCount());
 		json.put("noteCount" , stamp.getNoteCount());

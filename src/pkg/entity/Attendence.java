@@ -29,11 +29,11 @@ public class Attendence implements Serializable{
 	private int var_count;
 	private int max_cyclomaticcpl;
 	
-	public Attendence(int attendID,int studentID,int subjectID,int second ,
+	public Attendence(int attendID,int student_id,int subject_id,int second ,
 			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl){
 		this.attend_id = attendID;
-		this.student_id = studentID;
-		this.subject_id = subjectID;
+		this.student_id = student_id;
+		this.subject_id = subject_id;
 		this.second = second;
 		this.line_count = lineCount;
 		this.note_count = noteCount;
@@ -46,11 +46,11 @@ public class Attendence implements Serializable{
 		return attend_id;
 	}
 	
-	public int getStudentID(){
+	public int getStudent_Id(){
 		return student_id;
 	}
 	
-	public int getSubjectID(){
+	public int getSubject_Id(){
 		return subject_id;
 	}
 	
