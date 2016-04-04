@@ -99,14 +99,18 @@
 			<div class="title">
 				<h5>考试分析</h5>
 			</div>
-
+			
+			<%
+				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
+			%>
+			
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 参数可能更改 -->
 						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
-						<li class="firstB"><%=request.getAttribute("exam_name") %></li>
+						<li class="firstB"><%=exam.getString("exam_name") %></li>
 					</ul>
 				</div>
 			</div>
@@ -120,12 +124,12 @@
 					<ul class="item-list tabled">
 						<li class="item">
 							<div class="item-name">考试名称</div>
-							<div class="item-value"><%=((JSONObject)request.getAttribute("exam")).getString("exam_name") %></div>
+							<div class="item-value"><%=exam.getString("exam_name") %></div>
 						</li>
 						<li class="item">
 							<div class="item-name">考试日期</div>
 							<div class="item-value">
-							<%=(((JSONObject)request.getAttribute("exam")).getString("exam_begin_time")).split(" ")[0]%></div>
+							<%=(exam.getString("exam_begin_time")).split(" ")[0]%></div>
 						</li>
 					</ul>
 				</div>
@@ -166,7 +170,7 @@
 								<tbody>
 									<tr>
 										<!-- 此处跳转至考生的具体题目代码分析 -->
-										<td><a href="<%=request.getContextPath() %>/stuAnalysisResult?exam_id=<%=((JSONObject)request.getAttribute("exam")).getString("id")  %>&problem_id=<%=problem.getInt("problem_id")%>"
+										<td><a href="<%=request.getContextPath() %>/stuAnalysisResult?exam_id=<%=exam.getString("id")  %>&problem_id=<%=problem.getInt("problem_id")%>"
 											class="underline" title="查看考题统计"><%=problem.getString("problem_name") %></a></td>
 										<td><%=problem.getString("difficulty") %></td>
 										<td><%=problem.getString("score") %></td>
@@ -430,7 +434,7 @@ $(function(){
     // ================================
     BreadCrumbUtil.update(
         BreadCrumbUtil.HOME, BreadCrumbUtil.EXAM_LIST, 
-        ['Java覆盖练习1', '#']
+        ['<%=((JSONObject)request.getAttribute("exam")).getString("exam_name")%>', '#']
     );
 
 });

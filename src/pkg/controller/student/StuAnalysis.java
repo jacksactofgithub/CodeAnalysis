@@ -34,14 +34,16 @@ public class StuAnalysis {
     	request.setAttribute("uni_name", "南京大学");
     	//在第一次进的时候如果request中带了参数则将session中参数设置为登录信息;否则session中信息不变(如果是本网站的请求)
     	session.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
+    	session.setAttribute("stu_id", 2);//必要
     	session.setAttribute("stu_name", "刘硕");
     	session.setAttribute("uni_name", "南京大学");
     	
-    	String stu_account = (String) request.getAttribute("stu_account");
+    	String stu_account = (String) session.getAttribute("stu_account");
     	//String stu_account = (String) request.getParameter("stu_account");
     	//request.setAttribute("stu_account",stu_account);//根据提供参数的方法不同更改
     	JSONArray examArray = service.getExams(stu_account);
     	request.setAttribute("examArray", examArray);
+    	
 		return "view/student/stuAnalysis";
 	}
 

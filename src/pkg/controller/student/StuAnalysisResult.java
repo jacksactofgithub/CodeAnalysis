@@ -31,9 +31,11 @@ public class StuAnalysisResult{
     public String showResult(HttpServletRequest request,HttpSession session){
     	
 		String stu_account = (String) session.getAttribute("stu_account");
-    	String exam_id = request.getParameter("id");
+		int stu_id = (int) session.getAttribute("stu_id");
+    	String exam_id = request.getParameter("exam_id");
     	String problem_id = request.getParameter("problem_id");
     	JSONObject exam = service.getExamDetail(stu_account, Integer.parseInt(exam_id));
+    	request.setAttribute("exam", exam);
     	try {
 			String exam_name = exam.getString("exam_name");
 		} catch (JSONException e1) {
@@ -79,11 +81,15 @@ public class StuAnalysisResult{
 			e.printStackTrace();
 		}
     	
-    	return "view/student/teaAnalysisResult";
+    	return "view/student/stuAnalysisResult";
     }
     
     public void reverse(String str){//
     	
+    }
+    
+    public String getProblemName(JSONObject exam,int id){//通过题目id得到题目名称
+    	return null;
     }
 
 }
