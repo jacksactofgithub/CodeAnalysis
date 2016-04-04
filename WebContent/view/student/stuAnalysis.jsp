@@ -231,8 +231,8 @@
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
-				<span class="text-info">刘硕</span>student!
-			</span> <span>南京大学</span>
+				<span class="text-info"><%=session.getAttribute("stu_name") %></span>student!
+			</span> <span><%=session.getAttribute("uni_name") %></span>
 		</div>
 
 		<div class="clearfix"></div>
@@ -255,7 +255,7 @@
 						</li><!-- 如果session无法共用 此处可以使用一个表单 -->
 					</ul>
 					<form action="/CodeAnalysis/stuAnalysis" name = "toanalysis" method="post">
-						<input type="hidden" name="account" value = "ls1995429">
+						<input type="hidden" name="account" value = "<%=session.getAttribute("stu_account")%>">
 					</form>
 				</div>
 				<div class="middleNav pull-right">
@@ -323,7 +323,7 @@
 									%>
 									<tr>
 										<td>
-											<a href="/CodeAnalysis/stuExamQue?id=<%=id%>" class="underline problem-analysis-link">
+											<a href="<%=request.getContextPath()%>/CodeAnalysis/stuExamQue?id=<%=id%>" class="underline problem-analysis-link">
 											<%=exam_name %></a>
 										</td>
 										<td><%=teacher_name %></td>

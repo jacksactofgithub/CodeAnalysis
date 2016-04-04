@@ -24,189 +24,18 @@
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
 <style type="text/css">
-.box {
-	height: 300px;
-	margin-top: 20px;
-	position: relative;
-	width: 978px;
+.problem-section{
+    margin: 10px 0;
 }
+.problem-section .info{
 
-.box .link {
-	float: left;
-	height: 280px;
-	margin: 0 20px;
-	width: 200px;
 }
-
-.link .icon {
-	display: inline-block;
-	height: 180px;
-	transition: 0.4s ease-out;
-	-ms-transition: 0.4s ease-out;
-	-webkit-transition: 0.4s ease-out;
-	-moz-transition: 0.4s ease-out;
-	-o-transition: 0.4s ease-out;
-	width: 100%;
+.problem-section .detail{
+    margin-top: -1px;
+    position: relative;
 }
-
-.link .icon:hover {
-	transform: rotate(360deg) scale(1.2);
-	-ms-transform: rotate(360deg) scale(1.2);
-	-webkit-transform: rotate(360deg) scale(1.2);
-	-moz-transform: rotate(360deg) scale(1.2);
-	-o-transform: rotate(360deg) scale(1.2);
-}
-
-.link-exam .icon {
-	background: url(http://mooctest.net/public/images/exam.png) no-repeat
-		center center;
-}
-
-.link-exercise .icon {
-	background: url(http://mooctest.net/public/images/exercise.png)
-		no-repeat center center;
-}
-
-.link-personal .icon {
-	background: url(http://mooctest.net/public/images/personal.png)
-		no-repeat center center;
-}
-
-.link-download .icon {
-	background: url(http://mooctest.net/public/images/download.png)
-		no-repeat center center;
-}
-
-.button {
-	background: url(http://mooctest.net/public/images/arrow.png) no-repeat
-		145px center;
-	border: 2px solid rgba(72, 72, 72, 0.8);
-	box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	color: #484848;
-	display: block;
-	font-family: Arial;
-	font-weight: bolder;
-	font-size: 24px;
-	height: 50px;
-	line-height: 50px;
-	margin: 0 auto;
-	transition: 0.4s ease;
-	-ms-transition: 0.4s ease;
-	-webkit-transition: 0.4s ease;
-	-moz-transition: 0.4s ease;
-	-o-transition: 0.4s ease;
-	padding-left: 15px;
-	padding-top: 0;
-	position: relative;
-	width: 200px;
-}
-
-.button:hover {
-	background-position: 160px center;
-	border: 2px solid rgba(72, 72, 72, 1);
-}
-
-.button .line {
-	background: none;
-	display: block;
-	position: absolute;
-	transition: 0.4s ease-out;
-	-ms-transition: 0.4s ease-out;
-	-webkit-transition: 0.4s ease-out;
-	-o-transition: 0.4s ease-out;
-	-moz-transition: 0.4s ease-out;
-}
-
-.button:hover .line {
-	background: #484848;
-}
-
-.button .line-top {
-	height: 2px;
-	left: -110%;
-	width: 0%;
-	top: -2px;
-}
-
-.button:hover .line-top {
-	left: -2px;
-	width: 100%;
-}
-
-.button .line-right {
-	height: 0%;
-	right: -2px;
-	top: -110%;
-	width: 2px;
-}
-
-.button:hover .line-right {
-	height: 100%;
-	top: -2px;
-}
-
-.button .line-bottom {
-	bottom: -110%;
-	height: 0;
-	left: -2px;
-	width: 2px;
-}
-
-.button:hover .line-bottom {
-	bottom: -2px;
-	height: 100%;
-}
-
-.button .line-left {
-	bottom: -2px;
-	height: 2px;
-	right: -110%;
-	width: 0;
-}
-
-.button:hover .line-left {
-	right: -2px;
-	width: 100%;
-}
-
-.tip {
-	background: #707070;
-	border-radius: 3px;
-	-ms-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-o-border-radius: 3px;
-	-moz-border-radius: 3px;
-	color: #fff;
-	font-size: 18px;
-	height: 35px;
-	line-height: 35px;
-	margin: 0 auto;
-	opacity: 0;
-	position: absolute;
-	padding: 0 14px;
-	top: 100px;
-	z-index: -9999;
-}
-
-.tip em {
-	font-style: normal;
-}
-
-.tip span {
-	border: 7px solid transparent;
-	border-top-color: #707070;
-	display: block;
-	height: 0;
-	left: 50%;
-	margin-left: -4px;
-	overflow: hidden;
-	position: absolute;
-	top: 35px;
-	width: 0;
+.problem-section table{
+    border: 1px solid #ccc;
 }
 </style>
 
@@ -396,34 +225,34 @@
         </script>
 
         <!-- jquery 1.7.2 业内最稳定版本 -->
-        <script type="text/javascript" src="/public/js/jquery/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/jquery/jquery-1.7.2.min.js"></script>
 
         <!-- jquery UI（ui_custom.css做过改动） -->
-        <script type="text/javascript" src="/public/js/jquery-ui/jquery-ui-1.8.24.min.js"></script>
-                <script type="text/javascript" src="/public/js/jquery-ui/jquery-ui-datepicker-zh-CN.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/jquery-ui/jquery-ui-1.8.24.min.js"></script>
+                <script type="text/javascript" src="http://mooctest.net/public/js/jquery-ui/jquery-ui-datepicker-zh-CN.js"></script>
         
         <!-- 借鉴bootstrap模态框 -->
-        <script type="text/javascript" src="/public/js/bootstrap/bootstrap-modal-2.3.2.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/bootstrap/bootstrap-modal-2.3.2.js"></script>
 
         <!-- form validation -->
-        <script type="text/javascript" src="/public/js/others/jquery.validationEngine-2.6.2.js"></script>
-                <script type="text/javascript" src="/public/js/others/jquery.validationEngine-zh_CN.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.validationEngine-2.6.2.js"></script>
+                <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.validationEngine-zh_CN.js"></script>
         
         <!-- 消息队列 + tooltip + 弹框 -->
-        <script type="text/javascript" src="/public/js/itsbrain/ui/jquery.jgrowl.js"></script>
-        <script type="text/javascript" src="/public/js/itsbrain/ui/jquery.tipsy.js"></script>
-        <script type="text/javascript" src="/public/js/itsbrain/ui/jquery.alerts.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.jgrowl.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.tipsy.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.alerts.js"></script>
 
         <!-- 面包屑导航 + 返回顶部 -->
-        <script type="text/javascript" src="/public/js/itsbrain/jBreadCrumb.1.1.js"></script>
-        <script type="text/javascript" src="/public/js/itsbrain/jquery.ToTop.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/jBreadCrumb.1.1.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/jquery.ToTop.js"></script>
 
         <!-- my common可复用 -->
-        <script type="text/javascript" src="/public/js/common/application-util.js?v=20151204"></script>
-        <script type="text/javascript" src="/public/js/common/application-execution.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/common/application-util.js?v=20151204"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/common/application-execution.js"></script>
 
         <!-- cookie -->
-        <script type="text/javascript" src="/public/js/others/jquery.cookie.1.4.1.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.cookie.1.4.1.js"></script>
 
         <!-- itsbrain精简后的执行 -->
         <script type="text/javascript">

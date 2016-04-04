@@ -11,8 +11,8 @@ public class StudentService {
 	public JSONArray getExams(String stu_account){
 		try {
 			return new JSONArray("[{'id':1,'exam_name':'测试考试1','teacher_name':'陈振宇','exam_begin_time':'2016-4-1 14:00:01',"
-					+ "'exam_end_time':'2016-4-1 16:00:01','exam_Duration':120,'score':87},{'id':2,'exam_name':'测试考试2','teacher_name':'陈振宇','exam_begin_time':'2016-4-1 14:00:01',"
-					+ "'exam_end_time':'2016-4-1 16:00:01','exam_Duration':120,'score':89}]");
+					+ "'exam_end_time':'2016-4-1 16:00:01','exam_duration':120,'score':87},{'id':2,'exam_name':'测试考试2','teacher_name':'陈振宇','exam_begin_time':'2016-4-1 14:00:01',"
+					+ "'exam_end_time':'2016-4-1 16:00:01','exam_duration':120,'score':89}]");
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
