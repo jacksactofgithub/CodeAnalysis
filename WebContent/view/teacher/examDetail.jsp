@@ -272,6 +272,7 @@
 			</div>
 			<%
 				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
+				String exam_id = exam.getString("id");
 			%>
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
@@ -346,6 +347,7 @@
 									int problem1_id = student.getInt("problem1_id");
 									int problem2_id = student.getInt("problem2_id");
 									int problem3_id = student.getInt("problem3_id");
+									int stu_id = student.getInt("stu_id");
 								%>
 								<tr data-mem="0">
 									<td><%=uni_name %></td>
@@ -354,11 +356,11 @@
 									<td><span class="text-success"> <span
 											class="final-score"><%=score %></span> 分
 									</span></td>
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?exam_id=<%=exam.getString("id") %>&problem_id=<%=problem1_id%>" title="查看题目代码统计">
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem1_id%>" title="查看题目代码统计">
 									<span class="final-score"><%=p1_score %></span>分</a></td>
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?exam_id=<%=exam.getString("id") %>&problem_id=<%=problem2_id%>" title="查看题目代码统计">
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem2_id%>" title="查看题目代码统计">
 									<span class="final-score"><%=p2_score %></span>分</a></td>
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?exam_id=<%=exam.getString("id") %>&problem_id=<%=problem3_id%>" title="查看题目代码统计">
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem3_id%>" title="查看题目代码统计">
 									<span class="final-score"><%=p3_score %></span>分</a></td>
 								</tr>
 							<%} %>

@@ -138,8 +138,8 @@
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 -->
-						<li ><a href="http://mooctest.net/tea/home" title="考试分析">考试分析</a></li>
-						<li ><a href="<%=request.getContextPath()%>/teaExamDetail?id=<%=((JSONObject)request.getAttribute("exam")).getString("id") %>"><%=((JSONObject)request.getAttribute("exam")).getString("exam_name") %></a></li>
+						<li ><a href="<%=request.getContextPath()%>/teacherAnalysis" title="考试分析">考试分析</a></li>
+						<li ><a href="<%=request.getContextPath()%>/examDetail?id=<%=((JSONObject)request.getAttribute("exam")).getString("id") %>"><%=((JSONObject)request.getAttribute("exam")).getString("exam_name") %></a></li>
 						<li ><%=((JSONObject)request.getAttribute("exam")).getString("exam_name")  %></li>
 						<!-- 从request中取得考试信息类中的考试名 题目名-->
 					</ul>
