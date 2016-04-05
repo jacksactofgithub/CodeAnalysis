@@ -247,7 +247,7 @@
 							href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
 						</li>
 						<li class="iStats"><a
-							href="<%=request.getContextPath()%>/teaAnalysis" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -326,9 +326,9 @@
 									<th class="span2">学号</th>
 									<th class="span2" data-sorter="false">姓名</th>
 									<th class="span1" data-empty="zero">总成绩</th>
-									<th class="span1" data-empty="zero">题目一得分</th>
-									<th class="span1" data-empty="zero" id="th6">题目二得分</th>
-									<th class="span1" data-empty="zero" id="th7">题目三得分</th>
+									<th class="span1">题目一得分</th>
+									<th class="span1" id="th6">题目二得分</th>
+									<th class="span1" id="th7">题目三得分</th>
 								</tr>
 							</thead>
 							<tbody>
