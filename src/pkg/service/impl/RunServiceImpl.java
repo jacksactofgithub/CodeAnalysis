@@ -6,13 +6,15 @@ import java.util.Map.Entry;
 import lmooc.modulize.bean.RunStamp;
 import pkg.dao.RunDAO;
 import pkg.dao.TestDAO;
+import pkg.dao.impl.RunDAOImpl;
+import pkg.dao.impl.TestDAOImpl;
 import pkg.entity.Run;
 import pkg.service.RunService;
 
 public class RunServiceImpl implements RunService{
 
-	private RunDAO runDAO;
-	private TestDAO testDAO;
+	private RunDAO runDAO = new RunDAOImpl();
+	private TestDAO testDAO = new TestDAOImpl();
 	
 	@Override
 	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID) {

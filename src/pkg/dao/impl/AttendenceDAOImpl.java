@@ -8,16 +8,17 @@ import org.springframework.stereotype.Repository;
 import pkg.dao.AttendenceDAO;
 import pkg.dao.DBOperation;
 import pkg.entity.Attendence;
+import pkg.hibernate.HibernateServiceSupport;
 
 @Repository
-public class AttendenceDAOImpl implements AttendenceDAO{
+public class AttendenceDAOImpl extends HibernateServiceSupport implements AttendenceDAO{
 
 	@Autowired
 	private DBOperation dbopt;
 	
 	@Override
-	public int addAttendence(int student, String subject, int second, int line_count, int note_count, int method_count,
-			int var_count, int max_cyclomatic) {
+	public int addAttendence(int student, String subject, int second, int line_count,
+			int note_count, int method_count,int var_count, int max_cyclomatic) {
 		// TODO Auto-generated method stub
 		Attendence attendence = new Attendence(1,student,subject,second,line_count,note_count,
 				method_count,var_count,max_cyclomatic);
@@ -27,6 +28,12 @@ public class AttendenceDAOImpl implements AttendenceDAO{
 	@Override
 	public int addAttendence(Attendence attendence) {
 		// TODO Auto-generated method stub
+		
+		if(dbopt == null){
+			System.out.println("dbopt is null");
+			return 0;
+		}
+		
 		return dbopt.save(attendence);
 	}
 

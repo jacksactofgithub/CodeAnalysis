@@ -5,12 +5,13 @@ import java.util.List;
 
 import lmooc.modulize.bean.CodeStamp;
 import pkg.dao.AttendenceDAO;
+import pkg.dao.impl.AttendenceDAOImpl;
 import pkg.entity.Attendence;
 import pkg.service.CodeService;
 
 public class CodeServiceImpl implements CodeService{
 	
-	private AttendenceDAO attDAO ;
+	private AttendenceDAO attDAO = new AttendenceDAOImpl();
 
 	@Override
 	public int saveStamps(Iterator<CodeStamp> stamps, int stuID, int exam) {
