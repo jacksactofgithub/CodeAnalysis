@@ -3,11 +3,20 @@ package pkg.service;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import pkg.dao.DBOperation;
 
 @Service
 public class StudentService {
 	
+	@Autowired
+	DBOperation dbopt;
+	
+	public boolean isNull(){
+		return (dbopt == null);
+	}
 	
 	public JSONArray getExams(String stu_account){
 		try {

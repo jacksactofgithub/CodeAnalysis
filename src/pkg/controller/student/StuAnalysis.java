@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lmooc.modulize.storage.StorageManager;
+import pkg.dao.DBOperation;
+import pkg.entity.Attendence;
+import pkg.entity.Run;
 import pkg.service.StudentService;
 
 @Controller
@@ -16,6 +19,9 @@ public class StuAnalysis {
 	
 	@Autowired
 	StudentService service;
+	
+	@Autowired
+	private DBOperation dbopt;
 	
     public StuAnalysis() {
         super();
@@ -29,7 +35,6 @@ public class StuAnalysis {
     
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
-    	test();
     	//在尚未接通慕测的情况下全用假数据
     	request.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
     	request.setAttribute("stu_name", "刘硕");
@@ -47,8 +52,5 @@ public class StuAnalysis {
 		return "view/student/stuAnalysis";
 	}
     
-    private void test(){
-    	StorageManager.storeOne(290, 2);
-    }
 
 }
