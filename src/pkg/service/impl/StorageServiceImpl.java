@@ -1,10 +1,12 @@
-package lmooc.modulize.storage;
+package pkg.service.impl;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lmooc.modulize.bean.CodeStamp;
 import lmooc.modulize.bean.LogBean;
@@ -17,39 +19,37 @@ import lmooc.modulize.model.FileStateHandler;
 import lmooc.modulize.model.loganalyser.LogAnalyser;
 import pkg.service.CodeService;
 import pkg.service.RunService;
-import pkg.service.impl.CodeServiceImpl;
-import pkg.service.impl.RunServiceImpl;
+import pkg.service.StorageService;
 
-public class StorageManager {
+@Service
+public class StorageServiceImpl implements StorageService{
 
-	private static Reader reader = new Reader();
+	@Autowired
+	CodeService codeService;
+	@Autowired
+	RunService runService;
 	
-	private static CodeService codeService = new CodeServiceImpl();
-	private static RunService runService = new RunServiceImpl();
+	private Reader reader = new Reader();
 	
-	/**
-	 * 将参加某一场考试的所有的学生的考试分析数据进行存储
-	 * @param examID
-	 */
-	public static void startStore(int examID , int tea_id){
-//		Iterator<Integer> stuList = 
+	@Override
+	public void startStore(int examID, int tea_id) {
+		// TODO Auto-generated method stub
+		
+		
+		//最后释放Map中的存储空间
+		FileStateHandler.clearMap();
 	}
-	
-	/**
-	 * 对参加一次考试的某一个学生的数据进行存储
-	 * @param examID
-	 * @param stu_id
-	 */
-	public static void storeOne(int examID , int stuID){
+
+	@Override
+	public void storeOne(int examID, int stuID) {
+		// TODO Auto-generated method stub
 		SubjectResult result = loadResult(examID+"", stuID+"");
 		
 		codeService.saveStamps(result.getCodeStamps() , stuID, examID);
 		runService.saveRunStamp(result.getRunStamps(), stuID);
-		
 	}
-	
-	
-	private static SubjectResult loadResult(String examID, String studentNum) {
+
+	private SubjectResult loadResult(String examID, String studentNum) {
 
 		Iterator<String> logs = reader.readLog(examID, studentNum);
 		LogAnalyser analyser = new LogAnalyser();
@@ -69,14 +69,14 @@ public class StorageManager {
 		}
 
 	}
-
-	private static Iterator<CodeStamp> codeOutput(Iterator<FileState> states, String examID, String stuID) {
+	
+	private Iterator<CodeStamp> codeOutput(Iterator<FileState> states, String examID, String stuID) {
 		FileStateHandler handler = new FileStateHandler(stuID, examID);
 		
 		return handler.hanleFileStates(states);
 	}
 
-	private static Iterator<RunStamp> runOutput(Iterator<RunResult> runs) {
+	private Iterator<RunStamp> runOutput(Iterator<RunResult> runs) {
 
 		List<RunStamp> stampList = new LinkedList<RunStamp>();
 		while(runs.hasNext()){

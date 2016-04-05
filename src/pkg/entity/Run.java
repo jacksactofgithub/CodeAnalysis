@@ -15,6 +15,7 @@ public class Run {
 	private int run_id;
 	private String pro_name;
 	private int student_id;
+	private int run_second;
 	
 	public void setPro_name(String pro_name){
 		this.pro_name = pro_name;
@@ -30,6 +31,14 @@ public class Run {
 	
 	public int getStudent(){
 		return student_id;
+	}
+
+	public int getRun_second() {
+		return run_second;
+	}
+
+	public void setRun_second(int run_second) {
+		this.run_second = run_second;
 	}
 	
 }

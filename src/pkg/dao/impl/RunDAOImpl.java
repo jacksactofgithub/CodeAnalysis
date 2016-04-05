@@ -16,11 +16,12 @@ public class RunDAOImpl implements RunDAO{
 	private DBOperation dbopt;
 	
 	@Override
-	public Run addRun(String proName, int student_id) {
+	public Run addRun(String proName, int student_id , int run_second) {
 		// TODO Auto-generated method stub
 		Run run = new Run();
 		run.setPro_name(proName);
 		run.setStudent_id(student_id);
+		run.setRun_second(run_second);
 		
 		dbopt.save(run);
 		

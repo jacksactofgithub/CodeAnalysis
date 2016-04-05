@@ -21,19 +21,35 @@ import lmooc.modulize.model.coldanalyser.Source;
  *
  */
 public class FileStateHandler {
-
+	
 	private String stuID;
 	private String examID;
+	
+	//存储学生开始某一题的时间
+	private static Map<String , Long> startMap = new HashMap<String , Long>();
 
 	public FileStateHandler(String stuID, String examID) {
 		this.stuID = stuID;
 		this.examID = examID;
 	}
+	
+	public static long getStartTime(int studentID , String proName){
+		String mapIdentifier = proName + " " + studentID;
+		if(startMap.containsKey(mapIdentifier)){
+			long time = startMap.get(mapIdentifier);
+			return time;
+		}
+		
+		return -1;
+	}
+	
+	public static void clearMap(){
+		startMap.clear();
+	}
 
-	public Iterator<CodeStamp> hanleFileStates(Iterator<FileState> states) {
+	public Iterator<CodeStamp> hanleFileStates(Iterator<FileState> states ) {
 		List<CodeStamp> stampList = new ArrayList<CodeStamp>();
 		
-		Map<String , Long> startMap = new HashMap<String , Long>();
 		String currentPath = "";
 		while(states.hasNext()){
 			FileState state = states.next();
@@ -43,11 +59,12 @@ public class FileStateHandler {
 			switch (type) {
 			case Active_Editor:
 				String fileName = getFileName(state.getFilePath());
-				if(startMap.containsKey(fileName)){
-					startTime = startMap.get(fileName);
+				String mapIdentifier = fileName+" " + stuID;
+				if(startMap.containsKey(mapIdentifier)){
+					startTime = startMap.get(mapIdentifier);
 					
 				}else{
-					startMap.put(fileName, state.getMillisecond());
+					startMap.put(mapIdentifier, state.getMillisecond());
 					startTime = state.getMillisecond();
 				}
 				currentPath = state.getFilePath();
@@ -55,7 +72,7 @@ public class FileStateHandler {
 				stampList.add(stamp);
 				break;
 			case Timer:
-				startTime = startMap.get(getFileName(currentPath));
+				startTime = startMap.get(getFileName(currentPath)+" "+stuID);
 				stamp = handleOne(currentPath , startTime , state.getMillisecond());
 				stampList.add(stamp);
 				break;

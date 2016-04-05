@@ -3,18 +3,23 @@ package pkg.service.impl;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import lmooc.modulize.bean.RunStamp;
+import lmooc.modulize.model.FileStateHandler;
 import pkg.dao.RunDAO;
 import pkg.dao.TestDAO;
-import pkg.dao.impl.RunDAOImpl;
-import pkg.dao.impl.TestDAOImpl;
 import pkg.entity.Run;
 import pkg.service.RunService;
 
+@Service
 public class RunServiceImpl implements RunService{
 
-	private RunDAO runDAO = new RunDAOImpl();
-	private TestDAO testDAO = new TestDAOImpl();
+	@Autowired
+	private RunDAO runDAO;
+	@Autowired
+	private TestDAO testDAO;
 	
 	@Override
 	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID) {
@@ -22,7 +27,12 @@ public class RunServiceImpl implements RunService{
 		
 		while(stamps.hasNext()){
 			RunStamp stamp = stamps.next();
-			Run run = runDAO.addRun(stamp.getClassName(), stuID);
+			long millisecond = stamp.getMillisecond();
+			String proName = stamp.getClassName();
+			long startsecond = FileStateHandler.getStartTime(stuID, proName);
+			System.out.println(millisecond + "  " + startsecond);
+			
+			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000));
 			addTests(run , stamp.getTests());
 		}
 		

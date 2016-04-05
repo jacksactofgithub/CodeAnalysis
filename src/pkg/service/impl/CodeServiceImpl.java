@@ -3,19 +3,20 @@ package pkg.service.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lmooc.modulize.bean.CodeStamp;
 import pkg.dao.AttendenceDAO;
-import pkg.dao.impl.AttendenceDAOImpl;
 import pkg.entity.Attendence;
 import pkg.service.CodeService;
 
 @Service
 public class CodeServiceImpl implements CodeService{
 	
-	private AttendenceDAO attDAO = new AttendenceDAOImpl();
-
+	@Autowired
+	private AttendenceDAO attDAO;
+	
 	@Override
 	public int saveStamps(Iterator<CodeStamp> stamps, int stuID, int exam) {
 		// TODO Auto-generated method stub
