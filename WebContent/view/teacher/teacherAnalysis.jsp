@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="org.json.JSONException"%>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
 <head>
 <title>慕测平台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -221,8 +225,8 @@
 <div id="header" class="wrapper">
     <div id="loginInfo">
         <img src="http://mooctest.net/public/images/userPic.png" alt=""/>
-        <span>欢迎, <span class="text-info">卢依宁</span>老师! </span>
-        <span>南京大学</span>
+        <span>欢迎, <span class="text-info"><%=session.getAttribute("tea_name") %></span>老师! </span>
+        <span><%=session.getAttribute("uni_name") %></span>
     </div>
     <div class="clearfix"></div>
     <div>
@@ -242,7 +246,7 @@
                         <a href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
                     </li>
                     <li class="iStats">
-                        <a href="http://mooctest.net/tea/exercise/overview" title=""><span>考试分析</span></a>
+                        <a href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
                     </li>
                 </ul>
             </div>
@@ -276,7 +280,7 @@
 				</div>
 			</div>
 			
-						<div class="widget">
+			<div class="widget">
 				<ul class="static-tabs">
 					<li class="active"><a
 						href="http://mooctest.net/stu/exam/list?type=all">全部考试</a></li>
@@ -296,16 +300,28 @@
 								</tr>
 							</thead>
 							<tbody>
+								<%JSONArray examArray = (JSONArray)request.getAttribute("examArray");
+								int len = examArray.length();
+								//{id:,exam_name:,teacher_name:,exam_begin_time:,exam_end_time:,exam_duration:,score:,}
+ 								for(int i = 0;i<len;i++){
+									JSONObject exam = (JSONObject)examArray.get(i);
+									String exam_name = exam.getString("exam_name");
+									int id = exam.getInt("id");
+									String exam_begin_time = exam.getString("exam_begin_time");
+									String exam_end_time = exam.getString("exam_end_time");
+									int exam_duration =exam.getInt("exam_duration");
+									double score = exam.getDouble("score");
+									%>
 								<tr>
 									<td><!-- 此处id是从后台得到 -->
-										<a href="/tea/analysis/exam?id=51" class="underline problem-analysis-link">2015性能测试1-备用</a>
-										<a href="/tea/analysis/exam?id=51" class="underline problem-analysis-link">学生成绩分析</a>
+										<a href="<%=request.getContextPath()%>/examDetail?id=<%=id %>" class="underline problem-analysis-link" title="学生成绩分析"><%=exam_name %></a>
 									</td>
-									<td>2015-07-01 10:00</td>
-									<td>2015-07-01 12:00</td>
-									<td>60&nbsp;分钟</td>
-									<td>83.0</td>
+									<td><%=exam_begin_time %></td>
+									<td><%=exam_end_time %></td>
+									<td><%=exam_duration %>&nbsp;分钟</td>
+									<td><%=score%></td>
 								</tr>
+								<%}%>
 							</tbody>
 						</table>
 

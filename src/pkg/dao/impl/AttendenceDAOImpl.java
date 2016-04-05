@@ -33,6 +33,7 @@ public class AttendenceDAOImpl extends HibernateServiceSupport implements Attend
 			System.out.println("dbopt is null");
 			return 0;
 		}
+		System.out.println("adding attendence");
 		
 		return dbopt.save(attendence);
 	}

@@ -6,8 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import pkg.service.TeacherService;
 
 /**
  * Servlet implementation class AnalysisResult
@@ -15,17 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TeaAnalysisResult{
 	
-	
+    @Autowired
+    TeacherService service;
+    
     public TeaAnalysisResult() {
         super();
     }
 
-    
+    @SuppressWarnings("unused")
     @RequestMapping("/teaAnalysisResult")
     public String showResult(HttpServletRequest request,HttpSession session){
     	
-    	@SuppressWarnings("unused")
-		String stu_account = (String) session.getAttribute("tea_account");
+		String tea_account = (String) session.getAttribute("tea_account");
+		String stu_id = request.getParameter("stu_id");
+    	String exam_id = request.getParameter("exam_id");
+    	String problem_id = request.getParameter("problem_id");
+    	JSONObject exam = service.getExamDetails(Integer.parseInt(exam_id),tea_account);
+    	request.setAttribute("exam", exam);
     	
     	JSONObject runResultJson = null;
     	try {
@@ -66,7 +75,7 @@ public class TeaAnalysisResult{
 			e.printStackTrace();
 		}
     	
-    	return "view/analysisResult";
+    	return "view/teacher/teaAnalysisResult";
     }
     
     public void reverse(String str){//

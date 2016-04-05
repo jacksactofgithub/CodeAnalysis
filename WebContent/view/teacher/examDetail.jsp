@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="org.json.JSONException"%>
+<%@ page import="org.json.JSONObject"%>
+<%@ page import="org.json.JSONArray"%>
 <head>
 <title>慕测平台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -222,8 +226,8 @@
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>欢迎,
-				<span class="text-info">卢依宁</span>老师!
-			</span> <span>南京大学</span>
+				<span class="text-info"><%=session.getAttribute("tea_name") %></span>老师!
+			</span> <span><%=session.getAttribute("uni_name") %></span>
 		</div>
 		<div class="clearfix"></div>
 		<div>
@@ -243,7 +247,7 @@
 							href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
 						</li>
 						<li class="iStats"><a
-							href="http://mooctest.net/tea/exercise/overview" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -266,15 +270,17 @@
 			<div class="title">
 				<h5>考试分析</h5>
 			</div>
-
+			<%
+				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
+				String exam_id = exam.getString("id");
+			%>
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home"
 							title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 -->
-						<li><a href="http://mooctest.net/tea/home" title="考试分析">考试分析</a></li>
-						<li class="firstB">Java覆盖练习1</li>
+						<li class="firstB"><%=exam.getString("exam_name")%></li>
 						<!-- 从request中取得考试信息类中的考试名 -->
 					</ul>
 				</div>
@@ -288,15 +294,15 @@
 					<ul class="item-list tabled">
 						<li class="item">
 							<div class="item-name">考试名称</div>
-							<div class="item-value">Java覆盖练习1</div>
+							<div class="item-value"><%=exam.getString("exam_name")%></div>
 						</li>
 						<li class="item">
 							<div class="item-name">考试日期</div>
-							<div class="item-value">2015-02-01</div>
+							<div class="item-value"><%=exam.getString("exam_begin_time").split(" ")[0]%></div>
 						</li>
 						<li class="item">
 							<div class="item-name">考试人数</div>
-							<div class="item-value">10</div>
+							<div class="item-value"><%=exam.getInt("stu_num")%></div>
 						</li>
 					</ul>
 				</div>
@@ -320,195 +326,44 @@
 									<th class="span2">学号</th>
 									<th class="span2" data-sorter="false">姓名</th>
 									<th class="span1" data-empty="zero">总成绩</th>
-									<th class="span1" data-empty="zero">题目一得分</th>
-									<th class="span1" data-empty="zero">题目二得分</th>
-									<th class="span1" data-empty="zero">题目三得分</th>
+									<th class="span1">题目一得分</th>
+									<th class="span1" id="th6">题目二得分</th>
+									<th class="span1" id="th7">题目三得分</th>
 								</tr>
 							</thead>
 							<tbody>
+							<%JSONArray studentArray = (JSONArray)request.getAttribute("studentArray");
+								int len = studentArray.length();
+								//{id:,exam_name:,teacher_name:,exam_begin_time:,exam_end_time:,exam_duration:,score:,}
+ 								for(int i = 0;i<len;i++){
+									JSONObject student = (JSONObject)studentArray.get(i);
+									String stu_name = student.getString("student_name");
+									String stu_no = student.getString("stu_no");
+									String uni_name =student.getString("uni_name");
+									double score = student.getDouble("score");
+									double p1_score = student.getDouble("problem1_score");
+									double p2_score = student.getDouble("problem2_score");
+									double p3_score = student.getDouble("problem3_score");
+									int problem1_id = student.getInt("problem1_id");
+									int problem2_id = student.getInt("problem2_id");
+									int problem3_id = student.getInt("problem3_id");
+									int stu_id = student.getInt("stu_id");
+								%>
 								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>dg1132002</td>
-									<td>张智轶</td>
-
+									<td><%=uni_name %></td>
+									<td><%=stu_no %></td>
+									<td><%=stu_name %></td>
 									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
+											class="final-score"><%=score %></span> 分
 									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem1_id%>" title="查看题目代码统计">
+									<span class="final-score"><%=p1_score %></span>分</a></td>
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem2_id%>" title="查看题目代码统计">
+									<span class="final-score"><%=p2_score %></span>分</a></td>
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem3_id%>" title="查看题目代码统计">
+									<span class="final-score"><%=p3_score %></span>分</a></td>
 								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>dg1332004</td>
-									<td>汪亚斌</td>
-
-									<td><span class="text-success"> <span
-											class="final-score">90.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>dg1432006</td>
-									<td>孙一</td>
-
-									<td><span class="text-success"> <span
-											class="final-score">90.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>dg1432008</td>
-									<td>张伟强</td>
-
-									<td><span class="text-success"> <span
-											class="final-score">78.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>mg1232002</td>
-									<td>豆梦宇</td>
-									<td><span class="text-success"> <span
-											class="final-score">84.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>mg1332003</td>
-									<td>冯奕彬</td>
-
-
-									<td><span class="text-success"> <span
-											class="final-score">89.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>mg1332009</td>
-									<td>卢依宁</td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>mg1432002</td>
-									<td>郝蕊</td>
-
-									<td><span class="text-success"> <span
-											class="final-score">68.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>mg1432008</td>
-									<td>李舒颖</td>
-									<td><span class="text-success"> <span
-											class="final-score">74.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-
-								</tr>
-								<tr data-mem="0">
-									<td>南京大学</td>
-									<td>mg1432009</td>
-									<td>刘子聪</td>
-									<td><span class="text-success"> <span
-											class="final-score">91.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-									<td><span class="text-success"> <span
-											class="final-score">83.0</span> 分
-									</span></td>
-								</tr>
-
+							<%} %>
 							</tbody>
 						</table>
 						<!-- 这里是排序的页面<div class="text-center" id="examMemberTablePager"></div>  -->
@@ -593,6 +448,22 @@
 
         <!-- itsbrain精简后的执行 -->
         <script type="text/javascript">
+        
+        $(document).ready(function(){ //隐藏table的某行
+        	var tag6 = '<%=request.getAttribute("problem2_id")%>';
+        	var tag7 = '<%=request.getAttribute("problem3_id")%>';
+        	if(tag6=="-1"){
+            	$('table tr').find('td:eq(6)').hide();//隐藏第六列
+            	$('#th6').hide();//隐藏第六列
+        	}
+        	
+        	if(tag7=="-1"){
+            	$('table tr').find('td:eq(7)').hide();//隐藏第六列
+            	$('#th7').hide();//隐藏第六列
+        	}
+
+       	}); 
+        
         $(function(){
 
             //===== ToTop =====//
@@ -645,9 +516,9 @@ $(function(){
 
         // keys
         var HOME = "主页";
-        var EXAM_LIST = "考试列表";
+        var EXAM_LIST = "考试分析";
         var EXAM_CREATE = "新建考试";
-        var EXAM_VIEW = "考试";
+        var EXAM_VIEW = "<%=exam.getString("exam_name")%>";
         var CLASS_LIST = "班级列表";
         var CLASS_CREATE = "新建班级";
         var CLASS_VIEW = "班级";
@@ -664,7 +535,7 @@ $(function(){
         // 导航链接
         var LINKS = {};
         LINKS[HOME] = '/tea/home';
-        LINKS[EXAM_LIST] = '/tea/exam/list';
+        LINKS[EXAM_LIST] = '<%=request.getContextPath() %>/teacherAnalysis';
         LINKS[EXAM_CREATE] = '/tea/exam/create';
         LINKS[EXAM_VIEW] = '#';
         LINKS[CLASS_LIST] = '/tea/class/list';
@@ -765,6 +636,7 @@ $(function(){
 <script type="text/javascript" src="http://mooctest.net/public/js/highcharts-4.0.4/highcharts.js"></script>
 <script type="text/javascript" src="http://mooctest.net/public/js/common/AjaxChart.js"></script>
 <script type="text/javascript">
+
 $(function(){
     // ================================
     // 日期时间
@@ -859,7 +731,6 @@ $(function(){
                             jAlert('考试开始时间已过，请重新选择', '提示');
                             return false;
                         }
-                        // TODO: 与结束时间的比较
                         return true;
                     }
                 },
@@ -869,7 +740,6 @@ $(function(){
                         return $('#examDuration').val();
                     },
                     check: function(){
-                        // TODO: 与(结束-开始)时间的比较
                         return true;
                     }
                 },
@@ -890,7 +760,6 @@ $(function(){
                             jAlert('考试结束时间已过，请重新选择', '提示');
                             return false;
                         }
-                        // TODO: 与开始时间的比较
                         return true;
                     }
                 }
@@ -944,7 +813,6 @@ $(function(){
             displayTarget($('#expandDurationTarget'), 'hide');
         });
 
-        // TODO:延迟结束时间
     })();
     }
 
