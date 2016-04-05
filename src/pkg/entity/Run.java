@@ -4,11 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="run")
@@ -17,21 +13,23 @@ public class Run {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int run_id;
-	@ManyToOne
-	@Cascade(value={org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-	@JoinColumn(name="subject_id")
-	private Subject subject;
-	@ManyToOne
-	@Cascade(value={org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-	@JoinColumn(name="student_id")
-	private Student student;
+	private String pro_name;
+	private int student_id;
 	
-	public Subject getSubject(){
-		return subject;
+	public void setPro_name(String pro_name){
+		this.pro_name = pro_name;
 	}
 	
-	public Student getStudent(){
-		return student;
+	public void setStudent_id(int student_id){
+		this.student_id = student_id;
+	}
+	
+	public String getPro_name(){
+		return pro_name;
+	}
+	
+	public int getStudent(){
+		return student_id;
 	}
 	
 }

@@ -13,21 +13,10 @@ import pkg.hibernate.HibernateServiceSupport;
 @Repository
 public class DBOperation extends HibernateServiceSupport{
 
-	private static DBOperation operation = new DBOperation();
-	
-	public static DBOperation getInstance(){
-		return operation;
-	}
-	
-	private DBOperation(){
-		
-	}
-	
 	//增
 	public int save(Object entity){
 		
 		try{
-			//this.save(entity);
 			this.getHibernateTemplate().save(entity);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -94,5 +83,4 @@ public class DBOperation extends HibernateServiceSupport{
 		releaseSession(session);
 		return arrayList;
 	}
-	
 }

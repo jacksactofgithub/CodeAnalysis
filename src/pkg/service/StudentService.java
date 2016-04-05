@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 	
+	
 	public JSONArray getExams(String stu_account){
 		try {
 			return new JSONArray("[{'id':1,'exam_name':'测试考试1','teacher_name':'陈振宇','exam_begin_time':'2016-4-1 14:00:01',"

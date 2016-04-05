@@ -13,9 +13,9 @@ public class AnalysisController {
 	 * @param subjectName
 	 * @return
 	 */
-	public SubjectResult acquireOneSubject(String examID , String stuID , String subjectName){
+	public SubjectResult acquireOneSubject(String examID , String stuID , String problemName){
 		
-		return AnalysisDataManager.getResult(examID, stuID, subjectName);
+		return AnalysisDataManager.getResult(examID, stuID, problemName);
 	}
 	
 	public static void main(String[] args){

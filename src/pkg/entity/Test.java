@@ -19,10 +19,22 @@ public class Test {
 	private int test_id;
 	@ManyToOne
 	@Cascade(value={org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-	@JoinColumn(name="subject_id")
-	private Subject subject;
+	@JoinColumn(name="run_id")
+	private Run run;
 	private String test_name;
 	private boolean test_result;
+	
+	public void setRun(Run run){
+		this.run = run;
+	}
+	
+	public void setTest_name(String testName){
+		this.test_name = testName;
+	}
+	
+	public void setTest_result(boolean testResult){
+		this.test_result = testResult;
+	}
 	
 	public int getTest_Id(){
 		return test_id;
@@ -36,8 +48,8 @@ public class Test {
 		return test_result;
 	}
 	
-	public Subject getSubject(){
-		return subject;
+	public Run getSubject(){
+		return run;
 	}
 	
 }

@@ -8,8 +8,7 @@ package lmooc.modulize.bean;
  */
 public class CodeStamp {
 
-	private long fromSecond;
-	private long toSecond;
+	private long relativeTime;
 	private int lineCount;
 	private int noteCount;
 	private int methodCount;
@@ -17,11 +16,10 @@ public class CodeStamp {
 	private int maxCyc; // 最大圈复杂度
 	private String sourceName; // 对应的源文件的名称
 
-	public CodeStamp(long fromSecond , long toSecond, int lineCount, int noteCount, int methodCount,
+	public CodeStamp(long relativeTime , int lineCount, int noteCount, int methodCount,
 			int varyCount, int maxCyc,String sourceName) {
 
-		this.fromSecond = fromSecond;
-		this.toSecond = toSecond;
+		this.relativeTime = relativeTime;
 		this.lineCount = lineCount;
 		this.noteCount = noteCount;
 		this.methodCount = methodCount;
@@ -31,14 +29,10 @@ public class CodeStamp {
 
 	}
 
-	public long getFromSecond() {
-		return fromSecond;
+	public long getRelativeTime() {
+		return relativeTime;
 	}
 	
-	public long getToSecond(){
-		return toSecond;
-	}
-
 	public int getLineCount() {
 		return lineCount;
 	}

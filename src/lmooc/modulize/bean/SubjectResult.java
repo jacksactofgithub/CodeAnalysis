@@ -17,6 +17,14 @@ public class SubjectResult {
 		this.run = run;
 	}
 	
+	public Iterator<CodeStamp> getCodeStamps(){
+		return code;
+	}
+	
+	public Iterator<RunStamp> getRunStamps(){
+		return run;
+	}
+	
 	public JSONArray getCodeJSON() {
 		
 		JSONArray array = new JSONArray();
@@ -38,7 +46,7 @@ public class SubjectResult {
 	private JSONObject formCode(CodeStamp stamp) throws JSONException{
 		
 		JSONObject json = new JSONObject();
-		json.put("timestamp", stamp.getToSecond());
+		json.put("timestamp", stamp.getRelativeTime());
 		json.put("source", stamp.getSourceName());
 		json.put("lineCount", stamp.getLineCount());
 		json.put("noteCount" , stamp.getNoteCount());

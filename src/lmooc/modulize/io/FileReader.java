@@ -39,4 +39,6 @@ public class FileReader implements ReadStrategy{
 		return null;
 	}
 	
+	
+	
 }

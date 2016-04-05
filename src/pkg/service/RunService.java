@@ -6,8 +6,8 @@ import lmooc.modulize.bean.RunStamp;
 
 public interface RunService {
 
-	public int saveRunStamp(Iterator<RunStamp> stamps , int studentID , int subjectID);
+	public int saveRunStamp(Iterator<RunStamp> stamps , int stuID);
 	
-	public Iterator<RunStamp> getRunstamp(int studentID , int subjectID);
+	public Iterator<RunStamp> getRunstamp(int stuID , String proName);
 	
 }

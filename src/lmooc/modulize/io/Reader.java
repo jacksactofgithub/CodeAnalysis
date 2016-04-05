@@ -7,7 +7,7 @@ public class Reader {
 	private String prePath; // 源目录
 	private String tagFolder; // 存放代码的文件夹
 	private String logPrefix;		//log文件的前缀
-	private static final String CFG_PATH = "./reader.cfg";
+	private static final String CFG_PATH = "../reader.cfg";
 
 	private ReadStrategy myReader;
 
@@ -34,7 +34,8 @@ public class Reader {
 	private void initReader() {
 		FileReader fReader = new FileReader();
 		// 读取cfg信息
-		Iterator<String> info = fReader.read(CFG_PATH);
+		String cfgPath = this.getClass().getResource("/").getPath();
+		Iterator<String> info = fReader.read(cfgPath + CFG_PATH);
 
 		String cfg = info.next();
 		String dirCfg = info.next();

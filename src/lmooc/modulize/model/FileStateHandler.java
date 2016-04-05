@@ -2,8 +2,10 @@ package lmooc.modulize.model;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import lmooc.modulize.bean.CodeStamp;
 import lmooc.modulize.bean.filestate.FileState;
@@ -28,52 +30,42 @@ public class FileStateHandler {
 		this.examID = examID;
 	}
 
-	public Iterator<CodeStamp> hanleFileStates(Iterator<FileState> states, String subjectName) {
+	public Iterator<CodeStamp> hanleFileStates(Iterator<FileState> states) {
 		List<CodeStamp> stampList = new ArrayList<CodeStamp>();
-
-		long fromSecond = 0;
-		boolean workOn = false; // 上一次是否在该项目进行编码
-		String fileName = ""; // 当前项目的文件名
-		while (states.hasNext()) {
+		
+		Map<String , Long> startMap = new HashMap<String , Long>();
+		String currentPath = "";
+		while(states.hasNext()){
 			FileState state = states.next();
-
-			if (!workOn) {
-				StateType type = state.getType();
-				switch (type) {
-				case Active_Editor: // 切换编辑框
-					if (judgeProName(state.getFilePath(), subjectName)) {
-						fileName = state.getFilePath();
-						CodeStamp stamp = handleOne(fileName, fromSecond, state.getMillisecond());
-						stampList.add(stamp);
-						workOn = true;
-					}
-					break;
-				case Timer:
-					break;
-				default:
+			
+			StateType type = state.getType();
+			long startTime;
+			switch (type) {
+			case Active_Editor:
+				String fileName = getFileName(state.getFilePath());
+				if(startMap.containsKey(fileName)){
+					startTime = startMap.get(fileName);
+					
+				}else{
+					startMap.put(fileName, state.getMillisecond());
+					startTime = state.getMillisecond();
 				}
-			} else { // 在当前项目中
-				StateType type = state.getType();
-				switch (type) {
-				case Active_Editor:
-					if (judgeProName(state.getFilePath(), subjectName)) {
-						CodeStamp stamp = handleOne(fileName, fromSecond, state.getMillisecond());
-						stampList.add(stamp);
-					}
-					else{
-						workOn = false;
-					}
-					break;
-				case Timer:
-					CodeStamp stamp = handleOne(fileName, fromSecond, state.getMillisecond());
-					stampList.add(stamp);
-					break;
-				default:
-				}
+				currentPath = state.getFilePath();
+				CodeStamp stamp = handleOne(currentPath , startTime , state.getMillisecond());
+				stampList.add(stamp);
+				break;
+			case Timer:
+				startTime = startMap.get(getFileName(currentPath));
+				stamp = handleOne(currentPath , startTime , state.getMillisecond());
+				stampList.add(stamp);
+				break;
+			default:
+				break;
 			}
-
-			fromSecond = state.getMillisecond();
+			
 		}
+
+
 
 		return stampList.iterator();
 	}
@@ -81,23 +73,20 @@ public class FileStateHandler {
 	/*
 	 * 判断tag 是否是path所对应的项目
 	 */
-	private boolean judgeProName(String path, String tag) {
+	private String getFileName(String path) {
 		// 可能有文件格式问题，需后续调整
 		// 即是stamp.getSourceName()可能为Triangle/src/Triangle.java 而 subjectName
 		// 可能为Triangle
 		String proName = path.split("/")[0];
-		if (proName.equals(tag)) {
-			return true;
-		}
-		return false;
+		return proName;
 	}
 
 	/*
 	 * 生成一个CodeStamp对象，存储截至toSecond时间的分析参数
 	 */
-	private CodeStamp handleOne(String fileName, long fromSecond, long toSecond) {
+	private CodeStamp handleOne(String filePath,long startTime , long currentTime) {
 
-		Source source = getSource(fileName, toSecond);
+		Source source = getSource(filePath, currentTime);
 		Lexer lexer = new Lexer();
 		lexer.segment(source);
 		
@@ -109,7 +98,7 @@ public class FileStateHandler {
 		int varyCount = source.getTotalVaryCount();
 		int maxCyc = source.getMaxCyc();
 
-		return new CodeStamp(fromSecond, toSecond, lineCount, noteCount, methodCount, varyCount, maxCyc, fileName);
+		return new CodeStamp( currentTime - startTime, lineCount, noteCount, methodCount, varyCount, maxCyc, filePath);
 	}
 
 	/**
@@ -119,9 +108,9 @@ public class FileStateHandler {
 	 * @param toSecond
 	 * @return
 	 */
-	private Source getSource(String fileName, long toSecond) {
+	private Source getSource(String fileName, long currentTime) {
 		Reader reader = new Reader();
-		Iterator<String> it = reader.readJava(toSecond, fileName, examID, stuID);
+		Iterator<String> it = reader.readJava(currentTime, fileName, examID, stuID);
 		return new Source(it, fileName);
 	}
 
