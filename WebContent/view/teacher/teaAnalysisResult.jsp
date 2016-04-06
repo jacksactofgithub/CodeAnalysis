@@ -25,7 +25,6 @@
  <script type="text/javascript">
  $(function () {
 	 var myjson = eval(<%=(String)request.getAttribute("staJsonstr")%>);
-	 
 	 var chart1=$('#container').highcharts({
 	        title: {
 	            text: '',//'代码统计',
@@ -52,10 +51,6 @@
 	            valueSuffix: ''
 	        },
 	        legend: {
-	            //layout: 'vertical',
-	            //align: 'right',
-	            //verticalAlign: 'middle',
-	            //borderWidth: 0,
 	            align: 'left', //水平方向位置
 	            verticalAlign: 'top', //垂直方向位置
 	            x: 0, //距离x轴的距离
@@ -87,39 +82,39 @@
 <!-- Header -->
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
-			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
-				<span class="text-info"><%=session.getAttribute("stu_name") %></span>student!
+			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>欢迎,
+				<span class="text-info"><%=session.getAttribute("tea_name") %></span>老师!
 			</span> <span><%=session.getAttribute("uni_name") %></span>
 		</div>
-
 		<div class="clearfix"></div>
 		<div>
 			<div id="logo">
-				<a href="http://mooctest.net/stu/home" title="返回主页"></a>
+				<a href="http://mooctest.net/tea/home" title="返回主页"></a>
 			</div>
 			<div class="clearfix" id="nav">
 				<div class="middleNav pull-left">
 					<ul>
-						<li class="iStats"><a
-							href="http://112.124.1.3:8050/?email=lshuo12@software.nju.edu.cn&vcode=4ac130b1c76c7858d41070528e4c3294"
-							title="" target="_blank"><span>Python统计</span></a></li>
-						<li class="iExam"><a href="http://mooctest.net/stu/exam/list"
-							title=""><span>My Exam</span></a></li>
-						<li class="iClass"><a
-							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
-						</li>
 						<li class="iExam"><a
-							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>考试分析</span></a>
+							href="http://mooctest.net/tea/exam/create" title=""><span>新建考试</span></a>
+						</li>
+						<!-- <li class="iUpload">
+                        <a href="/tea/upload" title=""><span>上传题目</span></a>
+                    </li> -->
+						<li class="iFinish"><a
+							href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
+						</li>
+						<li class="iStats"><a
+							href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
 						</li>
 					</ul>
 				</div>
 				<div class="middleNav pull-right">
 					<ul>
 						<li class="iUser"><a
-							href="http://mooctest.net/stu/personal/profile" title=""><span>Profile</span></a>
+							href="http://mooctest.net/tea/personal/profile" title=""><span>个人信息</span></a>
 						</li>
 						<li class="iLogoff"><a href="http://mooctest.net/logout"
-							title=""><span>Logout</span></a></li>
+							title=""><span>注销用户</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -267,5 +262,6 @@
 			</div>
 			</div>
 	</div>
+
 </body>
 </html>
