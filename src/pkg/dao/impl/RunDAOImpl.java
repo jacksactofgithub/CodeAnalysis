@@ -39,4 +39,16 @@ public class RunDAOImpl implements RunDAO{
 		return list;
 	}
 
+	@Override
+	public List<Integer> queryStudentID(String proName) {
+		// TODO Auto-generated method stub
+		String hql = "select distinct student_id from run as run where pro_name=?";
+		
+		@SuppressWarnings("unchecked")
+		List<Integer> list = dbopt.findList(hql, proName);
+		
+		return list;
+	}
+	
+	
 }
