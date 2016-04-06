@@ -3,19 +3,22 @@ package pkg.service.impl;
 import java.util.Iterator;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lmooc.modulize.bean.CodeStamp;
-import pkg.dao.AttendenceDAO;
-import pkg.entity.Attendence;
+import pkg.dao.CodeDAO;
+import pkg.entity.Code;
 import pkg.service.CodeService;
 
 @Service
 public class CodeServiceImpl implements CodeService{
 	
 	@Autowired
-	private AttendenceDAO attDAO;
+	private CodeDAO attDAO;
 	
 	@Override
 	public int saveStamps(Iterator<CodeStamp> stamps, int stuID, int exam) {
@@ -24,16 +27,16 @@ public class CodeServiceImpl implements CodeService{
 //		List<Attendence> attList = new ArrayList<Attendence>();
 		
 		while(stamps.hasNext()){
-			Attendence attendence = generateAttendence(stamps.next() , stuID);
-			attDAO.addAttendence(attendence);
+			Code attendence = generateAttendence(stamps.next() , stuID);
+			attDAO.addCode(attendence);
 //			attList.add(attendence);
 		}
 		
 		return 0;
 	}
 	
-	private Attendence generateAttendence(CodeStamp stamp , int stuID){
-		Attendence attendence = new Attendence();
+	private Code generateAttendence(CodeStamp stamp , int stuID){
+		Code attendence = new Code();
 		attendence.setStudent_id(stuID);
 		attendence.setLine_count(stamp.getLineCount());
 		attendence.setNote_count(stamp.getNoteCount());
@@ -55,21 +58,91 @@ public class CodeServiceImpl implements CodeService{
 //	}
 
 	@Override
-	public Iterator<Attendence> getStamps(int stuID, String proName) {
+	public JSONArray getCodeRecord(int stuID, String proName) {
 		// TODO Auto-generated method stub
 		
-		List<Attendence> list = attDAO.queryAttendences(stuID, proName);
+		List<Code> list = attDAO.queryAttendences(stuID, proName);
 		
-		Iterator<Attendence> it = list.iterator();
+		Iterator<Code> it = list.iterator();
 		
 		while(it.hasNext()){
-			Attendence attendence = it.next();
+			Code attendence = it.next();
 			if(!attendence.getPro_name().equals(proName)){
 				list.remove(attendence);
 			}
 		}
 		
-		return list.iterator();
+		JSONArray array = getCodeJSON(list.iterator());
+		
+		return array;
+	}
+	
+	public JSONArray getCodeJSON(Iterator<Code> code) {
+		
+		JSONArray array = new JSONArray();
+		
+		int count =0;		//第几分钟
+		Code former = null;
+		int interval = 0;
+		while(code.hasNext()){
+			JSONObject json;
+			try {
+				Code temp = code.next();
+				
+				if(former == null){
+					json = formCode(temp , count);
+					array.put(json);
+					former = temp;
+					count++;
+					interval = (count*60) - former.getSecond();
+					continue;
+				}
+				
+				int currentInterval = calInterval((count*60) , temp.getSecond());
+				if(currentInterval < interval){
+					interval = currentInterval;
+					former = temp;
+				}else{
+					json = formCode(temp , count);
+					array.put(json);
+					count++;
+					interval = (count*60) - former.getSecond();
+				}
+				
+				if(!code.hasNext()){
+					json = formCode(temp, count);
+					array.put(json);
+				}
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return array;
+	}
+	
+	private int calInterval(int timeOne , int timeTwo){
+		int result = timeOne - timeTwo;
+		if(timeOne < timeTwo){
+			result = 0 - result;
+		}
+		return result;
+	}
+	
+	private JSONObject formCode(Code attendence ,int minute) throws JSONException{
+		
+		JSONObject json = new JSONObject();
+		json.put("time", minute);
+		json.put("source", attendence.getPro_name());
+		json.put("lineCount", attendence.getLine_count());
+		json.put("noteCount" , attendence.getNote_count());
+		json.put("methodCount", attendence.getMethod_count());
+		json.put("varyCount", attendence.getVar_count());
+		json.put("maxCyclomaticCpl", attendence.getMax_cyclomaticcpl());
+		
+		return json;
 	}
 
 }

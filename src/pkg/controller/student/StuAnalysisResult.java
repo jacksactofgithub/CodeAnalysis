@@ -46,7 +46,7 @@ public class StuAnalysisResult {
 
 		JSONObject runResultJson = null;
 		try {
-			String obj1 = "{'stuid':121250088,'examNo':1,'questionNo':'1','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"
+			String obj1 = "{'stuid':121250088,'questionName':'Triangle','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"
 					+ "{'time':3,'passNo':[1,2,3]},{'time':8,'passNo':[1,2,3,4]},{'time':11,'passNo':[1,2,3,4,5]},"
 					+ "{'time':14,'passNo':[1,2,3,4,5,6]}]}";
 			runResultJson = new JSONObject(obj1);

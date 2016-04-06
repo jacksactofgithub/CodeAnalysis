@@ -1,8 +1,12 @@
 package pkg.service.impl;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +34,6 @@ public class RunServiceImpl implements RunService{
 			long millisecond = stamp.getMillisecond();
 			String proName = stamp.getClassName();
 			long startsecond = FileStateHandler.getStartTime(stuID, proName);
-			System.out.println(millisecond + "  " + startsecond);
 			
 			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000));
 			addTests(run , stamp.getTests());
@@ -51,6 +54,86 @@ public class RunServiceImpl implements RunService{
 
 	@Override
 	public Iterator<RunStamp> getRunstamp(int stuID, String proName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public JSONArray getRunJSON(Iterator<Run> run){
+		
+		JSONArray runArray = new JSONArray();
+		
+		int count =0;		//第几分钟
+		Run former = null;
+		int interval = 0;
+		while(run.hasNext()){
+			JSONObject json;
+			try {
+				Run temp = run.next();
+				
+				if(former == null){
+					json = formRun(temp , count);
+					runArray.put(json);
+					former = temp;
+					count++;
+					interval = (count*60) - former.getRun_second();
+					continue;
+				}
+				
+				int currentInterval = calInterval((count*60) , temp.getRun_second());
+				if(currentInterval < interval){
+					interval = currentInterval;
+					former = temp;
+				}else{
+					json = formRun(temp , count);
+					runArray.put(json);
+					count++;
+					interval = (count*60) - former.getRun_second();
+				}
+				if(!run.hasNext()){
+					json = formRun(temp, count);
+					runArray.put(json);
+				}
+				
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return runArray;
+	}
+	
+	private int calInterval(int timeOne , int timeTwo){
+		int result = timeOne - timeTwo;
+		if(timeOne < timeTwo){
+			result = 0 - result;
+		}
+		return result;
+	}
+	
+	private JSONObject formRun(Run run , int count) throws JSONException{
+		JSONObject json = new JSONObject();
+		
+//		json.put("time", stamp.getMillisecond());
+//		
+//		JSONArray successArray = new JSONArray();
+//		
+//		Iterator<Entry<String , Boolean>> tests = stamp.getTests();
+//		
+//		while(tests.hasNext()){
+//			Entry<String , Boolean> entry = tests.next();
+//			if(entry.getValue()){
+//				successArray.put(entry.getKey());
+//			}
+//		}
+//		
+//		json.put("success", successArray);
+		
+		return json;
+	}
+
+	@Override
+	public List<String> findCommonTestCases(String proName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="attendence")
-public class Attendence implements Serializable{
+@Table(name="code")
+public class Code implements Serializable{
 
 	/**
 	 * 
@@ -29,7 +29,7 @@ public class Attendence implements Serializable{
 	private int var_count;
 	private int max_cyclomaticcpl;
 	
-	public Attendence(int attendID,int student_id,String pro_name,int second ,
+	public Code(int attendID,int student_id,String pro_name,int second ,
 			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl){
 		this.attend_id = attendID;
 		this.setStudent_id(student_id);
@@ -42,7 +42,7 @@ public class Attendence implements Serializable{
 		this.setMax_cyclomaticcpl(maxCyclomaticCpl);
 	}
 	
-	public Attendence(){
+	public Code(){
 		
 	}
 
