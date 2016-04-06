@@ -10,4 +10,11 @@ public interface RunDAO {
 	
 	public List<Run> queryRuns(int student_id , String proName);
 	
+	/**
+	 * 查询做了某一题的所有学生的id
+	 * @param proName
+	 * @return
+	 */
+	public List<Integer> queryStudentID(String proName);
+	
 }
