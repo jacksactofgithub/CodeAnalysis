@@ -1,6 +1,8 @@
 package pkg.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -15,6 +17,7 @@ import lmooc.modulize.model.FileStateHandler;
 import pkg.dao.RunDAO;
 import pkg.dao.TestDAO;
 import pkg.entity.Run;
+import pkg.entity.Test;
 import pkg.service.RunService;
 
 @Service
@@ -53,13 +56,16 @@ public class RunServiceImpl implements RunService{
 	
 
 	@Override
-	public Iterator<RunStamp> getRunstamp(int stuID, String proName) {
+	public JSONArray getRuns(int stuID, String proName) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List<Run> runs = runDAO.queryRuns(stuID, proName);
+		
+		return getRunJSON(runs.iterator() , proName);
 	}
 	
-	public JSONArray getRunJSON(Iterator<Run> run){
-		
+	public JSONArray getRunJSON(Iterator<Run> run , String proName){
+		List<String> testNames = findCommonTestCases(proName);
 		JSONArray runArray = new JSONArray();
 		
 		int count =0;		//第几分钟
@@ -71,7 +77,7 @@ public class RunServiceImpl implements RunService{
 				Run temp = run.next();
 				
 				if(former == null){
-					json = formRun(temp , count);
+					json = formRun(temp , count , testNames.iterator());
 					runArray.put(json);
 					former = temp;
 					count++;
@@ -84,13 +90,13 @@ public class RunServiceImpl implements RunService{
 					interval = currentInterval;
 					former = temp;
 				}else{
-					json = formRun(temp , count);
+					json = formRun(temp , count , testNames.iterator());
 					runArray.put(json);
 					count++;
 					interval = (count*60) - former.getRun_second();
 				}
 				if(!run.hasNext()){
-					json = formRun(temp, count);
+					json = formRun(temp, count , testNames.iterator());
 					runArray.put(json);
 				}
 				
@@ -111,23 +117,10 @@ public class RunServiceImpl implements RunService{
 		return result;
 	}
 	
-	private JSONObject formRun(Run run , int count) throws JSONException{
+	private JSONObject formRun(Run run , int count , Iterator<String> testNames) throws JSONException{
 		JSONObject json = new JSONObject();
 		
-//		json.put("time", stamp.getMillisecond());
-//		
-//		JSONArray successArray = new JSONArray();
-//		
-//		Iterator<Entry<String , Boolean>> tests = stamp.getTests();
-//		
-//		while(tests.hasNext()){
-//			Entry<String , Boolean> entry = tests.next();
-//			if(entry.getValue()){
-//				successArray.put(entry.getKey());
-//			}
-//		}
-//		
-//		json.put("success", successArray);
+		
 		
 		return json;
 	}
@@ -135,7 +128,78 @@ public class RunServiceImpl implements RunService{
 	@Override
 	public List<String> findCommonTestCases(String proName) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List<Integer> stuList = runDAO.queryStudentID(proName);
+		
+		List<String> result = null;
+		
+		if(stuList.size() >= 1){
+			int stuID = stuList.get(0);
+			result = findOneStudentCommon(stuID , proName);
+			
+			for(int i=1 ; i<stuList.size() ;++i){
+				stuID = stuList.get(i);
+				findCommon(result , findOneStudentCommon(stuID , proName));
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 找到一个学生的所有公共测试，即将该学生每个时间点的测试用例进行统计
+	 * @param stu_id
+	 * @param proName 
+	 * @return
+	 */
+	private List<String> findOneStudentCommon(int stuID , String proName){
+		List<Run> runs = runDAO.queryRuns(stuID, proName);
+		List<String> common = new LinkedList<String>();
+		
+		List<Test> temp = testDAO.queryTests(runs.get(0).getRun_id());
+		List<String> strTemp = transList(temp);
+		common.addAll(strTemp);
+		
+		for(int i=1 ; i<runs.size() ; ++i){
+			temp = testDAO.queryTests(runs.get(i).getRun_id());	//查找该次run下的所有test
+			strTemp = transList(temp);
+			findCommon(common , strTemp);
+		}
+		
+		return common;
+	}
+	
+	/**
+	 * 将Test类型的list转为string类型的，string是test的名称
+	 * @param from
+	 * @return
+	 */
+	private List<String> transList(List<Test> from){
+		List<String> result = new ArrayList<String>(from.size());
+		
+		for(int i=0;i<from.size();i++){
+			result.add(from.get(i).getTest_Name());
+		}
+		
+		return result;
 	}
 
+	/**
+	 * 找到两个list中的所有相同元素，将相同元素存入common中
+	 * @param common
+	 * @param tag
+	 */
+	private void findCommon(List<String> common , List<String> tag){
+		Iterator<String> it = common.iterator();
+		
+		while(it.hasNext()){
+			String temp = it.next();
+			if(!tag.contains(temp)){
+				common.remove(temp);
+			}
+		}
+		
+	}
+	
 }

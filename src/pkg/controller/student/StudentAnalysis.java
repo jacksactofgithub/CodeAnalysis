@@ -30,7 +30,7 @@ public class StudentAnalysis {
     
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
-//    	test();
+    	storageService.storeOne(290, 2);
     	//在尚未接通慕测的情况下全用假数据
     	request.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
     	request.setAttribute("stu_name", "刘硕");
@@ -47,4 +47,6 @@ public class StudentAnalysis {
     	request.setAttribute("examArray", examArray);
 		return "view/student/stuAnalysis";
 	}
+    
+    
 }

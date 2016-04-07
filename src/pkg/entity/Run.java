@@ -25,6 +25,10 @@ public class Run {
 		this.student_id = student_id;
 	}
 	
+	public int getRun_id(){
+		return run_id;
+	}
+	
 	public String getPro_name(){
 		return pro_name;
 	}

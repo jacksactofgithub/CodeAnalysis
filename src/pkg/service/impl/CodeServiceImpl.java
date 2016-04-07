@@ -134,7 +134,7 @@ public class CodeServiceImpl implements CodeService{
 	private JSONObject formCode(Code attendence ,int minute) throws JSONException{
 		
 		JSONObject json = new JSONObject();
-		json.put("time", minute);
+		json.put("timestamp", minute);
 		json.put("source", attendence.getPro_name());
 		json.put("lineCount", attendence.getLine_count());
 		json.put("noteCount" , attendence.getNote_count());

@@ -82,7 +82,7 @@ public class LogAnalyser {
 	 * @param states
 	 */
 	private void addOneFS(String log , List<FileState> states){
-		String[] infos = log.split(" ");
+		String[] infos = log.split("\t");
 		FileState fs;
 		switch (infos.length){
 		case 4: fs = new FileState(Long.parseLong(infos[2]) , StateType.Timer , null);break;
