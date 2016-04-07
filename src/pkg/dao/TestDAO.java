@@ -9,6 +9,6 @@ public interface TestDAO {
 
 	public int addTest(Run run_id , String testName , boolean testResult);
 	
-	public List<Test> queryTests(int run_id);
+	public List<Test> queryTests(Run run);
 	
 }

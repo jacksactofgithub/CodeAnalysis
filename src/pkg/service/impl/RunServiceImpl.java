@@ -56,47 +56,77 @@ public class RunServiceImpl implements RunService{
 	
 
 	@Override
-	public JSONArray getRuns(int stuID, String proName) {
+	public JSONObject getRuns(int stuID, String proName) throws JSONException {
 		// TODO Auto-generated method stub
 		
 		List<Run> runs = runDAO.queryRuns(stuID, proName);
 		
-		return getRunJSON(runs.iterator() , proName);
+		return getRunJSON(runs.iterator() , proName , stuID);
 	}
 	
-	public JSONArray getRunJSON(Iterator<Run> run , String proName){
+	public JSONObject getRunJSON(Iterator<Run> run , String proName , int stuID) throws JSONException{
 		List<String> testNames = findCommonTestCases(proName);
+		JSONObject runJSON = new JSONObject();
+		
+		runJSON.put("stuid",stuID);
+		runJSON.put("problemName", proName);
+		runJSON.put("caseNumber", testNames.size());
+		
+		JSONArray caseNameArray = new JSONArray();
+		for(String name:testNames){
+			caseNameArray.put(name);
+		}
+		runJSON.put("caseName", caseNameArray);
+		runJSON.put("result", formResultArray(run, proName, testNames));
+		
+		return runJSON;
+	}
+	
+	private JSONArray formResultArray(Iterator<Run> run , String proName , List<String> testNames){
+		
 		JSONArray runArray = new JSONArray();
 		
 		int count =0;		//第几分钟
 		Run former = null;
+		Run current = null;
 		int interval = 0;
-		while(run.hasNext()){
+		while((run.hasNext())||((count*60)<current.getRun_second())){
 			JSONObject json;
 			try {
-				Run temp = run.next();
 				
 				if(former == null){
-					json = formRun(temp , count , testNames.iterator());
+					Run temp = run.next();
+					json = formRun(temp , count , testNames);
 					runArray.put(json);
 					former = temp;
+					if(run.hasNext()){
+						current = run.next();
+					}else{
+						break;
+					}
 					count++;
-					interval = (count*60) - former.getRun_second();
+					interval = (count*60);
 					continue;
 				}
 				
-				int currentInterval = calInterval((count*60) , temp.getRun_second());
+				int currentInterval = calInterval((count*60) , current.getRun_second());
 				if(currentInterval < interval){
 					interval = currentInterval;
-					former = temp;
+					former = current;
+					if(run.hasNext()){
+						current = run.next();
+					}else{
+						interval = 0;
+					}
 				}else{
-					json = formRun(temp , count , testNames.iterator());
+					json = formRun(current , count ,testNames);
 					runArray.put(json);
 					count++;
 					interval = (count*60) - former.getRun_second();
 				}
-				if(!run.hasNext()){
-					json = formRun(temp, count , testNames.iterator());
+				
+				if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
+					json = formRun(current, count , testNames);
 					runArray.put(json);
 				}
 				
@@ -107,6 +137,7 @@ public class RunServiceImpl implements RunService{
 		}
 		
 		return runArray;
+		
 	}
 	
 	private int calInterval(int timeOne , int timeTwo){
@@ -117,10 +148,22 @@ public class RunServiceImpl implements RunService{
 		return result;
 	}
 	
-	private JSONObject formRun(Run run , int count , Iterator<String> testNames) throws JSONException{
+	private JSONObject formRun(Run run , int count , List<String> testNames) throws JSONException{
 		JSONObject json = new JSONObject();
 		
+		List<Test> tests = testDAO.queryTests(run);
+		json.put("time", count);
 		
+		JSONArray successArray = new JSONArray();
+		
+		for(Test t:tests){
+			String name = t.getTest_Name();
+			if((testNames.contains(name))&&(t.getTest_Result() == true)){
+				successArray.put(name);
+			}
+		}
+		
+		json.put("passNo", successArray);
 		
 		return json;
 	}
@@ -157,12 +200,12 @@ public class RunServiceImpl implements RunService{
 		List<Run> runs = runDAO.queryRuns(stuID, proName);
 		List<String> common = new LinkedList<String>();
 		
-		List<Test> temp = testDAO.queryTests(runs.get(0).getRun_id());
+		List<Test> temp = testDAO.queryTests(runs.get(0));
 		List<String> strTemp = transList(temp);
 		common.addAll(strTemp);
 		
 		for(int i=1 ; i<runs.size() ; ++i){
-			temp = testDAO.queryTests(runs.get(i).getRun_id());	//查找该次run下的所有test
+			temp = testDAO.queryTests(runs.get(i));	//查找该次run下的所有test
 			strTemp = transList(temp);
 			findCommon(common , strTemp);
 		}

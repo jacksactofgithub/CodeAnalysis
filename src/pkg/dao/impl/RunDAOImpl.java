@@ -31,7 +31,7 @@ public class RunDAOImpl implements RunDAO{
 	@Override
 	public List<Run> queryRuns(int student_id, String proName) {
 		// TODO Auto-generated method stub
-		String hql = "from run as run where run.student_id=? and run.pro_name=?";
+		String hql = "from Run as run where run.student_id=? and run.pro_name=?";
 		
 		@SuppressWarnings("unchecked")
 		List<Run> list = dbopt.findList(hql, student_id , proName);
@@ -42,7 +42,7 @@ public class RunDAOImpl implements RunDAO{
 	@Override
 	public List<Integer> queryStudentID(String proName) {
 		// TODO Auto-generated method stub
-		String hql = "select distinct student_id from run as run where pro_name=?";
+		String hql = "select distinct student_id from Run as run where run.pro_name=?";
 		
 		@SuppressWarnings("unchecked")
 		List<Integer> list = dbopt.findList(hql, proName);

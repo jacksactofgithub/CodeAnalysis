@@ -11,6 +11,6 @@ public interface CodeDAO {
 	
 	public int addCode(Code attendence);
 
-	public List<Code> queryAttendences(int stu_id, String proName);
+	public List<Code> queryCode(int stu_id, String proName);
 
 }

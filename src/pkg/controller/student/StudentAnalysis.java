@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pkg.service.CodeService;
+import pkg.service.RunService;
 import pkg.service.StorageService;
 import pkg.service.StudentService;
 
@@ -17,6 +19,10 @@ public class StudentAnalysis {
 	StudentService service;
 	@Autowired
 	StorageService storageService;
+	@Autowired
+	CodeService codeService;
+	@Autowired
+	RunService runService;
 	
     public StudentAnalysis() {
         super();
@@ -30,7 +36,6 @@ public class StudentAnalysis {
     
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
-    	storageService.storeOne(290, 2);
     	//在尚未接通慕测的情况下全用假数据
     	request.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
     	request.setAttribute("stu_name", "刘硕");

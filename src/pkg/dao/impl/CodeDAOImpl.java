@@ -29,19 +29,13 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 	public int addCode(Code attendence) {
 		// TODO Auto-generated method stub
 		
-		if(dbopt == null){
-			System.out.println("dbopt is null");
-			return 0;
-		}
-		System.out.println("adding attendence");
-		
 		return dbopt.save(attendence);
 	}
 
 	@Override
-	public List<Code> queryAttendences(int stu_id, String proName) {
+	public List<Code> queryCode(int stu_id, String proName) {
 		// TODO Auto-generated method stub
-		String hql = "from attendence as att where att.student_id=? and pro_name=?";
+		String hql = "from Code as code where code.student_id=? and code.pro_name=?";
 		@SuppressWarnings("unchecked")
 		List<Code> list = dbopt.findList(hql, stu_id , proName);
 		
