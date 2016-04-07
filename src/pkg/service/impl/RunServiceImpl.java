@@ -29,7 +29,7 @@ public class RunServiceImpl implements RunService{
 	private TestDAO testDAO;
 	
 	@Override
-	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID) {
+	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID , int examID) {
 		// TODO Auto-generated method stub
 		
 		while(stamps.hasNext()){
@@ -38,7 +38,7 @@ public class RunServiceImpl implements RunService{
 			String proName = stamp.getClassName();
 			long startsecond = FileStateHandler.getStartTime(stuID, proName);
 			
-			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000));
+			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000) , examID);
 			addTests(run , stamp.getTests());
 		}
 		
@@ -56,16 +56,16 @@ public class RunServiceImpl implements RunService{
 	
 
 	@Override
-	public JSONObject getRuns(int stuID, String proName) throws JSONException {
+	public JSONObject getRuns(int stuID, String proName , int exam) throws JSONException {
 		// TODO Auto-generated method stub
 		
-		List<Run> runs = runDAO.queryRuns(stuID, proName);
+		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
 		
-		return getRunJSON(runs.iterator() , proName , stuID);
+		return getRunJSON(runs.iterator() , proName , stuID , exam);
 	}
 	
-	public JSONObject getRunJSON(Iterator<Run> run , String proName , int stuID) throws JSONException{
-		List<String> testNames = findCommonTestCases(proName);
+	public JSONObject getRunJSON(Iterator<Run> run , String proName , int stuID , int exam) throws JSONException{
+		List<String> testNames = findCommonTestCases(proName , exam);
 		JSONObject runJSON = new JSONObject();
 		
 		runJSON.put("stuid",stuID);
@@ -102,7 +102,8 @@ public class RunServiceImpl implements RunService{
 					if(run.hasNext()){
 						current = run.next();
 					}else{
-						break;
+						current = temp;
+						interval = 0;
 					}
 					count++;
 					interval = (count*60);
@@ -169,20 +170,20 @@ public class RunServiceImpl implements RunService{
 	}
 
 	@Override
-	public List<String> findCommonTestCases(String proName) {
+	public List<String> findCommonTestCases(String proName , int exam) {
 		// TODO Auto-generated method stub
 		
-		List<Integer> stuList = runDAO.queryStudentID(proName);
+		List<Integer> stuList = runDAO.queryStudentID(proName , exam);
 		
 		List<String> result = null;
 		
 		if(stuList.size() >= 1){
 			int stuID = stuList.get(0);
-			result = findOneStudentCommon(stuID , proName);
+			result = findOneStudentCommon(stuID , proName , exam);
 			
 			for(int i=1 ; i<stuList.size() ;++i){
 				stuID = stuList.get(i);
-				findCommon(result , findOneStudentCommon(stuID , proName));
+				findCommon(result , findOneStudentCommon(stuID , proName , exam));
 			}
 			
 		}
@@ -196,8 +197,8 @@ public class RunServiceImpl implements RunService{
 	 * @param proName 
 	 * @return
 	 */
-	private List<String> findOneStudentCommon(int stuID , String proName){
-		List<Run> runs = runDAO.queryRuns(stuID, proName);
+	private List<String> findOneStudentCommon(int stuID , String proName , int exam){
+		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
 		List<String> common = new LinkedList<String>();
 		
 		List<Test> temp = testDAO.queryTests(runs.get(0));

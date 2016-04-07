@@ -46,7 +46,7 @@ public class StorageServiceImpl implements StorageService{
 		SubjectResult result = loadResult(examID+"", stuID+"");
 		
 		codeService.saveStamps(result.getCodeStamps() , stuID, examID);
-		runService.saveRunStamp(result.getRunStamps(), stuID);
+		runService.saveRunStamp(result.getRunStamps(), stuID , examID);
 	}
 
 	private SubjectResult loadResult(String examID, String studentNum) {

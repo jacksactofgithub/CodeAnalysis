@@ -10,9 +10,9 @@ import lmooc.modulize.bean.RunStamp;
 
 public interface RunService {
 
-	public int saveRunStamp(Iterator<RunStamp> stamps , int stuID);
+	public int saveRunStamp(Iterator<RunStamp> stamps , int stuID , int examID);
 	
-	public JSONObject getRuns(int stuID , String proName) throws JSONException;
+	public JSONObject getRuns(int stuID , String proName , int exam) throws JSONException;
 	
 	/**
 	 * 找到某一到题的最小公共测试用例集
@@ -20,5 +20,5 @@ public interface RunService {
 	 * @param proName
 	 * @return
 	 */
-	public List<String> findCommonTestCases(String proName);
+	public List<String> findCommonTestCases(String proName , int exam);
 }

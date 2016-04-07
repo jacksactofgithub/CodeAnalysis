@@ -13,6 +13,7 @@ public class Run {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int run_id;
+	private int exam_id;
 	private String pro_name;
 	private int student_id;
 	private int run_second;
@@ -43,6 +44,14 @@ public class Run {
 
 	public void setRun_second(int run_second) {
 		this.run_second = run_second;
+	}
+
+	public int getExam_id() {
+		return exam_id;
+	}
+
+	public void setExam_id(int exam_id) {
+		this.exam_id = exam_id;
 	}
 	
 }

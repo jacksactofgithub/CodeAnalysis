@@ -27,7 +27,7 @@ public class CodeServiceImpl implements CodeService{
 //		List<Attendence> attList = new ArrayList<Attendence>();
 		
 		while(stamps.hasNext()){
-			Code attendence = generateAttendence(stamps.next() , stuID);
+			Code attendence = generateAttendence(stamps.next() , stuID , exam);
 			codeDAO.addCode(attendence);
 //			attList.add(attendence);
 		}
@@ -35,9 +35,10 @@ public class CodeServiceImpl implements CodeService{
 		return 0;
 	}
 	
-	private Code generateAttendence(CodeStamp stamp , int stuID){
+	private Code generateAttendence(CodeStamp stamp , int stuID , int exam){
 		Code attendence = new Code();
 		attendence.setStudent_id(stuID);
+		attendence.setExam_id(exam);
 		attendence.setLine_count(stamp.getLineCount());
 		attendence.setNote_count(stamp.getNoteCount());
 		attendence.setMethod_count(stamp.getMethodCount());
@@ -50,18 +51,12 @@ public class CodeServiceImpl implements CodeService{
 		
 		return attendence;
 	}
-	
-//	private int getProIDByPath(String sourceName){
-//		String proName = sourceName.split("\\.")[0];
-//		
-//		return 0;
-//	}
 
 	@Override
-	public JSONArray getCodeRecord(int stuID, String proName) {
+	public JSONArray getCodeRecord(int stuID, String proName , int exam) {
 		// TODO Auto-generated method stub
 		
-		List<Code> list = codeDAO.queryCode(stuID, proName);
+		List<Code> list = codeDAO.queryCode(stuID, proName , exam);
 		
 		Iterator<Code> it = list.iterator();
 		
