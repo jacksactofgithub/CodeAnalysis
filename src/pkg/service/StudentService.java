@@ -46,7 +46,7 @@ public class StudentService {
 
 	public JSONArray getProblems(int exam_id,String stu_account){
 		try {
-			return new JSONArray("[{'problem_name':'题目一','problem_id':2, 'difficulty':1,'score':80,'ave_score':85,"
+			return new JSONArray("[{'problem_name':'CalculateMatrix','problem_id':2, 'difficulty':1,'score':80,'ave_score':85,"
 					+ "'description':'题目一',}]");
 			/**
 			 * return new JSONArray("[{'problem_name':'题目一','problem_id':2, 'difficulty':1,'score':80,'ave_score':85,"
