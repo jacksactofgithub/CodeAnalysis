@@ -44,9 +44,10 @@ public class StuAnalysisResult {
 			e1.printStackTrace();
 		}
 
-		String obj1 = "{'stuid':121250088,'questionName':'Triangle','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"
-				+ "{'time':3,'passNo':[1,2,3]},{'time':8,'passNo':[1,2,3,4]},{'time':11,'passNo':[1,2,3,4,5]},"
-				+ "{'time':14,'passNo':[1,2,3,4,5,6]}]}";
+		String obj1 = "{'stuid':121250088,'questionName':'Triangle','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,]},"
+				+ "{'time':2,'passNo':[1,2]},{'time':3,'passNo':[1,2]},{'time':4,'passNo':[1,2,3]},{'time':5,'passNo':[1,2,3]},{'time':6,'passNo':[1,2,3]},"
+				+ "{'time':7,'passNo':[1,2,3]},{'time':8,'passNo':[1,2,3,4]},{'time':9,'passNo':[1,2,3,4,5]},{'time':10,'passNo':[1,2,3,4]},{'time':11,'passNo':[1,2,3,4]},{'time':12,'passNo':[1,2,3,4]},"
+				+ "{'time':13,'passNo':[1,2,3,4,5]},{'time':14,'passNo':[1,2,3,4,5,6]},{'time':15,'passNo':[1,2,3,4,5,6]}]}";
 		JSONObject runResultJson=null;
 		try {
 			runResultJson = new JSONObject(obj1);
