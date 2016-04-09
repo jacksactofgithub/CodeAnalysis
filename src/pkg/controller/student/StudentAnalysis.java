@@ -37,12 +37,7 @@ public class StudentAnalysis {
     
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
-    	try {
-			System.out.println(runService.getRuns(2, "Triangle", 290));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	storageService.startStore(382, 1);
     	//在尚未接通慕测的情况下全用假数据
     	request.setAttribute("stu_account", "lshuo12@software.nju.edu.cn");
     	request.setAttribute("stu_name", "刘硕");

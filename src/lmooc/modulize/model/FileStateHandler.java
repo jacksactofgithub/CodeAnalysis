@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipFile;
 
 import lmooc.modulize.bean.CodeStamp;
 import lmooc.modulize.bean.filestate.FileState;
@@ -23,14 +24,14 @@ import lmooc.modulize.model.coldanalyser.Source;
 public class FileStateHandler {
 	
 	private String stuID;
-	private String examID;
+	private ZipFile zip;
 	
 	//存储学生开始某一题的时间
 	private static Map<String , Long> startMap = new HashMap<String , Long>();
 
-	public FileStateHandler(String stuID, String examID) {
+	public FileStateHandler(String stuID , ZipFile zip) {
 		this.stuID = stuID;
-		this.examID = examID;
+		this.zip = zip;
 	}
 	
 	public static long getStartTime(int studentID , String proName){
@@ -72,6 +73,9 @@ public class FileStateHandler {
 				stampList.add(stamp);
 				break;
 			case Timer:
+				if(currentPath.equals("")){
+					break;
+				}
 				startTime = startMap.get(getFileName(currentPath)+" "+stuID);
 				stamp = handleOne(currentPath , startTime , state.getMillisecond());
 				stampList.add(stamp);
@@ -107,8 +111,6 @@ public class FileStateHandler {
 		Lexer lexer = new Lexer();
 		lexer.segment(source);
 		
-		source.printVars();
-		
 		int lineCount = source.getLoc();
 		int noteCount = source.getLon();
 		int methodCount = source.getMethodCount();
@@ -127,7 +129,7 @@ public class FileStateHandler {
 	 */
 	private Source getSource(String fileName, long currentTime) {
 		Reader reader = new Reader();
-		Iterator<String> it = reader.readJava(currentTime, fileName, examID, stuID);
+		Iterator<String> it = reader.readJava(currentTime, fileName,zip);
 		return new Source(it, fileName);
 	}
 

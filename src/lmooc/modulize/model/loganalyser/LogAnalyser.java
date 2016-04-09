@@ -28,7 +28,7 @@ import util.DateParser;
  */
 public class LogAnalyser {
 
-	private static final String SPLIT_TAG = " ";
+	private static final String SPLIT_TAG = "\t";
 	
 //	
 //	public LogAnalyser(){
@@ -67,7 +67,7 @@ public class LogAnalyser {
 	 * @throws JSONException 
 	 */
 	private void analyseOne(String log , List<FileState> states , List<RunResult> runs) throws JSONException{
-		String start = log.split(" " , 2)[0];
+		String start = log.split(SPLIT_TAG , 2)[0];
 		
 		if(start.equals("FileState")){
 			addOneFS(log , states);
