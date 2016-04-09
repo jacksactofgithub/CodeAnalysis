@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pkg.service.TeacherService;
+import pkg.service.ExamService;
 
 @Controller
 public class ExamDetail {
 	
 
 	@Autowired
-	TeacherService service;
+	ExamService service;
 
 	/**
 	 * 教师查看一次考试的学生答题情况
@@ -29,11 +29,11 @@ public class ExamDetail {
 		
 		String id =request.getParameter("id");//考试id
 		String tea_account = (String)session.getAttribute("tea_account");
-		service.getExamStudent(Integer.parseInt(id), tea_account);
-		JSONObject exam = service.getExamDetails(Integer.parseInt(id),tea_account);
+		service.getExamPapers(Integer.parseInt(id));
+		JSONObject exam = service.getExamInfo(Integer.parseInt(id));
 		request.setAttribute("exam", exam);
 		
-		JSONArray studentArray = service.getExamStudent(Integer.parseInt(id), tea_account);
+		JSONArray studentArray = service.getExamPapers(Integer.parseInt(id));
 		request.setAttribute("studentArray", studentArray);
 		//再此处确定题目数量
 		try {

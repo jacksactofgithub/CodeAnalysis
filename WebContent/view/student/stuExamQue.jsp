@@ -151,7 +151,7 @@
 								<li class="item">
 									<div class="item-name">第<%=i+1 %>题</div>
 									<!--<div class="item-value">
-										 <span>考题类型：Java覆盖测试；</span> <span>权重：30%</span>  
+										 <span>权重：30%</span>  
 									</div>-->
 								</li>
 							</ul>
@@ -163,7 +163,6 @@
 										<th class="span2">考题名称</th>
 										<th>难度</th>
 										<th>得分</th>
-										<th>平均分</th>
 										<th>考题描述</th>
 									</tr>
 								</thead>
@@ -174,7 +173,6 @@
 											class="underline" title="查看考题统计"><%=problem.getString("problem_name") %></a></td>
 										<td><%=problem.getString("difficulty") %></td>
 										<td><%=problem.getString("score") %></td>
-										<td><%=problem.getDouble("ave_score")%></td>
 										<td><%=problem.getString("description")%></td>
 									</tr>
 								</tbody>
