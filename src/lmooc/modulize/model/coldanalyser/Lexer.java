@@ -3,6 +3,7 @@ package lmooc.modulize.model.coldanalyser;
 import java.util.Iterator;
 import java.util.Stack;
 
+import lmooc.modulize.io.FileReader;
 import lmooc.modulize.model.coldanalyser.state.AbstractState;
 import lmooc.modulize.model.coldanalyser.state.StateCallBack;
 
@@ -58,7 +59,7 @@ public class Lexer implements StateCallBack{
 					else{
 						currentState.getEqual(buffer);
 						if(!isSpecial(forechar, currentChar, "")){
-							buffer = "" + currentChar;
+							buffer = "";
 						}
 						else{
 							buffer = "";
@@ -154,6 +155,10 @@ public class Lexer implements StateCallBack{
 			currentState.getRightMiddleBracket(currentWord);
 			return true;
 		}
+		if(current == '@'){
+			currentState.getLineNote();
+			return true;
+		}
 		
 		return false;
 	}
@@ -197,6 +202,22 @@ public class Lexer implements StateCallBack{
 		if(!states.isEmpty()){
 			currentState = states.pop();
 		}
+	}
+	
+	public static void main(String[] args){
+		FileReader reader = new FileReader();
+		Iterator<String> txt = reader.read("D:/test.txt");
+		
+		Source source = new Source(txt , "test");
+		Lexer lexer = new Lexer();
+		lexer.segment(source);
+		source.printVars();
+		
+		System.out.println(source.getLoc());
+		System.out.println(source.getLon());
+		System.out.println(source.getMaxCyc());
+		System.out.println(source.getTotalVaryCount());
+		
 	}
 	
 }

@@ -19,7 +19,7 @@ public class SourceMethod {
 		this.parameters = parameters;
 		loc = 0 ;
 		lon = 0 ;
-		cyclomaticCpl = 0;
+		cyclomaticCpl = 1;
 		varyList = new ArrayList<Vary>();
 	}
 	

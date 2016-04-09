@@ -46,7 +46,7 @@ public class PreformState extends AbstractState{
 		}
 		
 		if(isVary){	
-			if((follow.equals(""))){		//first word without brackets must be vary
+			if((follow.equals(""))&&(currentWord!=null)){		//first word without brackets must be vary
 				sentence.addName(currentWord);
 				currentName = currentWord;
 				follow = " ";
@@ -63,7 +63,7 @@ public class PreformState extends AbstractState{
 	@Override
 	public void getSemicolon(String currentWord) {
 		// TODO Auto-generated method stub
-		if(follow.equals("")){
+		if(follow.equals("")&&(!currentWord.equals(""))){
 			sentence.addName(currentWord);
 			currentName = currentWord;
 			follow = "";
@@ -107,7 +107,7 @@ public class PreformState extends AbstractState{
 	@Override
 	public void getLeftBracket(String currentWord) {
 		// TODO Auto-generated method stub
-		if(firstWord == null){
+		if((firstWord == null)&&(!currentWord.equals(""))){
 			firstWord = currentWord;
 			sentence.addName(currentWord);
 			isMethod = true;
@@ -231,7 +231,6 @@ public class PreformState extends AbstractState{
 		// TODO Auto-generated method stub
 		if(firstWord == null){
 			lexer.startState(new BracketsMatchingState(source, lexer, sentence, 0, 1));
-			return ;
 		}
 		follow = follow + currentWord + "[";
 	}
