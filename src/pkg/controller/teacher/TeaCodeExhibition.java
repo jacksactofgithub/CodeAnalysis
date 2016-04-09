@@ -11,7 +11,7 @@ public class TeaCodeExhibition {
 	
 	@RequestMapping("/teaCodeExh")
 	public String showResult(HttpServletRequest request, HttpSession session) {
-		return "";
+		return "view/teacher/teaCodeExh";
 	}
 
 }

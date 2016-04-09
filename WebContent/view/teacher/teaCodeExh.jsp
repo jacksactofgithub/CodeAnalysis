@@ -77,6 +77,102 @@
         </div>
     </div>
 </div>
+	<div class="wrapper">
+		<!-- Content -->
+		<div class="content">
 
+			<div class="widget">
+				<div class="head">
+					<h5 class="iInfo">学生代码</h5>
+				</div>
+				<div class="body">
+					<pre>
+					public JSONObject reverse(JSONArray stasArray) throws JSONException {、
+						JSONObject stasJson = new JSONObject();
+						int len = stasArray.length();
+						int[] timestamp = new int[len];
+						double[] lineCount = new double[len];
+						int[] noteCount = new int[len];
+						int[] methodCount = new int[len];
+						int[] varCount = new int[len];
+						int[] maxCy = new int[len];
+
+						stasJson.put("timestamp", timestamp);
+						stasJson.put("lineCount", lineCount);
+						stasJson.put("noteCount", noteCount);
+						stasJson.put("methodCount", methodCount);
+						stasJson.put("varCount", varCount);
+						stasJson.put("maxCy", maxCy);
+						return stasJson;
+					}
+					</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="wrapper" style="position:relative; top:-20px;">
+		<!-- Content -->
+		<div class="content">
+
+			<div class="widget">
+				<div class="head">
+					<h5 class="iInfo">测试代码</h5>
+				</div>
+				<div class="body">
+					<pre>
+					public void test(JSONArray stasArray) throws JSONException {
+						JSONObject stasJson = new JSONObject();
+						int len = stasArray.length();
+						int[] timestamp = new int[len];
+						double[] lineCount = new double[len];
+						int[] noteCount = new int[len];
+						int[] methodCount = new int[len];
+						int[] varCount = new int[len];
+						int[] maxCy = new int[len];
+					}
+					</pre>
+				</div>
+			</div>
+		</div>
+</div>
+
+<div class="wrapper" style="position:relative; top:0px;height:80px;">
+		<!-- Content -->
+		<div class="content" >
+			<div class="title">
+				<h5>运行结果</h5>
+			</div>
+	
+			<div id="pigment" style="width:980px;">
+				
+				
+				<table class="table table-bordered" style="position: absolute;height:40px;table-layout:fixed;">
+
+					<tr>
+						<td style="word-wrap:break-word;">testcase1</td>
+					</tr>
+
+				</table>
+				<table class="table table-bordered" style="position:relative; height:40px;width:920px;left: 60px">
+					<tr style="">
+						<% int[] array = {0,0,0,0,0,0,0,0,1,1,1,1,1,0,1};
+						String url;
+							for(int j=0;j<15;j++){
+							if(array[j]==0){
+								url="url(view/pic/fail.png)";
+							}else{
+								url = "url(view/pic/pass.png)";
+							}
+							%>
+							<td  style="background:<%=url%>;"></td>
+						<% }%>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+<div class="wrapper" style="position:relative; top:0px;height:80px;">
+</div>
 </body>
 </html>
