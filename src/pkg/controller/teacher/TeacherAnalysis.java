@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pkg.service.TeacherService;
+import pkg.service.ExamService;
 
 @Controller
 public class TeacherAnalysis {
 
 	@Autowired
-	TeacherService service;
+	ExamService service;
 	
 	public TeacherAnalysis() {
 
@@ -38,7 +38,7 @@ public class TeacherAnalysis {
     	session.setAttribute("uni_name", "南京大学");
     	
     	String tea_account = (String) session.getAttribute("tea_account");
-    	JSONArray examArray = service.getExams(tea_account);
+    	JSONArray examArray = service.getTeacherFinishedExams(tea_account);
     	request.setAttribute("examArray", examArray);
     	
 		return "view/teacher/teacherAnalysis";
