@@ -17,10 +17,10 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 	private DBOperation dbopt;
 	
 	@Override
-	public int addCode(int student, String subject, int second, int line_count,
+	public int addCode(int student,int exam_id , String subject, int second, int line_count,
 			int note_count, int method_count,int var_count, int max_cyclomatic) {
 		// TODO Auto-generated method stub
-		Code attendence = new Code(1,student,subject,second,line_count,note_count,
+		Code attendence = new Code(1,student, exam_id ,subject,second,line_count,note_count,
 				method_count,var_count,max_cyclomatic);
 		return dbopt.save(attendence);
 	}
@@ -29,23 +29,23 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 	public int addCode(Code attendence) {
 		// TODO Auto-generated method stub
 		
-		if(dbopt == null){
-			System.out.println("dbopt is null");
-			return 0;
-		}
-		System.out.println("adding attendence");
-		
 		return dbopt.save(attendence);
 	}
 
 	@Override
-	public List<Code> queryAttendences(int stu_id, String proName) {
+	public List<Code> queryCode(int stu_id, String proName , int exam) {
 		// TODO Auto-generated method stub
-		String hql = "from attendence as att where att.student_id=? and pro_name=?";
+		String hql = "from Code as code where code.student_id=? and code.pro_name=? and code.exam_id=?";
 		@SuppressWarnings("unchecked")
-		List<Code> list = dbopt.findList(hql, stu_id , proName);
+		List<Code> list = dbopt.findList(hql, stu_id , proName , exam);
 		
 		return list;
+	}
+
+	@Override
+	public List<Code> queryAvg(int exam, String proName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

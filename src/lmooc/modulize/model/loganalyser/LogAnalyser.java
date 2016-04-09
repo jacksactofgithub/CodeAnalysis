@@ -28,6 +28,8 @@ import util.DateParser;
  */
 public class LogAnalyser {
 
+	private static final String SPLIT_TAG = "\t";
+	
 //	
 //	public LogAnalyser(){
 //		states = new ArrayList<FileState>();
@@ -65,7 +67,7 @@ public class LogAnalyser {
 	 * @throws JSONException 
 	 */
 	private void analyseOne(String log , List<FileState> states , List<RunResult> runs) throws JSONException{
-		String start = log.split(" " , 2)[0];
+		String start = log.split(SPLIT_TAG , 2)[0];
 		
 		if(start.equals("FileState")){
 			addOneFS(log , states);
@@ -82,7 +84,7 @@ public class LogAnalyser {
 	 * @param states
 	 */
 	private void addOneFS(String log , List<FileState> states){
-		String[] infos = log.split(" ");
+		String[] infos = log.split(SPLIT_TAG);
 		FileState fs;
 		switch (infos.length){
 		case 4: fs = new FileState(Long.parseLong(infos[2]) , StateType.Timer , null);break;

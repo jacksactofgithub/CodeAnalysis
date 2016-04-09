@@ -10,6 +10,8 @@ public interface CodeService {
 
 	public int saveStamps(Iterator<CodeStamp> stamps , int stuID , int exam);
 	
-	public JSONArray getCodeRecord(int stuID , String proName);
+	public JSONArray getCodeRecord(int stuID , String proName , int exam);
+	
+	public JSONArray getAvgCodeRecord(String proName , int examID);
 	
 }

@@ -229,6 +229,10 @@ public class PreformState extends AbstractState{
 	@Override
 	public void getLeftMiddleBracket(String currentWord) {
 		// TODO Auto-generated method stub
+		if(firstWord == null){
+			lexer.startState(new BracketsMatchingState(source, lexer, sentence, 0, 1));
+			return ;
+		}
 		follow = follow + currentWord + "[";
 	}
 

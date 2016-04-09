@@ -1,6 +1,8 @@
 package pkg.service.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -15,6 +17,7 @@ import lmooc.modulize.model.FileStateHandler;
 import pkg.dao.RunDAO;
 import pkg.dao.TestDAO;
 import pkg.entity.Run;
+import pkg.entity.Test;
 import pkg.service.RunService;
 
 @Service
@@ -26,7 +29,7 @@ public class RunServiceImpl implements RunService{
 	private TestDAO testDAO;
 	
 	@Override
-	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID) {
+	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID , int examID) {
 		// TODO Auto-generated method stub
 		
 		while(stamps.hasNext()){
@@ -35,7 +38,7 @@ public class RunServiceImpl implements RunService{
 			String proName = stamp.getClassName();
 			long startsecond = FileStateHandler.getStartTime(stuID, proName);
 			
-			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000));
+			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000) , examID);
 			addTests(run , stamp.getTests());
 		}
 		
@@ -53,44 +56,78 @@ public class RunServiceImpl implements RunService{
 	
 
 	@Override
-	public Iterator<RunStamp> getRunstamp(int stuID, String proName) {
+	public JSONObject getRuns(int stuID, String proName , int exam) throws JSONException {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
+		
+		return getRunJSON(runs.iterator() , proName , stuID , exam);
 	}
 	
-	public JSONArray getRunJSON(Iterator<Run> run){
+	public JSONObject getRunJSON(Iterator<Run> run , String proName , int stuID , int exam) throws JSONException{
+		List<String> testNames = findCommonTestCases(proName , exam);
+		JSONObject runJSON = new JSONObject();
+		
+		runJSON.put("stuid",stuID);
+		runJSON.put("problemName", proName);
+		runJSON.put("caseNumber", testNames.size());
+		
+		JSONArray caseNameArray = new JSONArray();
+		for(String name:testNames){
+			caseNameArray.put(name);
+		}
+		runJSON.put("caseName", caseNameArray);
+		runJSON.put("result", formResultArray(run, proName, testNames));
+		
+		return runJSON;
+	}
+	
+	private JSONArray formResultArray(Iterator<Run> run , String proName , List<String> testNames){
 		
 		JSONArray runArray = new JSONArray();
 		
 		int count =0;		//第几分钟
 		Run former = null;
+		Run current = null;
 		int interval = 0;
-		while(run.hasNext()){
+		while((run.hasNext())||((count*60)<current.getRun_second())){
 			JSONObject json;
 			try {
-				Run temp = run.next();
 				
 				if(former == null){
-					json = formRun(temp , count);
+					Run temp = run.next();
+					json = formRun(temp , count , testNames);
 					runArray.put(json);
 					former = temp;
+					if(run.hasNext()){
+						current = run.next();
+					}else{
+						current = temp;
+						interval = 0;
+					}
 					count++;
-					interval = (count*60) - former.getRun_second();
+					interval = (count*60);
 					continue;
 				}
 				
-				int currentInterval = calInterval((count*60) , temp.getRun_second());
+				int currentInterval = calInterval((count*60) , current.getRun_second());
 				if(currentInterval < interval){
 					interval = currentInterval;
-					former = temp;
+					former = current;
+					if(run.hasNext()){
+						current = run.next();
+					}else{
+						interval = 0;
+					}
 				}else{
-					json = formRun(temp , count);
+					json = formRun(current , count ,testNames);
 					runArray.put(json);
 					count++;
 					interval = (count*60) - former.getRun_second();
 				}
-				if(!run.hasNext()){
-					json = formRun(temp, count);
+				
+				if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
+					json = formRun(current, count , testNames);
 					runArray.put(json);
 				}
 				
@@ -101,6 +138,7 @@ public class RunServiceImpl implements RunService{
 		}
 		
 		return runArray;
+		
 	}
 	
 	private int calInterval(int timeOne , int timeTwo){
@@ -111,31 +149,107 @@ public class RunServiceImpl implements RunService{
 		return result;
 	}
 	
-	private JSONObject formRun(Run run , int count) throws JSONException{
+	private JSONObject formRun(Run run , int count , List<String> testNames) throws JSONException{
 		JSONObject json = new JSONObject();
 		
-//		json.put("time", stamp.getMillisecond());
-//		
-//		JSONArray successArray = new JSONArray();
-//		
-//		Iterator<Entry<String , Boolean>> tests = stamp.getTests();
-//		
-//		while(tests.hasNext()){
-//			Entry<String , Boolean> entry = tests.next();
-//			if(entry.getValue()){
-//				successArray.put(entry.getKey());
-//			}
-//		}
-//		
-//		json.put("success", successArray);
+		List<Test> tests = testDAO.queryTests(run);
+		json.put("time", count);
+		
+		JSONArray successArray = new JSONArray();
+		
+		for(Test t:tests){
+			String name = t.getTest_Name();
+			if((testNames.contains(name))&&(t.getTest_Result() == true)){
+				successArray.put(name);
+			}
+		}
+		
+		json.put("passNo", successArray);
 		
 		return json;
 	}
 
 	@Override
-	public List<String> findCommonTestCases(String proName) {
+	public List<String> findCommonTestCases(String proName , int exam) {
+		// TODO Auto-generated method stub
+		
+		List<Integer> stuList = runDAO.queryStudentID(proName , exam);
+		
+		List<String> result = null;
+		
+		if(stuList.size() >= 1){
+			int stuID = stuList.get(0);
+			result = findOneStudentCommon(stuID , proName , exam);
+			
+			for(int i=1 ; i<stuList.size() ;++i){
+				stuID = stuList.get(i);
+				findCommon(result , findOneStudentCommon(stuID , proName , exam));
+			}
+			
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 找到一个学生的所有公共测试，即将该学生每个时间点的测试用例进行统计
+	 * @param stu_id
+	 * @param proName 
+	 * @return
+	 */
+	private List<String> findOneStudentCommon(int stuID , String proName , int exam){
+		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
+		List<String> common = new LinkedList<String>();
+		
+		List<Test> temp = testDAO.queryTests(runs.get(0));
+		List<String> strTemp = transList(temp);
+		common.addAll(strTemp);
+		
+		for(int i=1 ; i<runs.size() ; ++i){
+			temp = testDAO.queryTests(runs.get(i));	//查找该次run下的所有test
+			strTemp = transList(temp);
+			findCommon(common , strTemp);
+		}
+		
+		return common;
+	}
+	
+	/**
+	 * 将Test类型的list转为string类型的，string是test的名称
+	 * @param from
+	 * @return
+	 */
+	private List<String> transList(List<Test> from){
+		List<String> result = new ArrayList<String>(from.size());
+		
+		for(int i=0;i<from.size();i++){
+			result.add(from.get(i).getTest_Name());
+		}
+		
+		return result;
+	}
+
+	/**
+	 * 找到两个list中的所有相同元素，将相同元素存入common中
+	 * @param common
+	 * @param tag
+	 */
+	private void findCommon(List<String> common , List<String> tag){
+		Iterator<String> it = common.iterator();
+		
+		while(it.hasNext()){
+			String temp = it.next();
+			if(!tag.contains(temp)){
+				common.remove(temp);
+			}
+		}
+		
+	}
+
+	@Override
+	public JSONObject getAvgPassResult(String proName, int exam) throws JSONException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

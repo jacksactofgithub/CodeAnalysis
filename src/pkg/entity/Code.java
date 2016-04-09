@@ -21,6 +21,7 @@ public class Code implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int attend_id;
 	private int student_id;
+	private int exam_id;
 	private String pro_name;
 	private int second;
 	private int line_count;
@@ -29,9 +30,10 @@ public class Code implements Serializable{
 	private int var_count;
 	private int max_cyclomaticcpl;
 	
-	public Code(int attendID,int student_id,String pro_name,int second ,
+	public Code(int attendID,int student_id,int exam_id , String pro_name,int second ,
 			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl){
 		this.attend_id = attendID;
+		this.exam_id = exam_id;
 		this.setStudent_id(student_id);
 		this.setPro_name(pro_name);
 		this.setSecond(second);
@@ -108,6 +110,14 @@ public class Code implements Serializable{
 
 	public void setMax_cyclomaticcpl(int max_cyclomaticcpl) {
 		this.max_cyclomaticcpl = max_cyclomaticcpl;
+	}
+
+	public int getExam_id() {
+		return exam_id;
+	}
+
+	public void setExam_id(int exam_id) {
+		this.exam_id = exam_id;
 	}
 	
 

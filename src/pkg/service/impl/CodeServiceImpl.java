@@ -18,7 +18,7 @@ import pkg.service.CodeService;
 public class CodeServiceImpl implements CodeService{
 	
 	@Autowired
-	private CodeDAO attDAO;
+	private CodeDAO codeDAO;
 	
 	@Override
 	public int saveStamps(Iterator<CodeStamp> stamps, int stuID, int exam) {
@@ -27,17 +27,18 @@ public class CodeServiceImpl implements CodeService{
 //		List<Attendence> attList = new ArrayList<Attendence>();
 		
 		while(stamps.hasNext()){
-			Code attendence = generateAttendence(stamps.next() , stuID);
-			attDAO.addCode(attendence);
+			Code attendence = generateAttendence(stamps.next() , stuID , exam);
+			codeDAO.addCode(attendence);
 //			attList.add(attendence);
 		}
 		
 		return 0;
 	}
 	
-	private Code generateAttendence(CodeStamp stamp , int stuID){
+	private Code generateAttendence(CodeStamp stamp , int stuID , int exam){
 		Code attendence = new Code();
 		attendence.setStudent_id(stuID);
+		attendence.setExam_id(exam);
 		attendence.setLine_count(stamp.getLineCount());
 		attendence.setNote_count(stamp.getNoteCount());
 		attendence.setMethod_count(stamp.getMethodCount());
@@ -45,33 +46,26 @@ public class CodeServiceImpl implements CodeService{
 		attendence.setMax_cyclomaticcpl(stamp.getMaxCyc());
 		attendence.setSecond((int) (stamp.getRelativeTime()/1000) );
 		
-		String proName = stamp.getSourceName().split("\\.")[0];
+		String proName = stamp.getSourceName().split("/")[0];
 		attendence.setPro_name(proName);
 		
 		return attendence;
 	}
-	
-//	private int getProIDByPath(String sourceName){
-//		String proName = sourceName.split("\\.")[0];
-//		
-//		return 0;
-//	}
 
 	@Override
-	public JSONArray getCodeRecord(int stuID, String proName) {
+	public JSONArray getCodeRecord(int stuID, String proName , int exam) {
 		// TODO Auto-generated method stub
 		
-		List<Code> list = attDAO.queryAttendences(stuID, proName);
+		List<Code> list = codeDAO.queryCode(stuID, proName , exam);
 		
 		Iterator<Code> it = list.iterator();
 		
 		while(it.hasNext()){
-			Code attendence = it.next();
-			if(!attendence.getPro_name().equals(proName)){
-				list.remove(attendence);
+			Code code = it.next();
+			if(!code.getPro_name().equals(proName)){
+				list.remove(code);
 			}
 		}
-		
 		JSONArray array = getCodeJSON(list.iterator());
 		
 		return array;
@@ -83,34 +77,45 @@ public class CodeServiceImpl implements CodeService{
 		
 		int count =0;		//第几分钟
 		Code former = null;
+		Code current = null;
 		int interval = 0;
-		while(code.hasNext()){
+		while((code.hasNext())||((count*60)<current.getSecond())){
 			JSONObject json;
 			try {
-				Code temp = code.next();
 				
 				if(former == null){
+					Code temp = code.next();
 					json = formCode(temp , count);
 					array.put(json);
 					former = temp;
+					if(code.hasNext()){
+						current = code.next();
+					}else{
+						break;
+					}
 					count++;
-					interval = (count*60) - former.getSecond();
+					interval = (count*60);
 					continue;
 				}
 				
-				int currentInterval = calInterval((count*60) , temp.getSecond());
+				int currentInterval = calInterval((count*60) , current.getSecond());
 				if(currentInterval < interval){
 					interval = currentInterval;
-					former = temp;
+					former = current;
+					if(code.hasNext()){
+						current = code.next();
+					}else{
+						interval = 0;
+					}
 				}else{
-					json = formCode(temp , count);
+					json = formCode(current , count);
 					array.put(json);
 					count++;
 					interval = (count*60) - former.getSecond();
 				}
 				
-				if(!code.hasNext()){
-					json = formCode(temp, count);
+				if((!code.hasNext()) &&((count*60 > current.getSecond()))){	//保证时间够
+					json = formCode(current, count);
 					array.put(json);
 				}
 				
@@ -134,7 +139,7 @@ public class CodeServiceImpl implements CodeService{
 	private JSONObject formCode(Code attendence ,int minute) throws JSONException{
 		
 		JSONObject json = new JSONObject();
-		json.put("time", minute);
+		json.put("timestamp", minute);
 		json.put("source", attendence.getPro_name());
 		json.put("lineCount", attendence.getLine_count());
 		json.put("noteCount" , attendence.getNote_count());
@@ -143,6 +148,12 @@ public class CodeServiceImpl implements CodeService{
 		json.put("maxCyclomaticCpl", attendence.getMax_cyclomaticcpl());
 		
 		return json;
+	}
+
+	@Override
+	public JSONArray getAvgCodeRecord(String proName, int examID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

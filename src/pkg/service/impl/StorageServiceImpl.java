@@ -1,8 +1,11 @@
 package pkg.service.impl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,44 +37,59 @@ public class StorageServiceImpl implements StorageService{
 	@Override
 	public void startStore(int examID, int tea_id) {
 		// TODO Auto-generated method stub
+		List<Integer> clazzMemberIds = reader.getStudentIds(examID+"");
 		
+		for(int i=0 ; i<clazzMemberIds.size() ; ++i){
+			int memberId = clazzMemberIds.get(i);
+			storeOne(examID , memberId , memberId);
+		}
 		
 		//最后释放Map中的存储空间
 		FileStateHandler.clearMap();
 	}
 
 	@Override
-	public void storeOne(int examID, int stuID) {
+	public void storeOne(int examID, int classMemberId , int studentId) {
 		// TODO Auto-generated method stub
-		SubjectResult result = loadResult(examID+"", stuID+"");
+		SubjectResult result = loadResult(examID+"", classMemberId+"");
 		
-		codeService.saveStamps(result.getCodeStamps() , stuID, examID);
-		runService.saveRunStamp(result.getRunStamps(), stuID);
+		codeService.saveStamps(result.getCodeStamps() , studentId, examID);
+		runService.saveRunStamp(result.getRunStamps(), studentId , examID);
 	}
 
 	private SubjectResult loadResult(String examID, String studentNum) {
-
-		Iterator<String> logs = reader.readLog(examID, studentNum);
-		LogAnalyser analyser = new LogAnalyser();
-		LogBean logBean;
+		File backupFile = reader.getLatestBackup(examID, studentNum);
+		
 		try {
-			logBean = analyser.analyse(logs);
-			Iterator<CodeStamp> codes = codeOutput(logBean.getFileStates(),examID , studentNum);
-			Iterator<RunStamp> runs = runOutput(logBean.getRuns());
+			ZipFile backupZip = new ZipFile(backupFile);
 			
-			// JSONObject run = runOutput(logBean.getRuns());
+			Iterator<String> logs = reader.readLog(examID, studentNum , backupZip);
+			LogAnalyser analyser = new LogAnalyser();
+			LogBean logBean;
+			try {
+				logBean = analyser.analyse(logs);
+				Iterator<CodeStamp> codes = codeOutput(logBean.getFileStates(),examID , studentNum , backupZip);
+				Iterator<RunStamp> runs = runOutput(logBean.getRuns());
+				
+				// JSONObject run = runOutput(logBean.getRuns());
+				
+				return new SubjectResult(codes, runs);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}
 			
-			return new SubjectResult(codes, runs);
-		} catch (JSONException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-
+		
 	}
 	
-	private Iterator<CodeStamp> codeOutput(Iterator<FileState> states, String examID, String stuID) {
-		FileStateHandler handler = new FileStateHandler(stuID, examID);
+	private Iterator<CodeStamp> codeOutput(Iterator<FileState> states, String examID, String stuID , ZipFile backupZip) {
+		FileStateHandler handler = new FileStateHandler(stuID , backupZip);
 		
 		return handler.hanleFileStates(states);
 	}

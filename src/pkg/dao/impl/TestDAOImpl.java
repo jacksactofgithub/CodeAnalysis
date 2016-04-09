@@ -29,12 +29,12 @@ public class TestDAOImpl implements TestDAO{
 	}
 
 	@Override
-	public List<Test> queryTests(int run_id) {
+	public List<Test> queryTests(Run run) {
 		// TODO Auto-generated method stub
-		String hql = "from test as test where test.run_id=?";
+		String hql = "from Test as test where test.run=?";
 		
 		@SuppressWarnings("unchecked")
-		List<Test> list = dbopt.findList(hql, run_id);
+		List<Test> list = dbopt.findList(hql, run);
 		
 		return list;
 	}
