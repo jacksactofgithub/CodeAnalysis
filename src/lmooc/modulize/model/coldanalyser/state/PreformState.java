@@ -46,7 +46,7 @@ public class PreformState extends AbstractState{
 		}
 		
 		if(isVary){	
-			if((follow.equals(""))&&(currentWord!=null)){		//first word without brackets must be vary
+			if((follow.equals(""))&&(!currentWord.equals(""))){		//first word without brackets must be vary
 				sentence.addName(currentWord);
 				currentName = currentWord;
 				follow = " ";
@@ -144,7 +144,13 @@ public class PreformState extends AbstractState{
 			bracketCount--;
 			if(bracketCount == 0){
 				sentence.addFollow(follow);
-				SourceMethod method = new SourceMethod(sentence.getNames().next(), follow);
+
+				String name = sentence.getNames().next();
+				if(name.contains(".")){
+					lexer.endState();
+					return ;
+				}
+				SourceMethod method = new SourceMethod(name, follow);
 				source.addMethod(method);
 				source.startMethod(method);
 				lexer.endState(sentence);

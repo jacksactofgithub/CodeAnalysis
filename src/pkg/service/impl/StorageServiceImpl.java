@@ -44,8 +44,7 @@ public class StorageServiceImpl implements StorageService{
 			storeOne(examID , memberId , memberId);
 		}
 		
-		//最后释放Map中的存储空间
-		FileStateHandler.clearMap();
+		
 	}
 
 	@Override
@@ -55,6 +54,9 @@ public class StorageServiceImpl implements StorageService{
 		
 		codeService.saveStamps(result.getCodeStamps() , studentId, examID);
 		runService.saveRunStamp(result.getRunStamps(), studentId , examID);
+		
+		//最后释放Map中的存储空间
+		FileStateHandler.clearMap();
 	}
 
 	private SubjectResult loadResult(String examID, String studentNum) {

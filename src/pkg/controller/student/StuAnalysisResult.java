@@ -33,7 +33,8 @@ public class StuAnalysisResult {
 	public String showResult(HttpServletRequest request, HttpSession session) {
 
 		String stu_account = (String) session.getAttribute("stu_account");
-		int stu_id = (int) session.getAttribute("stu_id");
+//		int stu_id = (int) session.getAttribute("stu_id");
+		int stu_id = 12289;
 		int exam_id = Integer.parseInt(request.getParameter("exam_id"));
 		String problem_name = request.getParameter("problem_name");
 		JSONObject exam = service.getExamDetail(stu_account, exam_id);

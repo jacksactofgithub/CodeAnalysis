@@ -36,7 +36,6 @@ public class StudentAnalysis {
     
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
-    	storageService.startStore(382, 1);
     	//在尚未接通慕测的情况下全用假数据
     	request.setAttribute("stu_account", "397342673@qq.com");
     	request.setAttribute("stu_name", "毕潇晗");

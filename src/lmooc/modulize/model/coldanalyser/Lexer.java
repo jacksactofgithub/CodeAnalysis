@@ -214,7 +214,7 @@ public class Lexer implements StateCallBack{
 		source.printVars();
 		
 		System.out.println(source.getLoc());
-		System.out.println(source.getLon());
+		System.out.println(source.getMethodCount());
 		System.out.println(source.getMaxCyc());
 		System.out.println(source.getTotalVaryCount());
 		

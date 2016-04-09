@@ -121,6 +121,9 @@ public class NormalState extends AbstractState{
 			else if(currentWord.equals(JavaSentence.IMPORT)){
 				
 			}
+			else if(currentWord.equals("throws")){
+				
+			}
 			else if(JavaWord.isJavaWord(currentWord)){
 				source.plusCyclomaticCpl();
 				int count = 0;

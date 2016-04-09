@@ -26,6 +26,8 @@ public class FileStateHandler {
 	private String stuID;
 	private ZipFile zip;
 	
+	private Reader reader = new Reader();
+	
 	//存储学生开始某一题的时间
 	private static Map<String , Long> startMap = new HashMap<String , Long>();
 
@@ -128,7 +130,6 @@ public class FileStateHandler {
 	 * @return
 	 */
 	private Source getSource(String fileName, long currentTime) {
-		Reader reader = new Reader();
 		Iterator<String> it = reader.readJava(currentTime, fileName,zip);
 		return new Source(it, fileName);
 	}
