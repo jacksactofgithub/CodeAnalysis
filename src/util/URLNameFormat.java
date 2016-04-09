@@ -8,6 +8,7 @@ public class URLNameFormat {
 	public static final String STUDENT_ACCOUNT = "stuAccount";
 	public static final String CLASS_MEMBER_ID = "classMemberId";
 	public static final String TEACHER_ID = "teaId";
+	public static final String STUDENT_ID = "stuId";
 	
 	//interface names
 	public static final String GET_STUDENT_EXAMS = "getStudentExams";

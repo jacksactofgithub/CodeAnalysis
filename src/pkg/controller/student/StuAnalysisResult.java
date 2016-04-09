@@ -75,23 +75,37 @@ public class StuAnalysisResult {
 
 		JSONObject stasJson = new JSONObject();
 		int len = stasArray.length();
-		int[] timestamp = new int[len];
-		double[] lineCount = new double[len];
-		int[] noteCount = new int[len];
-		int[] methodCount = new int[len];
-		int[] varCount = new int[len];
-		int[] maxCy = new int[len];
+//		int[] timestamp = new int[len];
+//		double[] lineCount = new double[len];
+//		int[] noteCount = new int[len];
+//		int[] methodCount = new int[len];
+//		int[] varCount = new int[len];
+//		int[] maxCy = new int[len];
+		
+		JSONArray timeArray = new JSONArray();
+		JSONArray lineCount = new JSONArray();
+		JSONArray noteCount = new JSONArray();
+		JSONArray methodCount = new JSONArray();
+		JSONArray varCount = new JSONArray();
+		JSONArray maxCy = new JSONArray();
+		
 		for (int i = 0; i < len; i++) {
 			JSONObject staObj = stasArray.getJSONObject(i);
-			timestamp[i] = staObj.getInt("timestamp");
-			lineCount[i] = staObj.getInt("lineCount")/10;//除以十
-			noteCount[i] = staObj.getInt("noteCount");
-			methodCount[i] = staObj.getInt("methodCount");
-			varCount[i] = staObj.getInt("varyCount");
-			maxCy[i] = staObj.getInt("maxCyclomaticCpl");
+			timeArray.put(staObj.get("timestamp"));
+			lineCount.put(staObj.get("lineCount"));
+			noteCount.put(staObj.get("noteCount"));
+			methodCount.put(staObj.get("methodCount"));
+			varCount.put(staObj.get("varyCount"));
+			maxCy.put(staObj.get("maxCyclomaticCpl"));
+//			timestamp[i] = staObj.getInt("timestamp");
+//			lineCount[i] = staObj.getInt("lineCount")/10;//除以十
+//			noteCount[i] = staObj.getInt("noteCount");
+//			methodCount[i] = staObj.getInt("methodCount");
+//			varCount[i] = staObj.getInt("varyCount");
+//			maxCy[i] = staObj.getInt("maxCyclomaticCpl");
 		}
 
-		stasJson.put("timestamp", timestamp);
+		stasJson.put("timestamp", timeArray);
 		stasJson.put("lineCount", lineCount);
 		stasJson.put("noteCount", noteCount);
 		stasJson.put("methodCount", methodCount);

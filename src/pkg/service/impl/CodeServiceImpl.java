@@ -55,7 +55,7 @@ public class CodeServiceImpl implements CodeService{
 	@Override
 	public JSONArray getCodeRecord(int stuID, String proName , int exam) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("geting code record");
 		List<Code> list = codeDAO.queryCode(stuID, proName , exam);
 		
 		Iterator<Code> it = list.iterator();
@@ -72,8 +72,12 @@ public class CodeServiceImpl implements CodeService{
 	}
 	
 	public JSONArray getCodeJSON(Iterator<Code> code) {
-		
+		System.out.println("geting code json");
 		JSONArray array = new JSONArray();
+		
+		if((code == null)||(!code.hasNext())){
+			return array;
+		}
 		
 		int count =0;		//第几分钟
 		Code former = null;
@@ -98,6 +102,15 @@ public class CodeServiceImpl implements CodeService{
 					continue;
 				}
 				
+				if(former.getSecond() == current.getSecond()){
+					former = current;
+					if(code.hasNext()){
+						current = code.next();
+					}else{
+						interval = 0;
+					}
+				}
+				
 				int currentInterval = calInterval((count*60) , current.getSecond());
 				if(currentInterval < interval){
 					interval = currentInterval;
@@ -108,7 +121,7 @@ public class CodeServiceImpl implements CodeService{
 						interval = 0;
 					}
 				}else{
-					json = formCode(current , count);
+					json = formCode(former , count);
 					array.put(json);
 					count++;
 					interval = (count*60) - former.getSecond();
@@ -118,6 +131,8 @@ public class CodeServiceImpl implements CodeService{
 					json = formCode(current, count);
 					array.put(json);
 				}
+				
+//				System.out.println("current code:" + current.getSecond() + "current minute:" + count);
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

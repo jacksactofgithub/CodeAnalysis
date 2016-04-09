@@ -22,7 +22,7 @@ public class NormalState extends AbstractState{
 	@Override
 	public void getSpace(String currentWord) {
 		// TODO Auto-generated method stub
-		handleWord(currentWord);
+		handleWord(currentWord , " ");
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class NormalState extends AbstractState{
 	@Override
 	public void getLeftBracket(String currentWord) {
 		// TODO Auto-generated method stub
+		handleWord(currentWord, "(");
 		enable = false;
 	}
 
@@ -85,7 +86,7 @@ public class NormalState extends AbstractState{
 	@Override
 	public void getEnter(String currentWord) {
 		// TODO Auto-generated method stub
-		handleWord(currentWord);
+		handleWord(currentWord , "\n");
 	}
 	
 	private void flush(){
@@ -99,7 +100,7 @@ public class NormalState extends AbstractState{
 		source.plusCyclomaticCpl();
 	}
 	
-	private void handleWord(String currentWord){
+	private void handleWord(String currentWord , String in){
 		if(enable && (!currentWord.equals(""))){
 			enable = false;
 			if(JavaSentence.isLimitation(currentWord)){		//是修饰词，加入修饰语句
@@ -122,6 +123,12 @@ public class NormalState extends AbstractState{
 			}
 			else if(JavaWord.isJavaWord(currentWord)){
 				source.plusCyclomaticCpl();
+				int count = 0;
+				if(in.equals("(")){
+					count = 1;
+				}
+				lexer.startState(new JavaWordState(source , lexer , currentWord , count));
+				flush();
 			}
 			else{
 				sentence.setTypeName(currentWord);
@@ -167,7 +174,7 @@ public class NormalState extends AbstractState{
 	@Override
 	public void getLeftAngleBracket(String currentWord) {
 		// TODO Auto-generated method stub
-		handleWord(currentWord+"<");
+		handleWord(currentWord+"<" , "<");
 	}
 
 	@Override
@@ -179,7 +186,7 @@ public class NormalState extends AbstractState{
 	@Override
 	public void getLeftMiddleBracket(String currentWord) {
 		// TODO Auto-generated method stub
-		handleWord(currentWord+"[");
+		handleWord(currentWord+"[" , "[");
 	}
 
 	@Override

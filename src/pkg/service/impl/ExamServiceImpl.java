@@ -73,4 +73,23 @@ public class ExamServiceImpl implements ExamService{
 		
 	}
 
+	@Override
+	public JSONArray getStudentExams(int stuId) {
+		// TODO Auto-generated method stub
+		
+		Map<String , String> params = new HashMap<String, String>();
+		params.put(URLNameFormat.STUDENT_ID, stuId+"");
+		
+		try {
+			String exams = http.postHttpInvocation(URLNameFormat.GET_STUDENT_EXAMS, params);
+			JSONArray array = new JSONArray(exams);
+			
+			return array;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new JSONArray();
+		}
+	}
+
 }

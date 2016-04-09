@@ -6,6 +6,8 @@ import org.json.JSONObject;
 
 public interface ExamService {
 
+	public JSONArray getStudentExams(int stuId);
+	
 	/**
 	 * 获取某一场考试的具体信息
 	 * @param exam_id
