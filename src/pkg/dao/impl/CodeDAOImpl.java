@@ -42,4 +42,10 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 		return list;
 	}
 
+	@Override
+	public List<Code> queryAvg(int exam, String proName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

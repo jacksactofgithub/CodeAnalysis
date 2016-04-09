@@ -12,4 +12,6 @@ public interface CodeService {
 	
 	public JSONArray getCodeRecord(int stuID , String proName , int exam);
 	
+	public JSONArray getAvgCodeRecord(String proName , int examID);
+	
 }

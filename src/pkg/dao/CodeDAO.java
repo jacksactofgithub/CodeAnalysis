@@ -12,5 +12,7 @@ public interface CodeDAO {
 	public int addCode(Code attendence);
 
 	public List<Code> queryCode(int stu_id, String proName , int exam);
+	
+	public List<Code> queryAvg(int exam , String proName);
 
 }

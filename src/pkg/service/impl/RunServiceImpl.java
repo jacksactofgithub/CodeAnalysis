@@ -245,5 +245,11 @@ public class RunServiceImpl implements RunService{
 		}
 		
 	}
+
+	@Override
+	public JSONObject getAvgPassResult(String proName, int exam) throws JSONException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

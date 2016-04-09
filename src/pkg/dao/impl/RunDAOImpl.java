@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import pkg.dao.DBOperation;
 import pkg.dao.RunDAO;
+import pkg.entity.ProblemResult;
 import pkg.entity.Run;
 
 @Repository
@@ -49,6 +50,12 @@ public class RunDAOImpl implements RunDAO{
 		List<Integer> list = dbopt.findList(hql, proName , exam);
 		
 		return list;
+	}
+
+	@Override
+	public List<ProblemResult> queryAvgRun(String proName, int exam) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

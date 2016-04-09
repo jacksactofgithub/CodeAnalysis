@@ -21,4 +21,7 @@ public interface RunService {
 	 * @return
 	 */
 	public List<String> findCommonTestCases(String proName , int exam);
+	
+	public JSONObject getAvgPassResult(String proName , int exam) throws JSONException;
+	
 }

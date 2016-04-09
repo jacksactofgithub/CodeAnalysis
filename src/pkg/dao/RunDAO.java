@@ -2,6 +2,7 @@ package pkg.dao;
 
 import java.util.List;
 
+import pkg.entity.ProblemResult;
 import pkg.entity.Run;
 
 public interface RunDAO {
@@ -16,5 +17,7 @@ public interface RunDAO {
 	 * @return
 	 */
 	public List<Integer> queryStudentID(String proName , int exam);
+	
+	public List<ProblemResult> queryAvgRun(String proName , int exam);
 	
 }

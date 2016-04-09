@@ -150,4 +150,10 @@ public class CodeServiceImpl implements CodeService{
 		return json;
 	}
 
+	@Override
+	public JSONArray getAvgCodeRecord(String proName, int examID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
