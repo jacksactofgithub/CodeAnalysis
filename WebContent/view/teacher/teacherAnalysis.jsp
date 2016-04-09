@@ -14,15 +14,15 @@
 	content="慕测平台是编程类考试和练习的服务平台，教师可以轻松监管考试流程，学生可以自由练习编程。系统负责编程练习的自动化评估及可视化展现，配合当下红火的MOOC慕课课程，慕测平台将是学生自学编程的好帮手。目前已支持的编程类型有：Python统计编程，Java测试驱动编程，C++编程，Java测试，Jmeter性能测试。">
 
 <link rel="shortcut icon" type="image/png"
-	href="http://mooctest.net/public/images/mooctest/favicon.png">
+	href="http://mooctest.net//public/images/mooctest/favicon.png">
 <link rel="stylesheet" type="text/css"
-	href="http://mooctest.net/public/css/itsbrain/main.css?v=20151123">
+	href="http://mooctest.net//public/css/itsbrain/main.css?v=20151123">
 <link rel="stylesheet" type="text/css"
-	href="http://mooctest.net/public/css/common/common.css">
+	href="http://mooctest.net//public/css/common/common.css">
 <link rel="stylesheet" type="text/css"
-	href="http://mooctest.net/public/css/common/itsbrain-width-full.css">
+	href="http://mooctest.net//public/css/common/itsbrain-width-full.css">
 <link rel="stylesheet" type="text/css"
-	href="http://mooctest.net/public/css/others/introjs.css">
+	href="http://mooctest.net//public/css/others/introjs.css">
 <style type="text/css">
 .box {
 	height: 300px;
@@ -224,7 +224,7 @@
 
 <div id="header" class="wrapper">
     <div id="loginInfo">
-        <img src="http://mooctest.net/public/images/userPic.png" alt=""/>
+        <img src="http://mooctest.net//public/images/userPic.png" alt=""/>
         <span>欢迎, <span class="text-info"><%=session.getAttribute("tea_name") %></span>老师! </span>
         <span><%=session.getAttribute("uni_name") %></span>
     </div>

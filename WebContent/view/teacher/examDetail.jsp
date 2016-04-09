@@ -25,203 +25,11 @@
 	href="http://mooctest.net/public/css/others/introjs.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/tablesorter/theme.blue.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/tablesorter/jquery.tablesorter.pager.css">
-<style type="text/css">
-.box {
-	height: 300px;
-	margin-top: 20px;
-	position: relative;
-	width: 978px;
-}
+ <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+ <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+ <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
 
-.box .link {
-	float: left;
-	height: 280px;
-	margin: 0 20px;
-	width: 200px;
-}
-
-.link .icon {
-	display: inline-block;
-	height: 180px;
-	transition: 0.4s ease-out;
-	-ms-transition: 0.4s ease-out;
-	-webkit-transition: 0.4s ease-out;
-	-moz-transition: 0.4s ease-out;
-	-o-transition: 0.4s ease-out;
-	width: 100%;
-}
-
-.link .icon:hover {
-	transform: rotate(360deg) scale(1.2);
-	-ms-transform: rotate(360deg) scale(1.2);
-	-webkit-transform: rotate(360deg) scale(1.2);
-	-moz-transform: rotate(360deg) scale(1.2);
-	-o-transform: rotate(360deg) scale(1.2);
-}
-
-.link-exam .icon {
-	background: url(http://mooctest.net/public/images/exam.png) no-repeat
-		center center;
-}
-
-.link-exercise .icon {
-	background: url(http://mooctest.net/public/images/exercise.png)
-		no-repeat center center;
-}
-
-.link-personal .icon {
-	background: url(http://mooctest.net/public/images/personal.png)
-		no-repeat center center;
-}
-
-.link-download .icon {
-	background: url(http://mooctest.net/public/images/download.png)
-		no-repeat center center;
-}
-
-.button {
-	background: url(http://mooctest.net/public/images/arrow.png) no-repeat
-		145px center;
-	border: 2px solid rgba(72, 72, 72, 0.8);
-	box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-o-box-sizing: border-box;
-	color: #484848;
-	display: block;
-	font-family: Arial;
-	font-weight: bolder;
-	font-size: 24px;
-	height: 50px;
-	line-height: 50px;
-	margin: 0 auto;
-	transition: 0.4s ease;
-	-ms-transition: 0.4s ease;
-	-webkit-transition: 0.4s ease;
-	-moz-transition: 0.4s ease;
-	-o-transition: 0.4s ease;
-	padding-left: 15px;
-	padding-top: 0;
-	position: relative;
-	width: 200px;
-}
-
-.button:hover {
-	background-position: 160px center;
-	border: 2px solid rgba(72, 72, 72, 1);
-}
-
-.button .line {
-	background: none;
-	display: block;
-	position: absolute;
-	transition: 0.4s ease-out;
-	-ms-transition: 0.4s ease-out;
-	-webkit-transition: 0.4s ease-out;
-	-o-transition: 0.4s ease-out;
-	-moz-transition: 0.4s ease-out;
-}
-
-.button:hover .line {
-	background: #484848;
-}
-
-.button .line-top {
-	height: 2px;
-	left: -110%;
-	width: 0%;
-	top: -2px;
-}
-
-.button:hover .line-top {
-	left: -2px;
-	width: 100%;
-}
-
-.button .line-right {
-	height: 0%;
-	right: -2px;
-	top: -110%;
-	width: 2px;
-}
-
-.button:hover .line-right {
-	height: 100%;
-	top: -2px;
-}
-
-.button .line-bottom {
-	bottom: -110%;
-	height: 0;
-	left: -2px;
-	width: 2px;
-}
-
-.button:hover .line-bottom {
-	bottom: -2px;
-	height: 100%;
-}
-
-.button .line-left {
-	bottom: -2px;
-	height: 2px;
-	right: -110%;
-	width: 0;
-}
-
-.button:hover .line-left {
-	right: -2px;
-	width: 100%;
-}
-
-.tip {
-	background: #707070;
-	border-radius: 3px;
-	-ms-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-o-border-radius: 3px;
-	-moz-border-radius: 3px;
-	color: #fff;
-	font-size: 18px;
-	height: 35px;
-	line-height: 35px;
-	margin: 0 auto;
-	opacity: 0;
-	position: absolute;
-	padding: 0 14px;
-	top: 100px;
-	z-index: -9999;
-}
-
-.tip em {
-	font-style: normal;
-}
-
-.tip span {
-	border: 7px solid transparent;
-	border-top-color: #707070;
-	display: block;
-	height: 0;
-	left: 50%;
-	margin-left: -4px;
-	overflow: hidden;
-	position: absolute;
-	top: 35px;
-	width: 0;
-}
-</style>
-
-<!-- 百度统计代码 -->
-<script type="text/javascript">
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?20e1ba16c6fd76bd293d234e7ddabe39";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+ </head>
 <body>
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
@@ -308,7 +116,6 @@
 				</div>
 			</div>
 
-
 			<div class="widget">
 				<div class="head">
 					<h5 class="iUser">考生状态</h5>
@@ -322,9 +129,9 @@
 						<table class="table tablesorter" id="examMemberTable">
 							<thead>
 								<tr>
-									<th class="span2">学校</th>
-									<th class="span2">学号</th>
-									<th class="span2" data-sorter="false">姓名</th>
+									<th class="span2" style="width:50px;">学校</th>
+									<th class="span2" style="width:50px;">学号</th>
+									<th class="span2" data-sorter="false" style="width:50px;">姓名</th>
 									<th class="span1" data-empty="zero">总成绩</th>
 									<th class="span1">题目一得分</th>
 									<th class="span1" id="th6">题目二得分</th>
@@ -350,9 +157,9 @@
 									int stu_id = student.getInt("stu_id");
 								%>
 								<tr data-mem="0">
-									<td><%=uni_name %></td>
-									<td><%=stu_no %></td>
-									<td><%=stu_name %></td>
+									<td style="width:50px;"><%=uni_name %></td>
+									<td style="width:50px;"><%=stu_no %></td>
+									<td style="width:50px;"><%=stu_name %></td>
 									<td><span class="text-success"> <span
 											class="final-score"><%=score %></span> 分
 									</span></td>
@@ -463,46 +270,6 @@
         	}
 
        	}); 
-        
-        $(function(){
-
-            //===== ToTop =====//
-            $().UItoTop({ easingType: 'easeOutQuart' });
-
-
-            //===== Tooltip =====//
-            $('.leftDir').tipsy({fade: true, gravity: 'e'});
-            $('.rightDir').tipsy({fade: true, gravity: 'w'});
-            $('.topDir').tipsy({fade: true, gravity: 's'});
-            $('.botDir').tipsy({fade: true, gravity: 'n'});
-
-
-            //===== Tabs =====//
-            $.fn.simpleTabs = function(){ 
-                //Default Action
-                $(this).find(".tabContent").hide(); //Hide all content
-                $(this).find("ul.tabs li:first").addClass("activeTab").show(); //Activate first tab
-                $(this).find(".tabContent:first").show(); //Show first tab content
-            
-                //On Click Event
-                $("ul.tabs li").click(function() {
-                    $(this).parent().parent().find("ul.tabs li").removeClass("activeTab"); //Remove any "active" class
-                    $(this).addClass("activeTab"); //Add "active" class to selected tab
-                    $(this).parent().parent().find(".tabContent").hide(); //Hide all tab content
-                    var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
-                    $(activeTab).show(); //Fade in the active content
-                    return false;
-                });
-            };
-            //Run function on any div with class name of "widget"
-            $("div[class^='widget']").simpleTabs();
-            
-
-            //===== alerts按钮文字 =====//
-            $.alerts.okButton = window.LANG_TEXT.OK;
-            $.alerts.cancelButton = window.LANG_TEXT.CANCEL;
-
-        });
         </script>
         
         <script type="text/javascript">
