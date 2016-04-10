@@ -37,8 +37,8 @@ public class TeacherAnalysis {
     	session.setAttribute("tea_name", "刘钦");
     	session.setAttribute("uni_name", "南京大学");
     	
-    	String tea_account = (String) session.getAttribute("tea_account");
-    	JSONArray examArray = service.getTeacherFinishedExams(tea_account);
+    	int teaId = (int) session.getAttribute("tea_id");
+    	JSONArray examArray = service.getTeacherFinishedExams(teaId);
     	request.setAttribute("examArray", examArray);
     	
 		return "view/teacher/teacherAnalysis";
