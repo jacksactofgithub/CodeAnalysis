@@ -43,10 +43,10 @@ public class HttpHandler {
 			
 //			List<String> result = new ArrayList<String>();
 			String str = "";
-			
-			while ((str = inputStream.readLine())!=null ){
-//				result.add(str);
-			}
+			str = inputStream.readLine();
+//			while ((str = inputStream.readLine())!=null ){
+////				result.add(str);
+//			}
 			
 			return str;
 			
@@ -104,11 +104,11 @@ public class HttpHandler {
 		HttpHandler h = new HttpHandler();
 		Map<String , String> map = new HashMap<String , String>();
 		
-		map.put("stuAccount", "lrui12@software.nju.edu.cn");
+		map.put("teaId", "34");
 		map.put("test", "testValue");
 		
 		try {
-			String object = h.postHttpInvocation("getStudentExams", map);
+			String object = h.postHttpInvocation("getTeacherFinishedExams", map);
 //			JSONObject json = (JSONObject) object;
 			System.out.println(object);
 			

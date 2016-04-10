@@ -306,11 +306,12 @@
  								for(int i = 0;i<len;i++){
 									JSONObject exam = (JSONObject)examArray.get(i);
 									String exam_name = exam.getString("exam_name");
-									int id = exam.getInt("id");
+									int id = exam.getInt("exam_id");
 									String exam_begin_time = exam.getString("exam_begin_time");
 									String exam_end_time = exam.getString("exam_end_time");
 									int exam_duration =exam.getInt("exam_duration");
-									double score = exam.getDouble("score");
+									//double score = exam.getDouble("score");
+									double score = 85.0;
 									%>
 								<tr>
 									<td><!-- 此处id是从后台得到 -->

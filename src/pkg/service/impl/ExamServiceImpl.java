@@ -36,13 +36,14 @@ public class ExamServiceImpl implements ExamService{
 	}
 
 	@Override
-	public JSONArray getTeacherFinishedExams(String tea_account) {
+	public JSONArray getTeacherFinishedExams(int teaId) {
 		// TODO Auto-generated method stub
 		Map<String , String> params = new HashMap<String , String>();
-		params.put(URLNameFormat.TEACHER_ACCOUNT , tea_account);
+		params.put(URLNameFormat.TEACHER_ID , teaId+"");
 		
 		try {
 			String exams = http.postHttpInvocation(URLNameFormat.GET_TEACHER_FINISHED_EXAMS, params);
+			System.out.println(exams);
 			JSONArray array = new JSONArray(exams);
 			
 			return array;
