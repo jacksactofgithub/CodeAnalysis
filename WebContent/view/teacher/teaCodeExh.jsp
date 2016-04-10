@@ -23,6 +23,57 @@
 	href="http://mooctest.net/public/css/common/itsbrain-width-full.css">
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
+	<style>
+body{
+	margin:50px; ; 
+}
+.scale_panel{
+	font-size:12px;
+	color:#999;
+	width:840px;
+	position:absolute; 
+	line-height:18px; 
+	left:70px;
+	top:-0px;
+}
+.scale_panel .r{
+	float:right;
+}
+.scale span{
+	background:url(view/pic/scroll.gif) no-repeat; 
+	width:8px;
+	height:16px; 
+	position:absolute; 
+	left:-2px;
+	top:-1px;
+	cursor:pointer;
+}
+.scale{
+	background:url(view/pic/red.gif) repeat-x 0 100%;
+	border-left:1px #83BBD9 solid;
+	border-right:1px red solid;
+	width:850px;
+	height:10px; 
+	position:relative; 
+	font-size:0px;
+}
+.scale div{
+	background:url(view/pic/blue.gif) repeat-x;
+	width:0px; 
+	position:absolute; 
+	width:0;
+	left:0;
+	height:5px;
+	bottom:0;
+}
+li{
+	font-size:12px;
+	line-height:50px;
+	position:relative; 
+	height:50px; 
+	list-style:none;
+}
+</style>
 
 <!-- 百度统计代码 -->
 <script type="text/javascript">
@@ -79,39 +130,65 @@
 </div>
 	<div class="wrapper">
 		<!-- Content -->
-		<div class="content">
+		
+		<div class="content" style="height:15px;">
+			<div class="title">
+				<h5>考试列表</h5>
+			</div>
+
+			<div class="breadCrumbHolder module">
+				<div class="breadCrumb module">
+					<ul id="breadCrumbList">
+						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
+						<!-- 这里是stuanalysis页面 参数可能更改 -->
+						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li class="firstB">CalculateMatrix</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
 
 			<div class="widget">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 				</div>
 				<div class="body">
-					<pre>
-					public JSONObject reverse(JSONArray stasArray) throws JSONException {、
-						JSONObject stasJson = new JSONObject();
-						int len = stasArray.length();
-						int[] timestamp = new int[len];
-						double[] lineCount = new double[len];
-						int[] noteCount = new int[len];
-						int[] methodCount = new int[len];
-						int[] varCount = new int[len];
-						int[] maxCy = new int[len];
+					<pre  style="font-family:Consolas;font-size:15px">
+			public JSONObject reverse(JSONArray stasArray) throws JSONException {
+				JSONObject stasJson = new JSONObject();
+				int len = stasArray.length();
+				int[] timestamp = new int[len];
+				double[] lineCount = new double[len];
+				int[] noteCount = new int[len];
+				int[] methodCount = new int[len];
+				int[] varCount = new int[len];
+				int[] maxCy = new int[len];
 
-						stasJson.put("timestamp", timestamp);
-						stasJson.put("lineCount", lineCount);
-						stasJson.put("noteCount", noteCount);
-						stasJson.put("methodCount", methodCount);
-						stasJson.put("varCount", varCount);
-						stasJson.put("maxCy", maxCy);
-						return stasJson;
-					}
+				stasJson.put("timestamp", timestamp);
+				stasJson.put("lineCount", lineCount);
+				stasJson.put("noteCount", noteCount);
+				stasJson.put("methodCount", methodCount);
+				stasJson.put("varCount", varCount);
+				stasJson.put("maxCy", maxCy);
+				return stasJson;
+			}
 					</pre>
+					<ul>
+					 <li>时间 <span id="title">0min</span>
+					<div class="scale_panel">
+						<span class="r">120</span>0
+						<div class="scale" id="bar">
+							<div></div>
+							<span id="btn"></span>
+						</div> 
+					</div> 
+					</ul>
 				</div>
 			</div>
-		</div>
 	</div>
 	
-	<div class="wrapper" style="position:relative; top:-20px;">
+	<div class="wrapper" style="position:relative; top:0px;">
 		<!-- Content -->
 		<div class="content">
 
@@ -120,7 +197,7 @@
 					<h5 class="iInfo">测试代码</h5>
 				</div>
 				<div class="body">
-					<pre>
+					<pre style="font-family:Consolas;font-size:15px">
 					public void test(JSONArray stasArray) throws JSONException {
 						JSONObject stasJson = new JSONObject();
 						int len = stasArray.length();
@@ -174,5 +251,38 @@
 	</div>
 <div class="wrapper" style="position:relative; top:0px;height:80px;">
 </div>
+<script>
+scale=function (btn,bar,title){
+	this.btn=document.getElementById(btn);
+	this.bar=document.getElementById(bar);
+	this.title=document.getElementById(title);
+	this.step=this.bar.getElementsByTagName("DIV")[0];//得到了拖动之后左边的条
+	this.init();
+};
+scale.prototype={
+	init:function (){
+		var f=this,g=document,b=window,m=Math;
+		f.btn.onmousedown=function (e){
+			var x=(e||b.event).clientX;
+			var l=this.offsetLeft;
+			var max=f.bar.offsetWidth-this.offsetWidth;
+			g.onmousemove=function (e){
+				var thisX=(e||b.event).clientX;
+				var to=m.min(max,m.max(-2,l+(thisX-x)));
+				f.btn.style.left=to+'px';
+				f.ondrag(m.round(m.max(0,to/max)*100),to);
+				b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
+			};
+			g.onmouseup=new Function('this.onmousemove=null');
+		};
+	},
+	ondrag:function (pos,x){
+		this.step.style.width=Math.max(0,x)+'px';
+		this.title.innerHTML=parseFloat(pos*1.2).toFixed(0)+'min';//pos*总时间就是拖动的时间
+		//此处调用ajax
+	}
+}
+new scale('btn','bar','title');
+</script>
 </body>
 </html>

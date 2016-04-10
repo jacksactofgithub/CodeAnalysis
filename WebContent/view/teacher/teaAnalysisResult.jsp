@@ -167,14 +167,8 @@
 			</div>
 	
 			<div id="pigment" style="width:980px;">
-				<%//此处将json处理成二维数组格式
+<%//此处将json处理成二维数组格式
 				int caseNum=0;//测试用例数
-				JSONObject stajson = (JSONObject)request.getAttribute("staJson");
-				JSONArray timeStamps = stajson.getJSONArray("timestamp");//代码时间戳
-				
-				int len = timeStamps.length();//横坐标长度;
-				//得到的run结果已经是筛选过的 每分钟一次的结果了;就按照每分钟统计一次计算
-				//构造成一个补全的二维数组
 				
 				JSONObject json = null;
 				JSONArray array = null;
@@ -186,54 +180,19 @@
 				}catch(Exception e){
 					e.printStackTrace();
 				}
+				
+				int len = array.length();//运行统计的数目
+				
 				caseNum = json.getInt("caseNum");
 				int[][] tdarray = new int[caseNum][len];//row col是代码统计的次数;对应就应该有这么多列
-				runNum = array.length();//运行次数
-				//取出每次运行的时间戳
-				//int [] runtimestamp = new int[runNum];
 				
-				int count =0;//计数运行结果统计的坐标
-				int time = 0;
 				
 				for(int i=0;i<len;i++){//每次统计时的运行情况
-					
-					if(count>=array.length()){//将后面全部变成最后一个
-						for(int p=i+1;p<len;p++){
-							for(int q=0;q<caseNum;q++){
-								tdarray[q][p] = tdarray[q][p-1];//与前一行相同
-							}
-						}
-					}
-					else{
-						time = (int)array.getJSONObject(count).get("time");//寻找代码统计结束时最近的运行结果
-						JSONArray passNo = array.getJSONObject(count).getJSONArray("passNo");//要处理最后一段
-						
-						if(timeStamps.getInt(i)==time){//如果统计代码的时间与运行时间相同
-							for(int k=0;k<passNo.length();k++){
-								int m =passNo.getInt(k);//用例标号变成整数存储
-								tdarray[m-1][i] = 1;// 用例标号是从1开始的 所以要减一
-							}
-							count++;
-						}else if(timeStamps.getInt(i)<time){
-							if(i==0){
-								for(int k=1;k<caseNum+1;k++){
-									tdarray[k][i] = 0;//全部失败
-									//System.out.print("fail");
-								}
-							}else{
-								for(int k=0;k<caseNum;k++){
-									tdarray[k][i] = tdarray[k][i-1];//与前一行相同
-									//System.out.print("suc");
-								}
-							}//次数count不加;因为下一个代码统计的时间可能还是接近运行时间
-						}
-					}
-				}
-				if(time<len){
-					for(int i=time;i<len;i++){
-						for(int k=0;k<caseNum;k++){
-							tdarray[k][i] = tdarray[k][i-1];//与前一行相同
-						}
+					JSONObject obj = array.getJSONObject(i);
+					JSONArray passArray = obj.getJSONArray("passNo");
+					for(int j = 0;j<passArray.length();j++){
+						int m = passArray.getInt(j);
+						tdarray[m-1][i]=1;// 用例标号是从1开始的 所以要减一
 					}
 				}
 				%>
