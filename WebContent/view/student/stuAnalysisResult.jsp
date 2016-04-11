@@ -19,6 +19,15 @@
 	href="http://mooctest.net/public/css/common/itsbrain-width-full.css">
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
+<style>
+#left_tr{
+width:80px;
+white-space:nowrap; 
+text-overflow:ellipsis; 
+-o-text-overflow:ellipsis; 
+overflow: hidden; 
+}
+ </style>
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
@@ -189,27 +198,27 @@
 					e.printStackTrace();
 				}
 				
-				int len = array.length()/3;//运行统计的数目
-				System.out.println(len);
-				System.out.println("============================================================");
+				int len = array.length();//运行统计的数目
+				int col = len/3;
 				
 				caseNum = json.getInt("caseNum");
-				int[][] tdarray = new int[caseNum][len];//row col是代码统计的次数;对应就应该有这么多列
+				int[][] tdarray = new int[caseNum][col];//row col是代码统计的次数;对应就应该有这么多列
 				
 				
-				for(int i=0;i<len;i=i+3){//每次统计时的运行情况
+				for(int i=0;i<len-1;i=i+3){//每次统计时的运行情况
 					JSONObject obj = array.getJSONObject(i);
 					JSONArray passArray = obj.getJSONArray("passNo");
 					for(int j = 0;j<passArray.length();j++){
 						int m = passArray.getInt(j);
-						tdarray[m-1][i]=1;// 用例标号是从1开始的 所以要减一
+						int td_col = i/3;
+						tdarray[m][td_col]=1;// 用例标号是从1开始的 所以要减一
 					}
 				}
 				%>
 				
 				<table class="table table-bordered" style="position: absolute;height:300px;table-layout:fixed;">
 					<%for(int i=0;i<caseNum;i++){%>
-					<tr>
+					<tr id = "left_tr">
 						<td style="word-wrap:break-word;"><%=json.getJSONArray("caseName").getString(i)%></td>
 					</tr>
 					<% }%>
@@ -217,7 +226,7 @@
 				<table class="table table-bordered" style="position:relative; height:371px;width:900px;left: 80px">
 				<%for(int i=0;i<caseNum;i++){%>
 					<tr style="">
-						<%for(int j=0;j<len;j++){
+						<%for(int j=0;j<col;j++){
 							String url="url(view/pic/fail.png)";//错误颜色
 							//System.out.print(tdarray[i][j]);
 							if(tdarray[i][j]==1){
