@@ -37,6 +37,7 @@ public class StudentAnalysis {
     @RequestMapping("/stuAnalysis")
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
     	//在尚未接通慕测的情况下全用假数据
+    	//首先看request中有没有参数 如果有设置session否则去session中找
     	request.setAttribute("stu_account", "397342673@qq.com");
     	request.setAttribute("stu_name", "毕潇晗");
     	request.setAttribute("uni_name", "南京大学");

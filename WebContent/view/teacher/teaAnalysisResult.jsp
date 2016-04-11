@@ -19,6 +19,14 @@
 	href="http://mooctest.net/public/css/common/itsbrain-width-full.css">
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
+<style>
+#left_td{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis; 
+	overflow: hidden;
+}
+ </style>
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
@@ -160,14 +168,13 @@
 	</div>
 	
 	<div class="wrapper" style="position:relative; top:0px;">
-		<!-- Content -->
 		<div class="content" >
 			<div class="title">
 				<h5>运行结果</h5>
 			</div>
 	
 			<div id="pigment" style="width:980px;">
-<%//此处将json处理成二维数组格式
+				<%//此处将json处理成二维数组格式
 				int caseNum=0;//测试用例数
 				
 				JSONObject json = null;
@@ -182,12 +189,10 @@
 				}
 				
 				int len = array.length();//运行统计的数目
+				int col = len/3;
 				
 				caseNum = json.getInt("caseNum");
-				len = len/3;
-				System.out.println(len);
-				System.out.println("============================================================");
-				int[][] tdarray = new int[caseNum][len];//row col是代码统计的次数;对应就应该有这么多列
+				int[][] tdarray = new int[caseNum][col];//row col是代码统计的次数;对应就应该有这么多列
 				
 				
 				for(int i=0;i<len;i=i+3){//每次统计时的运行情况
@@ -195,24 +200,27 @@
 					JSONArray passArray = obj.getJSONArray("passNo");
 					for(int j = 0;j<passArray.length();j++){
 						int m = passArray.getInt(j);
-						tdarray[m-1][i]=1;// 用例标号是从1开始的 所以要减一
+						int td_col = i/3;
+						if(td_col<col){
+							tdarray[m][td_col]=1;
+						}
 					}
 				}
 				%>
 				
-				<table class="table table-bordered" style="position: absolute;height:300px;">
+				<table class="table table-bordered" style="position: absolute;width:82px;height:300px;table-layout:fixed;">
 					<%for(int i=0;i<caseNum;i++){%>
-					<tr>
-						<td style="word-wrap:break-word;"><%=json.getJSONArray("caseName").getString(i)%></td>
+					<tr style="width:82px;">
+						<td id="left_td" title="<%=json.getJSONArray("caseName").getString(i)%>">
+							<%=json.getJSONArray("caseName").getString(i)%>
+						</td>
 					</tr>
 					<% }%>
 				</table>
-				<table class="table table-bordered" style="position:relative; height:371px;width:920px;left: 60px">
+				<table class="table table-bordered" style="position:relative; height:371px;width:900px;left: 80px">
 				<%for(int i=0;i<caseNum;i++){%>
 					<tr>
-						<%for(int j=0;j<len;j++){
-							System.out.println(len);
-							System.out.println("============================================================");
+						<%for(int j=0;j<col;j++){
 							String url="url(view/pic/fail.png)";//错误颜色
 							//System.out.print(tdarray[i][j]);
 							if(tdarray[i][j]==1){
@@ -224,8 +232,8 @@
 				<% }%>
 				</table>
 			</div>
-			</div>
 	</div>
+</div>
 
 </body>
 </html>

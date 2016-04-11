@@ -20,12 +20,11 @@
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
 <style>
-#left_tr{
-width:80px;
-white-space:nowrap; 
-text-overflow:ellipsis; 
--o-text-overflow:ellipsis; 
-overflow: hidden; 
+#left_td{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis; 
+	overflow: hidden;
 }
  </style>
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
@@ -151,9 +150,9 @@ overflow: hidden;
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 -->
-						<li ><a href="http://mooctest.net/tea/home" title="考试分析">考试分析</a></li>
+						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li>
 						<li ><a href="<%=request.getContextPath()%>/stuExamQue?id=<%=((JSONObject)request.getAttribute("exam")).getString("id") %>"><%=((JSONObject)request.getAttribute("exam")).getString("exam_name") %></a></li>
-						<li ><%=((JSONObject)request.getAttribute("exam")).getString("exam_name")  %></li>
+						<li ><%=(request.getParameter("problem_name")) %></li>
 						<!-- 从request中取得考试信息类中的考试名 题目名-->
 					</ul>
 				</div>
@@ -205,27 +204,31 @@ overflow: hidden;
 				int[][] tdarray = new int[caseNum][col];//row col是代码统计的次数;对应就应该有这么多列
 				
 				
-				for(int i=0;i<len-1;i=i+3){//每次统计时的运行情况
+				for(int i=0;i<len;i=i+3){//每次统计时的运行情况
 					JSONObject obj = array.getJSONObject(i);
 					JSONArray passArray = obj.getJSONArray("passNo");
 					for(int j = 0;j<passArray.length();j++){
 						int m = passArray.getInt(j);
 						int td_col = i/3;
-						tdarray[m][td_col]=1;// 用例标号是从1开始的 所以要减一
+						if(td_col<col){
+							tdarray[m][td_col]=1;
+						}
 					}
 				}
 				%>
 				
-				<table class="table table-bordered" style="position: absolute;height:300px;table-layout:fixed;">
+				<table class="table table-bordered" style="position: absolute;width:82px;height:300px;table-layout:fixed;">
 					<%for(int i=0;i<caseNum;i++){%>
-					<tr id = "left_tr">
-						<td style="word-wrap:break-word;"><%=json.getJSONArray("caseName").getString(i)%></td>
+					<tr style="width:82px;">
+						<td id="left_td" title="<%=json.getJSONArray("caseName").getString(i)%>">
+							<%=json.getJSONArray("caseName").getString(i)%>
+						</td>
 					</tr>
 					<% }%>
 				</table>
 				<table class="table table-bordered" style="position:relative; height:371px;width:900px;left: 80px">
 				<%for(int i=0;i<caseNum;i++){%>
-					<tr style="">
+					<tr>
 						<%for(int j=0;j<col;j++){
 							String url="url(view/pic/fail.png)";//错误颜色
 							//System.out.print(tdarray[i][j]);
@@ -238,7 +241,7 @@ overflow: hidden;
 				<% }%>
 				</table>
 			</div>
-			</div>
 	</div>
+ </div>
 </body>
 </html>
