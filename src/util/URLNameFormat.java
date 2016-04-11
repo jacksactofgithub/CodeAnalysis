@@ -16,5 +16,6 @@ public class URLNameFormat {
 	public static final String GET_TEACHER_FINISHED_EXAMS = "getTeacherFinishedExams";
 	public static final String GET_EXAM_RESULT = "getExamResult";
 	public static final String GET_STUDENT_EXAM_PROBLEMS = "getStuExamProblem";
+	public static final String GET_CLASS_MEMBER_ID = "getClassMemberId";
 	
 }
