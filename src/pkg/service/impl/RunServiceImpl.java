@@ -249,11 +249,11 @@ public class RunServiceImpl implements RunService{
 			findCommon(common , strTemp);
 		}
 		
-		System.out.print(stuID + ":\t");
-		for(int i=0 ; i<common.size() ; ++i){
-			System.out.print(common.get(i)+"\t");
-		}
-		System.out.println();
+//		System.out.print(stuID + ":\t");
+//		for(int i=0 ; i<common.size() ; ++i){
+//			System.out.print(common.get(i)+"\t");
+//		}
+//		System.out.println();
 		
 		return common;
 	}
