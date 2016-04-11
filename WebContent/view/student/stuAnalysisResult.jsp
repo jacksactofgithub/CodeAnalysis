@@ -80,6 +80,10 @@
 	        }]
 	    });
 	});
+ $(document).ready(function(){ //隐藏table的某行
+	 alert(myjson.timestamp);
+ }); 
+
  </script>
 <title>慕测平台</title>
 </head>
@@ -210,7 +214,7 @@
 					</tr>
 					<% }%>
 				</table>
-				<table class="table table-bordered" style="position:relative; height:371px;width:920px;left: 60px">
+				<table class="table table-bordered" style="position:relative; height:371px;width:900px;left: 80px">
 				<%for(int i=0;i<caseNum;i++){%>
 					<tr style="">
 						<%for(int j=0;j<len;j++){
