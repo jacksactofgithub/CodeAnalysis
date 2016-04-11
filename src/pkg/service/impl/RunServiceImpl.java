@@ -121,6 +121,7 @@ public class RunServiceImpl implements RunService{
 			}else{
 				JSONObject json = formRun(timeMap.get(count) , count , testNames);
 				resultArray.put(json);
+				count++;
 			}
 		}
 		
