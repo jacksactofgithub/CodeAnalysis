@@ -301,7 +301,14 @@ scale.prototype={
 				f.ondrag(m.round(m.max(0,to/max)*100),to);
 				b.getSelection ? b.getSelection().removeAllRanges() : g.selection.empty();
 			};
-			g.onmouseup=new Function('this.onmousemove=null');
+			//g.onmouseup=new Function('this.onmousemove=null');
+			g.onmouseup=function(e){
+				this.onmousemove=null;
+				var thisX=(e||b.event).clientX;
+				var to=m.min(max,m.max(-2,l+(thisX-x)));
+				//alert(m.round(m.max(0,to/max)*120));
+				test();
+			}
 		};
 	},
 	ondrag:function (pos,x){
@@ -311,6 +318,29 @@ scale.prototype={
 	}
 }
 new scale('btn','bar','title');
+
+function showCode(time){
+	
+	$("#login_submit").unbind("click");
+	$("#login_submit").val("LOADING...");
+  	var pwd = $("#password").val();
+  	var mobile = $("#mobile").val();
+
+  	 $.ajax({type : "POST",
+           url : "showCode", 
+           data : {
+          	 stu_id : stu_id,
+          	 time :time,
+          	 exam_id:exam_id,
+  	 		 problem_name :problem_name
+           },
+           success : function (data){
+ 				//将data显示在相应区域
+           }
+   	 });   
+  	 return false;
+}
+
 </script>
 
         <!-- jquery 1.7.2 业内最稳定版本 -->
