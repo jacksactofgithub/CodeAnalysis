@@ -185,13 +185,15 @@
 					e.printStackTrace();
 				}
 				
-				int len = array.length();//运行统计的数目
+				int len = array.length()/3;//运行统计的数目
+				System.out.println(len);
+				System.out.println("============================================================");
 				
 				caseNum = json.getInt("caseNum");
 				int[][] tdarray = new int[caseNum][len];//row col是代码统计的次数;对应就应该有这么多列
 				
 				
-				for(int i=0;i<len;i++){//每次统计时的运行情况
+				for(int i=0;i<len;i=i+3){//每次统计时的运行情况
 					JSONObject obj = array.getJSONObject(i);
 					JSONArray passArray = obj.getJSONArray("passNo");
 					for(int j = 0;j<passArray.length();j++){
@@ -208,7 +210,7 @@
 					</tr>
 					<% }%>
 				</table>
-				<table class="table table-bordered" style="position:relative; height:300px;width:920px;left: 60px">
+				<table class="table table-bordered" style="position:relative; height:371px;width:920px;left: 60px">
 				<%for(int i=0;i<caseNum;i++){%>
 					<tr style="">
 						<%for(int j=0;j<len;j++){

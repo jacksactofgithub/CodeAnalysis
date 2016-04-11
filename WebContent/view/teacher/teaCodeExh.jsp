@@ -23,7 +23,9 @@
 	href="http://mooctest.net/public/css/common/itsbrain-width-full.css">
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
-	<style>
+<link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
+<link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/highlight.github.css">
+<style>
 body{
 	margin:50px; ; 
 }
@@ -72,6 +74,28 @@ li{
 	position:relative; 
 	height:50px; 
 	list-style:none;
+}
+#codeBlock{
+    float: left;
+    width: 70%;
+}
+#coverageBlock{
+    float: left;
+    margin-left: 20px;
+    width: 25%;
+}
+#coverageBlock a.watch{
+    margin-left: 5px;
+    visibility: hidden;
+}
+#coverageBlock tr:hover a.watch{
+    visibility: visible;
+}
+#coverageBlock a.watch img{
+    vertical-align: text-bottom;
+}
+#codeTable tr.highlight code{
+    background-color: #FFFF99;
 }
 </style>
 
@@ -196,18 +220,33 @@ li{
 				<div class="head">
 					<h5 class="iInfo">测试代码</h5>
 				</div>
+			<!-- 
+			<div class="analysis-block" id="codeBlock">
+				<div class="operation">
+	                <span>测试用例</span>
+	                <div class="chosen-container chosen-container-single" style="width: 250px;" title id="codeSelect_chosen">
+		                <select id="codeSelect">
+	
+		                	  <option value ="volvo">Volvo</option>
+							  <option value ="saab">Saab</option>
+							  <option value="opel">Opel</option>
+							  <option value="audi">Audi</option>
+		                </select>
+	                </div>
+	            </div>
+			</div> -->
 				<div class="body">
 					<pre style="font-family:Consolas;font-size:15px">
-					public void test(JSONArray stasArray) throws JSONException {
-						JSONObject stasJson = new JSONObject();
-						int len = stasArray.length();
-						int[] timestamp = new int[len];
-						double[] lineCount = new double[len];
-						int[] noteCount = new int[len];
-						int[] methodCount = new int[len];
-						int[] varCount = new int[len];
-						int[] maxCy = new int[len];
-					}
+			public JSONObject reverse(JSONArray stasArray) throws JSONException {
+				JSONObject stasJson = new JSONObject();
+				int len = stasArray.length();
+				int[] timestamp = new int[len];
+				double[] lineCount = new double[len];
+				int[] noteCount = new int[len];
+				int[] methodCount = new int[len];
+				int[] varCount = new int[len];
+				int[] maxCy = new int[len];
+			}
 					</pre>
 				</div>
 			</div>
@@ -222,16 +261,8 @@ li{
 			</div>
 	
 			<div id="pigment" style="width:980px;">
-				
-				
-				<table class="table table-bordered" style="position: absolute;height:40px;table-layout:fixed;">
 
-					<tr>
-						<td style="word-wrap:break-word;">testcase1</td>
-					</tr>
-
-				</table>
-				<table class="table table-bordered" style="position:relative; height:40px;width:920px;left: 60px">
+				<table class="table table-bordered" style="position:relative; height:40px;width:980px;left:0px">
 					<tr style="">
 						<% int[] array = {0,0,0,0,0,0,0,0,1,1,1,1,1,0,1};
 						String url;
@@ -284,5 +315,36 @@ scale.prototype={
 }
 new scale('btn','bar','title');
 </script>
+
+        <!-- jquery 1.7.2 业内最稳定版本 -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/jquery/jquery-1.7.2.min.js"></script>
+
+        <!-- jquery UI（ui_custom.css做过改动） -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/jquery-ui/jquery-ui-1.8.24.min.js"></script>
+                <script type="text/javascript" src="http://mooctest.net/public/js/jquery-ui/jquery-ui-datepicker-zh-CN.js"></script>
+        
+        <!-- 借鉴bootstrap模态框 -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/bootstrap/bootstrap-modal-2.3.2.js"></script>
+
+        <!-- form validation -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.validationEngine-2.6.2.js"></script>
+                <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.validationEngine-zh_CN.js"></script>
+        
+        <!-- 消息队列 + tooltip + 弹框 -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.jgrowl.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.tipsy.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.alerts.js"></script>
+
+        <!-- 面包屑导航 + 返回顶部 -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/jBreadCrumb.1.1.js"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/jquery.ToTop.js"></script>
+
+        <!-- my common可复用 -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/common/application-util.js?v=20151204"></script>
+        <script type="text/javascript" src="http://mooctest.net/public/js/common/application-execution.js"></script>
+
+        <!-- cookie -->
+        <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.cookie.1.4.1.js"></script>
+
 </body>
 </html>
