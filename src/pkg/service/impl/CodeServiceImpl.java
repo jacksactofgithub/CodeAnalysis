@@ -1,7 +1,10 @@
 package pkg.service.impl;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +32,6 @@ public class CodeServiceImpl implements CodeService{
 		while(stamps.hasNext()){
 			Code attendence = generateAttendence(stamps.next() , stuID , exam);
 			codeDAO.addCode(attendence);
-//			attList.add(attendence);
 		}
 		
 		return 0;
@@ -45,6 +47,7 @@ public class CodeServiceImpl implements CodeService{
 		attendence.setVar_count(stamp.getVaryCount());
 		attendence.setMax_cyclomaticcpl(stamp.getMaxCyc());
 		attendence.setSecond((int) (stamp.getRelativeTime()/1000) );
+		attendence.setTimestamp(stamp.getTimestamp());
 		
 		String proName = stamp.getSourceName().split("/")[0];
 		attendence.setPro_name(proName);
@@ -71,12 +74,14 @@ public class CodeServiceImpl implements CodeService{
 		return array;
 	}
 	
-	public JSONArray getCodeJSON(Iterator<Code> code) {
-		System.out.println("geting code json");
-		JSONArray array = new JSONArray();
-		
+	/**
+	 * 将每一分钟对应至一个code
+	 * @return
+	 */
+	private Map<Integer , Code> mapTime(Iterator<Code> code){
+		Map<Integer , Code> map = new HashMap<Integer , Code>();
 		if((code == null)||(!code.hasNext())){
-			return array;
+			return map;
 		}
 		
 		int count =0;		//第几分钟
@@ -84,60 +89,72 @@ public class CodeServiceImpl implements CodeService{
 		Code current = null;
 		int interval = 0;
 		while((code.hasNext())||((count*60)<current.getSecond())){
-			JSONObject json;
-			try {
-				
-				if(former == null){
-					Code temp = code.next();
-					json = formCode(temp , count);
-					array.put(json);
-					former = temp;
-					if(code.hasNext()){
-						current = code.next();
-					}else{
-						break;
-					}
-					count++;
-					interval = (count*60);
-					continue;
-				}
-				
-				if(former.getSecond() == current.getSecond()){
-					former = current;
-					if(code.hasNext()){
-						current = code.next();
-					}else{
-						interval = 0;
-					}
-				}
-				
-				int currentInterval = calInterval((count*60) , current.getSecond());
-				if(currentInterval < interval){
-					interval = currentInterval;
-					former = current;
-					if(code.hasNext()){
-						current = code.next();
-					}else{
-						interval = 0;
-					}
+			if(former == null){
+				Code temp = code.next();
+				map.put(count, temp);
+				former = temp;
+				if(code.hasNext()){
+					current = code.next();
 				}else{
-					json = formCode(former , count);
-					array.put(json);
-					count++;
-					interval = (count*60) - former.getSecond();
+					break;
 				}
-				
-				if((!code.hasNext()) &&((count*60 > current.getSecond()))){	//保证时间够
-					json = formCode(current, count);
-					array.put(json);
+				count++;
+				interval = (count*60);
+				continue;
+			}
+			
+			if(former.getSecond() == current.getSecond()){
+				former = current;
+				if(code.hasNext()){
+					current = code.next();
+				}else{
+					interval = 0;
 				}
+			}
+			
+			int currentInterval = calInterval((count*60) , current.getSecond());
+			if(currentInterval < interval){
+				interval = currentInterval;
+				former = current;
+				if(code.hasNext()){
+					current = code.next();
+				}else{
+					interval = 0;
+				}
+			}else{
+				map.put(count, former);
+				count++;
+				interval = (count*60) - former.getSecond();
+			}
+			
+			if((!code.hasNext()) &&((count*60 > current.getSecond()))){	//保证时间够
+				map.put(count, current);
+			}
 				
-//				System.out.println("current code:" + current.getSecond() + "current minute:" + count);
+		}
+		
+		return map;
+	}
+	
+	public JSONArray getCodeJSON(Iterator<Code> code) {
+		JSONArray array = new JSONArray();
+		
+		Map<Integer , Code> codeMap = mapTime(code);
+		
+		Iterator<Entry<Integer , Code>> codeIt = codeMap.entrySet().iterator();
+		
+		while(codeIt.hasNext()){
+			Entry<Integer , Code> entry = codeIt.next();
+			try {
+				JSONObject json = formCode(entry.getValue(), entry.getKey());
+				array.put(json);
 				
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return array;
 			}
+			
 		}
 		
 		return array;

@@ -7,7 +7,7 @@ import pkg.entity.Code;
 public interface CodeDAO {
 
 	public int addCode(int student,int examID , String subject, int second, int line_count
-			, int note_count, int method_count,int var_count, int max_cyclomatic);
+			, int note_count, int method_count,int var_count, int max_cyclomatic , long timestamp);
 	
 	public int addCode(Code attendence);
 

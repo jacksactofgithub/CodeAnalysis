@@ -17,13 +17,14 @@ public class RunDAOImpl implements RunDAO{
 	private DBOperation dbopt;
 	
 	@Override
-	public Run addRun(String proName, int student_id , int run_second , int examID) {
+	public Run addRun(String proName, int student_id , int run_second , int examID , long timestamp) {
 		// TODO Auto-generated method stub
 		Run run = new Run();
 		run.setPro_name(proName);
 		run.setStudent_id(student_id);
 		run.setRun_second(run_second);
 		run.setExam_id(examID);
+		run.setTimestamp(timestamp);
 		
 		dbopt.save(run);
 		
@@ -33,7 +34,7 @@ public class RunDAOImpl implements RunDAO{
 	@Override
 	public List<Run> queryRuns(int student_id, String proName , int exam) {
 		// TODO Auto-generated method stub
-		String hql = "from Run as run where run.student_id=? and run.pro_name=? and run.exam_id=?";
+		String hql = "from Run as run where run.student_id=? and run.pro_name=? and run.exam_id=? order by run.run_second asc";
 		
 		@SuppressWarnings("unchecked")
 		List<Run> list = dbopt.findList(hql, student_id , proName , exam);

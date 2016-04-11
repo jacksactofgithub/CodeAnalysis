@@ -101,7 +101,7 @@ public class LogAnalyser {
 	 * @throws JSONException 
 	 */
 	private void addOneRun(String log , List<RunResult> run) throws JSONException{
-		String[] logInfo = log.split(" " , 3);
+		String[] logInfo = log.split(SPLIT_TAG , 3);
 		String tempDate = logInfo[1];
 		String report = logInfo[2];
 		Date date = DateParser.string2Date(tempDate);	//精确到分的时间
@@ -158,11 +158,20 @@ public class LogAnalyser {
 		String failureMessage = null;
 		boolean pass = true;
 		if(success.equals("0")){
-			failureMessage = caseObj.getString("failureMessage");
 			pass = false;
 		}
 		else if(!success.equals("1")){	//既不为0页不为1，则是无效数据返回null
 			return null;
+		}
+		
+		@SuppressWarnings("unchecked")
+		Iterator<String> keys = caseObj.keys();
+		
+		while(keys.hasNext()){
+			String key = keys.next();
+			if(key.equals("failureMessage")){
+				failureMessage = caseObj.getString(key);
+			}
 		}
 		
 		return new CaseResult(pass , methodName , failureMessage);

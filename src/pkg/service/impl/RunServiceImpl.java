@@ -1,9 +1,11 @@
 package pkg.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.json.JSONArray;
@@ -38,7 +40,7 @@ public class RunServiceImpl implements RunService{
 			String proName = stamp.getClassName();
 			long startsecond = FileStateHandler.getStartTime(stuID, proName);
 			
-			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000) , examID);
+			Run run = runDAO.addRun(proName, stuID , (int) ((millisecond-startsecond)/1000) , examID , millisecond);
 			addTests(run , stamp.getTests());
 		}
 		
@@ -61,7 +63,21 @@ public class RunServiceImpl implements RunService{
 		
 		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
 		
+		Run originRun = generateStartRun(stuID, proName, exam);
+		runs.add(0, originRun);
+		
 		return getRunJSON(runs.iterator() , proName , stuID , exam);
+	}
+	
+	private Run generateStartRun(int stuId , String proName , int exam){
+		Run run = new Run();
+		run.setPro_name(proName);
+		run.setExam_id(exam);
+		run.setRun_second(0);
+		run.setStudent_id(stuId);
+		run.setTimestamp(0);
+		
+		return run;
 	}
 	
 	public JSONObject getRunJSON(Iterator<Run> run , String proName , int stuID , int exam) throws JSONException{
@@ -77,69 +93,141 @@ public class RunServiceImpl implements RunService{
 			caseNameArray.put(name);
 		}
 		runJSON.put("caseName", caseNameArray);
-		runJSON.put("result", formResultArray(run, proName, testNames));
+//		runJSON.put("result", formResultArray(run, proName, testNames));
+		
+		Map<Integer , Run> timeMap = mapTime(run);
+		
+		Iterator<Entry<Integer , Run>> entryIt = timeMap.entrySet().iterator();
+		
+		JSONArray resultArray = new JSONArray();
+		
+		while(entryIt.hasNext()){
+			Entry<Integer , Run> entry = entryIt.next();
+			JSONObject json = formRun(entry.getValue(), entry.getKey(), testNames);
+			resultArray.put(json);
+		}
+		
+		runJSON.put("result", resultArray);
 		
 		return runJSON;
 	}
 	
-	private JSONArray formResultArray(Iterator<Run> run , String proName , List<String> testNames){
-		
-		JSONArray runArray = new JSONArray();
+	private Map<Integer , Run> mapTime(Iterator<Run> run){
+		Map<Integer , Run> map = new HashMap<Integer , Run>();
+		if((run == null)||(!run.hasNext())){
+			return map;
+		}
 		
 		int count =0;		//第几分钟
 		Run former = null;
 		Run current = null;
 		int interval = 0;
 		while((run.hasNext())||((count*60)<current.getRun_second())){
-			JSONObject json;
-			try {
-				
-				if(former == null){
-					Run temp = run.next();
-					json = formRun(temp , count , testNames);
-					runArray.put(json);
-					former = temp;
-					if(run.hasNext()){
-						current = run.next();
-					}else{
-						current = temp;
-						interval = 0;
-					}
-					count++;
-					interval = (count*60);
-					continue;
-				}
-				
-				int currentInterval = calInterval((count*60) , current.getRun_second());
-				if(currentInterval < interval){
-					interval = currentInterval;
-					former = current;
-					if(run.hasNext()){
-						current = run.next();
-					}else{
-						interval = 0;
-					}
+			if(former == null){
+				Run temp = run.next();
+				map.put(count, temp);
+				former = temp;
+				if(run.hasNext()){
+					current = run.next();
 				}else{
-					json = formRun(current , count ,testNames);
-					runArray.put(json);
-					count++;
-					interval = (count*60) - former.getRun_second();
+					break;
 				}
-				
-				if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
-					json = formRun(current, count , testNames);
-					runArray.put(json);
-				}
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				count++;
+				interval = (count*60);
+				continue;
 			}
+			
+			if(former.getRun_second() == current.getRun_second()){
+				former = current;
+				if(run.hasNext()){
+					current = run.next();
+				}else{
+					interval = 0;
+				}
+			}
+			
+			int currentInterval = calInterval((count*60) , current.getRun_second());
+			if(currentInterval < interval){
+				interval = currentInterval;
+				former = current;
+				if(run.hasNext()){
+					current = run.next();
+				}else{
+					interval = 0;
+				}
+			}else{
+				map.put(count, former);
+				count++;
+				interval = (count*60) - former.getRun_second();
+			}
+			
+			if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
+				map.put(count, current);
+			}
+				
 		}
 		
-		return runArray;
-		
+		return map;
 	}
+	
+//	private JSONArray formResultArray(Iterator<Run> run , String proName , List<String> testNames){
+//		
+//		JSONArray runArray = new JSONArray();
+//		
+//		int count =0;		//第几分钟
+//		Run former = null;
+//		Run current = null;
+//		int interval = 0;
+//		while((run.hasNext())||((count*60)<current.getRun_second())){
+//			JSONObject json;
+//			try {
+//				
+//				if(former == null){
+//					Run temp = run.next();
+//					json = formRun(temp , count , testNames);
+//					runArray.put(json);
+//					former = temp;
+//					if(run.hasNext()){
+//						current = run.next();
+//					}else{
+//						current = temp;
+//						interval = 0;
+//					}
+//					count++;
+//					interval = (count*60);
+//					continue;
+//				}
+//				
+//				int currentInterval = calInterval((count*60) , current.getRun_second());
+//				if(currentInterval < interval){
+//					interval = currentInterval;
+//					former = current;
+//					if(run.hasNext()){
+//						current = run.next();
+//					}else{
+//						interval = 0;
+//					}
+//				}else{
+//					json = formRun(current , count ,testNames);
+//					runArray.put(json);
+//					count++;
+//					interval = (count*60) - former.getRun_second();
+//				}
+//				
+//				if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
+//					json = formRun(current, count , testNames);
+//					runArray.put(json);
+//				}
+//				
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//		return runArray;
+//		
+//	}
 	
 	private int calInterval(int timeOne , int timeTwo){
 		int result = timeOne - timeTwo;

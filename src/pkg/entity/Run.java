@@ -17,6 +17,7 @@ public class Run {
 	private String pro_name;
 	private int student_id;
 	private int run_second;
+	private long timestamp;
 	
 	public void setPro_name(String pro_name){
 		this.pro_name = pro_name;
@@ -52,6 +53,14 @@ public class Run {
 
 	public void setExam_id(int exam_id) {
 		this.exam_id = exam_id;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 }

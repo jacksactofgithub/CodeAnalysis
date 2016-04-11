@@ -7,7 +7,7 @@ import pkg.entity.Run;
 
 public interface RunDAO {
 
-	public Run addRun(String proName , int student_id , int run_second , int examID);
+	public Run addRun(String proName , int student_id , int run_second , int examID , long timestamp);
 	
 	public List<Run> queryRuns(int student_id , String proName , int exam);
 	
