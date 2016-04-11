@@ -56,6 +56,7 @@ public class StuAnalysisResult {
 		}
 
 		request.setAttribute("runResultJson", runResultJson);
+		System.out.println(runResultJson.toString());
 		
 		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id);		
 		JSONObject stasJson = null;
