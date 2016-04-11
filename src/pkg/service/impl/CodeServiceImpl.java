@@ -65,7 +65,7 @@ public class CodeServiceImpl implements CodeService{
 		while(it.hasNext()){
 			Code code = it.next();
 			if(!code.getPro_name().equals(proName)){
-				list.remove(code);
+				it.remove();
 			}
 		}
 		JSONArray array = getCodeJSON(list.iterator());
@@ -140,20 +140,38 @@ public class CodeServiceImpl implements CodeService{
 		
 		Map<Integer , Code> codeMap = mapTime(code);
 		
-		Iterator<Entry<Integer , Code>> codeIt = codeMap.entrySet().iterator();
+//		Iterator<Entry<Integer , Code>> codeIt = codeMap.entrySet().iterator();
 		
-		while(codeIt.hasNext()){
-			Entry<Integer , Code> entry = codeIt.next();
-			try {
-				JSONObject json = formCode(entry.getValue(), entry.getKey());
-				array.put(json);
-				
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return array;
+//		while(codeIt.hasNext()){
+//			Entry<Integer , Code> entry = codeIt.next();
+//			try {
+//				JSONObject json = formCode(entry.getValue(), entry.getKey());
+//				array.put(json);
+//				
+//			} catch (JSONException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return array;
+//			}
+//			
+//		}
+		
+		int minute = 0;
+		while(true){
+			if(!codeMap.containsKey(minute)){
+				break;
+			}else{
+				try {
+					JSONObject json = formCode(codeMap.get(minute) , minute);
+					array.put(json);
+					minute++;
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					minute++;
+					continue;
+				}
 			}
-			
 		}
 		
 		return array;

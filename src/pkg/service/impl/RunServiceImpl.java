@@ -16,8 +16,11 @@ import org.springframework.stereotype.Service;
 
 import lmooc.modulize.bean.RunStamp;
 import lmooc.modulize.model.FileStateHandler;
+import pkg.dao.CommonTestDAO;
 import pkg.dao.RunDAO;
 import pkg.dao.TestDAO;
+import pkg.dao.TestNameDAO;
+import pkg.entity.CommonTest;
 import pkg.entity.Run;
 import pkg.entity.Test;
 import pkg.service.RunService;
@@ -29,6 +32,10 @@ public class RunServiceImpl implements RunService{
 	private RunDAO runDAO;
 	@Autowired
 	private TestDAO testDAO;
+	@Autowired
+	private CommonTestDAO commonDAO;
+	@Autowired
+	private TestNameDAO testNameDAO;
 	
 	@Override
 	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID , int examID) {
@@ -97,14 +104,24 @@ public class RunServiceImpl implements RunService{
 		
 		Map<Integer , Run> timeMap = mapTime(run);
 		
-		Iterator<Entry<Integer , Run>> entryIt = timeMap.entrySet().iterator();
+//		Iterator<Entry<Integer , Run>> entryIt = timeMap.entrySet().iterator();
 		
 		JSONArray resultArray = new JSONArray();
 		
-		while(entryIt.hasNext()){
-			Entry<Integer , Run> entry = entryIt.next();
-			JSONObject json = formRun(entry.getValue(), entry.getKey(), testNames);
-			resultArray.put(json);
+//		while(entryIt.hasNext()){
+//			Entry<Integer , Run> entry = entryIt.next();
+//			JSONObject json = formRun(entry.getValue(), entry.getKey(), testNames);
+//			resultArray.put(json);
+//		}
+		
+		int count = 0;
+		while(true){
+			if(!timeMap.containsKey(count)){
+				break;
+			}else{
+				JSONObject json = formRun(timeMap.get(count) , count , testNames);
+				resultArray.put(json);
+			}
 		}
 		
 		runJSON.put("result", resultArray);
@@ -208,27 +225,10 @@ public class RunServiceImpl implements RunService{
 	@Override
 	public List<String> findCommonTestCases(String proName , int exam) {
 		// TODO Auto-generated method stub
+		CommonTest common = commonDAO.queryCommonTest(exam, proName);
+		List<String> names = testNameDAO.queryStringNames(common);
 		
-		List<Integer> stuList = runDAO.queryStudentID(proName , exam);
-		
-		List<String> result = new ArrayList<String>();
-		
-		if(stuList.size() >= 1){
-			int stuID = stuList.get(0);
-			result = findOneStudentCommon(stuID , proName , exam);
-			
-			for(int i=1 ; i<stuList.size() ;++i){
-				stuID = stuList.get(i);
-				List<String> stuCommon = findOneStudentCommon(stuID , proName , exam);
-				if(stuCommon.size() == 0){
-					continue;
-				}
-				findCommon(result , stuCommon);
-			}
-			
-		}
-		
-		return result;
+		return names;
 	}
 	
 	/**
@@ -296,6 +296,35 @@ public class RunServiceImpl implements RunService{
 	public JSONObject getAvgPassResult(String proName, int exam) throws JSONException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void saveCommonTests(int examID, String proName) {
+		// TODO Auto-generated method stub
+		List<Integer> stuList = runDAO.queryStudentID(proName , examID);
+		
+		List<String> result = new ArrayList<String>();
+		
+		if(stuList.size() >= 1){
+			int stuID = stuList.get(0);
+			result = findOneStudentCommon(stuID , proName , examID);
+			
+			for(int i=1 ; i<stuList.size() ;++i){
+				stuID = stuList.get(i);
+				List<String> stuCommon = findOneStudentCommon(stuID , proName , examID);
+				if(stuCommon.size() == 0){
+					continue;
+				}
+				findCommon(result , stuCommon);
+			}
+			
+		}
+		
+		CommonTest common = commonDAO.addCommonTest(examID, proName);
+		for(int i=0 ; i<result.size() ; i++){
+			testNameDAO.addTestName(common, result.get(i));
+		}
+		
 	}
 	
 }

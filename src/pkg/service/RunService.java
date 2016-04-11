@@ -24,4 +24,6 @@ public interface RunService {
 	
 	public JSONObject getAvgPassResult(String proName , int exam) throws JSONException;
 	
+	public void saveCommonTests(int examID , String proName);
+	
 }
