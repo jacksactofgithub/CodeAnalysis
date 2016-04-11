@@ -26,9 +26,6 @@
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/highlight.github.css">
 <style>
-body{
-	margin:50px; ; 
-}
 .scale_panel{
 	font-size:12px;
 	color:#999;
@@ -68,7 +65,7 @@ body{
 	height:5px;
 	bottom:0;
 }
-li{
+#scroll_li{
 	font-size:12px;
 	line-height:50px;
 	position:relative; 
@@ -199,7 +196,7 @@ li{
 			}
 					</pre>
 					<ul>
-					 <li>时间 <span id="title">0min</span>
+					 <li id="scroll_li">时间 <span id="title">0min</span>
 					<div class="scale_panel">
 						<span class="r">120</span>0
 						<div class="scale" id="bar">
@@ -207,6 +204,7 @@ li{
 							<span id="btn"></span>
 						</div> 
 					</div> 
+					</li>
 					</ul>
 				</div>
 			</div>
