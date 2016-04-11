@@ -328,7 +328,7 @@ public class RunServiceImpl implements RunService{
 		while(it.hasNext()){
 			String temp = it.next();
 			if(!tag.contains(temp)){
-				common.remove(temp);
+				it.remove();
 			}
 		}
 		

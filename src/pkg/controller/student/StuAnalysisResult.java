@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pkg.service.CodeService;
+import pkg.service.RunService;
 import pkg.service.StudentService;
 
 /**
@@ -23,6 +24,8 @@ public class StuAnalysisResult {
 	StudentService service;
 	@Autowired
 	CodeService codeService;
+	@Autowired
+	RunService runService;
 
 	public StuAnalysisResult() {
 		super();
@@ -49,14 +52,14 @@ public class StuAnalysisResult {
 				+ "{'time':2,'passNo':[1,2]},{'time':3,'passNo':[1,2]},{'time':4,'passNo':[1,2,3]},{'time':5,'passNo':[1,2,3]},{'time':6,'passNo':[1,2,3]},"
 				+ "{'time':7,'passNo':[1,2,3]},{'time':8,'passNo':[1,2,3,4]},{'time':9,'passNo':[1,2,3,4,5]},{'time':10,'passNo':[1,2,3,4]},{'time':11,'passNo':[1,2,3,4]},{'time':12,'passNo':[1,2,3,4]},"
 				+ "{'time':13,'passNo':[1,2,3,4,5]},{'time':14,'passNo':[1,2,3,4,5,6]},{'time':15,'passNo':[1,2,3,4,5,6]}]}";
-		JSONObject runResultJson=null;
+		JSONObject runResultJson = null;
 		try {
-			runResultJson = new JSONObject(obj1);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}// 暂无数据
+			runResultJson = runService.getRuns(stu_id, problem_name, exam_id);
+		} catch (JSONException e2) {
+			e2.printStackTrace();
+		}
 
-		request.setAttribute("runResultJson", runResultJson);//
+		request.setAttribute("runResultJson", runResultJson);
 		
 		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id);		
 		JSONObject stasJson = null;
