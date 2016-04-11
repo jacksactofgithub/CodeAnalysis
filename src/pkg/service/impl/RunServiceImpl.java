@@ -86,7 +86,7 @@ public class RunServiceImpl implements RunService{
 		
 		runJSON.put("stuid",stuID);
 		runJSON.put("problemName", proName);
-		runJSON.put("caseNumber", testNames.size());
+		runJSON.put("caseNum", testNames.size());
 		
 		JSONArray caseNameArray = new JSONArray();
 		for(String name:testNames){
@@ -170,65 +170,6 @@ public class RunServiceImpl implements RunService{
 		return map;
 	}
 	
-//	private JSONArray formResultArray(Iterator<Run> run , String proName , List<String> testNames){
-//		
-//		JSONArray runArray = new JSONArray();
-//		
-//		int count =0;		//第几分钟
-//		Run former = null;
-//		Run current = null;
-//		int interval = 0;
-//		while((run.hasNext())||((count*60)<current.getRun_second())){
-//			JSONObject json;
-//			try {
-//				
-//				if(former == null){
-//					Run temp = run.next();
-//					json = formRun(temp , count , testNames);
-//					runArray.put(json);
-//					former = temp;
-//					if(run.hasNext()){
-//						current = run.next();
-//					}else{
-//						current = temp;
-//						interval = 0;
-//					}
-//					count++;
-//					interval = (count*60);
-//					continue;
-//				}
-//				
-//				int currentInterval = calInterval((count*60) , current.getRun_second());
-//				if(currentInterval < interval){
-//					interval = currentInterval;
-//					former = current;
-//					if(run.hasNext()){
-//						current = run.next();
-//					}else{
-//						interval = 0;
-//					}
-//				}else{
-//					json = formRun(current , count ,testNames);
-//					runArray.put(json);
-//					count++;
-//					interval = (count*60) - former.getRun_second();
-//				}
-//				
-//				if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
-//					json = formRun(current, count , testNames);
-//					runArray.put(json);
-//				}
-//				
-//			} catch (JSONException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		return runArray;
-//		
-//	}
-	
 	private int calInterval(int timeOne , int timeTwo){
 		int result = timeOne - timeTwo;
 		if(timeOne < timeTwo){
@@ -239,11 +180,16 @@ public class RunServiceImpl implements RunService{
 	
 	private JSONObject formRun(Run run , int count , List<String> testNames) throws JSONException{
 		JSONObject json = new JSONObject();
-		
-		List<Test> tests = testDAO.queryTests(run);
+		JSONArray successArray = new JSONArray();
 		json.put("time", count);
 		
-		JSONArray successArray = new JSONArray();
+		if(run.getRun_second() == 0){
+			json.put("passNo", successArray);
+			return json;
+		}
+		
+		List<Test> tests = testDAO.queryTests(run);
+		
 		
 		for(Test t:tests){
 			String name = t.getTest_Name();
@@ -263,7 +209,7 @@ public class RunServiceImpl implements RunService{
 		
 		List<Integer> stuList = runDAO.queryStudentID(proName , exam);
 		
-		List<String> result = null;
+		List<String> result = new ArrayList<String>();
 		
 		if(stuList.size() >= 1){
 			int stuID = stuList.get(0);
@@ -271,7 +217,11 @@ public class RunServiceImpl implements RunService{
 			
 			for(int i=1 ; i<stuList.size() ;++i){
 				stuID = stuList.get(i);
-				findCommon(result , findOneStudentCommon(stuID , proName , exam));
+				List<String> stuCommon = findOneStudentCommon(stuID , proName , exam);
+				if(stuCommon.size() == 0){
+					continue;
+				}
+				findCommon(result , stuCommon);
 			}
 			
 		}
@@ -298,6 +248,12 @@ public class RunServiceImpl implements RunService{
 			strTemp = transList(temp);
 			findCommon(common , strTemp);
 		}
+		
+		System.out.print(stuID + ":\t");
+		for(int i=0 ; i<common.size() ; ++i){
+			System.out.print(common.get(i)+"\t");
+		}
+		System.out.println();
 		
 		return common;
 	}
