@@ -222,12 +222,11 @@
 					<tr>
 						<%for(int j=0;j<col;j++){
 							String url="url(view/pic/fail.png)";//错误颜色
-							//System.out.print(tdarray[i][j]);
 							if(tdarray[i][j]==1){
 								url = "url(view/pic/pass.png)";
 							}%>
 						<td  style="background:<%=url%>;"></td>
-						<% }//System.out.println();%>
+						<% }%>
 					</tr>
 				<% }%>
 				</table>

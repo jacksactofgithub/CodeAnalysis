@@ -11,7 +11,7 @@ public class StuCodeExhibition {
 	
 	@RequestMapping("/stuCodeExh")
 	public String showResult(HttpServletRequest request, HttpSession session) {
-		return "";
+		return "view/student/stuCodeExh";
 	}
 
 }
