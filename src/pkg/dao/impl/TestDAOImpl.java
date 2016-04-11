@@ -23,7 +23,12 @@ public class TestDAOImpl implements TestDAO{
 		Test test = new Test();
 		test.setRun(run);
 		test.setTest_name(testName);
-		test.setTest_result(testResult);
+		
+		if(testResult){
+			test.setTest_result(1);
+		}else{
+			test.setTest_result(0);
+		}
 		
 		return dbopt.save(test);
 	}

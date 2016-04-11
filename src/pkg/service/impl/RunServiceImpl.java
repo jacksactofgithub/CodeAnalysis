@@ -193,8 +193,10 @@ public class RunServiceImpl implements RunService{
 		
 		for(Test t:tests){
 			String name = t.getTest_Name();
-			if((testNames.contains(name))&&(t.getTest_Result() == true)){
-				successArray.put(name);
+//			System.out.println(t.getSubject().getRun_id());
+			if((testNames.contains(name))&&(t.getTest_Result() == 1)){
+				
+				successArray.put(testNames.indexOf(name));
 			}
 		}
 		

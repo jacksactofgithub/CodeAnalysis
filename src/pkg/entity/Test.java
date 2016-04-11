@@ -22,7 +22,7 @@ public class Test {
 	@JoinColumn(name="run_id")
 	private Run run;
 	private String test_name;
-	private boolean test_result;
+	private int test_result;
 	
 	public void setRun(Run run){
 		this.run = run;
@@ -32,7 +32,7 @@ public class Test {
 		this.test_name = testName;
 	}
 	
-	public void setTest_result(boolean testResult){
+	public void setTest_result(int testResult){
 		this.test_result = testResult;
 	}
 	
@@ -44,7 +44,7 @@ public class Test {
 		return test_name;
 	}
 	
-	public boolean getTest_Result(){
+	public int getTest_Result(){
 		return test_result;
 	}
 	
