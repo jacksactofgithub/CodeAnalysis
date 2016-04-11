@@ -58,7 +58,6 @@ public class CodeServiceImpl implements CodeService{
 	@Override
 	public JSONArray getCodeRecord(int stuID, String proName , int exam) {
 		// TODO Auto-generated method stub
-		System.out.println("geting code record");
 		List<Code> list = codeDAO.queryCode(stuID, proName , exam);
 		
 		Iterator<Code> it = list.iterator();
