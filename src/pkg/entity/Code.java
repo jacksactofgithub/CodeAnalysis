@@ -29,9 +29,10 @@ public class Code implements Serializable{
 	private int method_count;
 	private int var_count;
 	private int max_cyclomaticcpl;
+	private long timestamp;
 	
 	public Code(int attendID,int student_id,int exam_id , String pro_name,int second ,
-			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl){
+			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl , long timestamp){
 		this.attend_id = attendID;
 		this.exam_id = exam_id;
 		this.setStudent_id(student_id);
@@ -42,6 +43,7 @@ public class Code implements Serializable{
 		this.setMethod_count(methodCount);
 		this.setVar_count(varCount);
 		this.setMax_cyclomaticcpl(maxCyclomaticCpl);
+		this.setTimestamp(timestamp);
 	}
 	
 	public Code(){
@@ -118,6 +120,14 @@ public class Code implements Serializable{
 
 	public void setExam_id(int exam_id) {
 		this.exam_id = exam_id;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(long timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 

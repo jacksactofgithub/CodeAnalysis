@@ -119,7 +119,7 @@ public class FileStateHandler {
 		int varyCount = source.getTotalVaryCount();
 		int maxCyc = source.getMaxCyc();
 
-		return new CodeStamp( currentTime - startTime, lineCount, noteCount, methodCount, varyCount, maxCyc, filePath);
+		return new CodeStamp(currentTime , currentTime - startTime, lineCount, noteCount, methodCount, varyCount, maxCyc, filePath);
 	}
 
 	/**

@@ -19,6 +19,7 @@ import lmooc.modulize.bean.filestate.FileState;
 import lmooc.modulize.bean.run.RunResult;
 import lmooc.modulize.io.Reader;
 import lmooc.modulize.model.FileStateHandler;
+import lmooc.modulize.model.RunLogHelper;
 import lmooc.modulize.model.loganalyser.LogAnalyser;
 import pkg.service.CodeService;
 import pkg.service.RunService;
@@ -35,12 +36,14 @@ public class StorageServiceImpl implements StorageService{
 	private Reader reader = new Reader();
 	
 	@Override
-	public void startStore(int examID, int tea_id) {
+	public void startStore(int examID) {
 		// TODO Auto-generated method stub
 		List<Integer> clazzMemberIds = reader.getStudentIds(examID+"");
+		RunLogHelper handler = new RunLogHelper();
 		
 		for(int i=0 ; i<clazzMemberIds.size() ; ++i){
 			int memberId = clazzMemberIds.get(i);
+			handler.fillInRunLog(examID, memberId);
 			storeOne(examID , memberId , memberId);
 		}
 		
@@ -71,6 +74,10 @@ public class StorageServiceImpl implements StorageService{
 			try {
 				logBean = analyser.analyse(logs);
 				Iterator<CodeStamp> codes = codeOutput(logBean.getFileStates(),examID , studentNum , backupZip);
+				
+				//plus one time for run results
+				logs = reader.readRunLog(examID, studentNum, backupZip);
+				logBean = analyser.analyse(logs);
 				Iterator<RunStamp> runs = runOutput(logBean.getRuns());
 				
 				// JSONObject run = runOutput(logBean.getRuns());

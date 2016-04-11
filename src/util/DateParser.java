@@ -26,4 +26,14 @@ public class DateParser {
 		return date;
 	}
 	
+	public static String stamp2String(long timestamp){
+		Date date = new Date(timestamp);
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+		
+		String str = format.format(date);
+		
+		return str;
+	}
+	
 }
