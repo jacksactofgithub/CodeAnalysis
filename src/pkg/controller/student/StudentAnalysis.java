@@ -44,7 +44,7 @@ public class StudentAnalysis {
     	session.setAttribute("stu_account", "397342673@qq.com");
     	session.setAttribute("stu_name", "毕潇晗");
     	session.setAttribute("uni_name", "南京大学");
-    	session.setAttribute("stu_id", 12465);
+    	session.setAttribute("stu_id", 12468);
     	
     	String stu_account = (String) request.getAttribute("stu_account");
     	//String stu_account = (String) request.getParameter("stu_account");
