@@ -235,8 +235,12 @@
 						<div class="operation" style="height: 38px; margin-top: 6px;">
 							<span style="margin-top: 1px;">测试用例：</span> <select
 								id="coverageSelect">
-								<option value="branch" selected>分支覆盖</option>
-								<option value="block">代码覆盖</option>
+								<%ArrayList<String> testCases = (ArrayList<String>)request.getAttribute("testCases");
+								for(int i=0;i<testCases.size();i++){
+									String testCase = testCases.get(i);
+								%>
+								<option value="<%=testCase%>"><%=testCase%></option>
+								<%} %>
 							</select>
 						</div>
 					</div>
@@ -282,7 +286,7 @@
 							}
 							%>
 							<td  style="background:<%=url%>;"></td>
-						<% }%>
+						<%} %>
 					</tr>
 				</table>
 			</div>
