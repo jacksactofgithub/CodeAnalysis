@@ -85,7 +85,7 @@
 			</div>
 			<%
 				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
-				String exam_id = exam.getString("id");
+				String exam_id = exam.getString("exam_id");
 			%>
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
@@ -115,7 +115,7 @@
 						</li>
 						<li class="item">
 							<div class="item-name">考试人数</div>
-							<div class="item-value"><%=exam.getInt("stu_num")%></div>
+							<div class="item-value"><%=exam.getInt("stu_count")%></div>
 						</li>
 					</ul>
 				</div>
@@ -165,9 +165,9 @@
 									int stu_id = student.getInt("stu_id");
 								%>
 								<tr data-mem="0">
-									<td style="width:50px;"><%=uni_name %></td>
-									<td style="width:50px;"><%=stu_no %></td>
-									<td style="width:50px;"><%=stu_name %></td>
+									<td><%=uni_name %></td>
+									<td><%=stu_no %></td>
+									<td><%=stu_name %></td>
 									<td><span class="text-success"> <span
 											class="final-score"><%=score %></span> 分
 									</span></td>
@@ -276,12 +276,12 @@
         	var tag6 = '<%=request.getAttribute("problem2_id")%>';
         	var tag7 = '<%=request.getAttribute("problem3_id")%>';
         	if(tag6=="-1"){
-            	$('table tr').find('td:eq(6)').hide();//隐藏第六列
+            	$('table tr').find('td:eq(5)').hide();//隐藏第六列
             	$('#th6').hide();//隐藏第六列
         	}
         	
         	if(tag7=="-1"){
-            	$('table tr').find('td:eq(7)').hide();//隐藏第六列
+            	$('table tr').find('td:eq(6)').hide();//隐藏第7列
             	$('#th7').hide();//隐藏第六列
         	}
 

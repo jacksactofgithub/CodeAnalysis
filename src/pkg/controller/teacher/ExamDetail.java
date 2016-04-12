@@ -27,12 +27,13 @@ public class ExamDetail {
 	@RequestMapping("/examDetail")
 	public String studentAnalysis(HttpServletRequest request,HttpSession session) {
 		
-		String id =request.getParameter("id");//考试id
-		service.getExamPapers(Integer.parseInt(id));
-		JSONObject exam = service.getExamInfo(Integer.parseInt(id));
+		int id =Integer.parseInt(request.getParameter("id"));//考试id
+		service.getExamPapers(id);
+		JSONObject exam = service.getExamInfo(id);
 		request.setAttribute("exam", exam);
 		
-		JSONArray studentArray = service.getExamPapers(Integer.parseInt(id));
+		JSONArray studentArray = service.getExamPapers(id);
+		System.out.println(studentArray.toString());
 		request.setAttribute("studentArray", studentArray);
 		//再此处确定题目数量
 		try {
@@ -44,50 +45,6 @@ public class ExamDetail {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-		/**
-		 * ------------------------------------------------------------
-		 */
-		JSONObject runResultJson = null;
-		try {
-			String obj1 = "{'stuid':121250088,'examNo':1,'questionNo':'1','caseNum':6,'caseName':[triangle1,triangle2,triangle3,triangle4,triangle5,triangle6],'result':[{'time':1,'passNo':[1,2]},"
-					+ "{'time':3,'passNo':[1,2,3]},{'time':8,'passNo':[1,2,3,4]},{'time':11,'passNo':[1,2,3,4,5]},"
-					+ "{'time':14,'passNo':[1,2,3,4,5,6]}]}";
-			runResultJson = new JSONObject(obj1);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		request.setAttribute("runResultJson", runResultJson);
-
-		String obj3 = "[{'timestamp': 1, 'source':'q1' , 'lineCount':5 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 2, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 3, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 4, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 5, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 6, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 7, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 8, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1},"
-				+ "{'timestamp': 9, 'source':'q1' , 'lineCount':6 , 'noteCount':0 , 'methodCount': 1 , 'varyCount': 2 , 'maxCyclomaticCpl': 1}]";
-		try {
-			reverse(new JSONArray(obj3));
-		} catch (JSONException e1) {
-			e1.printStackTrace();
-		}
-
-		String obj4 = "{'source':'q1','timestamp':[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],'lineCount':[0,2,7,8,15,16,20,25,27,28,35,36,30,35,37],"
-				+ "'noteCount':[0,1,3,3,5,6,6,8,10,3,5,6,6,8,10],'methodCount':[0,1,1,1,1,2,2,2,2,1,1,2,2,3,3],"
-				+ "'varCount':[0,1,3,4,5,5,5,6,6,4,5,5,5,6,6],'maxCy':[1,1,1,2,2,2,3,3,3,2,2,2,3,3,3]}";
-		request.setAttribute("staJsonstr", obj4);
-		try {
-			request.setAttribute("staJson", new JSONObject(obj4));
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		/**
-		 * ------------------------------------------------------------
-		 */
-		
 		return "view/teacher/examDetail";
 	}
 	
