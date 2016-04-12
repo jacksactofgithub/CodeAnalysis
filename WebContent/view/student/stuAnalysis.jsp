@@ -315,7 +315,7 @@
 									JSONObject exam = (JSONObject)examArray.get(i);
 									String teacher_name = exam.getString("teacher_name");
 									String exam_name = exam.getString("exam_name");
-									int id = exam.getInt("id");
+									int id = exam.getInt("exam_id");
 									String exam_begin_time = exam.getString("exam_begin_time");
 									String exam_end_time = exam.getString("exam_end_time");
 									int exam_duration =exam.getInt("exam_duration");

@@ -38,6 +38,7 @@ public class TeaAnalysisResult {
 		int exam_id = Integer.parseInt(request.getParameter("exam_id"));
 		String problem_name = request.getParameter("problem_name");
 		JSONObject exam = examService.getExamInfo(exam_id);
+		System.out.println(exam.toString());
 		request.setAttribute("exam", exam);
 
 		JSONObject runResultJson = null;
