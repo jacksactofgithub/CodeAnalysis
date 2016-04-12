@@ -31,11 +31,9 @@ public class TeaAnalysisResult {
 		super();
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping("/teaAnalysisResult")
 	public String showResult(HttpServletRequest request, HttpSession session) {
 
-		int tea_id = (int) session.getAttribute("tea_id");
 		int stu_id = Integer.parseInt(request.getParameter("stu_id"));
 		int exam_id = Integer.parseInt(request.getParameter("exam_id"));
 		String problem_name = request.getParameter("problem_name");
