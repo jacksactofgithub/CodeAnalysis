@@ -94,6 +94,20 @@
 #codeTable tr.highlight code{
     background-color: #FFFF99;
 }
+#coverageSelect{
+    width: 150px;
+    height:25px;
+	position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    zoom: 1;
+    -webkit-user-select: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
 </style>
 
 <!-- 百度统计代码 -->
@@ -125,9 +139,6 @@
                     <li class="iExam">
                         <a href="http://mooctest.net/tea/exam/create" title=""><span>新建考试</span></a>
                     </li>
-                    <!-- <li class="iUpload">
-                        <a href="/tea/upload" title=""><span>上传题目</span></a>
-                    </li> -->
                     <li class="iFinish">
                         <a href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
                     </li>
@@ -217,24 +228,19 @@
 			<div class="widget">
 				<div class="head">
 					<h5 class="iInfo">测试代码</h5>
+										<div class="analysis-block" id="coverageBlock"
+						style="height: 38px; padding-top: -13px;">
+						<div class="operation" style="height: 38px; margin-top: 6px;">
+							<span style="margin-top: 1px;">测试需求：</span> <select
+								id="coverageSelect">
+								<option value="branch" selected>分支覆盖</option>
+								<option value="block">代码覆盖</option>
+							</select>
+						</div>
+					</div>
 				</div>
-			<!-- 
-			<div class="analysis-block" id="codeBlock">
-				<div class="operation">
-	                <span>测试用例</span>
-	                <div class="chosen-container chosen-container-single" style="width: 250px;" title id="codeSelect_chosen">
-		                <select id="codeSelect">
-	
-		                	  <option value ="volvo">Volvo</option>
-							  <option value ="saab">Saab</option>
-							  <option value="opel">Opel</option>
-							  <option value="audi">Audi</option>
-		                </select>
-	                </div>
-	            </div>
-			</div> -->
 				<div class="body">
-					<pre style="font-family:Consolas;font-size:15px">
+					<pre style="font-family:Consolas;font-size:15px;margin-top: 10px">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {
 				JSONObject stasJson = new JSONObject();
 				int len = stasArray.length();

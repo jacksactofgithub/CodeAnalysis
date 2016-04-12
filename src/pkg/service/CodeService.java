@@ -14,4 +14,6 @@ public interface CodeService {
 	
 	public JSONArray getAvgCodeRecord(String proName , int examID);
 	
+	public String getStuCode(int stu_id,int time,int exam_id,String problem_name);
+	
 }

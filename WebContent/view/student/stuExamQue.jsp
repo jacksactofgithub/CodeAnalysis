@@ -37,6 +37,10 @@
 .problem-section table{
     border: 1px solid #ccc;
 }
+.problem-analysis-link {
+    background-color: #9ff;
+    margin-left: 10px;
+}
 </style>
 
 <!-- 百度统计代码 -->
@@ -157,7 +161,7 @@
 							</ul>
 						</div>
 						<div class="detail">
-							<table class="table table-striped">
+							<table class="table table-striped" style="table-layout : auto">
 								<thead>
 									<tr>
 										<th class="span2">考题名称</th>
@@ -169,8 +173,10 @@
 								<tbody>
 									<tr>
 										<!-- 此处跳转至考生的具体题目代码分析 -->
-										<td><a href="<%=request.getContextPath() %>/stuAnalysisResult?exam_id=<%=exam.getString("id")  %>&problem_name=<%=problem.getString("problem_name")%>"
-											class="underline" title="查看考题统计"><%=problem.getString("problem_name") %></a></td>
+										<td width="250px"><a href="<%=request.getContextPath() %>/stuAnalysisResult?exam_id=<%=exam.getString("id")  %>&problem_name=<%=problem.getString("problem_name")%>"
+											class="underline" title="查看考题统计"><%=problem.getString("problem_name") %></a>
+											<a href="<%=request.getContextPath() %>/stuCodeExh?exam_id=<%=exam.getString("id")  %>&problem_name=<%=problem.getString("problem_name")%>"
+											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
 										<td><%=problem.getString("difficulty") %></td>
 										<td><%=problem.getString("score") %></td>
 										<td><%=problem.getString("description")%></td>

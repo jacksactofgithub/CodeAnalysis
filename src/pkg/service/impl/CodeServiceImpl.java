@@ -204,4 +204,10 @@ public class CodeServiceImpl implements CodeService{
 		return null;
 	}
 
+	@Override
+	public String getStuCode(int stu_id, int time, int exam_id, String problem_name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

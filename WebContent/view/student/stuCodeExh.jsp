@@ -94,6 +94,20 @@
 #codeTable tr.highlight code{
     background-color: #FFFF99;
 }
+#coverageSelect{
+    width: 150px;
+    height:25px;
+	position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    zoom: 1;
+    -webkit-user-select: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
 </style>
 
 <!-- 百度统计代码 -->
@@ -162,7 +176,7 @@
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 参数可能更改 -->
 						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
-						<li class="firstB">CalculateMatrix</li>
+						<li class="firstB"><%=request.getParameter("problem_name") %></li>
 					</ul>
 				</div>
 			</div>
@@ -208,32 +222,29 @@
 				</div>
 			</div>
 	</div>
-	
-	<div class="wrapper" style="position:relative; top:0px;">
+
+	<div class="wrapper" style="position: relative; top: 0px;">
 		<!-- Content -->
 		<div class="content">
 
 			<div class="widget">
 				<div class="head">
 					<h5 class="iInfo">测试代码</h5>
+					<div class="analysis-block" id="coverageBlock"
+						style="height: 38px; padding-top: -13px;">
+						<div class="operation" style="height: 38px; margin-top: 6px;">
+							<span style="margin-top: 1px;">测试用例：</span> <select
+								id="coverageSelect">
+								<option value="branch" selected>分支覆盖</option>
+								<option value="block">代码覆盖</option>
+							</select>
+						</div>
+					</div>
 				</div>
-			<!-- 
-			<div class="analysis-block" id="codeBlock">
-				<div class="operation">
-	                <span>测试用例</span>
-	                <div class="chosen-container chosen-container-single" style="width: 250px;" title id="codeSelect_chosen">
-		                <select id="codeSelect">
-	
-		                	  <option value ="volvo">Volvo</option>
-							  <option value ="saab">Saab</option>
-							  <option value="opel">Opel</option>
-							  <option value="audi">Audi</option>
-		                </select>
-	                </div>
-	            </div>
-			</div> -->
+
 				<div class="body">
-					<pre style="font-family:Consolas;font-size:15px">
+					<pre
+						style="font-family: Consolas; font-size: 15px; margin-top: 10px">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {
 				JSONObject stasJson = new JSONObject();
 				int len = stasArray.length();
@@ -248,9 +259,9 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 
-<div class="wrapper" style="position:relative; top:0px;height:80px;">
+	<div class="wrapper" style="position:relative; top:0px;height:80px;">
 		<!-- Content -->
 		<div class="content" >
 			<div class="title">
