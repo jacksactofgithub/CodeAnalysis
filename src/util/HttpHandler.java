@@ -1,12 +1,12 @@
 package util;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Map.Entry;
  */
 public class HttpHandler {
 
-	private static final String INVOCATION_URL = "http://127.0.0.1:9000/plugin/";
+	private static final String INVOCATION_URL = "http://192.168.1.104:9000/service/";
 	
 	public String postHttpInvocation(String interfaceName , Map<String , String> params) throws Exception{ 
 		
@@ -31,22 +31,20 @@ public class HttpHandler {
 		BufferedReader inputStream = null;
 		
 		try{
-			URLConnection connection = url.openConnection();
-			HttpURLConnection httpCon = (HttpURLConnection) connection;
 			
+	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();  
+	        conn.setRequestProperty("contentType", "utf-8");  
+	        conn.setConnectTimeout(5 * 1000);  
+	        conn.setRequestMethod("GET");  
+	        InputStream inStream = conn.getInputStream();  
 			
-			httpCon.setDoOutput(true);
-			httpCon.setRequestMethod("POST");
-			httpCon.setRequestProperty("Accept-Charset", "utf-8");
-			
-			inputStream = new BufferedReader(new InputStreamReader(httpCon.getInputStream()));
-			
-//			List<String> result = new ArrayList<String>();
-			String str = "";
-			str = inputStream.readLine();
-//			while ((str = inputStream.readLine())!=null ){
-////				result.add(str);
-//			}
+	        BufferedReader in = new BufferedReader(new InputStreamReader(inStream, "utf-8"));  
+	        StringBuffer buffer = new StringBuffer();  
+	        String line = "";  
+	        while ((line = in.readLine()) != null){  
+	          buffer.append(line);  
+	        }  
+	        String str = buffer.toString(); 
 			
 			return str;
 			
