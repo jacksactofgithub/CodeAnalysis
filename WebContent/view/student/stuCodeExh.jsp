@@ -314,6 +314,7 @@ scale.prototype={
 	ondrag:function (pos,x){
 		this.step.style.width=Math.max(0,x)+'px';
 		this.title.innerHTML=parseFloat(pos*1.2).toFixed(0)+'min';//pos*总时间就是拖动的时间
+		showCode(1)
 		//此处调用ajax
 	}
 }
@@ -321,10 +322,8 @@ new scale('btn','bar','title');
 
 function showCode(time){
 	
-	$("#login_submit").unbind("click");
-	$("#login_submit").val("LOADING...");
-  	var pwd = $("#password").val();
-  	var mobile = $("#mobile").val();
+	var stu_id = session.getAttribute("stu_id");
+	alert(stu_id);
 
   	 $.ajax({type : "POST",
            url : "showCode", 
@@ -338,7 +337,6 @@ function showCode(time){
  				//将data显示在相应区域
            }
    	 });   
-  	 return false;
 }
 
 </script>
