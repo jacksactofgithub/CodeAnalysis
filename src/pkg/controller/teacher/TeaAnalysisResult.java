@@ -29,11 +29,11 @@ public class TeaAnalysisResult {
 	@RequestMapping("/teaAnalysisResult")
 	public String showResult(HttpServletRequest request, HttpSession session) {
 
-		String tea_account = (String) session.getAttribute("tea_account");
+		String tea_id = (String) session.getAttribute("tea_id");
 		String stu_id = request.getParameter("stu_id");
 		String exam_id = request.getParameter("exam_id");
 		String problem_id = request.getParameter("problem_id");
-		JSONObject exam = service.getExamDetails(Integer.parseInt(exam_id), tea_account);
+		JSONObject exam = service.getExamDetails(Integer.parseInt(exam_id), tea_id);
 		request.setAttribute("exam", exam);
 
 		JSONObject runResultJson = null;

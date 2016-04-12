@@ -28,7 +28,12 @@
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
-
+<style type="text/css">
+.problem-analysis-link {
+    background-color: #9ff;
+    margin-left: 10px;
+}
+</style>
  </head>
 <body>
 	<div id="header" class="wrapper">
@@ -154,6 +159,9 @@
 									int problem1_id = student.getInt("problem1_id");
 									int problem2_id = student.getInt("problem2_id");
 									int problem3_id = student.getInt("problem3_id");
+									String problem1_name = student.getString("problem1_name");
+									String problem2_name = student.getString("problem2_name");
+									String problem3_name = student.getString("problem3_name");
 									int stu_id = student.getInt("stu_id");
 								%>
 								<tr data-mem="0">
@@ -164,11 +172,19 @@
 											class="final-score"><%=score %></span> 分
 									</span></td>
 									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem1_id%>" title="查看题目代码统计">
-									<span class="final-score"><%=p1_score %></span>分</a></td>
+									<span class="final-score"><%=p1_score %></span>分</a>
+									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem1_name%>&stu_id=<%=stu_id%>"
+											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
+									
 									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem2_id%>" title="查看题目代码统计">
-									<span class="final-score"><%=p2_score %></span>分</a></td>
+									<span class="final-score"><%=p2_score %></span>分</a>
+									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem2_name%>&stu_id=<%=stu_id%>"
+											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
+									
 									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem3_id%>" title="查看题目代码统计">
-									<span class="final-score"><%=p3_score %></span>分</a></td>
+									<span class="final-score"><%=p3_score %></span>分</a>
+									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id%>&problem_name=<%=problem3_name%>&stu_id=<%=stu_id%>"
+											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
 								</tr>
 							<%} %>
 							</tbody>

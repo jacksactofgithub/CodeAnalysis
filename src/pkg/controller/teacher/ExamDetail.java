@@ -28,7 +28,6 @@ public class ExamDetail {
 	public String studentAnalysis(HttpServletRequest request,HttpSession session) {
 		
 		String id =request.getParameter("id");//考试id
-		String tea_account = (String)session.getAttribute("tea_account");
 		service.getExamPapers(Integer.parseInt(id));
 		JSONObject exam = service.getExamInfo(Integer.parseInt(id));
 		request.setAttribute("exam", exam);
