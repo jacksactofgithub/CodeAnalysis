@@ -23,6 +23,7 @@ import pkg.dao.TestNameDAO;
 import pkg.entity.CommonTest;
 import pkg.entity.Run;
 import pkg.entity.Test;
+import pkg.service.ExamService;
 import pkg.service.RunService;
 
 @Service
@@ -36,6 +37,8 @@ public class RunServiceImpl implements RunService{
 	private CommonTestDAO commonDAO;
 	@Autowired
 	private TestNameDAO testNameDAO;
+	@Autowired
+	private ExamService examService;
 	
 	@Override
 	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID , int examID) {
@@ -67,13 +70,13 @@ public class RunServiceImpl implements RunService{
 	@Override
 	public JSONObject getRuns(int stuID, String proName , int exam) throws JSONException {
 		// TODO Auto-generated method stub
+		int classMemberId = examService.getClassMemberId(stuID, exam);
+		List<Run> runs = runDAO.queryRuns(classMemberId, proName , exam);
 		
-		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
-		
-		Run originRun = generateStartRun(stuID, proName, exam);
+		Run originRun = generateStartRun(classMemberId, proName, exam);
 		runs.add(0, originRun);
 		
-		return getRunJSON(runs.iterator() , proName , stuID , exam);
+		return getRunJSON(runs.iterator() , proName , classMemberId , exam);
 	}
 	
 	private Run generateStartRun(int stuId , String proName , int exam){

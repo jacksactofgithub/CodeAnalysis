@@ -92,4 +92,27 @@ public class ExamServiceImpl implements ExamService{
 		}
 	}
 
+	@Override
+	public int getClassMemberId(int stuId, int examId) {
+		// TODO Auto-generated method stub
+		
+		Map<String , String> params = new HashMap<String, String>();
+		params.put(URLNameFormat.STUDENT_ID, stuId+"");
+		params.put(URLNameFormat.EXAM_ID, examId+"");
+		
+		String id;
+		try {
+			id = http.postHttpInvocation(URLNameFormat.GET_CLASS_MEMBER_ID , params);
+			
+			int classMemberId = Integer.parseInt(id);
+			return classMemberId;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
 }

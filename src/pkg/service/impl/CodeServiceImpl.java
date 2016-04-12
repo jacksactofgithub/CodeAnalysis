@@ -15,12 +15,15 @@ import lmooc.modulize.bean.CodeStamp;
 import pkg.dao.CodeDAO;
 import pkg.entity.Code;
 import pkg.service.CodeService;
+import pkg.service.ExamService;
 
 @Service
 public class CodeServiceImpl implements CodeService{
 	
 	@Autowired
 	private CodeDAO codeDAO;
+	@Autowired
+	private ExamService examService;
 	
 	@Override
 	public int saveStamps(Iterator<CodeStamp> stamps, int stuID, int exam) {
@@ -57,7 +60,8 @@ public class CodeServiceImpl implements CodeService{
 	@Override
 	public JSONArray getCodeRecord(int stuID, String proName , int exam) {
 		// TODO Auto-generated method stub
-		List<Code> list = codeDAO.queryCode(stuID, proName , exam);
+		int classMemberId = examService.getClassMemberId(stuID, exam);
+		List<Code> list = codeDAO.queryCode(classMemberId, proName , exam);
 		
 		Iterator<Code> it = list.iterator();
 		

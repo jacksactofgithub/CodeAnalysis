@@ -30,6 +30,6 @@ public interface ExamService {
 	 */
 	public JSONArray getExamPapers(int exam_id);
 	
-	
+	public int getClassMemberId(int stuId , int examId);
 	
 }
