@@ -33,7 +33,22 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,HttpServletRequest request, HttpSession session) {
 		//参数 学生学号,时间点,考试号,考题名
 		String code = service.getStuCode(stu_id, time, exam_id, problem_name);
+		System.out.println(stu_id);
+		System.out.println(time);
+		System.out.println(exam_id);
+		System.out.println(problem_name);
 		return code;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/showTestCase", method=RequestMethod.POST)
+	public String showTestCase(@RequestParam("exam_id")int exam_id,	@RequestParam("problem_name")String problem_name,
+			HttpServletRequest request, HttpSession session) {
+		//参数 学生学号,时间点,考试号,考题名
+		//String code = service.getStuCode(stu_id, time, exam_id, problem_name);
+		String testCase = "success2";
+		return testCase;
+	}
+	
 
 }
