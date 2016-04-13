@@ -234,7 +234,7 @@
 						style="height: 38px; padding-top: -13px;">
 						<div class="operation" style="height: 38px; margin-top: 6px;">
 							<span style="margin-top: 1px;">测试用例：</span> <select
-								id="coverageSelect">
+								id="coverageSelect" onchange="changeTestCase()">
 								<%ArrayList<String> testCases = (ArrayList<String>)request.getAttribute("testCases");
 								for(int i=0;i<testCases.size();i++){
 									String testCase = testCases.get(i);
@@ -321,15 +321,13 @@ scale.prototype={
 				this.onmousemove=null;
 				var thisX=(e||b.event).clientX;
 				var to=m.min(max,m.max(-2,l+(thisX-x)));
-				//alert(m.round(m.max(0,to/max)*120));
-				test();
+				showCode(m.round(m.max(0,to/max)*120));
 			}
 		};
 	},
 	ondrag:function (pos,x){
 		this.step.style.width=Math.max(0,x)+'px';
 		this.title.innerHTML=parseFloat(pos*1.2).toFixed(0)+'min';//pos*总时间就是拖动的时间
-		showCode(1)
 		//此处调用ajax
 	}
 }
@@ -337,8 +335,9 @@ new scale('btn','bar','title');
 
 function showCode(time){
 	
-	var stu_id = session.getAttribute("stu_id");
-	alert(stu_id);
+	var stu_id = '<%=session.getAttribute("stu_id")%>';
+	var exam_id = '<%=request.getParameter("exam_id")%>';
+	var problem_name = '<%=request.getParameter("problem_name")%>';
 
   	 $.ajax({type : "POST",
            url : "showCode", 
@@ -349,9 +348,28 @@ function showCode(time){
   	 		 problem_name :problem_name
            },
            success : function (data){
- 				//将data显示在相应区域
+        	   //将data显示在相应区域
            }
    	 });   
+}
+
+function changeTestCase(){
+	//更改测试用例代码
+	var option=$("#coverageSelect option:selected");
+	var exam_id = '<%=request.getParameter("exam_id")%>';
+	var problem_name = '<%=request.getParameter("problem_name")%>';
+
+ 	 $.ajax({type : "POST",
+          url : "showTestCase", 
+          data : {
+         	 exam_id:exam_id,
+ 	 		 problem_name: problem_name,
+ 	 		 testcase_name :option.val()
+          },
+          success : function (data){
+        	  alert(data);
+          }
+  	 });
 }
 
 </script>
@@ -369,22 +387,6 @@ function showCode(time){
         <!-- form validation -->
         <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.validationEngine-2.6.2.js"></script>
                 <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.validationEngine-zh_CN.js"></script>
-        
-        <!-- 消息队列 + tooltip + 弹框 -->
-        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.jgrowl.js"></script>
-        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.tipsy.js"></script>
-        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/ui/jquery.alerts.js"></script>
-
-        <!-- 面包屑导航 + 返回顶部 -->
-        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/jBreadCrumb.1.1.js"></script>
-        <script type="text/javascript" src="http://mooctest.net/public/js/itsbrain/jquery.ToTop.js"></script>
-
-        <!-- my common可复用 -->
-        <script type="text/javascript" src="http://mooctest.net/public/js/common/application-util.js?v=20151204"></script>
-        <script type="text/javascript" src="http://mooctest.net/public/js/common/application-execution.js"></script>
-
-        <!-- cookie -->
-        <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.cookie.1.4.1.js"></script>
 
 </body>
 </html>
