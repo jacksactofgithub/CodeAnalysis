@@ -18,10 +18,11 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 	
 	@Override
 	public int addCode(int student,int exam_id , String subject, int second, int line_count,
-			int note_count, int method_count,int var_count, int max_cyclomatic , long timestamp) {
+			int note_count, int method_count,int var_count,
+			int max_cyclomatic , long timestamp , String file_name) {
 		// TODO Auto-generated method stub
 		Code attendence = new Code(1,student, exam_id ,subject,second,line_count,note_count,
-				method_count,var_count,max_cyclomatic , timestamp);
+				method_count,var_count,max_cyclomatic , timestamp , file_name);
 		return dbopt.save(attendence);
 	}
 
@@ -46,6 +47,17 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 	public List<Code> queryAvg(int exam, String proName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<String> queryAllProNames(int examId) {
+		// TODO Auto-generated method stub
+		String hql = "select distinct pro_name from Code as code where code.exam_id=?";
+		
+		@SuppressWarnings("unchecked")
+		List<String> results = dbopt.findList(hql, examId);
+		
+		return results;
 	}
 
 }

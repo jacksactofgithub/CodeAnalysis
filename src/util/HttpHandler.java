@@ -19,7 +19,7 @@ import java.util.Map.Entry;
  */
 public class HttpHandler {
 
-	private static final String INVOCATION_URL = "http://192.168.1.104:9000/service/";
+	private static final String INVOCATION_URL = "http://127.0.0.1:9000/service/";
 	
 	public String postHttpInvocation(String interfaceName , Map<String , String> params) throws Exception{ 
 		

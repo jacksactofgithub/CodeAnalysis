@@ -30,9 +30,11 @@ public class Code implements Serializable{
 	private int var_count;
 	private int max_cyclomaticcpl;
 	private long timestamp;
+	private String file_name;
 	
 	public Code(int attendID,int student_id,int exam_id , String pro_name,int second ,
-			int lineCount , int noteCount , int methodCount , int varCount , int maxCyclomaticCpl , long timestamp){
+			int lineCount , int noteCount , int methodCount ,
+			int varCount , int maxCyclomaticCpl , long timestamp , String file_name){
 		this.attend_id = attendID;
 		this.exam_id = exam_id;
 		this.setStudent_id(student_id);
@@ -44,6 +46,7 @@ public class Code implements Serializable{
 		this.setVar_count(varCount);
 		this.setMax_cyclomaticcpl(maxCyclomaticCpl);
 		this.setTimestamp(timestamp);
+		this.file_name = file_name;
 	}
 	
 	public Code(){
@@ -128,6 +131,14 @@ public class Code implements Serializable{
 
 	public void setTimestamp(long timestamp) {
 		this.timestamp = timestamp;
+	}
+
+	public String getFile_name() {
+		return file_name;
+	}
+
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
 	
 

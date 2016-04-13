@@ -47,7 +47,11 @@ public class StorageServiceImpl implements StorageService{
 			storeOne(examID , memberId , memberId);
 		}
 		
+		List<String> allProNames = codeService.getAllProNames(examID);
 		
+		for(String proName:allProNames){
+			runService.saveCommonTests(examID, proName);
+		}
 	}
 
 	@Override
