@@ -19,12 +19,28 @@
 	href="http://mooctest.net/public/css/common/itsbrain-width-full.css">
 <link rel="stylesheet" type="text/css"
 	href="http://mooctest.net/public/css/others/introjs.css">
+<link rel="stylesheet" type="text/css" 
+	href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
 <style>
 #left_td{
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	-o-text-overflow:ellipsis; 
 	overflow: hidden;
+}
+#files{
+    width: 150px;
+    height:25px;
+	position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    zoom: 1;
+    -webkit-user-select: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
  </style>
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
@@ -161,9 +177,28 @@
 			<div class="title">
 				<h5>代码统计</h5>
 			</div>
-			<div style="position:absolute;width:30px;height:350px;background: url(view/pic/wbg.png)">
+
+			<div class="operation" style="height: 38px; margin-top: 6px;">
+				<span style="margin-top: 1px;">文件列表：</span> <select id="files"
+					onchange="changeFile()">
+					<%
+						ArrayList<String> files = (ArrayList<String>) request.getAttribute("files");
+						for (int i = 0; i < files.size(); i++) {
+							String file = files.get(i);
+					%>
+					<option value="<%=file%>"><%=file%></option>
+					<%
+						}
+					%>
+				</select>
+			</div>
+
+			<div
+				style="position: absolute; width: 30px; height: 350px; background: url(view/pic/wbg.png)">
 				<!-- 空白 -->
-				<span style="position:absolute;top:110px;left:10px;">单位: 个<br>/<br>行</span>
+				<span style="position: absolute; top: 110px; left: 10px;">单位:
+					个<br>/<br>行
+				</span>
 			</div>
 			<div id="container" style="position:relative;left:30px;width:960px;height:350px;">
 				<!-- 代码统计 -->
