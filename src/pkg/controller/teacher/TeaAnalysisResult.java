@@ -53,6 +53,7 @@ public class TeaAnalysisResult {
 		request.setAttribute("runResultJson", runResultJson);
 		
 		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNames(stu_id, exam_id, problem_name);
+		request.setAttribute("files", files);
 
 		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));
 		

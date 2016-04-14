@@ -21,6 +21,7 @@
 	href="http://mooctest.net/public/css/others/introjs.css">
 <link rel="stylesheet" type="text/css" 
 	href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
+<script type="text/javascript" src="http://mooctest.net/public/js/jquery/jquery-1.7.2.min.js"></script>
 <style>
 #left_td{
 	white-space:nowrap;
@@ -272,6 +273,12 @@
 			</div>
 	</div>
 </div>
+<script type="text/javascript">
 
+function changeFile(){
+	var files=$("#files option:selected");
+}
+
+</script>
 </body>
 </html>

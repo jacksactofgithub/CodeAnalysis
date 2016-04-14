@@ -402,6 +402,10 @@ function changeTestCase(){
   	 });
 }
 
+function changeFile(){
+	var files=$("#files option:selected");
+}
+
 </script>
 
         <!-- jquery 1.7.2 业内最稳定版本 -->
