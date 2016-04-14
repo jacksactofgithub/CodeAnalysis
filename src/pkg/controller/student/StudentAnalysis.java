@@ -38,8 +38,6 @@ public class StudentAnalysis {
     public String studentAnalysis(HttpServletRequest request,HttpSession session){
     	//在尚未接通慕测的情况下全用假数据
     	//首先看request中有没有参数 如果有设置session否则去session中找
-    	request.setAttribute("stu_name", "毕潇晗");
-    	request.setAttribute("uni_name", "南京大学");
     	//在第一次进的时候如果request中带了参数则将session中参数设置为登录信息;否则session中信息不变(如果是本网站的请求)
     	session.setAttribute("stu_name", "毕潇晗");
     	session.setAttribute("uni_name", "南京大学");
