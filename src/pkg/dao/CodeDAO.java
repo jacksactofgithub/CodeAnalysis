@@ -17,5 +17,7 @@ public interface CodeDAO {
 	public List<Code> queryAvg(int exam , String proName);
 	
 	public List<String> queryAllProNames(int examId);
+	
+	public List<String> queryStuFileNames(int examId , int stu_id , String proName);
 
 }

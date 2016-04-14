@@ -27,7 +27,7 @@ public class CodeServiceImpl implements CodeService {
 	@Autowired
 	private ExamService examService;
 
-	// key: examId;proName;stuId
+	// key: examId;proName;stuId;fileName
 	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(20,
 			5 * 60 * 1000);
 
@@ -134,8 +134,13 @@ public class CodeServiceImpl implements CodeService {
 	}
 
 	@Override
-	public JSONArray getCodeRecord(int stuID, String proName, int exam) {
+	public JSONArray getCodeRecord(int stuID, String proName, int exam , String fileName) {
 		// TODO Auto-generated method stub
+		String key = exam+proName+stuID+fileName;
+		if(codeCache.containsKey(key)){
+			return getCodeJSON(codeCache.get(key));
+		}
+		
 		int classMemberId = examService.getClassMemberId(stuID, exam);
 		List<Code> list = codeDAO.queryCode(classMemberId, proName, exam);
 
@@ -143,19 +148,21 @@ public class CodeServiceImpl implements CodeService {
 
 		while (it.hasNext()) {
 			Code code = it.next();
-			if (!code.getPro_name().equals(proName)) {
+			if (!code.getFile_name().contains(fileName)) {
 				it.remove();
 			}
 		}
-		JSONArray array = getCodeJSON(list.iterator());
+		
+		Map<Integer, Code> codeMap = mapTime(list.iterator());
+		codeCache.put(key, codeMap);
+		
+		JSONArray array = getCodeJSON(codeMap);
 
 		return array;
 	}
 
-	public JSONArray getCodeJSON(Iterator<Code> code) {
+	public JSONArray getCodeJSON(Map<Integer, Code> codeMap) {
 		JSONArray array = new JSONArray();
-
-		Map<Integer, Code> codeMap = mapTime(code);
 
 		int minute = 0;
 		while (true) {
@@ -217,7 +224,7 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public List<String> getStuFileNames(int stu_id, int exam_id, String problem_name) {
 		// TODO Auto-generated method stub
-		return null;
+		return codeDAO.queryStuFileNames(exam_id, stu_id, problem_name);
 	}
 
 }
