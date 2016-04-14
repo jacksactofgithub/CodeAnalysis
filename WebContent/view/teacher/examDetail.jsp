@@ -171,17 +171,17 @@
 									<td><span class="text-success"> <span
 											class="final-score"><%=score %></span> 分
 									</span></td>
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem1_id%>" title="查看题目代码统计">
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem1_name%>" title="查看题目代码统计">
 									<span class="final-score"><%=p1_score %></span>分</a>
 									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem1_name%>&stu_id=<%=stu_id%>"
 											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
 									
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem2_id%>" title="查看题目代码统计">
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem2_name%>" title="查看题目代码统计">
 									<span class="final-score"><%=p2_score %></span>分</a>
 									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem2_name%>&stu_id=<%=stu_id%>"
 											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
 									
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_id=<%=problem3_id%>" title="查看题目代码统计">
+									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem3_name%>" title="查看题目代码统计">
 									<span class="final-score"><%=p3_score %></span>分</a>
 									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id%>&problem_name=<%=problem3_name%>&stu_id=<%=stu_id%>"
 											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>

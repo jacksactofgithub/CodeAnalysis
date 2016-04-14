@@ -49,9 +49,13 @@
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
  <script type="text/javascript">
+ var chart;
  $(function () {
 	 var myjson = eval(<%=(String)request.getAttribute("staJsonstr")%>);
-	 var chart1=$('#container').highcharts({
+	 chart = new Highcharts.Chart({   
+		 chart: {
+			 renderTo: 'container',       
+		 },
 	        title: {
 	            text: '',//'代码统计',
 	            x: -20 //center
@@ -164,7 +168,7 @@
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 -->
 						<li ><a href="<%=request.getContextPath()%>/teacherAnalysis" title="考试分析">考试分析</a></li>
-						<li ><a href="<%=request.getContextPath()%>/examDetail?id=<%=exam_id %>"><%=exam_name%></a></li>
+						<li ><a href="<%=request.getContextPath()%>/examDetail?exam_id=<%=exam_id %>"><%=exam_name%></a></li>
 						<li ><%=exam_name%></li>
 						<!-- 从request中取得考试信息类中的考试名 题目名-->
 					</ul>
@@ -276,6 +280,27 @@
 
 function changeFile(){
 	var files=$("#files option:selected");
+	var exam_id = '<%=exam_id%>';
+	var problem_name = '<%=request.getAttribute("problem_name")%>';
+	var stu_id = '<%=request.getAttribute("stu_id")%>';
+	$.ajax({
+		type : "POST",
+		dataType:'json',
+        url : "getCodeStas",
+        data : {
+        	stu_id:stu_id,
+       	 	exam_id:exam_id,
+	 		problem_name: problem_name,
+	 		file_name :files.val()
+        },
+        success : function (data){
+        	chart.series[0].setData(data.lineCount);
+        	chart.series[1].setData(data.varCount);
+        	chart.series[2].setData(data.noteCount);
+        	chart.series[3].setData(data.methodCount);
+        	chart.series[4].setData(data.maxCy);
+        }
+	 });
 }
 
 </script>

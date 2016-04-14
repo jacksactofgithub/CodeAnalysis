@@ -42,7 +42,9 @@ public class TeaAnalysisResult {
 		JSONObject exam = examService.getExamInfo(exam_id);
 		System.out.println(exam.toString());
 		request.setAttribute("exam", exam);
-
+		request.setAttribute("problem_name", problem_name);
+		request.setAttribute("stu_id", stu_id);
+		
 		JSONObject runResultJson = null;
 		try {
 			runResultJson = runService.getRuns(stu_id, problem_name, exam_id);
@@ -84,7 +86,7 @@ public class TeaAnalysisResult {
 		for (int i = 0; i < len; i++) {
 			JSONObject staObj = stasArray.getJSONObject(i);
 			timestamp[i] = staObj.getInt("timestamp");
-			lineCount[i] = staObj.getInt("lineCount")/10;//除以十
+			lineCount[i] = staObj.getInt("lineCount");
 			noteCount[i] = staObj.getInt("noteCount");
 			methodCount[i] = staObj.getInt("methodCount");
 			varCount[i] = staObj.getInt("varyCount");

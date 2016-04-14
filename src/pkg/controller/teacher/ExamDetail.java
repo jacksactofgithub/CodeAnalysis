@@ -27,11 +27,11 @@ public class ExamDetail {
 	@RequestMapping("/examDetail")
 	public String studentAnalysis(HttpServletRequest request,HttpSession session) {
 		
-		int id =Integer.parseInt(request.getParameter("id"));//考试id
-		JSONObject exam = service.getExamInfo(id);
+		int exam_id =Integer.parseInt(request.getParameter("exam_id"));//考试id
+		JSONObject exam = service.getExamInfo(exam_id);
 		request.setAttribute("exam", exam);
 		
-		JSONArray studentArray = service.getExamPapers(id);
+		JSONArray studentArray = service.getExamPapers(exam_id);
 		System.out.println(studentArray.toString());
 		request.setAttribute("studentArray", studentArray);
 		//再此处确定题目数量
@@ -60,7 +60,7 @@ public class ExamDetail {
 		for (int i = 0; i < len; i++) {
 			JSONObject staObj = stasArray.getJSONObject(i);
 			timestamp[i] = staObj.getInt("timestamp");
-			lineCount[i] = staObj.getInt("lineCount")/10;//除以十
+			lineCount[i] = staObj.getInt("lineCount");//除以十
 			noteCount[i] = staObj.getInt("noteCount");
 			methodCount[i] = staObj.getInt("methodCount");
 			varCount[i] = staObj.getInt("varyCount");

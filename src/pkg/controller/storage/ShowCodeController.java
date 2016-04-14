@@ -63,6 +63,11 @@ public class ShowCodeController {
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
+		System.out.println("--------------------------------------------------------------");
+		System.out.println(stu_id);
+		System.out.println(problem_name);
+		System.out.println(exam_id);
+		System.out.println(file_name);
 		System.out.println("=====================================================");
 		System.out.println(stasJson.toString());
 		return stasJson.toString();
@@ -81,7 +86,7 @@ public class ShowCodeController {
 		for (int i = 0; i < len; i++) {
 			JSONObject staObj = stasArray.getJSONObject(i);
 			timestamp[i] = staObj.getInt("timestamp");
-			lineCount[i] = staObj.getInt("lineCount")/10;//除以十
+			lineCount[i] = staObj.getInt("lineCount");
 			noteCount[i] = staObj.getInt("noteCount");
 			methodCount[i] = staObj.getInt("methodCount");
 			varCount[i] = staObj.getInt("varyCount");

@@ -306,7 +306,7 @@
  								for(int i = 0;i<len;i++){
 									JSONObject exam = (JSONObject)examArray.get(i);
 									String exam_name = exam.getString("exam_name");
-									int id = exam.getInt("exam_id");
+									int exam_id = exam.getInt("exam_id");
 									String exam_begin_time = exam.getString("exam_begin_time");
 									String exam_end_time = exam.getString("exam_end_time");
 									int exam_duration =exam.getInt("exam_duration");
@@ -315,7 +315,7 @@
 									%>
 								<tr>
 									<td><!-- 此处id是从后台得到 -->
-										<a href="<%=request.getContextPath()%>/examDetail?id=<%=id %>" class="underline problem-analysis-link" title="学生成绩分析"><%=exam_name %></a>
+										<a href="<%=request.getContextPath()%>/examDetail?exam_id=<%=exam_id %>" class="underline problem-analysis-link" title="学生成绩分析"><%=exam_name %></a>
 									</td>
 									<td><%=exam_begin_time %></td>
 									<td><%=exam_end_time %></td>
