@@ -215,7 +215,7 @@ public class CodeServiceImpl implements CodeService {
 	}
 
 	@Override
-	public List<String> getStuFileNames(int stu_id, int exam_id, String problem_name, String fileName) {
+	public List<String> getStuFileNames(int stu_id, int exam_id, String problem_name) {
 		// TODO Auto-generated method stub
 		return null;
 	}

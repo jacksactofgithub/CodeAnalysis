@@ -19,6 +19,6 @@ public interface CodeService {
 	
 	public List<String> getAllProNames(int examId);
 	
-	public List<String> getStuFileNames(int stu_id , int exam_id , String problem_name , String fileName);
+	public List<String> getStuFileNames(int stu_id , int exam_id , String problem_name);
 	
 }
