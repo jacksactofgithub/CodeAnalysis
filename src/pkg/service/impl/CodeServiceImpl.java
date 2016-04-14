@@ -227,7 +227,15 @@ public class CodeServiceImpl implements CodeService {
 		
 		int classMemberId = examService.getClassMemberId(stu_id, exam_id);
 		
-		return codeDAO.queryStuFileNames(exam_id, classMemberId, problem_name);
+		List<String> result = codeDAO.queryStuFileNames(exam_id, classMemberId, problem_name);
+		
+		for(int i=0 ; i<result.size() ; ++i){
+			String str = result.get(i);
+			str = str.split("/" , 2)[1];
+			result.set(i, str);
+		}
+		
+		return result;
 	}
 
 }
