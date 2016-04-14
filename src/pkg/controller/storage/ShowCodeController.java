@@ -60,11 +60,11 @@ public class ShowCodeController {
 		JSONObject stasJson = null;
 		try {
 			stasJson = reverse(codeJson);
-			System.out.println(stasJson.toString());
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
-		
+		System.out.println("=====================================================");
+		System.out.println(stasJson.toString());
 		return stasJson.toString();
 	}
 

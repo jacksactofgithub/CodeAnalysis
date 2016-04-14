@@ -198,7 +198,6 @@
 			<div class="widget">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
-				</div>
 					<div class="analysis-block" id="coverageBlock"
 						style="height: 38px; padding-top: -13px;">
 						<div class="operation" style="height: 38px; margin-top: 6px;">
@@ -213,6 +212,7 @@
 							</select>
 						</div>
 					</div>
+				</div>
 				<div class="body">
 					<pre  style="font-family:Consolas;font-size:15px">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {

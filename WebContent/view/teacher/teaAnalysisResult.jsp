@@ -42,6 +42,7 @@
     border-top-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+	margin-top:5px;
 }
  </style>
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
@@ -177,23 +178,21 @@
 		<div class="content" >
 			<div class="title">
 				<h5>代码统计</h5>
+				<div class="operation" style="height: 38px; margin-top: 6px;">
+					<h5>文件列表：</h5> <select id="files"
+						onchange="changeFile()">
+						<%
+							ArrayList<String> files = (ArrayList<String>) request.getAttribute("files");
+							for (int i = 0; i < files.size(); i++) {
+								String file = files.get(i);
+						%>
+						<option value="<%=file%>"><%=file%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
 			</div>
-
-			<div class="operation" style="height: 38px; margin-top: 6px;">
-				<span style="margin-top: 1px;">文件列表：</span> <select id="files"
-					onchange="changeFile()">
-					<%
-						ArrayList<String> files = (ArrayList<String>) request.getAttribute("files");
-						for (int i = 0; i < files.size(); i++) {
-							String file = files.get(i);
-					%>
-					<option value="<%=file%>"><%=file%></option>
-					<%
-						}
-					%>
-				</select>
-			</div>
-
 			<div
 				style="position: absolute; width: 30px; height: 350px; background: url(view/pic/wbg.png)">
 				<!-- 空白 -->

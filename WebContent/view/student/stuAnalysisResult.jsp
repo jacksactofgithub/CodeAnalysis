@@ -42,16 +42,21 @@
     border-top-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+	margin-top:5px;
 }
  </style>
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
  <script type="text/javascript">
+ var chart;
  $(function () {
 	 var myjson = eval(<%=(String)request.getAttribute("staJsonstr")%>);
 	 
-	 var chart1=$('#container').highcharts({
+	 chart = new Highcharts.Chart({   
+		 chart: {
+			 renderTo: 'container',       
+		 },
 	        title: {
 	            text: '',//'代码统计',
 	            x: -20 //center
@@ -101,10 +106,6 @@
 	        }]
 	    });
 	});
- $(document).ready(function(){ //隐藏table的某行
-	 alert(myjson.timestamp);
- }); 
-
  </script>
 <title>慕测平台</title>
 </head>
@@ -167,7 +168,7 @@
 							JSONObject exam = ((JSONObject)request.getAttribute("exam"));
 						%>
 						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li>
-						<li ><a href="<%=request.getContextPath()%>/stuExamQue?id=<%=exam.getString("exam_id") %>"><%=exam.getString("exam_name") %></a></li>
+						<li ><a href="<%=request.getContextPath()%>/stuExamQue?exam_id=<%=exam.getString("exam_id") %>"><%=exam.getString("exam_name") %></a></li>
 						<li ><%=(request.getParameter("problem_name")) %></li>
 						<!-- 从request中取得考试信息类中的考试名 题目名-->
 					</ul>
@@ -181,20 +182,20 @@
 		<div class="content" >
 			<div class="title">
 				<h5>代码统计</h5>
-			</div>
-			<div class="operation" style="height: 38px; margin-top: 6px;">
-				<span style="margin-top: 1px;">文件列表：</span> <select id="files"
-					onchange="changeFile()">
-					<%
-						ArrayList<String> files = (ArrayList<String>) request.getAttribute("files");
-						for (int i = 0; i < files.size(); i++) {
-							String file = files.get(i);
-					%>
-					<option value="<%=file%>"><%=file%></option>
-					<%
-						}
-					%>
-				</select>
+				<div class="operation" style="height: 38px; margin-top: 6px;">
+					<h5>文件列表</h5><select id="files"
+						onchange="changeFile()">
+						<%
+							ArrayList<String> files = (ArrayList<String>) request.getAttribute("files");
+							for (int i = 0; i < files.size(); i++) {
+								String file = files.get(i);
+						%>
+						<option value="<%=file%>"><%=file%></option>
+						<%
+							}
+						%>
+					</select>
+				</div>
 			</div>
 			<div
 				style="position: absolute; width: 30px; height: 350px; background: url(view/pic/wbg.png)">
@@ -283,6 +284,25 @@ function changeFile(){
 	var files=$("#files option:selected");
 	var exam_id = '<%=exam.getString("exam_id")%>';
 	var problem_name = '<%=request.getParameter("problem_name")%>';
+	var stu_id = '<%=session.getAttribute("stu_id")%>';
+	$.ajax({
+		type : "POST",
+		dataType:'json',
+        url : "getCodeStas",
+        data : {
+        	stu_id:stu_id,
+       	 	exam_id:exam_id,
+	 		problem_name: problem_name,
+	 		file_name :files.val()
+        },
+        success : function (data){
+        	chart.series[0].setData(data.lineCount);
+        	chart.series[1].setData(data.varCount);
+        	chart.series[2].setData(data.noteCount);
+        	chart.series[3].setData(data.methodCount);
+        	chart.series[4].setData(data.maxCy);
+        }
+	 });
 }
 
 </script>
