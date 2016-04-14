@@ -108,6 +108,20 @@
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+#files{
+    width: 150px;
+    height:25px;
+	position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    zoom: 1;
+    -webkit-user-select: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
 </style>
 
 <!-- 百度统计代码 -->
@@ -187,6 +201,20 @@
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 				</div>
+					<div class="analysis-block" id="coverageBlock"
+						style="height: 38px; padding-top: -13px;">
+						<div class="operation" style="height: 38px; margin-top: 6px;">
+							<span style="margin-top: 1px;">文件列表：</span> <select
+								id="files" onchange="changeFile()">
+								<%ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
+								for(int i=0;i<files.size();i++){
+									String file = files.get(i);
+								%>
+								<option value="<%=file%>"><%=file%></option>
+								<%} %>
+							</select>
+						</div>
+					</div>
 				<div class="body">
 					<pre  style="font-family:Consolas;font-size:15px">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {
@@ -338,6 +366,7 @@ function showCode(time){
 	var stu_id = '<%=session.getAttribute("stu_id")%>';
 	var exam_id = '<%=request.getParameter("exam_id")%>';
 	var problem_name = '<%=request.getParameter("problem_name")%>';
+	var files=$("#files option:selected");
 
   	 $.ajax({type : "POST",
            url : "showCode", 
@@ -345,7 +374,8 @@ function showCode(time){
           	 stu_id : stu_id,
           	 time :time,
           	 exam_id:exam_id,
-  	 		 problem_name :problem_name
+  	 		 problem_name :problem_name,
+  	 		 file_name :files.val()
            },
            success : function (data){
         	   //将data显示在相应区域

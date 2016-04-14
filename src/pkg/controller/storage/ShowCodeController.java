@@ -30,13 +30,9 @@ public class ShowCodeController {
 	@ResponseBody
 	@RequestMapping(value = "/showCode", method=RequestMethod.POST)
 	public String showResult(@RequestParam("stu_id")int stu_id,@RequestParam("time")int time,@RequestParam("exam_id")int exam_id,
-			@RequestParam("problem_name")String problem_name,HttpServletRequest request, HttpSession session) {
+			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		//参数 学生学号,时间点,考试号,考题名
-		String code = service.getStuCode(stu_id, time, exam_id, problem_name);
-		System.out.println(stu_id);
-		System.out.println(time);
-		System.out.println(exam_id);
-		System.out.println(problem_name);
+		String code = service.getStuCode(stu_id, time, exam_id, problem_name,file_name);
 		return code;
 	}
 	
