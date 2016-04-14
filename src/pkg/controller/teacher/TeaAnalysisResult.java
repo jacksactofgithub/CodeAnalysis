@@ -1,5 +1,7 @@
 package pkg.controller.teacher;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -49,8 +51,11 @@ public class TeaAnalysisResult {
 		}
 
 		request.setAttribute("runResultJson", runResultJson);
+		
+		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNames(stu_id, exam_id, problem_name);
 
-		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id);		
+		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));
+		
 		JSONObject stasJson = null;
 		try {
 			stasJson = reverse(codeJson);

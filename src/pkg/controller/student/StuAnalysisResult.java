@@ -1,5 +1,7 @@
 package pkg.controller.student;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -57,7 +59,10 @@ public class StuAnalysisResult {
 		request.setAttribute("runResultJson", runResultJson);
 		System.out.println(runResultJson.toString());
 		
-		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id);		
+		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNames(stu_id, exam_id, problem_name);
+		
+		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));
+		
 		JSONObject stasJson = null;
 		try {
 			stasJson = reverse(codeJson);

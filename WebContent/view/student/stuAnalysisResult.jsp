@@ -60,10 +60,6 @@
 	            valueSuffix: ''
 	        },
 	        legend: {
-	            //layout: 'vertical',
-	            //align: 'right',
-	            //verticalAlign: 'middle',
-	            //borderWidth: 0,
 	            align: 'left', //水平方向位置
 	            verticalAlign: 'top', //垂直方向位置
 	            x: 0, //距离x轴的距离
