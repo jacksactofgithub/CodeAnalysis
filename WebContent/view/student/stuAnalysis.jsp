@@ -255,7 +255,7 @@
 						</li><!-- 如果session无法共用 此处可以使用一个表单 -->
 					</ul>
 					<form action="<%=request.getContextPath()%>/stuAnalysis" name = "toanalysis" method="post">
-						<input type="hidden" name="account" value = "<%=session.getAttribute("stu_account")%>">
+						<input type="hidden" name="stu_id" value = "<%=session.getAttribute("stu_id")%>">
 					</form>
 				</div>
 				<div class="middleNav pull-right">
