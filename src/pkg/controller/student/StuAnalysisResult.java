@@ -13,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pkg.service.CodeService;
+import pkg.service.ExamService;
 import pkg.service.RunService;
-import pkg.service.StudentService;
 
 /**
  * Servlet implementation class AnalysisResult
@@ -23,7 +23,7 @@ import pkg.service.StudentService;
 public class StuAnalysisResult {
 
 	@Autowired
-	StudentService service;
+	ExamService service;
 	@Autowired
 	CodeService codeService;
 	@Autowired
@@ -33,20 +33,18 @@ public class StuAnalysisResult {
 		super();
 	}
 
-	@SuppressWarnings("unused")
 	@RequestMapping("/stuAnalysisResult")
 	public String showResult(HttpServletRequest request, HttpSession session) {
 
-		String stu_account = (String) session.getAttribute("stu_account");
  		int stu_id = (int) session.getAttribute("stu_id");
 		int exam_id = Integer.parseInt(request.getParameter("exam_id"));
 		String problem_name = request.getParameter("problem_name");
-		JSONObject exam = service.getExamDetail(stu_account, exam_id);
-		request.setAttribute("exam", exam);
+		JSONObject exam;
 		try {
-			String exam_name = exam.getString("exam_name");
-		} catch (JSONException e1) {
-			e1.printStackTrace();
+			exam = getExam(exam_id,stu_id);
+			request.setAttribute("exam", exam);
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 
 		JSONObject runResultJson = null;
@@ -62,7 +60,7 @@ public class StuAnalysisResult {
 		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNames(stu_id, exam_id, problem_name);
 		request.setAttribute("files", files);
 		
-		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));
+		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));//代码统计
 		
 		JSONObject stasJson = null;
 		try {
@@ -82,12 +80,6 @@ public class StuAnalysisResult {
 
 		JSONObject stasJson = new JSONObject();
 		int len = stasArray.length();
-//		int[] timestamp = new int[len];
-//		double[] lineCount = new double[len];
-//		int[] noteCount = new int[len];
-//		int[] methodCount = new int[len];
-//		int[] varCount = new int[len];
-//		int[] maxCy = new int[len];
 		
 		JSONArray timeArray = new JSONArray();
 		JSONArray lineCount = new JSONArray();
@@ -104,12 +96,6 @@ public class StuAnalysisResult {
 			methodCount.put(staObj.get("methodCount"));
 			varCount.put(staObj.get("varyCount"));
 			maxCy.put(staObj.get("maxCyclomaticCpl"));
-//			timestamp[i] = staObj.getInt("timestamp");
-//			lineCount[i] = staObj.getInt("lineCount")/10;//除以十
-//			noteCount[i] = staObj.getInt("noteCount");
-//			methodCount[i] = staObj.getInt("methodCount");
-//			varCount[i] = staObj.getInt("varyCount");
-//			maxCy[i] = staObj.getInt("maxCyclomaticCpl");
 		}
 
 		stasJson.put("timestamp", timeArray);
@@ -121,8 +107,15 @@ public class StuAnalysisResult {
 		return stasJson;
 	}
 
-	public String getProblemName(JSONObject exam, int id) {// 通过题目id得到题目名称
-		return null;
+	public JSONObject getExam(int exam_id, int stu_id) throws JSONException {// 通过题目id得到题目名称
+		JSONArray examArray = service.getStudentExams(stu_id);
+		for(int i=0;i<examArray.length();i++){
+			JSONObject exam = examArray.getJSONObject(i);
+			if(exam.getInt("exam_id")==exam_id){
+				return exam;
+			}
+		}
+		return examArray.getJSONObject(0);
 	}
 
 }
