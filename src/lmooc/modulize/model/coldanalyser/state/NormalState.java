@@ -68,7 +68,7 @@ public class NormalState extends AbstractState{
 	public void getRightBrace(String currentWord) {
 		// TODO Auto-generated method stub
 		source.getRightBrace();
-		this.flush();
+//		this.flush();
 	}
 
 	@Override
@@ -103,10 +103,15 @@ public class NormalState extends AbstractState{
 	private void handleWord(String currentWord , String in){
 		if(enable && (!currentWord.equals(""))){
 			enable = false;
+			
+			
 			if(JavaSentence.isLimitation(currentWord)){		//是修饰词，加入修饰语句
 				sentence.addLimitation(currentWord);
 				enable = true;		//允许继续读取，直到读取到TypeName，但这种方法会忽略构造方法
 //				lexer.startState(new PreformState(source , lexer , sentence));
+			}
+			else if(currentWord.contains(".")){
+				
 			}
 			else if(currentWord.equals(JavaSentence.RETURN)){
 				lexer.startState(new ReturnState(source , lexer));

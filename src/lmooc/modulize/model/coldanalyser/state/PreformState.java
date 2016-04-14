@@ -64,9 +64,11 @@ public class PreformState extends AbstractState{
 	public void getSemicolon(String currentWord) {
 		// TODO Auto-generated method stub
 		if(follow.equals("")&&(!currentWord.equals(""))){
-			sentence.addName(currentWord);
-			currentName = currentWord;
-			follow = "";
+			if(!sentence.getTypeName().equals("")){
+				sentence.addName(currentWord);
+				currentName = currentWord;
+				follow = "";
+			}
 		}
 		else{
 			follow += currentWord;
@@ -162,6 +164,11 @@ public class PreformState extends AbstractState{
 	public void getLeftBrace(String currentWord) {
 		// TODO Auto-generated method stub
 		source.getLeftBrace();
+		if(isVary || isMethod){
+			
+		}else{
+			lexer.endState();
+		}
 	}
 
 	@Override
@@ -199,8 +206,11 @@ public class PreformState extends AbstractState{
 //			currentName = currentWord;
 //			sentence.addName(currentWord);
 //			follow = "=";
-			sentence.setTypeName(null);
-			lexer.endState();
+			firstWord = "";
+			currentName = "";
+			sentence.setTypeName("");
+//			sentence.setTypeName(null);
+//			lexer.endState();
 		}
 		else{
 			follow = follow + currentWord + "=";
