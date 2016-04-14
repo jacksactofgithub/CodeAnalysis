@@ -199,7 +199,7 @@ public class CodeServiceImpl implements CodeService {
 	}
 
 	@Override
-	public String getStuCode(int stu_id, int time, int exam_id, String problem_name) {
+	public String getStuCode(int stu_id, int time, int exam_id, String problem_name , String fileName) {
 		// TODO Auto-generated method stub
 		
 		
@@ -212,6 +212,12 @@ public class CodeServiceImpl implements CodeService {
 		// TODO Auto-generated method stub
 		
 		return codeDAO.queryAllProNames(examId);
+	}
+
+	@Override
+	public List<String> getStuFileNames(int stu_id, int exam_id, String problem_name, String fileName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
