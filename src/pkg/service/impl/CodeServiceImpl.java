@@ -224,7 +224,10 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public List<String> getStuFileNames(int stu_id, int exam_id, String problem_name) {
 		// TODO Auto-generated method stub
-		return codeDAO.queryStuFileNames(exam_id, stu_id, problem_name);
+		
+		int classMemberId = examService.getClassMemberId(stu_id, exam_id);
+		
+		return codeDAO.queryStuFileNames(exam_id, classMemberId, problem_name);
 	}
 
 }

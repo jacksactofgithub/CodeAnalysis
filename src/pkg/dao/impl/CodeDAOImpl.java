@@ -63,7 +63,7 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 	@Override
 	public List<String> queryStuFileNames(int examId, int stu_id, String proName) {
 		// TODO Auto-generated method stub
-		String hql = "select distinct file_name from Code as code where code.exam_id=? and code.stu_id=? and code.pro_name=?";
+		String hql = "select distinct file_name from Code as code where code.exam_id=? and code.student_id=? and code.pro_name=?";
 		
 		@SuppressWarnings("unchecked")
 		List<String> result = dbopt.findList(hql, examId , stu_id , proName);

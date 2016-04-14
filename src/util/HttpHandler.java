@@ -19,7 +19,12 @@ import java.util.Map.Entry;
  */
 public class HttpHandler {
 
-	public static String INVOCATION_URL;
+	private static String INVOCATION_URL;
+	
+	public static void setInvocationURL(String url){
+		INVOCATION_URL = url;
+		System.out.println(INVOCATION_URL);
+	}
 	
 	public String postHttpInvocation(String interfaceName , Map<String , String> params) throws Exception{ 
 		

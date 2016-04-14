@@ -28,12 +28,13 @@ public class Initializer implements InitializingBean{
 			if(str.startsWith("#")){
 				continue;
 			}
-			if(str.equals("service")){
+			if(str.equals("service:")){
 				inService = true;
 				continue;
 			}
 			if(inService){
-				HttpHandler.INVOCATION_URL = str;
+				HttpHandler.setInvocationURL(str);
+				inService = false;
 			}
 		}
 		
