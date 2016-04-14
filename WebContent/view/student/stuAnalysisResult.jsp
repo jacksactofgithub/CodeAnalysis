@@ -167,7 +167,7 @@
 							JSONObject exam = ((JSONObject)request.getAttribute("exam"));
 						%>
 						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li>
-						<li ><a href="<%=request.getContextPath()%>/stuExamQue?id=<%=exam.getString("id") %>"><%=((JSONObject)request.getAttribute("exam")).getString("exam_name") %></a></li>
+						<li ><a href="<%=request.getContextPath()%>/stuExamQue?id=<%=exam.getString("exam_id") %>"><%=exam.getString("exam_name") %></a></li>
 						<li ><%=(request.getParameter("problem_name")) %></li>
 						<!-- 从request中取得考试信息类中的考试名 题目名-->
 					</ul>
@@ -281,7 +281,7 @@
 
 function changeFile(){
 	var files=$("#files option:selected");
-	var exam_id = '<%=request.getParameter("exam_id")%>';
+	var exam_id = '<%=exam.getString("exam_id")%>';
 	var problem_name = '<%=request.getParameter("problem_name")%>';
 }
 

@@ -172,10 +172,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<!-- 此处跳转至考生的具体题目代码分析 -->
-										<td width="250px"><a href="<%=request.getContextPath() %>/stuAnalysisResult?exam_id=<%=exam.getString("id")  %>&problem_name=<%=problem.getString("problem_name")%>"
+										<td width="250px"><a href="<%=request.getContextPath() %>/stuAnalysisResult?exam_id=<%=exam.getString("exam_id")  %>&problem_name=<%=problem.getString("problem_name")%>"
 											class="underline" title="查看考题统计"><%=problem.getString("problem_name") %></a>
-											<a href="<%=request.getContextPath() %>/stuCodeExh?exam_id=<%=exam.getString("id")  %>&problem_name=<%=problem.getString("problem_name")%>"
+											<a href="<%=request.getContextPath() %>/stuCodeExh?exam_id=<%=exam.getString("exam_id")  %>&problem_name=<%=problem.getString("problem_name")%>"
 											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
 										<td><%=problem.getString("difficulty") %></td>
 										<td><%=problem.getString("score") %></td>
