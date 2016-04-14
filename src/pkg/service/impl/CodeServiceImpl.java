@@ -138,7 +138,9 @@ public class CodeServiceImpl implements CodeService {
 		// TODO Auto-generated method stub
 		String key = exam+proName+stuID+fileName;
 		if(codeCache.containsKey(key)){
-			return getCodeJSON(codeCache.get(key));
+			JSONArray ar = getCodeJSON(codeCache.get(key));
+//			System.out.println("back json array : " + ar.toString());
+			return ar;
 		}
 		
 		int classMemberId = examService.getClassMemberId(stuID, exam);

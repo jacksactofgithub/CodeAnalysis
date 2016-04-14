@@ -43,7 +43,7 @@ public class StudentAnalysis {
     	//在第一次进的时候如果request中带了参数则将session中参数设置为登录信息;否则session中信息不变(如果是本网站的请求)
     	session.setAttribute("stu_name", "毕潇晗");
     	session.setAttribute("uni_name", "南京大学");
-    	session.setAttribute("stu_id", 6605);
+    	session.setAttribute("stu_id", 89);
     	int stu_id = (int)session.getAttribute("stu_id");
     	
     	JSONArray examArray = examService.getStudentExams(stu_id);
