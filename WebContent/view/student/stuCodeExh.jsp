@@ -216,7 +216,7 @@
 					</div>
 				</div>
 				<div class="body">
-					<pre  style="font-family:Consolas;font-size:15px">
+					<pre  style="font-family:Consolas;font-size:15px" id="stuCode">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {
 				JSONObject stasJson = new JSONObject();
 				int len = stasArray.length();
@@ -379,6 +379,7 @@ function showCode(time){
            },
            success : function (data){
         	   //将data显示在相应区域
+        	   alert(data);
            }
    	 });   
 }
@@ -397,6 +398,7 @@ function changeTestCase(){
  	 		 testcase_name :option.val()
           },
           success : function (data){
+        	  $("#stuCode").html(data);
         	  alert(data);
           }
   	 });
