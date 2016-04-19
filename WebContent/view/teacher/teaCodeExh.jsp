@@ -357,7 +357,7 @@ function showCode(time){
   	 		 file_name :files.val()
            },
            success : function (data){
-        	   //将data显示在相应区域
+        	   $("#stuCode").html(data);
            }
    	 });   
 }

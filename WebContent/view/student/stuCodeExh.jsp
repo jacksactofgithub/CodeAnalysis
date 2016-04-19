@@ -344,11 +344,12 @@ scale.prototype={
 }
 new scale('btn','bar','title');
 
+var exam_id = '<%=request.getParameter("exam_id")%>';
+var problem_name = '<%=request.getParameter("problem_name")%>';
+var stu_id = '<%=session.getAttribute("stu_id")%>';
+
 function showCode(time){
 	
-	var stu_id = '<%=session.getAttribute("stu_id")%>';
-	var exam_id = '<%=request.getParameter("exam_id")%>';
-	var problem_name = '<%=request.getParameter("problem_name")%>';
 	var files=$("#files option:selected");
 
   	 $.ajax({type : "POST",
@@ -369,8 +370,6 @@ function showCode(time){
 function changeTestCase(){
 	//更改测试用例代码
 	var option=$("#coverageSelect option:selected");
-	var exam_id = '<%=request.getParameter("exam_id")%>';
-	var problem_name = '<%=request.getParameter("problem_name")%>';
 
  	 $.ajax({type : "POST",
           url : "showTestCase", 
@@ -387,6 +386,20 @@ function changeTestCase(){
 
 function changeFile(){
 	var files=$("#files option:selected");
+
+ 	 $.ajax({type : "POST",
+          url : "showCode", 
+          data : {
+        	 stu_id : stu_id,
+           	 time :0,
+           	 exam_id:exam_id,
+   	 		 problem_name :problem_name,
+   	 		 file_name :files.val()
+          },
+          success : function (data){
+        	  $("#stuCode").html(data);
+          }
+  	 });
 }
 
 </script>
