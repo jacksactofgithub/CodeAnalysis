@@ -48,6 +48,23 @@ public class Reader {
 
 		return myReader.read(fileName);
 	}
+	
+	public Iterator<String> readJava(long timestamp , String fileName , int classMemberId , int exam_id){
+		File backup = getLatestBackup(exam_id+"", classMemberId+"");
+		try {
+			ZipFile zip = new ZipFile(backup);
+			
+			return readJava(timestamp , fileName , zip);
+		} catch (ZipException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	public Iterator<String> readJava(long timeStamp, String fName, ZipFile zip) {
 		String javaName = fName.replaceAll("/", "#");
