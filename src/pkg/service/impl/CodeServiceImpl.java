@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lmooc.modulize.bean.CodeStamp;
+import lmooc.modulize.io.Reader;
 import pkg.dao.CodeDAO;
 import pkg.entity.Code;
 import pkg.service.CodeService;
@@ -26,8 +27,12 @@ public class CodeServiceImpl implements CodeService {
 	private CodeDAO codeDAO;
 	@Autowired
 	private ExamService examService;
+	
+	private Reader reader = new Reader();
+	
+	private static final char seperator = ';';
 
-	// key: examId;proName;stuId;fileName
+	// key: examId;proName;classMemId;fileName
 	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(20,
 			5 * 60 * 1000);
 
@@ -136,15 +141,24 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public JSONArray getCodeRecord(int stuID, String proName, int exam , String fileName) {
 		// TODO Auto-generated method stub
-		String key = exam+proName+stuID+fileName;
-		if(codeCache.containsKey(key)){
-			JSONArray ar = getCodeJSON(codeCache.get(key));
-//			System.out.println("back json array : " + ar.toString());
-			return ar;
+		int classMemberId = examService.getClassMemberId(stuID, exam);
+		String key = exam+seperator+proName+seperator+classMemberId+seperator+fileName;
+		
+		Map<Integer , Code> codeMap;
+		if(!codeCache.containsKey(key)){
+			cacheCodeMap(classMemberId, proName, exam, fileName);
 		}
 		
-		int classMemberId = examService.getClassMemberId(stuID, exam);
-		List<Code> list = codeDAO.queryCode(classMemberId, proName, exam);
+		codeMap = codeCache.get(key);
+		
+		JSONArray array = getCodeJSON(codeMap);
+
+		return array;
+	}
+	
+	private void cacheCodeMap(int classMemberId , String proName , int exam_id , String fileName){
+		String key = exam_id+seperator+proName+seperator+classMemberId+seperator+fileName;
+		List<Code> list = codeDAO.queryCode(classMemberId, proName, exam_id);
 
 		Iterator<Code> it = list.iterator();
 
@@ -157,10 +171,6 @@ public class CodeServiceImpl implements CodeService {
 		
 		Map<Integer, Code> codeMap = mapTime(list.iterator());
 		codeCache.put(key, codeMap);
-		
-		JSONArray array = getCodeJSON(codeMap);
-
-		return array;
 	}
 
 	public JSONArray getCodeJSON(Map<Integer, Code> codeMap) {
@@ -210,10 +220,26 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public String getStuCode(int stu_id, int time, int exam_id, String problem_name , String fileName) {
 		// TODO Auto-generated method stub
+		int classMemberId = examService.getClassMemberId(stu_id, exam_id);
+		String key = exam_id+seperator+ problem_name+seperator+classMemberId+seperator+fileName;
 		
+		if(!codeCache.containsKey(key)){
+			cacheCodeMap(classMemberId, problem_name, exam_id, fileName);
+		}
+		Map<Integer , Code> codeMap = codeCache.get(key);
+		Code code = codeMap.get(time);
+		long timestamp = code.getTimestamp();
 		
+		Iterator<String> codes = reader.readJava(timestamp,problem_name+"/"+fileName, classMemberId, exam_id);
 		
-		return null;
+		StringBuffer sBuffer = new StringBuffer();
+		
+		while(codes.hasNext()){
+			sBuffer.append(codes.next());
+			sBuffer.append("\t\n");
+		}
+		
+		return sBuffer.toString();
 	}
 
 	@Override
