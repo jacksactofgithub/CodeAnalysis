@@ -214,25 +214,8 @@
 					</div>
 				</div>
 				<div class="body">
-					<pre  style="font-family:Consolas;font-size:15px">
-			public JSONObject reverse(JSONArray stasArray) throws JSONException {
-				JSONObject stasJson = new JSONObject();
-				int len = stasArray.length();
-				int[] timestamp = new int[len];
-				double[] lineCount = new double[len];
-				int[] noteCount = new int[len];
-				int[] methodCount = new int[len];
-				int[] varCount = new int[len];
-				int[] maxCy = new int[len];
-
-				stasJson.put("timestamp", timestamp);
-				stasJson.put("lineCount", lineCount);
-				stasJson.put("noteCount", noteCount);
-				stasJson.put("methodCount", methodCount);
-				stasJson.put("varCount", varCount);
-				stasJson.put("maxCy", maxCy);
-				return stasJson;
-			}
+					<pre  style="font-family:Consolas;font-size:15px" id="stuCode">
+						<%=request.getAttribute("code") %>
 					</pre>
 					<ul>
 					 <li id="scroll_li">时间 <span id="title">0min</span>
@@ -272,7 +255,7 @@
 					</div>
 				</div>
 				<div class="body">
-					<pre style="font-family:Consolas;font-size:15px;margin-top: 10px">
+					<pre style="font-family:Consolas;font-size:15px;margin-top: 10px" id="testCaseCode">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {
 				JSONObject stasJson = new JSONObject();
 				int len = stasArray.length();

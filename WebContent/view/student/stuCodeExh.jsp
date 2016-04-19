@@ -259,7 +259,7 @@
 
 				<div class="body">
 					<pre
-						style="font-family: Consolas; font-size: 15px; margin-top: 10px">
+						style="font-family: Consolas; font-size: 15px; margin-top: 10px" id="testCaseCode">
 			public JSONObject reverse(JSONArray stasArray) throws JSONException {
 				JSONObject stasJson = new JSONObject();
 				int len = stasArray.length();
