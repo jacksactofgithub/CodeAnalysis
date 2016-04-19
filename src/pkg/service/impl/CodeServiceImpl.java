@@ -1,5 +1,7 @@
 package pkg.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -239,7 +241,21 @@ public class CodeServiceImpl implements CodeService {
 			sBuffer.append("\t\n");
 		}
 		
-		return sBuffer.toString();
+		String result = sBuffer.toString();
+		
+		try {
+			byte[] bytes = result.getBytes("utf-8");
+			
+			result = new String(bytes , "utf-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println(result);
+		
+		return result;
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package pkg.controller.storage;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -36,6 +39,7 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		//参数 学生学号,时间点,考试号,考题名
 		String code = service.getStuCode(stu_id, time, exam_id, problem_name,file_name);
+		
 		return code;
 	}
 	
