@@ -379,6 +379,7 @@ function showCode(time){
            },
            success : function (data){
         	   //将data显示在相应区域
+        	   $("#stuCode").html(data);
         	   alert(data);
            }
    	 });   
@@ -398,7 +399,6 @@ function changeTestCase(){
  	 		 testcase_name :option.val()
           },
           success : function (data){
-        	  $("#stuCode").html(data);
         	  alert(data);
           }
   	 });
