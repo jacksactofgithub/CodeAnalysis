@@ -362,6 +362,7 @@ function showCode(time){
   	 		 file_name :files.val()
            },
            success : function (data){
+        	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
         	   $("#stuCode").html(data);
            }
    	 });   

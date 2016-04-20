@@ -243,20 +243,12 @@ public class CodeServiceImpl implements CodeService {
 		
 		String result = sBuffer.toString();
 		
-		try {
-			byte[] bytes = result.getBytes("utf-8");
-			
-			result = new String(bytes , "utf-8");
-			
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println(result);
+//		System.out.println(result);
 		
 		return result;
 	}
+	
+
 
 	@Override
 	public List<String> getAllProNames(int examId) {
