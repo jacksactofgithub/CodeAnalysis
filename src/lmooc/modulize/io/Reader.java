@@ -21,7 +21,7 @@ public class Reader {
 	private String runPrePath;
 	private String jsonPath = "mooctest/junitResult.json";
 
-	private static final String CFG_PATH = "../reader.cfg";
+	private static final String CFG_PATH = ".." + File.separator + "reader.cfg";
 
 	private ZipReader zipReader = new ZipReader();
 
@@ -68,14 +68,14 @@ public class Reader {
 
 	public Iterator<String> readJava(long timeStamp, String fName, ZipFile zip) {
 		String javaName = fName.replaceAll("/", "#");
-		String path = timeStamp + "/" + javaName;
+		String path = timeStamp + File.separator + javaName;
 
 		return zipReader.readZipFile(zip, path);
 	}
 
 	public List<Integer> getStudentIds(String examId) {
 
-		File baseFile = new File(prePath + "/" + examId);
+		File baseFile = new File(prePath + File.separator + examId);
 		File[] stuFile = baseFile.listFiles();
 
 		List<Integer> stuIds = new ArrayList<Integer>(stuFile.length);
@@ -89,7 +89,7 @@ public class Reader {
 	}
 
 	public File getLatestBackup(String examID, String stuID) {
-		File parent = new File(prePath + "/" + examID + "/" + stuID);
+		File parent = new File(prePath + File.separator + examID + File.separator + stuID);
 		File[] children = parent.listFiles(new ZipFileFilter());
 
 		if (children == null) {
