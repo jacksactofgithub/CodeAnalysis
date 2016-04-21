@@ -72,7 +72,7 @@ public class LogAnalyser {
 		if(start.equals("FileState")){
 			addOneFS(log , states);
 		}
-		else if(start.equals("Run")){
+		else if(start.equals("Process")){
 			addOneRun(log , runs);
 		}
 		
@@ -104,6 +104,12 @@ public class LogAnalyser {
 		String[] logInfo = log.split(SPLIT_TAG , 3);
 		String tempDate = logInfo[1];
 		String report = logInfo[2];
+		
+		String last = report.substring(report.lastIndexOf(" ")+1);
+		if((last.equals("Run"))||(last.equals("Submit"))){
+			report = report.substring(0, report.lastIndexOf(" "));
+		}
+		
 		Date date = DateParser.string2Date(tempDate);	//精确到分的时间
 		
 		JSONObject runJson = new JSONObject(report);

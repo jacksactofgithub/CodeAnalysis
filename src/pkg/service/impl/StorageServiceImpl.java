@@ -80,11 +80,11 @@ public class StorageServiceImpl implements StorageService{
 				Iterator<CodeStamp> codes = codeOutput(logBean.getFileStates(),examID , studentNum , backupZip);
 				
 				//plus one time for run results
-				logs = reader.readRunLog(examID, studentNum, backupZip);
-				logBean = analyser.analyse(logs);
+//				logs = reader.readRunLog(examID, studentNum, backupZip);
+//				logBean = analyser.analyse(logs);
 				Iterator<RunStamp> runs = runOutput(logBean.getRuns());
 				
-				// JSONObject run = runOutput(logBean.getRuns());
+//				 JSONObject run = runOutput(logBean.getRuns());
 				
 				return new SubjectResult(codes, runs);
 			} catch (JSONException e) {
