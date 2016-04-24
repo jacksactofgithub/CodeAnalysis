@@ -348,7 +348,7 @@ function showCode(time){
 	var files=$("#files option:selected");
 
   	 $.ajax({type : "POST",
-           url : "showCode", 
+           url : "showCodeByClassMemId", 
            data : {
           	 stu_id : stu_id,
           	 time :time,
