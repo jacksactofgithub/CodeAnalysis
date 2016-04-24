@@ -57,7 +57,7 @@ public class StuAnalysisResult {
 		request.setAttribute("runResultJson", runResultJson);
 		System.out.println(runResultJson.toString());
 		
-		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNames(stu_id, exam_id, problem_name);
+		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNamesByStuId(stu_id, exam_id, problem_name);
 		request.setAttribute("files", files);
 		
 		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));//代码统计
