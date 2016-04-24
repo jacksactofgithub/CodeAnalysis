@@ -748,11 +748,11 @@
 				}
 
 				//FUCK:自己添加：添加表格下方的分页按钮
-				p.$container.append('<img src="/public/css/tablesorter/icons/first.png" class="first" alt="First"/>');
-				p.$container.append('<img src="/public/css/tablesorter/icons/prev.png" class="prev" alt="Prev"/>');
+				p.$container.append('<img src="public/css/tablesorter/icons/first.png" class="first" alt="First"/>');
+				p.$container.append('<img src="public/css/tablesorter/icons/prev.png" class="prev" alt="Prev"/>');
 				p.$container.append('<span class="pagedisplay"></span>');
-				p.$container.append('<img src="/public/css/tablesorter/icons/next.png" class="next" alt="Next"/>');
-				p.$container.append('<img src="/public/css/tablesorter/icons/last.png" class="last" alt="Last"/>');
+				p.$container.append('<img src="public/css/tablesorter/icons/next.png" class="next" alt="Next"/>');
+				p.$container.append('<img src="public/css/tablesorter/icons/last.png" class="last" alt="Last"/>');
 
 				// skipped rows
 				p.regexRows = new RegExp('(' + (wo.filter_filteredRow || 'filtered') + '|' + c.selectorRemove.replace(/^(\w+\.)/g,'') + '|' + c.cssChildRow + ')');

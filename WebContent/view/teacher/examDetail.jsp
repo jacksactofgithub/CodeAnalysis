@@ -146,23 +146,17 @@
 							<tbody>
 							<%JSONArray studentArray = (JSONArray)request.getAttribute("studentArray");
 								int len = studentArray.length();
+								int problem_num=1;
 								//{id:,exam_name:,teacher_name:,exam_begin_time:,exam_end_time:,exam_duration:,score:,}
  								for(int i = 0;i<len;i++){
 									JSONObject student = (JSONObject)studentArray.get(i);
+									int stu_id = student.getInt("class_member_id");//班级id
 									String stu_name = student.getString("student_name");
 									String stu_no = student.getString("stu_no");
 									String uni_name =student.getString("uni_name");
-									double score = student.getDouble("score");
-									double p1_score = student.getDouble("problem1_score");
-									double p2_score = student.getDouble("problem2_score");
-									double p3_score = student.getDouble("problem3_score");
-									int problem1_id = student.getInt("problem1_id");
-									int problem2_id = student.getInt("problem2_id");
-									int problem3_id = student.getInt("problem3_id");
-									String problem1_name = student.getString("problem1_name");
-									String problem2_name = student.getString("problem2_name");
-									String problem3_name = student.getString("problem3_name");
-									int stu_id = student.getInt("stu_id");
+									double score = student.getDouble("score");//总得分
+									JSONArray pro_array = student.getJSONArray("pro_result");
+									problem_num = pro_array.length();
 								%>
 								<tr data-mem="0">
 									<td><%=uni_name %></td>
@@ -171,25 +165,23 @@
 									<td><span class="text-success"> <span
 											class="final-score"><%=score %></span> 分
 									</span></td>
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem1_name%>" title="查看题目代码统计">
-									<span class="final-score"><%=p1_score %></span>分</a>
-									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem1_name%>&stu_id=<%=stu_id%>"
-											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
-									
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem2_name%>" title="查看题目代码统计">
-									<span class="final-score"><%=p2_score %></span>分</a>
-									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem2_name%>&stu_id=<%=stu_id%>"
-											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
-									
-									<td><a href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem3_name%>" title="查看题目代码统计">
-									<span class="final-score"><%=p3_score %></span>分</a>
-									<a href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id%>&problem_name=<%=problem3_name%>&stu_id=<%=stu_id%>"
-											class="underline problem-analysis-link" title="查看代码详情"> [查看代码详情]</a></td>
+									<%for(int j=0;j<problem_num;j++){
+										double problem_score = pro_array.getJSONObject(j).getDouble("score");
+										String problem_name = pro_array.getJSONObject(j).getString("problem_name");
+									%>
+									<td><a
+										href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=pro_array%>"
+										title="查看题目代码统计"> <span class="final-score"><%=problem_score %></span>分
+									</a> <a
+										href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem_name%>&stu_id=<%=stu_id%>"
+										class="underline problem-analysis-link" title="查看代码详情">
+											[查看代码详情]</a></td>
+									<%} %>
 								</tr>
 							<%} %>
 							</tbody>
 						</table>
-						<!-- 这里是排序的页面<div class="text-center" id="examMemberTablePager"></div>  -->
+						<div class="text-center" id="examMemberTablePager"></div>
 					</div>
 				</div>
 			</div>
@@ -269,24 +261,20 @@
         <!-- cookie -->
         <script type="text/javascript" src="http://mooctest.net/public/js/others/jquery.cookie.1.4.1.js"></script>
 
-        <!-- itsbrain精简后的执行 -->
-        <script type="text/javascript">
+	<script type="text/javascript">
         
         $(document).ready(function(){ //隐藏table的某行
-        	var tag6 = '<%=request.getAttribute("problem2_id")%>';
-        	var tag7 = '<%=request.getAttribute("problem3_id")%>';
-        	if(tag6=="-1"){
-            	$('table tr').find('td:eq(5)').hide();//隐藏第六列
+        	var len = '<%=problem_num%>';
+        	if(len==1){
             	$('#th6').hide();//隐藏第六列
+            	$('#th7').hide();//隐藏第七列
         	}
-        	
-        	if(tag7=="-1"){
-            	$('table tr').find('td:eq(6)').hide();//隐藏第7列
+        	if(len==2){
             	$('#th7').hide();//隐藏第六列
         	}
-
+        	//修改图片路径
        	}); 
-        </script>
+     </script>
         
         <script type="text/javascript">
 $(function(){
@@ -415,7 +403,7 @@ $(function(){
 </script>
 <script type="text/javascript" src="http://mooctest.net/public/js/tablesorter/jquery.tablesorter-2.17.7.min.js"></script>
 <script type="text/javascript" src="http://mooctest.net/public/js/tablesorter/jquery.tablesorter.widgets-2.17.7.min.js"></script>
-<script type="text/javascript" src="http://mooctest.net/public/js/tablesorter/jquery.tablesorter.pager-2.17.6.min.js"></script>
+<script type="text/javascript" src="public/js/tablesorter/jquery.tablesorter.pager-2.17.6.min.js"></script>
 <script type="text/javascript" src="http://mooctest.net/public/js/highcharts-4.0.4/highcharts.js"></script>
 <script type="text/javascript" src="http://mooctest.net/public/js/common/AjaxChart.js"></script>
 <script type="text/javascript">
