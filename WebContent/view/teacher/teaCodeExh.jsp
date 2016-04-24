@@ -344,7 +344,7 @@ function showCode(time){
 	
 	var stu_id = '<%=request.getAttribute("code_stu_id")%>';
 	var exam_id = '<%=request.getAttribute("code_exam_id")%>';
-	var problem_name = '<%=request.getParameter("code_problem_name")%>';
+	var problem_name = '<%=request.getAttribute("code_problem_name")%>';
 	var files=$("#files option:selected");
 
   	 $.ajax({type : "POST",
@@ -365,8 +365,8 @@ function showCode(time){
 function changeTestCase(){
 	//更改测试用例代码
 	var option=$("#coverageSelect option:selected");
-	var exam_id = '<%=request.getParameter("exam_id")%>';
-	var problem_name = '<%=request.getParameter("problem_name")%>';
+	var exam_id = '<%=request.getAttribute("code_exam_id")%>';
+	var problem_name = '<%=request.getAttribute("code_problem_name")%>';
 
  	 $.ajax({type : "POST",
           url : "showTestCase", 

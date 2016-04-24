@@ -66,6 +66,10 @@ public class ShowCodeController {
 	public String showResultByClassMemId(@RequestParam("class_member_id")int class_member_id,@RequestParam("time")int time,@RequestParam("exam_id")int exam_id,
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		//参数 学生学号,时间点,考试号,考题名
+		System.out.println(class_member_id);
+		System.out.println(exam_id);
+		System.out.println(problem_name);
+		System.out.println(file_name);
 		String code = service.getStuCodeByClassMemId(class_member_id, time, exam_id, problem_name,file_name);
 //		System.out.println(code);
 		try {
