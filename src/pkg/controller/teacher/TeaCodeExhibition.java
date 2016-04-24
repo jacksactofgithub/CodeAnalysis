@@ -29,7 +29,7 @@ public class TeaCodeExhibition {
 		request.setAttribute("code_problem_name", problem_name);
 		
 		ArrayList<String>testCases = (ArrayList<String>) runService.findCommonTestCases(problem_name, exam_id);
-		ArrayList<String>files = (ArrayList<String>) codeService.getStuFileNames(stu_id, exam_id, problem_name);
+		ArrayList<String>files = (ArrayList<String>) codeService.getStuFileNamesByClassMemId(stu_id, exam_id, problem_name);
 		
 		request.setAttribute("testCases", testCases);
 		request.setAttribute("files", files);
