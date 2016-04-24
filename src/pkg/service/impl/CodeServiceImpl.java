@@ -221,29 +221,8 @@ public class CodeServiceImpl implements CodeService {
 	public String getStuCode(int stu_id, int time, int exam_id, String problem_name , String fileName) {
 		// TODO Auto-generated method stub
 		int classMemberId = examService.getClassMemberId(stu_id, exam_id);
-		String key = exam_id+seperator+ problem_name+seperator+classMemberId+seperator+fileName;
 		
-		if(!codeCache.containsKey(key)){
-			cacheCodeMap(classMemberId, problem_name, exam_id, fileName);
-		}
-		Map<Integer , Code> codeMap = codeCache.get(key);
-		Code code = codeMap.get(time);
-		long timestamp = code.getTimestamp();
-		
-		Iterator<String> codes = reader.readJava(timestamp,problem_name+"/"+fileName, classMemberId, exam_id);
-		
-		StringBuffer sBuffer = new StringBuffer();
-		
-		while(codes.hasNext()){
-			sBuffer.append(codes.next());
-			sBuffer.append("\t\n");
-		}
-		
-		String result = sBuffer.toString();
-		
-//		System.out.println(result);
-		
-		return result;
+		return getStuCodeByClassMemId(classMemberId, time, exam_id, problem_name, fileName);
 	}
 	
 
@@ -276,6 +255,35 @@ public class CodeServiceImpl implements CodeService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public String getStuCodeByClassMemId(int classMemId, int time, int exam_id, String problem_name, String fileName) {
+		// TODO Auto-generated method stub
+		String key = exam_id+seperator+ problem_name+seperator+classMemId+seperator+fileName;
+		
+		if(!codeCache.containsKey(key)){
+			cacheCodeMap(classMemId, problem_name, exam_id, fileName);
+		}
+		Map<Integer , Code> codeMap = codeCache.get(key);
+		Code code = codeMap.get(time);
+		long timestamp = code.getTimestamp();
+		
+		Iterator<String> codes = reader.readJava(timestamp,problem_name+"/"+fileName, classMemId, exam_id);
+		
+		StringBuffer sBuffer = new StringBuffer();
+		
+		while(codes.hasNext()){
+			sBuffer.append(codes.next());
+			sBuffer.append("\t\n");
+		}
+		
+		String result = sBuffer.toString();
+		
+//		System.out.println(result);
+		
+		return result;
+		
 	}
 
 }

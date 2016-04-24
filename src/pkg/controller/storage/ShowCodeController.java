@@ -62,6 +62,34 @@ public class ShowCodeController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/showCodeByClassMemId", method=RequestMethod.POST)
+	public String showResultByClassMemId(@RequestParam("class_member_id")int class_member_id,@RequestParam("time")int time,@RequestParam("exam_id")int exam_id,
+			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
+		//参数 学生学号,时间点,考试号,考题名
+		String code = service.getStuCodeByClassMemId(class_member_id, time, exam_id, problem_name,file_name);
+//		System.out.println(code);
+		try {
+			byte[] bytes = code.getBytes("UTF-8");
+			
+			code = new String(bytes , "ISO-8859-1");
+			
+			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			code = URLEncoder.encode(code, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return code;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/showTestCase", method=RequestMethod.POST)
 	public String showTestCase(@RequestParam("exam_id")int exam_id,	@RequestParam("problem_name")String problem_name,
 			HttpServletRequest request, HttpSession session) {
