@@ -342,15 +342,15 @@ new scale('btn','bar','title');
 
 function showCode(time){
 	
-	var stu_id = '<%=session.getAttribute("stu_id")%>';
-	var exam_id = '<%=request.getParameter("exam_id")%>';
-	var problem_name = '<%=request.getParameter("problem_name")%>';
+	var stu_id = '<%=request.getAttribute("code_stu_id")%>';
+	var exam_id = '<%=request.getAttribute("code_exam_id")%>';
+	var problem_name = '<%=request.getParameter("code_problem_name")%>';
 	var files=$("#files option:selected");
 
   	 $.ajax({type : "POST",
            url : "showCodeByClassMemId", 
            data : {
-          	 stu_id : stu_id,
+        	 class_member_id : stu_id,
           	 time :time,
           	 exam_id:exam_id,
   	 		 problem_name :problem_name,

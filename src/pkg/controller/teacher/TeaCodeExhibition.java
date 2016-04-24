@@ -26,6 +26,7 @@ public class TeaCodeExhibition {
 			@RequestParam("problem_name")String problem_name,HttpServletRequest request, HttpSession session) {
 		request.setAttribute("code_stu_id", stu_id);
 		request.setAttribute("code_exam_id", exam_id);
+		System.out.println(exam_id);
 		request.setAttribute("code_problem_name", problem_name);
 		
 		ArrayList<String>testCases = (ArrayList<String>) runService.findCommonTestCases(problem_name, exam_id);

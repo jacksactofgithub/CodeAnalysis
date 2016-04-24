@@ -86,6 +86,7 @@
 			<%
 				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
 				String exam_id = exam.getString("exam_id");
+				System.out.println(exam_id);
 			%>
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
@@ -151,6 +152,7 @@
  								for(int i = 0;i<len;i++){
 									JSONObject student = (JSONObject)studentArray.get(i);
 									int stu_id = student.getInt("class_member_id");//班级id
+									System.out.println(stu_id);
 									String stu_name = student.getString("student_name");
 									String stu_no = student.getString("stu_no");
 									String uni_name =student.getString("uni_name");
@@ -170,7 +172,7 @@
 										String problem_name = pro_array.getJSONObject(j).getString("problem_name");
 									%>
 									<td><a
-										href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=pro_array%>"
+										href="<%=request.getContextPath() %>/teaAnalysisResult?stu_id=<%=stu_id%>&exam_id=<%=exam_id%>&problem_name=<%=problem_name%>"
 										title="查看题目代码统计"> <span class="final-score"><%=problem_score %></span>分
 									</a> <a
 										href="<%=request.getContextPath() %>/teaCodeExh?exam_id=<%=exam_id %>&problem_name=<%=problem_name%>&stu_id=<%=stu_id%>"
