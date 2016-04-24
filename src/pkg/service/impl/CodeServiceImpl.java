@@ -256,12 +256,18 @@ public class CodeServiceImpl implements CodeService {
 	}
 
 	@Override
-	public List<String> getStuFileNames(int stu_id, int exam_id, String problem_name) {
+	public List<String> getStuFileNamesByStuId(int stu_id, int exam_id, String problem_name) {
 		// TODO Auto-generated method stub
 		
 		int classMemberId = examService.getClassMemberId(stu_id, exam_id);
 		
-		List<String> result = codeDAO.queryStuFileNames(exam_id, classMemberId, problem_name);
+		return getStuFileNamesByClassMemId(classMemberId, exam_id, problem_name);
+	}
+
+	@Override
+	public List<String> getStuFileNamesByClassMemId(int classMemId, int exam_id, String problem_name) {
+		// TODO Auto-generated method stub
+		List<String> result = codeDAO.queryStuFileNames(exam_id, classMemId, problem_name);
 		
 		for(int i=0 ; i<result.size() ; ++i){
 			String str = result.get(i);
