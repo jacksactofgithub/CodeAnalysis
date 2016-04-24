@@ -260,11 +260,6 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public String getStuCodeByClassMemId(int classMemId, int time, int exam_id, String problem_name, String fileName) {
 		
-		System.out.println(classMemId);
-		System.out.println(exam_id);
-		System.out.println(problem_name);
-		System.out.println(fileName);
-		
 		String key = exam_id+seperator+ problem_name+seperator+classMemId+seperator+fileName;
 		
 		System.out.println(key);
