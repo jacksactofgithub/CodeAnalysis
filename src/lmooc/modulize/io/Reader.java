@@ -68,7 +68,7 @@ public class Reader {
 
 	public Iterator<String> readJava(long timeStamp, String fName, ZipFile zip) {
 		String javaName = fName.replaceAll("/", "#");
-		String path = timeStamp + File.separator + javaName;
+		String path = timeStamp + "/" + javaName;
 
 		return zipReader.readZipFile(zip, path);
 	}

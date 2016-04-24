@@ -30,7 +30,7 @@ public class CodeServiceImpl implements CodeService {
 	
 	private Reader reader = new Reader();
 	
-	private static final char seperator = ';';
+	private static final String seperator = ";";
 
 	// key: examId;proName;classMemId;fileName
 	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(20,
@@ -266,6 +266,8 @@ public class CodeServiceImpl implements CodeService {
 		System.out.println(fileName);
 		
 		String key = exam_id+seperator+ problem_name+seperator+classMemId+seperator+fileName;
+		
+		System.out.println(key);
 		
 		if(!codeCache.containsKey(key)){
 			cacheCodeMap(classMemId, problem_name, exam_id, fileName);
