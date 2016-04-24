@@ -17,6 +17,8 @@ public interface CodeService {
 	
 	public String getStuCode(int stu_id,int time,int exam_id,String problem_name , String fileName);
 	
+	public String getStuCodeByClassMemId(int classMemId , int time , int exam_id , String problem_name , String fileName);
+	
 	public List<String> getAllProNames(int examId);
 	
 	public List<String> getStuFileNamesByStuId(int stu_id , int exam_id , String problem_name);

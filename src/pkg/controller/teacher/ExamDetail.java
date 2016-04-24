@@ -33,17 +33,10 @@ public class ExamDetail {
 		
 		JSONArray studentArray = service.getExamPapers(exam_id);
 		System.out.println(studentArray.toString());
-		request.setAttribute("studentArray", studentArray);
+		request.setAttribute("studentArray", studentArray);//score-1 代表没考
 		//再此处确定题目数量
-		try {
-			JSONObject student = studentArray.getJSONObject(0);
-			int problem2_id = student.getInt("problem2_id");
-			int problem3_id = student.getInt("problem3_id");
-			request.setAttribute("problem2_id", problem2_id );
-			request.setAttribute("problem3_id", problem3_id );
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+
+		
 		return "view/teacher/examDetail";
 	}
 	
