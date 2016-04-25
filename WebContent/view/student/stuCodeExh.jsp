@@ -197,7 +197,7 @@
 		</div>
 		
 
-			<div class="widget">
+			<div class="widget" style="overflow:scroll;height:400px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 					<div class="analysis-block" id="coverageBlock"
@@ -205,7 +205,6 @@
 						<div class="operation" style="height: 38px; margin-top: 6px;">
 							<span style="margin-top: 1px;">文件列表：</span> <select
 								id="files" onchange="changeFile()">
-								
 								<%
 								@SuppressWarnings("unchecked")
 								ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
@@ -222,20 +221,34 @@
 					<pre  style="font-family:Consolas;font-size:15px" id="stuCode">
 						<%=request.getAttribute("code") %>
 					</pre>
-					<ul>
-					 <li id="scroll_li">时间 <span id="title">0min</span>
-					<div class="scale_panel">
-						<span class="r">120</span>0
-						<div class="scale" id="bar">
-							<div></div>
-							<span id="btn"></span>
-						</div> 
-					</div> 
-					</li>
-					</ul>
 				</div>
 			</div>
 	</div>
+	
+	<div class="wrapper" style="position:relative; top:0px;">
+		<div class="content">
+
+			<div class="widget">
+				<div class="head">
+					<h5 class="iInfo">时间轴</h5>
+				</div>
+				<div class="body">
+					<ul>
+						<li id="scroll_li">时间 <span id="title">0min</span>
+							<div class="scale_panel">
+								<span class="r">120</span>0
+								<div class="scale" id="bar">
+									<div></div>
+									<span id="btn"></span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
 		<div class="widget">
 			<div class="head">
