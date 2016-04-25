@@ -100,9 +100,4 @@ public class RunResult {
 		return json;
 	}
 
-	// public static void main(String[] args){
-	// Date date = DateParser.string2Date("2016-02-29-20-40-52");
-	// System.out.println(date.getSeconds());
-	// }
-
 }

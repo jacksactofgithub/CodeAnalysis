@@ -226,7 +226,6 @@ public class RunServiceImpl implements RunService{
 		
 		for(Test t:tests){
 			String name = t.getTest_Name();
-//			System.out.println(t.getSubject().getRun_id());
 			if((testNames.contains(name))&&(t.getTest_Result() == 1)){
 				
 				successArray.put(testNames.indexOf(name));
@@ -266,12 +265,6 @@ public class RunServiceImpl implements RunService{
 			strTemp = transList(temp);
 			findCommon(common , strTemp);
 		}
-		
-//		System.out.print(stuID + ":\t");
-//		for(int i=0 ; i<common.size() ; ++i){
-//			System.out.print(common.get(i)+"\t");
-//		}
-//		System.out.println();
 		
 		return common;
 	}

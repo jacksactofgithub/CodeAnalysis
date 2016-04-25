@@ -55,22 +55,15 @@ public class StuAnalysisResult {
 		}
 
 		request.setAttribute("runResultJson", runResultJson);
-		System.out.println(runResultJson.toString());
 		
 		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNamesByStuId(stu_id, exam_id, problem_name);
 		request.setAttribute("files", files);
 		
 		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));//代码统计
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(stu_id);
-		System.out.println(problem_name);
-		System.out.println(exam_id);
-		System.out.println(files.get(0));
 		
 		JSONObject stasJson = null;
 		try {
 			stasJson = reverse(codeJson);
-			System.out.println(stasJson.toString());
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}

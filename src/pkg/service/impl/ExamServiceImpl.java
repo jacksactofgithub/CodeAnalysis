@@ -43,7 +43,6 @@ public class ExamServiceImpl implements ExamService{
 		
 		try {
 			String exams = http.postHttpInvocation(URLNameFormat.GET_TEACHER_FINISHED_EXAMS, params);
-			System.out.println(exams);
 			JSONArray array = new JSONArray(exams);
 			
 			return array;

@@ -96,8 +96,6 @@ public class CodeServiceImpl implements CodeService {
 
 		}
 		
-		System.out.println("Count:" + count);
-
 		return map;
 	}
 
@@ -281,8 +279,6 @@ public class CodeServiceImpl implements CodeService {
 		}
 		
 		String result = sBuffer.toString();
-		
-		System.out.println(result);
 		
 		return result;
 		

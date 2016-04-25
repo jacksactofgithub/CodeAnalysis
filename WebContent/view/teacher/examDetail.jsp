@@ -86,7 +86,6 @@
 			<%
 				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
 				String exam_id = exam.getString("exam_id");
-				System.out.println(exam_id);
 			%>
 			<div class="breadCrumbHolder module">
 				<div class="breadCrumb module">
@@ -152,7 +151,6 @@
  								for(int i = 0;i<len;i++){
 									JSONObject student = (JSONObject)studentArray.get(i);
 									int stu_id = student.getInt("class_member_id");//班级id
-									System.out.println(stu_id);
 									String stu_name = student.getString("student_name");
 									String stu_no = student.getString("stu_no");
 									String uni_name =student.getString("uni_name");

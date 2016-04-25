@@ -316,6 +316,7 @@
 <div class="wrapper" style="position:relative; top:0px;height:80px;">
 </div>
 <script>
+
 scale=function (btn,bar,title){
 	this.btn=document.getElementById(btn);
 	this.bar=document.getElementById(bar);
@@ -372,6 +373,7 @@ function showCode(time){
            },
            success : function (data){
         	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+        	   data = data.replaceAll(/</g,"&lt;");
         	   $("#stuCode").html(data);
            }
    	 });   

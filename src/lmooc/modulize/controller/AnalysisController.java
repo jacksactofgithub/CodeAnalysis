@@ -21,7 +21,5 @@
 //	public static void main(String[] args){
 //		AnalysisController con = new AnalysisController();
 //		SubjectResult result = con.acquireOneSubject("290", "2", "Triangle");
-//		System.out.println(result.getCodeJSON().toString());
-//		System.out.println(result.getRunJSON().toString());
 //	}
 //}

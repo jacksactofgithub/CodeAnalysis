@@ -39,7 +39,6 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		//参数 学生学号,时间点,考试号,考题名
 		String code = service.getStuCode(stu_id, time, exam_id, problem_name,file_name);
-//		System.out.println(code);
 		try {
 			byte[] bytes = code.getBytes("UTF-8");
 			
@@ -48,13 +47,11 @@ public class ShowCodeController {
 			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
 			
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			code = URLEncoder.encode(code, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -67,7 +64,6 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		//参数 学生学号,时间点,考试号,考题名
 		String code = service.getStuCodeByClassMemId(class_member_id, time, exam_id, problem_name,file_name);
-//		System.out.println(code);
 		try {
 			byte[] bytes = code.getBytes("UTF-8");
 			
@@ -76,16 +72,13 @@ public class ShowCodeController {
 			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
 			
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			code = URLEncoder.encode(code, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(code);
 		return code;
 	}
 	
@@ -113,11 +106,6 @@ public class ShowCodeController {
 		} catch (JSONException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(stu_id);
-		System.out.println(problem_name);
-		System.out.println(exam_id);
-		System.out.println(file_name);
-		System.out.println(stasJson.toString());
 		return stasJson.toString();
 	}
 

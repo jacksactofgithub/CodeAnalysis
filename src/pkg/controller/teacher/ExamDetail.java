@@ -32,7 +32,6 @@ public class ExamDetail {
 		request.setAttribute("exam", exam);
 		
 		JSONArray studentArray = service.getExamPapers(exam_id);
-		System.out.println(studentArray.toString());
 		request.setAttribute("studentArray", studentArray);//score-1 代表没考
 		//再此处确定题目数量
 

@@ -18,7 +18,6 @@
 //	
 //	@Override
 //	public int addAttendence(Attendence attendence) {
-//		System.out.println("saving attendence");
 //		return dbopt.save(attendence);
 //	}
 //

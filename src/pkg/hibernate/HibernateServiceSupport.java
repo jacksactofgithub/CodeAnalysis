@@ -115,9 +115,4 @@ public class HibernateServiceSupport extends HibernateDaoSupport{
 		}
 		return 1;
 	}
-	
-	public static void main(String[] args) {
-//		String chql= HibernateServiceSupport.getCountHql("select p.id (select count(*) from Person p ) from Person p group by p.id");
-//		System.out.println(chql);
-	}
 }
