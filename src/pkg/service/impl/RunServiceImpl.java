@@ -25,6 +25,8 @@ import pkg.entity.Run;
 import pkg.entity.Test;
 import pkg.service.ExamService;
 import pkg.service.RunService;
+import util.cache.Cache;
+import util.cache.LRUCache;
 
 @Service
 public class RunServiceImpl implements RunService{
@@ -39,6 +41,10 @@ public class RunServiceImpl implements RunService{
 	private TestNameDAO testNameDAO;
 	@Autowired
 	private ExamService examService;
+	// key: examId;proName;classMemId
+	private static Cache<String, Map<Integer, Run>> runCache = new LRUCache<String, Map<Integer, Run>>(20,
+				5 * 60 * 1000);
+	private static final String seperator = ";";
 	
 	@Override
 	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID , int examID) {
@@ -71,12 +77,17 @@ public class RunServiceImpl implements RunService{
 	public JSONObject getRuns(int stuID, String proName , int exam) throws JSONException {
 		// TODO Auto-generated method stub
 		int classMemberId = examService.getClassMemberId(stuID, exam);
-		List<Run> runs = runDAO.queryRuns(classMemberId, proName , exam);
+//		List<Run> runs = runDAO.queryRuns(classMemberId, proName , exam);
+//		
+//		Run originRun = generateStartRun(classMemberId, proName, exam);
+//		runs.add(0, originRun);
+		String key = exam+seperator+proName+seperator+classMemberId;
+		if(!runCache.containsKey(key)){
+			cacheRunMap(classMemberId, proName, exam);
+		}
+		Map<Integer , Run> runMap = runCache.get(key);
 		
-		Run originRun = generateStartRun(classMemberId, proName, exam);
-		runs.add(0, originRun);
-		
-		return getRunJSON(runs.iterator() , proName , classMemberId , exam);
+		return getRunJSON(runMap , proName , classMemberId , exam);
 	}
 	
 	private Run generateStartRun(int stuId , String proName , int exam){
@@ -90,7 +101,7 @@ public class RunServiceImpl implements RunService{
 		return run;
 	}
 	
-	public JSONObject getRunJSON(Iterator<Run> run , String proName , int stuID , int exam) throws JSONException{
+	public JSONObject getRunJSON(Map<Integer , Run> timeMap , String proName , int stuID , int exam) throws JSONException{
 		List<String> testNames = findCommonTestCases(proName , exam);
 		JSONObject runJSON = new JSONObject();
 		
@@ -103,19 +114,8 @@ public class RunServiceImpl implements RunService{
 			caseNameArray.put(name);
 		}
 		runJSON.put("caseName", caseNameArray);
-//		runJSON.put("result", formResultArray(run, proName, testNames));
-		
-		Map<Integer , Run> timeMap = mapTime(run);
-		
-//		Iterator<Entry<Integer , Run>> entryIt = timeMap.entrySet().iterator();
 		
 		JSONArray resultArray = new JSONArray();
-		
-//		while(entryIt.hasNext()){
-//			Entry<Integer , Run> entry = entryIt.next();
-//			JSONObject json = formRun(entry.getValue(), entry.getKey(), testNames);
-//			resultArray.put(json);
-//		}
 		
 		int count = 0;
 		while(true){
@@ -131,6 +131,18 @@ public class RunServiceImpl implements RunService{
 		runJSON.put("result", resultArray);
 		
 		return runJSON;
+	}
+	
+	private void cacheRunMap(int classMemId , String proName , int exam_id){
+		String key = exam_id+seperator+proName+seperator+classMemId;
+		List<Run> runs = runDAO.queryRuns(classMemId, proName , exam_id);
+		
+		Run originRun = generateStartRun(classMemId, proName, exam_id);
+		runs.add(0, originRun);
+		
+		Map<Integer , Run> runMap = mapTime(runs.iterator());
+		runCache.put(key, runMap);
+		
 	}
 	
 	private Map<Integer , Run> mapTime(Iterator<Run> run){
