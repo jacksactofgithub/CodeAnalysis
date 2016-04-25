@@ -42,7 +42,7 @@ public class CodeServiceImpl implements CodeService {
 	 * @return
 	 */
 	private Map<Integer, Code> mapTime(Iterator<Code> code) {
-		Map<Integer, Code> map = new HashMap<Integer, Code>();
+		Map<Integer, Code> map = new HashMap<Integer, Code>(130);
 		if ((code == null) || (!code.hasNext())) {
 			return map;
 		}
@@ -51,7 +51,7 @@ public class CodeServiceImpl implements CodeService {
 		Code former = null;
 		Code current = null;
 		int interval = 0;
-		while ((code.hasNext()) || ((count * 60) < current.getSecond())) {
+		while ((code.hasNext()) || (count <=120)) {
 			if (former == null) {
 				Code temp = code.next();
 				map.put(count, temp);
@@ -95,6 +95,8 @@ public class CodeServiceImpl implements CodeService {
 			}
 
 		}
+		
+		System.out.println("Count:" + count);
 
 		return map;
 	}
@@ -262,8 +264,6 @@ public class CodeServiceImpl implements CodeService {
 		
 		String key = exam_id+seperator+ problem_name+seperator+classMemId+seperator+fileName;
 		
-		System.out.println(key);
-		
 		if(!codeCache.containsKey(key)){
 			cacheCodeMap(classMemId, problem_name, exam_id, fileName);
 		}
@@ -282,7 +282,7 @@ public class CodeServiceImpl implements CodeService {
 		
 		String result = sBuffer.toString();
 		
-//		System.out.println(result);
+		System.out.println(result);
 		
 		return result;
 		

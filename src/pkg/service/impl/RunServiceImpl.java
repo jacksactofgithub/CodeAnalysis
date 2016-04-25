@@ -143,7 +143,7 @@ public class RunServiceImpl implements RunService{
 		Run former = null;
 		Run current = null;
 		int interval = 0;
-		while((run.hasNext())||((count*60)<current.getRun_second())){
+		while((run.hasNext())||((count <=120))){
 			if(former == null){
 				Run temp = run.next();
 				map.put(count, temp);
