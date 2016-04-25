@@ -194,7 +194,6 @@
 			</div>
 		</div>
 		
-
 			<div class="widget" style="overflow:scroll;height:400px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
@@ -246,8 +245,8 @@
 		</div>
 	</div>
 	
+	<!-- 
 	<div class="wrapper" style="position:relative; top:-80px;">
-		<!-- Content -->
 		<div class="content">
 
 			<div class="widget">
@@ -258,63 +257,37 @@
 						<div class="operation" style="height: 38px; margin-top: 6px;">
 							<span style="margin-top: 1px;">测试用例：</span> <select
 								id="coverageSelect" onchange="changeTestCase()">
-								<%ArrayList<String> testCases = (ArrayList<String>)request.getAttribute("testCases");
-								for(int i=0;i<testCases.size();i++){
-									String testCase = testCases.get(i);
-								%>
-								<option value="<%=testCase%>"><%=testCase%></option>
-								<%} %>
 							</select>
 						</div>
 					</div>
 				</div>
 				<div class="body">
 					<pre style="font-family:Consolas;font-size:15px;margin-top: 10px" id="testCaseCode">
-			public JSONObject reverse(JSONArray stasArray) throws JSONException {
-				JSONObject stasJson = new JSONObject();
-				int len = stasArray.length();
-				int[] timestamp = new int[len];
-				double[] lineCount = new double[len];
-				int[] noteCount = new int[len];
-				int[] methodCount = new int[len];
-				int[] varCount = new int[len];
-				int[] maxCy = new int[len];
-			}
 					</pre>
 				</div>
 			</div>
 		</div>
-</div>
+</div> -->
 
-<div class="wrapper" style="position:relative; top:0px;height:80px;">
-		<!-- Content -->
-		<div class="content" >
-			<div class="title">
-				<h5>运行结果</h5>
+	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
+		<div class="widget">
+			<div class="head">
+				<h5 class="iInfo">运行信息</h5>
 			</div>
-	
-			<div id="pigment" style="width:980px;">
-
-				<table class="table table-bordered" style="position:relative; height:40px;width:980px;left:0px">
-					<tr style="">
-						<% int[] array = {0,0,0,0,0,0,0,0,1,1,1,1,1,0,1};
-						String url;
-							for(int j=0;j<15;j++){
-							if(array[j]==0){
-								url="url(view/pic/fail.png)";
-							}else{
-								url = "url(view/pic/pass.png)";
-							}
-							%>
-							<td  style="background:<%=url%>;"></td>
-						<% }%>
-					</tr>
-				</table>
+			<div class="body">
+				<%
+					ArrayList<String> testCases = (ArrayList<String>) request.getAttribute("testCases");
+					for (int i = 0; i < testCases.size(); i++) {
+						String testCase = testCases.get(i);
+				%>
+					<span style="margin-top: 1px;"><%=testCase%></span><br>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</div>
-<div class="wrapper" style="position:relative; top:0px;height:80px;">
-</div>
+
 <script>
 
 scale=function (btn,bar,title){
@@ -379,27 +352,27 @@ function showCode(time){
    	 });   
 }
 
-function changeTestCase(){
-	//更改测试用例代码
-	var option=$("#coverageSelect option:selected");
+function changeFile(){
+	var stu_id = '<%=request.getAttribute("code_stu_id")%>';
 	var exam_id = '<%=request.getAttribute("code_exam_id")%>';
 	var problem_name = '<%=request.getAttribute("code_problem_name")%>';
+	var files=$("#files option:selected");
 
  	 $.ajax({type : "POST",
-          url : "showTestCase", 
+          url : "showCodeByClassMemId", 
           data : {
-         	 exam_id:exam_id,
- 	 		 problem_name: problem_name,
- 	 		 testcase_name :option.val()
+         	 class_member_id : stu_id,
+          	 time :0,
+          	 exam_id:exam_id,
+  	 		 problem_name :problem_name,
+  	 		 file_name :files.val()
           },
           success : function (data){
-        	  alert(data);
+	       	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+	    	   data = data.replaceAll(/</g,"&lt;");
+	    	   $("#stuCode").html(data);
           }
   	 });
-}
-
-function changeFile(){
-	var files=$("#files option:selected");
 }
 </script>
 
