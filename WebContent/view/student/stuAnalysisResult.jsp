@@ -186,6 +186,7 @@
 					<h5>文件列表</h5><select id="files"
 						onchange="changeFile()">
 						<%
+							@SuppressWarnings("unchecked")
 							ArrayList<String> files = (ArrayList<String>) request.getAttribute("files");
 							for (int i = 0; i < files.size(); i++) {
 								String file = files.get(i);

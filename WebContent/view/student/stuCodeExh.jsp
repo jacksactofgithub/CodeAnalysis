@@ -205,7 +205,10 @@
 						<div class="operation" style="height: 38px; margin-top: 6px;">
 							<span style="margin-top: 1px;">文件列表：</span> <select
 								id="files" onchange="changeFile()">
-								<%ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
+								
+								<%
+								@SuppressWarnings("unchecked")
+								ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
 								for(int i=0;i<files.size();i++){
 									String file = files.get(i);
 								%>
@@ -233,78 +236,25 @@
 				</div>
 			</div>
 	</div>
-
-	<div class="wrapper" style="position: relative; top: 0px;">
-		<!-- Content -->
-		<div class="content">
-
-			<div class="widget">
-				<div class="head">
-					<h5 class="iInfo">测试代码</h5>
-					<div class="analysis-block" id="coverageBlock"
-						style="height: 38px; padding-top: -13px;">
-						<div class="operation" style="height: 38px; margin-top: 6px;">
-							<span style="margin-top: 1px;">测试用例：</span> <select
-								id="coverageSelect" onchange="changeTestCase()">
-								<%ArrayList<String> testCases = (ArrayList<String>)request.getAttribute("testCases");
-								for(int i=0;i<testCases.size();i++){
-									String testCase = testCases.get(i);
-								%>
-								<option value="<%=testCase%>"><%=testCase%></option>
-								<%} %>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="body">
-					<pre
-						style="font-family: Consolas; font-size: 15px; margin-top: 10px" id="testCaseCode">
-			public JSONObject reverse(JSONArray stasArray) throws JSONException {
-				JSONObject stasJson = new JSONObject();
-				int len = stasArray.length();
-				int[] timestamp = new int[len];
-				double[] lineCount = new double[len];
-				int[] noteCount = new int[len];
-				int[] methodCount = new int[len];
-				int[] varCount = new int[len];
-				int[] maxCy = new int[len];
-			}
-					</pre>
-				</div>
+	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
+		<div class="widget">
+			<div class="head">
+				<h5 class="iInfo">运行信息</h5>
+			</div>
+			<div class="body">
+				<%
+					@SuppressWarnings("unchecked")
+					ArrayList<String> testCases = (ArrayList<String>) request.getAttribute("testCases");
+					for (int i = 0; i < testCases.size(); i++) {
+						String testCase = testCases.get(i);
+				%>
+					<span style="margin-top: 1px;"><%=testCase%></span><br>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</div>
-
-	<div class="wrapper" style="position:relative; top:0px;height:80px;">
-		<!-- Content -->
-		<div class="content" >
-			<div class="title">
-				<h5>运行结果</h5>
-			</div>
-	
-			<div id="pigment" style="width:980px;">
-
-				<table class="table table-bordered" style="position:relative; height:40px;width:980px;left:0px">
-					<tr style="">
-						<% int[] array = {0,0,0,0,0,0,0,0,1,1,1,1,1,0,1};
-						String url;
-							for(int j=0;j<15;j++){
-							if(array[j]==0){
-								url="url(view/pic/fail.png)";
-							}else{
-								url = "url(view/pic/pass.png)";
-							}
-							%>
-							<td  style="background:<%=url%>;"></td>
-						<%} %>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-<div class="wrapper" style="position:relative; top:0px;height:80px;">
-</div>
 <script>
 scale=function (btn,bar,title){
 	this.btn=document.getElementById(btn);
@@ -363,26 +313,10 @@ function showCode(time){
            },
            success : function (data){
         	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+        	   data = data.replace(/</g,"&lt;");
         	   $("#stuCode").html(data);
            }
    	 });   
-}
-
-function changeTestCase(){
-	//更改测试用例代码
-	var option=$("#coverageSelect option:selected");
-
- 	 $.ajax({type : "POST",
-          url : "showTestCase", 
-          data : {
-         	 exam_id:exam_id,
- 	 		 problem_name: problem_name,
- 	 		 testcase_name :option.val()
-          },
-          success : function (data){
-        	  alert(data);
-          }
-  	 });
 }
 
 function changeFile(){
@@ -391,14 +325,16 @@ function changeFile(){
  	 $.ajax({type : "POST",
           url : "showCode", 
           data : {
-        	 stu_id : stu_id,
-           	 time :0,
-           	 exam_id:exam_id,
-   	 		 problem_name :problem_name,
-   	 		 file_name :files.val()
+         	 stu_id : stu_id,
+          	 time :0,
+          	 exam_id:exam_id,
+  	 		 problem_name :problem_name,
+  	 		 file_name :files.val()
           },
           success : function (data){
-        	  $("#stuCode").html(data);
+	       	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+	    	   data = data.replace(/</g,"&lt;");
+	    	   $("#stuCode").html(data);
           }
   	 });
 }

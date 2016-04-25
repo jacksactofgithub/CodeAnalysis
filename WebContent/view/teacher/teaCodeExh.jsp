@@ -202,11 +202,13 @@
 						<div class="operation" style="height: 38px; margin-top: 6px;">
 							<span style="margin-top: 1px;">文件列表：</span> <select
 								id="files" onchange="changeFile()">
-								<%ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
-								for(int i=0;i<files.size();i++){
-									String file = files.get(i);
+								<%
+									@SuppressWarnings("unchecked")
+									ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
+									for(int i=0;i<files.size();i++){
+										String file = files.get(i);
 								%>
-								<option value="<%=file%>"><%=file%></option>
+									<option value="<%=file%>"><%=file%></option>
 								<%} %>
 							</select>
 						</div>
@@ -276,6 +278,7 @@
 			</div>
 			<div class="body">
 				<%
+					@SuppressWarnings("unchecked")
 					ArrayList<String> testCases = (ArrayList<String>) request.getAttribute("testCases");
 					for (int i = 0; i < testCases.size(); i++) {
 						String testCase = testCases.get(i);

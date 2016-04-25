@@ -83,16 +83,6 @@ public class ShowCodeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/showTestCase", method=RequestMethod.POST)
-	public String showTestCase(@RequestParam("exam_id")int exam_id,	@RequestParam("problem_name")String problem_name,
-			HttpServletRequest request, HttpSession session) {
-		//参数 学生学号,时间点,考试号,考题名
-		//String code = service.getStuCode(stu_id, time, exam_id, problem_name);
-		String testCase = "success2";
-		return testCase;
-	}
-	
-	@ResponseBody
 	@RequestMapping(value = "/getCodeStas", method=RequestMethod.POST)
 	public String getCodeStas(@RequestParam("stu_id")int stu_id,@RequestParam("exam_id")int exam_id,	@RequestParam("problem_name")String problem_name,
 			@RequestParam("file_name")String file_name,HttpServletRequest request, HttpSession session) {
