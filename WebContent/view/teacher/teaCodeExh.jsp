@@ -346,7 +346,7 @@ function showCode(time){
            },
            success : function (data){
         	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
-        	   data = data.replaceAll(/</g,"&lt;");
+        	   data = data.replace(/</g,"&lt;");
         	   $("#stuCode").html(data);
            }
    	 });   
