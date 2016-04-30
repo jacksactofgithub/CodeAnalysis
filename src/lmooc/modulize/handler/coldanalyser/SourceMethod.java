@@ -1,4 +1,4 @@
-package lmooc.modulize.model.coldanalyser;
+package lmooc.modulize.handler.coldanalyser;
 
 import java.util.ArrayList;
 import java.util.List;

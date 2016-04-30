@@ -1,4 +1,4 @@
-package lmooc.modulize.model.coldanalyser;
+package lmooc.modulize.handler.coldanalyser;
 
 /**
  * 变量

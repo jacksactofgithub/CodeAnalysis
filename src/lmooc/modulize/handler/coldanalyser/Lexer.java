@@ -1,11 +1,11 @@
-package lmooc.modulize.model.coldanalyser;
+package lmooc.modulize.handler.coldanalyser;
 
 import java.util.Iterator;
 import java.util.Stack;
 
+import lmooc.modulize.handler.coldanalyser.state.AbstractState;
+import lmooc.modulize.handler.coldanalyser.state.StateCallBack;
 import lmooc.modulize.io.FileReader;
-import lmooc.modulize.model.coldanalyser.state.AbstractState;
-import lmooc.modulize.model.coldanalyser.state.StateCallBack;
 
 public class Lexer implements StateCallBack{
 	

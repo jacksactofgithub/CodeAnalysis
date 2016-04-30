@@ -1,24 +1,28 @@
-package lmooc.modulize.model.coldanalyser.state;
+package lmooc.modulize.handler.coldanalyser.state;
 
-import lmooc.modulize.model.coldanalyser.Source;
+import lmooc.modulize.handler.coldanalyser.Source;
 
-public class NoteState extends AbstractState{
+public class JavaWordState extends AbstractState{
 
-	public static final int LINE_NOTE = 1;
-	public static final int BLOCK_NOTE = 2;
+	private String word;
+	private String follow;
+	private int leftBracketCount;
 	
-	private int type;
-	
-	public NoteState(Source source, StateCallBack lexer ,int type) {
+	public JavaWordState(Source source, StateCallBack lexer , String word , int leftBracketCount) {
 		super(source, lexer);
 		// TODO Auto-generated constructor stub
-		this.type = type;
+		this.word = word;
+		follow = "";
+		this.leftBracketCount = leftBracketCount;
 	}
 
 	@Override
 	public void getSpace(String currentWord) {
 		// TODO Auto-generated method stub
-		
+		if(bracketCount == 0){
+			word = word + " " + currentWord;
+		}
+		follow = follow + currentWord + " ";
 	}
 
 	@Override
@@ -28,48 +32,23 @@ public class NoteState extends AbstractState{
 	}
 
 	@Override
-	public void getQuotes(char forechar) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getLineNote() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getNoteStart() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void getNoteEnd() {
 		// TODO Auto-generated method stub
-		source.lonPlus();
-		if(type == BLOCK_NOTE){
-			lexer.endState();
-		}
+		
 	}
 
 	@Override
 	public void getLeftBracket(String currentWord) {
 		// TODO Auto-generated method stub
-		
+		leftBracketCount++;
 	}
 
-	@Override
-	public void getRightBracket(String currentWord) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void getLeftBrace(String currentWord) {
 		// TODO Auto-generated method stub
-		
+		source.getLeftBrace();
+		lexer.endState();
 	}
 
 	@Override
@@ -93,14 +72,13 @@ public class NoteState extends AbstractState{
 	@Override
 	public void getEnter(String currentWord) {
 		// TODO Auto-generated method stub
-		source.lonPlus();
-		if(type == LINE_NOTE){
+		if(word.equals("else")||(word.equals("default"))){
 			lexer.endState();
 		}
 	}
 
 	@Override
-	public void getLogicOperation(String currentWord) {
+	public void getQuotes(char forechar) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -127,6 +105,21 @@ public class NoteState extends AbstractState{
 	public void getRightMiddleBracket(String currentWord) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void getLogicOperation(String currentWord) {
+		// TODO Auto-generated method stub
+		source.plusCyclomaticCpl();
+	}
+
+	@Override
+	public void getRightBracket(String currentWord) {
+		// TODO Auto-generated method stub
+		leftBracketCount--;
+		if(leftBracketCount == 0){
+			lexer.endState();
+		}
 	}
 
 }

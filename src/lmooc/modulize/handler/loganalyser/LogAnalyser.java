@@ -1,4 +1,4 @@
-package lmooc.modulize.model.loganalyser;
+package lmooc.modulize.handler.loganalyser;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -1,10 +1,10 @@
-package lmooc.modulize.model.coldanalyser.state;
+package lmooc.modulize.handler.coldanalyser.state;
 
 import java.util.Iterator;
 
-import lmooc.modulize.model.coldanalyser.JavaSentence;
-import lmooc.modulize.model.coldanalyser.Source;
-import lmooc.modulize.model.coldanalyser.SourceMethod;
+import lmooc.modulize.handler.coldanalyser.JavaSentence;
+import lmooc.modulize.handler.coldanalyser.Source;
+import lmooc.modulize.handler.coldanalyser.SourceMethod;
 
 public class PreformState extends AbstractState{
 	

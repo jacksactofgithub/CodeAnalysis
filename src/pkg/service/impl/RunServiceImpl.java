@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lmooc.modulize.bean.RunStamp;
-import lmooc.modulize.model.FileStateHandler;
+import lmooc.modulize.handler.FileStateHandler;
 import pkg.dao.CommonTestDAO;
 import pkg.dao.RunDAO;
 import pkg.dao.TestDAO;

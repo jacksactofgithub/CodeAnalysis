@@ -1,10 +1,10 @@
-package lmooc.modulize.model.coldanalyser.state;
+package lmooc.modulize.handler.coldanalyser.state;
 
-import lmooc.modulize.model.coldanalyser.Source;
+import lmooc.modulize.handler.coldanalyser.Source;
 
-public class QuoteState extends AbstractState{
+public class ReturnState extends AbstractState{
 
-	public QuoteState(Source source, StateCallBack lexer) {
+	public ReturnState(Source source, StateCallBack lexer) {
 		super(source, lexer);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,16 +18,14 @@ public class QuoteState extends AbstractState{
 	@Override
 	public void getSemicolon(String currentWord) {
 		// TODO Auto-generated method stub
-		
+		source.locPlus();
+		lexer.endState();
 	}
 
 	@Override
 	public void getQuotes(char forechar) {
 		// TODO Auto-generated method stub
-		if(forechar == '\\'){
-			return ;
-		}
-		lexer.endState();
+		lexer.startState(new QuoteState(source, lexer));
 	}
 
 	@Override

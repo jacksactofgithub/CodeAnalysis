@@ -1,4 +1,4 @@
-package lmooc.modulize.model;
+package lmooc.modulize.handler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,9 +11,9 @@ import java.util.zip.ZipFile;
 import lmooc.modulize.bean.CodeStamp;
 import lmooc.modulize.bean.filestate.FileState;
 import lmooc.modulize.bean.filestate.StateType;
+import lmooc.modulize.handler.coldanalyser.Lexer;
+import lmooc.modulize.handler.coldanalyser.Source;
 import lmooc.modulize.io.Reader;
-import lmooc.modulize.model.coldanalyser.Lexer;
-import lmooc.modulize.model.coldanalyser.Source;
 
 /**
  * 管理一个学生的所有File State

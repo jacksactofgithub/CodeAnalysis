@@ -1,7 +1,7 @@
-package lmooc.modulize.model.coldanalyser.state;
+package lmooc.modulize.handler.coldanalyser.state;
 
-import lmooc.modulize.model.coldanalyser.JavaSentence;
-import lmooc.modulize.model.coldanalyser.Source;
+import lmooc.modulize.handler.coldanalyser.JavaSentence;
+import lmooc.modulize.handler.coldanalyser.Source;
 
 public class BracketsMatchingState extends AbstractState {
 
