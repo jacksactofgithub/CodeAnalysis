@@ -48,10 +48,6 @@ public class LogAnalyser {
 		//记录运行信息
 		List<RunResult> runs = new ArrayList<RunResult>();
 		
-//		for(int i=0 , length = log.size(); i<length ; ++i){
-//			analyseOne(log.get(i) , states , runs);
-//		}
-		
 		while(log.hasNext()){
 			analyseOne(log.next() , states , runs);
 		}

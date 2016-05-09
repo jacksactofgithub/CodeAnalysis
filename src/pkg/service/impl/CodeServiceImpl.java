@@ -33,7 +33,7 @@ public class CodeServiceImpl implements CodeService {
 	private static final String seperator = ";";
 
 	// key: examId;proName;classMemId;fileName
-	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(20,
+	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(1,
 			5 * 60 * 1000);
 
 	/**
@@ -171,6 +171,7 @@ public class CodeServiceImpl implements CodeService {
 		
 		Map<Integer, Code> codeMap = mapTime(list.iterator());
 		codeCache.put(key, codeMap);
+		System.out.println("cacheSize:"+codeCache.size());
 	}
 
 	public JSONArray getCodeJSON(Map<Integer, Code> codeMap) {
