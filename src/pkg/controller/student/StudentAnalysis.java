@@ -12,12 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pkg.service.CodeService;
 import pkg.service.ExamService;
 import pkg.service.RunService;
-import pkg.service.StorageService;
 
 @Controller
 public class StudentAnalysis {
-	@Autowired
-	StorageService storageService;
 	@Autowired
 	CodeService codeService;
 	@Autowired
