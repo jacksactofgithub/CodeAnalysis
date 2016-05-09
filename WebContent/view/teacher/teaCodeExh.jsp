@@ -187,7 +187,7 @@
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 参数可能更改 -->
-						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li ><a href="<%=request.getContextPath() %>/teaAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
 						<li class="firstB">CalculateMatrix</li>
 					</ul>
 				</div>
@@ -246,30 +246,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- 
-	<div class="wrapper" style="position:relative; top:-80px;">
-		<div class="content">
-
-			<div class="widget">
-				<div class="head">
-					<h5 class="iInfo">测试代码</h5>
-										<div class="analysis-block" id="coverageBlock"
-						style="height: 38px; padding-top: -13px;">
-						<div class="operation" style="height: 38px; margin-top: 6px;">
-							<span style="margin-top: 1px;">测试用例：</span> <select
-								id="coverageSelect" onchange="changeTestCase()">
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="body">
-					<pre style="font-family:Consolas;font-size:15px;margin-top: 10px" id="testCaseCode">
-					</pre>
-				</div>
-			</div>
-		</div>
-</div> -->
 
 	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
 		<div class="widget">
