@@ -18,7 +18,7 @@ import lmooc.modulize.bean.SubjectResult;
 import lmooc.modulize.bean.filestate.FileState;
 import lmooc.modulize.bean.run.RunResult;
 import lmooc.modulize.handler.FileStateHandler;
-import lmooc.modulize.handler.RunLogHelper;
+//import lmooc.modulize.handler.RunLogHelper;
 import lmooc.modulize.handler.loganalyser.LogAnalyser;
 import lmooc.modulize.io.Reader;
 import pkg.service.CodeService;
@@ -39,11 +39,11 @@ public class StorageServiceImpl implements StorageService{
 	public void startStore(int examID) {
 		// TODO Auto-generated method stub
 		List<Integer> clazzMemberIds = reader.getStudentIds(examID+"");
-		RunLogHelper handler = new RunLogHelper();
+//		RunLogHelper handler = new RunLogHelper();
 		
 		for(int i=0 ; i<clazzMemberIds.size() ; ++i){
 			int memberId = clazzMemberIds.get(i);
-			handler.fillInRunLog(examID, memberId);
+//			handler.fillInRunLog(examID, memberId);
 			storeOne(examID , memberId , memberId);
 		}
 		

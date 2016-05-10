@@ -42,7 +42,7 @@ public class RunServiceImpl implements RunService{
 	@Autowired
 	private ExamService examService;
 	// key: examId;proName;classMemId
-	private static Cache<String, Map<Integer, Run>> runCache = new LRUCache<String, Map<Integer, Run>>(20,
+	private static Cache<String, Map<Integer, Run>> runCache = new LRUCache<String, Map<Integer, Run>>(1,
 				5 * 60 * 1000);
 	private static final String seperator = ";";
 	
@@ -77,10 +77,7 @@ public class RunServiceImpl implements RunService{
 	public JSONObject getRuns(int stuID, String proName , int exam) throws JSONException {
 		// TODO Auto-generated method stub
 		int classMemberId = examService.getClassMemberId(stuID, exam);
-//		List<Run> runs = runDAO.queryRuns(classMemberId, proName , exam);
-//		
-//		Run originRun = generateStartRun(classMemberId, proName, exam);
-//		runs.add(0, originRun);
+		
 		String key = exam+seperator+proName+seperator+classMemberId;
 		if(!runCache.containsKey(key)){
 			cacheRunMap(classMemberId, proName, exam);
