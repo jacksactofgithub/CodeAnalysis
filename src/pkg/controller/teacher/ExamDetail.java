@@ -35,7 +35,6 @@ public class ExamDetail {
 		request.setAttribute("studentArray", studentArray);//score-1 代表没考
 		//再此处确定题目数量
 
-		
 		return "view/teacher/examDetail";
 	}
 	

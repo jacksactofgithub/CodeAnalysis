@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import pkg.service.ExamService;
 
@@ -27,9 +26,14 @@ public class TeacherAnalysis {
 	 * @return
 	 */
 	@RequestMapping("/teacherAnalysis")
-	public String studentAnalysis(HttpServletRequest request,HttpSession session,@RequestParam("tea_id")int tea_id,
-    		@RequestParam("tea_name")String tea_name,@RequestParam("uni_name")String uni_name) {
+	public String studentAnalysis(HttpServletRequest request,HttpSession session) {
     	//在第一次进的时候如果request中带了参数则将session中参数设置为登录信息;否则session中信息不变(如果是本网站的请求)
+    	int tea_id=-1;
+    	if(request.getParameter("tea_id")!=null){
+    		tea_id = Integer.parseInt(request.getParameter("tea_id"));
+    	}
+    	String tea_name = request.getParameter("tea_name");
+    	String uni_name = request.getParameter("uni_name");
 		if(tea_id!=0&&tea_name!=null){
         	//在第一次进的时候如果request中带了参数则将session中参数设置为登录信息;否则session中信息不变(如果是本网站的请求)
         	session.setAttribute("tea_name", tea_name);
