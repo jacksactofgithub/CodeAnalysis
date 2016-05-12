@@ -25,8 +25,8 @@ import pkg.entity.Run;
 import pkg.entity.Test;
 import pkg.service.ExamService;
 import pkg.service.RunService;
-import util.cache.Cache;
-import util.cache.LRUCache;
+//import util.cache.Cache;
+//import util.cache.LRUCache;
 
 @Service
 public class RunServiceImpl implements RunService{
@@ -42,9 +42,9 @@ public class RunServiceImpl implements RunService{
 	@Autowired
 	private ExamService examService;
 	// key: examId;proName;classMemId
-	private static Cache<String, Map<Integer, Run>> runCache = new LRUCache<String, Map<Integer, Run>>(1,
-				5 * 60 * 1000);
-	private static final String seperator = ";";
+//	private static Cache<String, Map<Integer, Run>> runCache = new LRUCache<String, Map<Integer, Run>>(2,
+//				5 * 60 * 1000);
+//	private static final String seperator = ";";
 	
 	@Override
 	public int saveRunStamp(Iterator<RunStamp> stamps, int stuID , int examID) {
@@ -78,11 +78,14 @@ public class RunServiceImpl implements RunService{
 		// TODO Auto-generated method stub
 		int classMemberId = examService.getClassMemberId(stuID, exam);
 		
-		String key = exam+seperator+proName+seperator+classMemberId;
-		if(!runCache.containsKey(key)){
-			cacheRunMap(classMemberId, proName, exam);
-		}
-		Map<Integer , Run> runMap = runCache.get(key);
+		Map<Integer , Run> runMap = cacheRunMap(classMemberId, proName, exam);
+		
+//		String key = exam+seperator+proName+seperator+classMemberId;
+//		if(!runCache.containsKey(key)){
+//			runMap = cacheRunMap(classMemberId, proName, exam);
+//		}else{
+//			runMap = runCache.get(key);
+//		}
 		
 		return getRunJSON(runMap , proName , classMemberId , exam);
 	}
@@ -130,19 +133,21 @@ public class RunServiceImpl implements RunService{
 		return runJSON;
 	}
 	
-	private void cacheRunMap(int classMemId , String proName , int exam_id){
-		String key = exam_id+seperator+proName+seperator+classMemId;
+	private Map<Integer , Run> cacheRunMap(int classMemId , String proName , int exam_id){
+//		String key = exam_id+seperator+proName+seperator+classMemId;
 		List<Run> runs = runDAO.queryRuns(classMemId, proName , exam_id);
 		
 		Run originRun = generateStartRun(classMemId, proName, exam_id);
 		runs.add(0, originRun);
 		
 		Map<Integer , Run> runMap = mapTime(runs.iterator());
-		runCache.put(key, runMap);
+//		runCache.put(key, runMap);
 		
+		return runMap;
 	}
 	
 	private Map<Integer , Run> mapTime(Iterator<Run> run){
+		System.out.println("Mapping time");
 		Map<Integer , Run> map = new HashMap<Integer , Run>();
 		if((run == null)||(!run.hasNext())){
 			return map;
@@ -197,6 +202,7 @@ public class RunServiceImpl implements RunService{
 				
 		}
 		
+		System.out.println("map time end");
 		return map;
 	}
 	

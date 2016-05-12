@@ -26,7 +26,11 @@ public class StorageController {
 		
 		int examID = Integer.parseInt(request.getParameter("exam_id"));
 		
-		storageService.startStore(examID);
+		int state = storageService.getAnalyseState(examID);
+		
+		if(state == 0){
+			storageService.startStore(examID);
+		}
 		
 		return null;
 	}

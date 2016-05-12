@@ -21,6 +21,7 @@ import lmooc.modulize.handler.FileStateHandler;
 //import lmooc.modulize.handler.RunLogHelper;
 import lmooc.modulize.handler.loganalyser.LogAnalyser;
 import lmooc.modulize.io.Reader;
+import pkg.dao.CodeDAO;
 import pkg.service.CodeService;
 import pkg.service.RunService;
 import pkg.service.StorageService;
@@ -32,12 +33,17 @@ public class StorageServiceImpl implements StorageService{
 	CodeService codeService;
 	@Autowired
 	RunService runService;
+	@Autowired
+	private CodeDAO codeDAO;
 	
 	private Reader reader = new Reader();
+	
+	private boolean isAnalysing = false;
 	
 	@Override
 	public void startStore(int examID) {
 		// TODO Auto-generated method stub
+		isAnalysing = true;
 		List<Integer> clazzMemberIds = reader.getStudentIds(examID+"");
 //		RunLogHelper handler = new RunLogHelper();
 		
@@ -52,6 +58,7 @@ public class StorageServiceImpl implements StorageService{
 		for(String proName:allProNames){
 			runService.saveCommonTests(examID, proName);
 		}
+		isAnalysing = false;
 	}
 
 	@Override
@@ -117,6 +124,21 @@ public class StorageServiceImpl implements StorageService{
 		}
 		
 		return stampList.iterator();
+	}
+
+	@Override
+	public int getAnalyseState(int examId) {
+		// TODO Auto-generated method stub
+		if(isAnalysing){
+			return 2;
+		}
+		long count = codeDAO.getCodeCount(examId);
+		
+		if(count == 0){
+			return 0;
+		}
+		
+		return 1;
 	}
 	
 }

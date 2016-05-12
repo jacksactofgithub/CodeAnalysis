@@ -17,8 +17,8 @@ import pkg.dao.CodeDAO;
 import pkg.entity.Code;
 import pkg.service.CodeService;
 import pkg.service.ExamService;
-import util.cache.Cache;
-import util.cache.LRUCache;
+//import util.cache.Cache;
+//import util.cache.LRUCache;
 
 @Service
 public class CodeServiceImpl implements CodeService {
@@ -30,11 +30,11 @@ public class CodeServiceImpl implements CodeService {
 	
 	private Reader reader = new Reader();
 	
-	private static final String seperator = ";";
-
-	// key: examId;proName;classMemId;fileName
-	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(1,
-			5 * 60 * 1000);
+//	private static final String seperator = ";";
+//
+//	// key: examId;proName;classMemId;fileName
+//	private static Cache<String, Map<Integer, Code>> codeCache = new LRUCache<String, Map<Integer, Code>>(2,
+//			5 * 60 * 1000);
 
 	/**
 	 * 将每一分钟对应至一个code
@@ -42,6 +42,7 @@ public class CodeServiceImpl implements CodeService {
 	 * @return
 	 */
 	private Map<Integer, Code> mapTime(Iterator<Code> code) {
+		System.out.println("Mapping code");
 		Map<Integer, Code> map = new HashMap<Integer, Code>(130);
 		if ((code == null) || (!code.hasNext())) {
 			return map;
@@ -96,6 +97,7 @@ public class CodeServiceImpl implements CodeService {
 
 		}
 		
+		System.out.println("Map code end");
 		return map;
 	}
 
@@ -142,22 +144,22 @@ public class CodeServiceImpl implements CodeService {
 	public JSONArray getCodeRecord(int stuID, String proName, int exam , String fileName) {
 		// TODO Auto-generated method stub
 		int classMemberId = examService.getClassMemberId(stuID, exam);
-		String key = exam+seperator+proName+seperator+classMemberId+seperator+fileName;
+//		String key = exam+seperator+proName+seperator+classMemberId+seperator+fileName;
 		
-		Map<Integer , Code> codeMap;
-		if(!codeCache.containsKey(key)){
-			cacheCodeMap(classMemberId, proName, exam, fileName);
-		}
-		
-		codeMap = codeCache.get(key);
+		Map<Integer , Code> codeMap = cacheCodeMap(classMemberId, proName, exam, fileName);
+//		if(!codeCache.containsKey(key)){
+//			cacheCodeMap(classMemberId, proName, exam, fileName);
+//		}
+//		
+//		codeMap = codeCache.get(key);
 		
 		JSONArray array = getCodeJSON(codeMap);
 
 		return array;
 	}
 	
-	private void cacheCodeMap(int classMemberId , String proName , int exam_id , String fileName){
-		String key = exam_id+seperator+proName+seperator+classMemberId+seperator+fileName;
+	private Map<Integer, Code> cacheCodeMap(int classMemberId , String proName , int exam_id , String fileName){
+//		String key = exam_id+seperator+proName+seperator+classMemberId+seperator+fileName;
 		List<Code> list = codeDAO.queryCode(classMemberId, proName, exam_id);
 
 		Iterator<Code> it = list.iterator();
@@ -170,8 +172,9 @@ public class CodeServiceImpl implements CodeService {
 		}
 		
 		Map<Integer, Code> codeMap = mapTime(list.iterator());
-		codeCache.put(key, codeMap);
-		System.out.println("cacheSize:"+codeCache.size());
+//		codeCache.put(key, codeMap);
+//		System.out.println("cacheSize:"+codeCache.size());
+		return codeMap;
 	}
 
 	public JSONArray getCodeJSON(Map<Integer, Code> codeMap) {
@@ -261,12 +264,13 @@ public class CodeServiceImpl implements CodeService {
 	@Override
 	public String getStuCodeByClassMemId(int classMemId, int time, int exam_id, String problem_name, String fileName) {
 		
-		String key = exam_id+seperator+ problem_name+seperator+classMemId+seperator+fileName;
+//		String key = exam_id+seperator+ problem_name+seperator+classMemId+seperator+fileName;
 		
-		if(!codeCache.containsKey(key)){
-			cacheCodeMap(classMemId, problem_name, exam_id, fileName);
-		}
-		Map<Integer , Code> codeMap = codeCache.get(key);
+		Map<Integer, Code> codeMap = cacheCodeMap(classMemId , problem_name , exam_id , fileName);
+//		if(!codeCache.containsKey(key)){
+//			cacheCodeMap(classMemId, problem_name, exam_id, fileName);
+//		}
+//		Map<Integer , Code> codeMap = codeCache.get(key);
 		Code code = codeMap.get(time);
 		long timestamp = code.getTimestamp();
 		

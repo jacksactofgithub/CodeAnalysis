@@ -71,4 +71,19 @@ public class CodeDAOImpl extends HibernateServiceSupport implements CodeDAO{
 		return result;
 	}
 
+	@Override
+	public long getCodeCount(int examId) {
+		// TODO Auto-generated method stub
+		String hql = "select count(exam_id) from Code as code where code.exam_id=?";
+		
+		@SuppressWarnings("unchecked")
+		List<Long> result = dbopt.findList(hql, examId);
+		
+		if(result.size() == 0){
+			return 0;
+		}
+		
+		return result.get(0);
+	}
+
 }
