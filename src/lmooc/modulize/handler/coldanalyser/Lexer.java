@@ -21,7 +21,6 @@ public class Lexer implements StateCallBack{
 	}
 	
 	/**
-	 * 对外接口，将source分词
 	 * @param source
 	 */
 	public void segment(Source source){
@@ -48,7 +47,7 @@ public class Lexer implements StateCallBack{
 				
 				if((getEqual)||(currentChar == '=')){
 					if(currentChar == '='){
-						if(!getEqual){		//第一个等号
+						if(!getEqual){ 
 							getEqual = true;
 						}
 						else{
@@ -164,7 +163,6 @@ public class Lexer implements StateCallBack{
 	}
 	
 //	/**
-//	 * 对单条String进行分词操作
 //	 * @param source
 //	 * @param tag
 //	 */

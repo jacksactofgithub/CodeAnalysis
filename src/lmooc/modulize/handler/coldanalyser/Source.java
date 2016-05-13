@@ -52,7 +52,6 @@ public class Source {
 	}
 	
 	/**
-	 * 增加一个loc，若该行在一个方法中，则该方法的loc也增加
 	 * @param methodID
 	 */
 	public void locPlus(){
@@ -95,7 +94,6 @@ public class Source {
 	}
 	
 	/**
-	 * 以下三个方法用于计量当前代码所属方法
 	 * @param method
 	 */
 	public void startMethod(SourceMethod method){

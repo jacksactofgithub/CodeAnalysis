@@ -8,8 +8,8 @@ public class SourceMethod {
 	private String name;
 	private String parameters;
 	
-	private int cyclomaticCpl ;		//圈复杂度
-	private List<Vary> varyList;	//方法的变量列表
+	private int cyclomaticCpl ;
+	private List<Vary> varyList;
 
 	private int loc;
 	private int lon;

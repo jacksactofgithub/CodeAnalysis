@@ -1,7 +1,6 @@
 package lmooc.modulize.handler.coldanalyser;
 
 /**
- * 变量
  * @author Ray Liu
  *
  */
