@@ -4,20 +4,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pkg.service.CodeService;
 import pkg.service.ExamService;
-import pkg.service.RunService;
+import pkg.service.StorageService;
 
 @Controller
 public class StudentAnalysis {
 	@Autowired
 	CodeService codeService;
 	@Autowired
-	RunService runService;
+	StorageService storageService;
 	@Autowired
 	ExamService examService;
 	
@@ -50,8 +51,23 @@ public class StudentAnalysis {
     	}
     	
     	JSONArray examArray = examService.getStudentExams(stu_id);
-    	request.setAttribute("examArray", examArray);
+    	try {
+			request.setAttribute("examArray", deleteUnAnalysis(examArray));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		return "view/student/stuAnalysis";
 	}
+    
+    public JSONArray deleteUnAnalysis(JSONArray array) throws JSONException{
+    	JSONArray newArray = new JSONArray();
+    	for(int i=0;i<array.length();i++){
+    	  	int state = storageService.getAnalyseState(array.getJSONObject(i).getInt("exam_id"));
+    	  	if(state==1){
+    	  		newArray.put(array.get(i));
+    	  	}
+    	}
+    	return newArray;
+    }
     
 }
