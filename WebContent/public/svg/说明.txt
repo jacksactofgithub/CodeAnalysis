@@ -1,2 +1,0 @@
-﻿这里存放所有题目的CFG的svg，为了页面中能够通过url得到svg文件
-目录结构: /problems/[subId]/[proName]/[ClassName]- [MethodName].svg（@init@表示构造函数）
