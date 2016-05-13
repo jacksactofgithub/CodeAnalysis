@@ -18,11 +18,6 @@ import lmooc.modulize.bean.run.RunResult;
 import util.DateParser;
 
 /**
- * 分析log文件
- * log分为2大类，FileState和Run
- * FileState分为Timer事件和Active_Editor事件
- * 使用方法analyse分析log后，将分析生成的2类对象分别存储在
- * states和runs2个List中
  * @author Ray Liu
  *
  */
@@ -43,9 +38,7 @@ public class LogAnalyser {
 	 */
 	public LogBean analyse(Iterator<String> log) throws JSONException{
 		
-		//记录当前log的所有FileState，并按时间排序
 		List<FileState> states = new ArrayList<FileState>();
-		//记录运行信息
 		List<RunResult> runs = new ArrayList<RunResult>();
 		
 		while(log.hasNext()){
@@ -56,7 +49,6 @@ public class LogAnalyser {
 	}
 	
 	/**
-	 * 解析单条log信息，若以FileState开头，则加入states，若以Run开头，则加入RunResult
 	 * @param log
 	 * @param states
 	 * @param runs
@@ -75,7 +67,6 @@ public class LogAnalyser {
 	}
 	
 	/**
-	 * 增加一条FileState记录，将log解析为FileState对象
 	 * @param log
 	 * @param states
 	 */
@@ -91,7 +82,6 @@ public class LogAnalyser {
 	}
 	
 	/**
-	 * 增加一条RunResult记录，将log解析为RunResult对象
 	 * @param log
 	 * @param run
 	 * @throws JSONException 
@@ -106,7 +96,7 @@ public class LogAnalyser {
 			report = report.substring(0, report.lastIndexOf(" "));
 		}
 		
-		Date date = DateParser.string2Date(tempDate);	//精确到分的时间
+		Date date = DateParser.string2Date(tempDate); 
 		
 		JSONObject runJson = new JSONObject(report);
 		String proName = runJson.getString("proName");
@@ -114,8 +104,6 @@ public class LogAnalyser {
 		int successNum = runJson.getInt("successNum");
 		
 		List<ClassResult> classes = new ArrayList<ClassResult>();
-		//参看run的json的结构，classArray为“classes”所对应的运行类的列表
-		//目前仅有1个
 		JSONArray classArray = runJson.getJSONArray("classes");
 		ClassResult classResult ;
 		for(int i=0,length=classArray.length();i<length ; i++){
@@ -130,15 +118,10 @@ public class LogAnalyser {
 	}
 	
 	/**
-	 * 生成一个对应的ClassResult对象
-	 * @param info
-	 * @return
-	 * @throws JSONException 
 	 */
 	private ClassResult initClass(Object info) throws JSONException{
 		JSONObject caseJson = (JSONObject) info;
 		String className = caseJson.getString("className");
-		//ClassResult内含有一组CaseResult，显示每个测试用例的运行情况
 		List<CaseResult> resultList = new ArrayList<CaseResult>();
 		
 		JSONArray cases = caseJson.getJSONArray("testCases");
@@ -156,13 +139,12 @@ public class LogAnalyser {
 	private CaseResult initCase(JSONObject caseObj) throws JSONException{
 		String success = caseObj.getString("success");
 		String methodName = caseObj.getString("methodName");
-		//默认值，若测试用例通过则没有failureMessage
 		String failureMessage = null;
 		boolean pass = true;
 		if(success.equals("0")){
 			pass = false;
 		}
-		else if(!success.equals("1")){	//既不为0页不为1，则是无效数据返回null
+		else if(!success.equals("1")){ 
 			return null;
 		}
 		

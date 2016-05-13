@@ -14,9 +14,9 @@ import util.DateParser;
 
 public class Reader {
 
-	private String prePath; // 源目录
-	// private String tagFolder; // 存放代码的文件夹
-	private String logPrefix; // log文件的前缀
+	private String prePath;  
+	// private String tagFolder;  
+	private String logPrefix;  
 
 	private String runPrePath;
 	private String jsonPath = "mooctest/junitResult.json";
@@ -176,11 +176,9 @@ public class Reader {
 	}
 
 	/**
-	 * 通过cfg文件判断是从本地还是web读取数据，以及路径
 	 */
 	private void initReader() {
 		FileReader fReader = new FileReader();
-		// 读取cfg信息
 		String cfgPath = this.getClass().getResource("/").getPath();
 		Iterator<String> info = fReader.read(cfgPath + CFG_PATH);
 
