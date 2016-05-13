@@ -46,7 +46,7 @@ public class TeaAnalysisResult {
 		
 		JSONObject runResultJson = null;
 		try {
-			runResultJson = runService.getRuns(stu_id, problem_name, exam_id);
+			runResultJson = runService.getRunsByClassMemId(stu_id, problem_name, exam_id);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

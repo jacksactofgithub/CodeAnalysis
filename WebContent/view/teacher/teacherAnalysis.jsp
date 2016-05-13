@@ -246,7 +246,7 @@
                         <a href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
                     </li>
                     <li class="iStats">
-                        <a href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
+                        <a href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>编程分析</span></a>
                     </li>
                 </ul>
             </div>

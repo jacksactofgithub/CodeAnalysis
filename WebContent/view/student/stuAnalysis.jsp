@@ -251,7 +251,7 @@
 						<li class="iClass"><a
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
-						<li class="iExam"><a id="analysis" onclick="jump()"><span>考试分析</span></a>
+						<li class="iExam"><a id="analysis" onclick="jump()"><span>编程分析</span></a>
 						</li><!-- 如果session无法共用 此处可以使用一个表单 -->
 					</ul>
 					<form action="<%=request.getContextPath()%>/stuAnalysis" name = "toanalysis" method="post">

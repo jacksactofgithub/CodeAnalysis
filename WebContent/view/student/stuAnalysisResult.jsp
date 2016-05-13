@@ -135,7 +135,7 @@
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
 						<li class="iExam"><a
-							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>编程分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -156,7 +156,7 @@
 		<!-- Content -->
 		<div class="content">
 			<div class="title">
-				<h5>考试分析</h5>
+				<h5>编程分析</h5>
 			</div>
 
 			<div class="breadCrumbHolder module" style="position:absolute;height:33px;">
@@ -167,7 +167,7 @@
 						<%
 							JSONObject exam = ((JSONObject)request.getAttribute("exam"));
 						%>
-						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li>
+						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="编程分析">编程分析</a></li>
 						<li ><a href="<%=request.getContextPath()%>/stuExamQue?exam_id=<%=exam.getString("exam_id") %>"><%=exam.getString("exam_name") %></a></li>
 						<li ><%=(request.getParameter("problem_name")) %></li>
 						<!-- 从request中取得考试信息类中的考试名 题目名-->

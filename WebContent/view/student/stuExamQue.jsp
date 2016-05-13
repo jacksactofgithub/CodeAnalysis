@@ -80,7 +80,7 @@
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
 						<li class="iExam"><a
-							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>编程分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -101,7 +101,7 @@
 		<!-- Content -->
 		<div class="content">
 			<div class="title">
-				<h5>考试分析</h5>
+				<h5>编程分析</h5>
 			</div>
 			
 			<%
@@ -113,7 +113,7 @@
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 参数可能更改 -->
-						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="编程分析">编程分析</a></li><!-- 同一工程下的链接跳转 -->
 						<li class="firstB"><%=exam.getString("exam_name") %></li>
 					</ul>
 				</div>
@@ -315,7 +315,7 @@ $(function(){
 
         // keys
         var HOME = "主页";
-        var EXAM_LIST = "考试分析";
+        var EXAM_LIST = "编程分析";
         var EXAM_CREATE = "新建考试";
         var EXAM_VIEW = "考试";
         var CLASS_LIST = "班级列表";

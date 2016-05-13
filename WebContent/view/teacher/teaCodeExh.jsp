@@ -157,7 +157,7 @@
                         <a href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
                     </li>
                     <li class="iStats">
-                        <a href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
+                        <a href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>编程分析</span></a>
                     </li>
                 </ul>
             </div>
@@ -187,7 +187,7 @@
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 参数可能更改 -->
-						<li ><a href="<%=request.getContextPath() %>/teaAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li ><a href="<%=request.getContextPath() %>/teaAnalysis" title="编程分析">编程分析</a></li><!-- 同一工程下的链接跳转 -->
 						<li class="firstB">CalculateMatrix</li>
 					</ul>
 				</div>

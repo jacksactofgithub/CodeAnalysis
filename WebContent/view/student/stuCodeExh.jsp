@@ -161,7 +161,7 @@
 							href="http://mooctest.net/stu/class/list" title=""><span>我的班级</span></a>
 						</li>
 						<li class="iExam"><a
-							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath() %>/stuAnalysis" title=""><span>编程分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -189,7 +189,7 @@
 				<div class="breadCrumb module">
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
-						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="编程分析">编程分析</a></li><!-- 同一工程下的链接跳转 -->
 						<li class="firstB"><%=request.getParameter("problem_name") %></li>
 					</ul>
 				</div>

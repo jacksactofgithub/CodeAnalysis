@@ -60,7 +60,7 @@
 							href="http://mooctest.net/tea/exercise/overview" title=""><span>学生练习</span></a>
 						</li>
 						<li class="iStats"><a
-							href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>考试分析</span></a>
+							href="<%=request.getContextPath()%>/teacherAnalysis" title=""><span>编程分析</span></a>
 						</li>
 					</ul>
 				</div>
@@ -81,7 +81,7 @@
 		<!-- Content -->
 		<div class="content">
 			<div class="title">
-				<h5>考试分析</h5>
+				<h5>编程分析</h5>
 			</div>
 			<%
 				JSONObject exam = ((JSONObject)request.getAttribute("exam"));
@@ -287,7 +287,7 @@ $(function(){
 
         // keys
         var HOME = "主页";
-        var EXAM_LIST = "考试分析";
+        var EXAM_LIST = "编程分析";
         var EXAM_CREATE = "新建考试";
         var EXAM_VIEW = "<%=exam.getString("exam_name")%>";
         var CLASS_LIST = "班级列表";
