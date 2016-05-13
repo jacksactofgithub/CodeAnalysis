@@ -7,7 +7,6 @@ import lmooc.modulize.io.FileWriter;
 import lmooc.modulize.io.Reader;
 
 /**
- * 辅助工具，从提交的代码中获取Run的log，写入monitor中
  * @author Ray Liu
  *
  */

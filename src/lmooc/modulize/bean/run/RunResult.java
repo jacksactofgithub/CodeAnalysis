@@ -14,7 +14,7 @@ import lmooc.modulize.bean.RunStamp;
 public class RunResult {
 
 //	private String stuID;
-//	private String title; // 題目
+//	private String title;
 	private Date time;
 	private int totalNum;
 	private int successNum;

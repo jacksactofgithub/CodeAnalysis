@@ -16,7 +16,6 @@ import lmooc.modulize.handler.coldanalyser.Source;
 import lmooc.modulize.io.Reader;
 
 /**
- * 管理一个学生的所有File State
  * 
  * @author Ray Liu
  *
@@ -28,7 +27,6 @@ public class FileStateHandler {
 	
 	private Reader reader = new Reader();
 	
-	//存储学生开始某一题的时间
 	private static Map<String , Long> startMap = new HashMap<String , Long>();
 
 	public FileStateHandler(String stuID , ZipFile zip) {
@@ -94,18 +92,13 @@ public class FileStateHandler {
 	}
 
 	/*
-	 * 判断tag 是否是path所对应的项目
 	 */
 	private String getFileName(String path) {
-		// 可能有文件格式问题，需后续调整
-		// 即是stamp.getSourceName()可能为Triangle/src/Triangle.java 而 subjectName
-		// 可能为Triangle
 		String proName = path.split("/")[0];
 		return proName;
 	}
 
 	/*
-	 * 生成一个CodeStamp对象，存储截至toSecond时间的分析参数
 	 */
 	private CodeStamp handleOne(String filePath,long startTime , long currentTime) {
 
@@ -123,7 +116,6 @@ public class FileStateHandler {
 	}
 
 	/**
-	 * 获取到Source ， toSecond是截屏时间的millisecond
 	 * 
 	 * @param fileName
 	 * @param toSecond
