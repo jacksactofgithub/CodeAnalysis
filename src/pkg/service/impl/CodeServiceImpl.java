@@ -37,7 +37,6 @@ public class CodeServiceImpl implements CodeService {
 //			5 * 60 * 1000);
 
 	/**
-	 * 将每一分钟对应至一个code
 	 * 
 	 * @return
 	 */
@@ -48,7 +47,7 @@ public class CodeServiceImpl implements CodeService {
 			return map;
 		}
 
-		int count = 0; // 第几分钟
+		int count = 0; 
 		Code former = null;
 		Code current = null;
 		int interval = 0;
@@ -91,7 +90,7 @@ public class CodeServiceImpl implements CodeService {
 				interval = (count * 60) - former.getSecond();
 			}
 
-			if ((!code.hasNext()) && ((count * 60 > current.getSecond()))) { // 保证时间够
+			if ((!code.hasNext()) && ((count * 60 > current.getSecond()))) { 
 				map.put(count, current);
 			}
 
