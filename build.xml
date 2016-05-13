@@ -30,7 +30,7 @@
     <!-- 定义默认任务，将class文件集合成jar包。 -->
     <target name="warFile" depends="compile">
         <!-- 删除原有war包。 -->
-        <delete dir="/var/lib/tomcat7/webapps" />
+        <delete dir="/var/lib/tomcat7/webapps/CodeAnalysis.war" />
         <!-- 建立新war包。 -->
         <war destfile="/var/lib/tomcat7/webapps" webxml="${basedir}/WebContent/WEB-INF/web.xml">
             <!-- 将非jar和非class文件拷贝到war包的对应路径下。 -->
