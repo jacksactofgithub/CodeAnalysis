@@ -20,8 +20,8 @@ public abstract class AbstractState {
 	protected StateCallBack lexer;
 	protected JavaSentence sentence;
 	
-	protected int braceCount =0;   //大括号数目
-	protected int bracketCount =0; //圆括号
+	protected int braceCount =0; 
+	protected int bracketCount =0; 
 	
 	public static AbstractState initState(Source source , StateCallBack lexer){
 		return new NormalState(source , lexer);
@@ -40,17 +40,14 @@ public abstract class AbstractState {
 	}
 	
 	/*
-	 * 获取到空格符
 	 */
 	public abstract void getSpace(String currentWord);
 	
 	/*
-	 * 获取到分号
 	 */
 	public abstract void getSemicolon(String currentWord);
 	
 	/*
-	 * 获取到引号
 	 */
 	public abstract void getQuotes(char forechar);
 	
@@ -65,37 +62,30 @@ public abstract class AbstractState {
 	}
 	
 	/*
-	 * 获取到 注释结束符号
 	 */
 	public abstract void getNoteEnd();
 	
 	/*
-	 * 获取到左圆括号
 	 */
 	public abstract void getLeftBracket(String currentWord);
 	
 	/*
-	 * 获取到右圆括号
 	 */
 	public abstract void getRightBracket(String currentWord);
 	
 	/*
-	 * 获取到左大括号
 	 */
 	public abstract void getLeftBrace(String currentWord);
 	
 	/*
-	 * 获取到右大括号
 	 */
 	public abstract void getRightBrace(String currentWord);
 	
 	/*
-	 * 获取到左尖括号
 	 */
 	public abstract void getLeftAngleBracket(String currentWord);
 	
 	/*
-	 * 获取到右尖括号
 	 */
 	public abstract void getRightAngleBracket(String currentWord);
 	
@@ -104,17 +94,14 @@ public abstract class AbstractState {
 	public abstract void getRightMiddleBracket(String currentWord);
 	
 	/*
-	 * 获取到逗号
 	 */
 	public abstract void getComma(String currentWord);
 	
 	/*
-	 * 获取到等号
 	 */
 	public abstract void getEqual(String currentWord);
 	
 	/*
-	 * 获取到换行
 	 */
 	public abstract void getEnter(String currentWord);
 	

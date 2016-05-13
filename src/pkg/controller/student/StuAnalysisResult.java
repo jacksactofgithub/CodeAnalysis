@@ -105,7 +105,7 @@ public class StuAnalysisResult {
 		return stasJson;
 	}
 
-	public JSONObject getExam(int exam_id, int stu_id) throws JSONException {// 通过题目id得到题目名称
+	public JSONObject getExam(int exam_id, int stu_id) throws JSONException { 
 		JSONArray examArray = service.getStudentExams(stu_id);
 		for(int i=0;i<examArray.length();i++){
 			JSONObject exam = examArray.getJSONObject(i);

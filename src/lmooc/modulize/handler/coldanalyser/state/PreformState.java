@@ -11,7 +11,7 @@ public class PreformState extends AbstractState{
 	private String follow = "";
 	private String currentName = "";
 	private boolean isMethod = false;
-	private boolean inFWHandle = false;		//	正在处理first word
+	private boolean inFWHandle = false; 
 	private boolean isVary = false;
 	private String firstWord = null;
 	

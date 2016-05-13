@@ -105,9 +105,9 @@ public class NormalState extends AbstractState{
 			enable = false;
 			
 			
-			if(JavaSentence.isLimitation(currentWord)){		//是修饰词，加入修饰语句
+			if(JavaSentence.isLimitation(currentWord)){ 
 				sentence.addLimitation(currentWord);
-				enable = true;		//允许继续读取，直到读取到TypeName，但这种方法会忽略构造方法
+				enable = true; 
 //				lexer.startState(new PreformState(source , lexer , sentence));
 			}
 			else if(currentWord.contains(".")){
