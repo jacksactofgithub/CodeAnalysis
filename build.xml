@@ -4,7 +4,7 @@
 <project name="CodeAnalysis" default="warFile" basedir=".">
     
     <!-- 定义属性，打成war包的名称。 -->
-    <property name="warFileName" value="CodeAnalysis.war"></property>
+    <property name="warFileName" value="CodeAnalysis2.war"></property>
     
     <!-- 定义路径，编译java文件时用到的jar包。 -->
     <path id="project.lib">
@@ -32,7 +32,7 @@
         <!-- 删除原有war包。 -->
         <delete dir="/var/lib/tomcat7/webapps/CodeAnalysis.war" />
         <!-- 建立新war包。 -->
-        <war destfile="/var/lib/tomcat7/webapps/CodeAnalysis2.war" webxml="${basedir}/WebContent/WEB-INF/web.xml">
+        <war destfile="/var/lib/tomcat7/webapps/CodeAnalysis.war" webxml="${basedir}/WebContent/WEB-INF/web.xml">
             <!-- 将非jar和非class文件拷贝到war包的对应路径下。 -->
             <fileset dir="${basedir}/WebContent">
                 <include name="**/**.*" />
