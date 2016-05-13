@@ -153,7 +153,7 @@ public class RunServiceImpl implements RunService{
 			return map;
 		}
 		
-		int count =0;		//第几分钟
+		int count =0; 
 		Run former = null;
 		Run current = null;
 		int interval = 0;
@@ -196,7 +196,7 @@ public class RunServiceImpl implements RunService{
 				interval = (count*60) - former.getRun_second();
 			}
 			
-			if((!run.hasNext()) &&((count*60 > current.getRun_second()))){	//保证时间够
+			if((!run.hasNext()) &&((count*60 > current.getRun_second()))){ 
 				map.put(count, current);
 			}
 				
@@ -250,7 +250,6 @@ public class RunServiceImpl implements RunService{
 	}
 	
 	/**
-	 * 找到一个学生的所有公共测试，即将该学生每个时间点的测试用例进行统计
 	 * @param stu_id
 	 * @param proName 
 	 * @return
@@ -264,7 +263,7 @@ public class RunServiceImpl implements RunService{
 		common.addAll(strTemp);
 		
 		for(int i=1 ; i<runs.size() ; ++i){
-			temp = testDAO.queryTests(runs.get(i));	//查找该次run下的所有test
+			temp = testDAO.queryTests(runs.get(i)); 
 			strTemp = transList(temp);
 			findCommon(common , strTemp);
 		}
@@ -273,7 +272,6 @@ public class RunServiceImpl implements RunService{
 	}
 	
 	/**
-	 * 将Test类型的list转为string类型的，string是test的名称
 	 * @param from
 	 * @return
 	 */
@@ -288,7 +286,6 @@ public class RunServiceImpl implements RunService{
 	}
 
 	/**
-	 * 找到两个list中的所有相同元素，将相同元素存入common中
 	 * @param common
 	 * @param tag
 	 */

@@ -69,7 +69,6 @@ public class StorageServiceImpl implements StorageService{
 		codeService.saveStamps(result.getCodeStamps() , studentId, examID);
 		runService.saveRunStamp(result.getRunStamps(), studentId , examID);
 		
-		//最后释放Map中的存储空间
 		FileStateHandler.clearMap();
 	}
 
