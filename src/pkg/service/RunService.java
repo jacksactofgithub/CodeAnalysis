@@ -14,6 +14,8 @@ public interface RunService {
 	
 	public JSONObject getRuns(int stuID , String proName , int exam) throws JSONException;
 	
+	public JSONObject getRunsByClassMemId(int classMemId , String proName , int exam) throws JSONException;
+	
 	/**
 	 * @param proName
 	 * @return

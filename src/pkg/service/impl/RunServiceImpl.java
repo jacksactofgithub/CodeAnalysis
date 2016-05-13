@@ -335,5 +335,21 @@ public class RunServiceImpl implements RunService{
 		}
 		
 	}
+
+	@Override
+	public JSONObject getRunsByClassMemId(int classMemId, String proName, int exam) throws JSONException {
+		// TODO Auto-generated method stub
+		
+		Map<Integer , Run> runMap = cacheRunMap(classMemId, proName, exam);
+		
+//		String key = exam+seperator+proName+seperator+classMemberId;
+//		if(!runCache.containsKey(key)){
+//			runMap = cacheRunMap(classMemberId, proName, exam);
+//		}else{
+//			runMap = runCache.get(key);
+//		}
+		
+		return getRunJSON(runMap , proName , classMemId , exam);
+	}
 	
 }
