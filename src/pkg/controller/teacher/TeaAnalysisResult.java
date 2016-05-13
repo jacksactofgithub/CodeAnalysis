@@ -56,7 +56,7 @@ public class TeaAnalysisResult {
 		ArrayList<String> files = (ArrayList<String>) codeService.getStuFileNamesByClassMemId(stu_id, exam_id, problem_name);
 		request.setAttribute("files", files);
 
-		JSONArray codeJson = codeService.getCodeRecord(stu_id, problem_name, exam_id,files.get(0));
+		JSONArray codeJson = codeService.getCodeRecordByClassMemId(stu_id, problem_name, exam_id,files.get(0));
 		
 		JSONObject stasJson = null;
 		try {

@@ -478,9 +478,6 @@
 	        }
 	    });
 	
-	    // ================================
-	    // 执行
-	    // ================================
 	    BreadCrumbUtil.update(BreadCrumbUtil.HOME, BreadCrumbUtil.EXAM_LIST);
 	
 	});

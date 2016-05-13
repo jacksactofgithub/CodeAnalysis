@@ -1,5 +1,7 @@
 package pkg.controller.teacher;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -36,6 +38,13 @@ public class TeacherAnalysis {
     	}
     	String tea_name = request.getParameter("tea_name");
     	String uni_name = request.getParameter("uni_name");
+    	try {
+			tea_name = new String(tea_name.getBytes("ISO-8859-1") , "UTF-8");
+			uni_name = new String(uni_name.getBytes("ISO-8859-1") , "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+    	
 		if(tea_id!=0&&tea_name!=null){
         	session.setAttribute("tea_name", tea_name);
         	session.setAttribute("uni_name", uni_name);
