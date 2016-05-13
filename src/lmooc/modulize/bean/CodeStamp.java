@@ -1,7 +1,6 @@
 package lmooc.modulize.bean;
 
 /**
- * 一个时间戳下所对应的代码的各个参数的数据统计
  * 
  * @author Ray Liu
  *
@@ -14,8 +13,8 @@ public class CodeStamp {
 	private int noteCount;
 	private int methodCount;
 	private int varyCount;
-	private int maxCyc; // 最大圈复杂度
-	private String sourceName; // 对应的源文件的名称
+	private int maxCyc; 
+	private String sourceName; 
 
 	public CodeStamp(long timestamp , long relativeTime , int lineCount, int noteCount, int methodCount,
 			int varyCount, int maxCyc,String sourceName) {
