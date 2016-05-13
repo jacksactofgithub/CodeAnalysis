@@ -25,6 +25,7 @@
 	href="http://mooctest.net/public/css/others/introjs.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/highlight.github.css">
+<link href="view/css/prism.css" rel="stylesheet" />
 <style>
 .scale_panel{
 	font-size:12px;
@@ -135,7 +136,7 @@
         })();
         </script>
 <body>
-
+	<script src="view/js/prism.js"></script>
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
@@ -188,7 +189,6 @@
 				<div class="breadCrumb module">
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
-						<!-- 这里是stuanalysis页面 参数可能更改 -->
 						<li ><a href="<%=request.getContextPath() %>/stuAnalysis" title="考试分析">考试分析</a></li><!-- 同一工程下的链接跳转 -->
 						<li class="firstB"><%=request.getParameter("problem_name") %></li>
 					</ul>
@@ -217,9 +217,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="body">
-					<pre  style="font-family:Consolas;font-size:15px" id="stuCode">
-						<%=request.getAttribute("code") %>
+				<div class="body" style="float:left;margin-left:-350px">
+					<pre id="stuCode" >
+						<code class="language-java" id="prismCode">
+							<%=request.getAttribute("code") %>
+						</code>
 					</pre>
 				</div>
 			</div>
@@ -327,7 +329,7 @@ function showCode(time){
            success : function (data){
         	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
         	   data = data.replace(/</g,"&lt;");
-        	   $("#stuCode").html(data);
+        	   $("#prismCode").html(data);
            }
    	 });   
 }

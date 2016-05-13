@@ -35,7 +35,7 @@ public class TeaCodeExhibition {
 		request.setAttribute("files", files);
 		
 		String code = codeService.getStuCodeByClassMemId(stu_id, 0, exam_id, problem_name,files.get(0));//初始化第一个文件第0分钟的代码
-		code= code.replaceAll("<", "&lt;");
+		code = code.replaceAll("<", "&lt;");
 		request.setAttribute("code", code);
 		
 		return "view/teacher/teaCodeExh";

@@ -484,6 +484,9 @@
 	    BreadCrumbUtil.update(BreadCrumbUtil.HOME, BreadCrumbUtil.EXAM_LIST);
 	
 	});
+	window.onload=function(){
+		alert("changeSuccess");
+	}
 </script>
 
 </body>
