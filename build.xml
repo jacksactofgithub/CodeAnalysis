@@ -32,7 +32,7 @@
         <!-- 删除原有war包。 -->
         <delete dir="/var/lib/tomcat7/webapps/CodeAnalysis.war" />
         <!-- 建立新war包。 -->
-        <war destfile="/var/lib/tomcat7/webapps" webxml="${basedir}/WebContent/WEB-INF/web.xml">
+        <war destfile="/var/lib/tomcat7/webapps/CodeAnalysis.war" webxml="${basedir}/WebContent/WEB-INF/web.xml">
             <!-- 将非jar和非class文件拷贝到war包的对应路径下。 -->
             <fileset dir="${basedir}/WebContent">
                 <include name="**/**.*" />
