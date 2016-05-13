@@ -35,7 +35,7 @@ public class StuCodeExhibition {
 		request.setAttribute("testCases", testCases);
 		request.setAttribute("files", files);
 		
-		String code = codeService.getStuCode(stu_id, 0, exam_id, problem_name,files.get(0));//初始化第5分钟的代码
+		String code = codeService.getStuCode(stu_id, 0, exam_id, problem_name,files.get(0)); 
 		code = code.replaceAll("<", "&lt;");
 		request.setAttribute("code", code);
 		
