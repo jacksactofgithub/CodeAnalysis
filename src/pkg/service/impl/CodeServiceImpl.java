@@ -145,16 +145,16 @@ public class CodeServiceImpl implements CodeService {
 		int classMemberId = examService.getClassMemberId(stuID, exam);
 //		String key = exam+seperator+proName+seperator+classMemberId+seperator+fileName;
 		
-		Map<Integer , Code> codeMap = cacheCodeMap(classMemberId, proName, exam, fileName);
+//		Map<Integer , Code> codeMap = cacheCodeMap(classMemberId, proName, exam, fileName);
 //		if(!codeCache.containsKey(key)){
 //			cacheCodeMap(classMemberId, proName, exam, fileName);
 //		}
 //		
 //		codeMap = codeCache.get(key);
 		
-		JSONArray array = getCodeJSON(codeMap);
+//		JSONArray array = getCodeJSON(codeMap);
 
-		return array;
+		return getCodeRecordByClassMemId(classMemberId, proName, exam, fileName);
 	}
 	
 	private Map<Integer, Code> cacheCodeMap(int classMemberId , String proName , int exam_id , String fileName){
@@ -286,6 +286,24 @@ public class CodeServiceImpl implements CodeService {
 		
 		return result;
 		
+	}
+
+	@Override
+	public JSONArray getCodeRecordByClassMemId(int classMemId, String proName, int exam, String fileName) {
+		// TODO Auto-generated method stub
+		
+//		String key = exam+seperator+proName+seperator+classMemberId+seperator+fileName;
+		
+		Map<Integer , Code> codeMap = cacheCodeMap(classMemId, proName, exam, fileName);
+//		if(!codeCache.containsKey(key)){
+//			cacheCodeMap(classMemberId, proName, exam, fileName);
+//		}
+//		
+//		codeMap = codeCache.get(key);
+		
+		JSONArray array = getCodeJSON(codeMap);
+		
+		return array;
 	}
 
 }
