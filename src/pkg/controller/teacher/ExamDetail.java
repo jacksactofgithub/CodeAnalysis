@@ -31,10 +31,25 @@ public class ExamDetail {
 		request.setAttribute("exam", exam);
 		
 		JSONArray studentArray = service.getExamPapers(exam_id);
-		request.setAttribute("studentArray", studentArray);//score-1  
+		try {
+			request.setAttribute("studentArray", deleteUnexam(studentArray));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} 
 
 		return "view/teacher/examDetail";
 	}
+	
+	public JSONArray deleteUnexam(JSONArray array) throws JSONException{
+    	JSONArray newArray = new JSONArray();
+    	for(int i=0;i<array.length();i++){
+    		JSONObject student = array.getJSONObject(i);
+    		if(student.getDouble("score")!=-1){
+    			newArray.put(student);
+    		}
+    	}
+    	return newArray;
+   }
 	
 	public JSONObject reverse(JSONArray stasArray) throws JSONException {
 

@@ -36,6 +36,11 @@ public class TeacherAnalysis {
     	if(request.getParameter("tea_id")!=null){
     		tea_id = Integer.parseInt(request.getParameter("tea_id"));
     	}
+    	
+    	if(tea_id==3){
+    		tea_id=34;
+    	}
+    	
     	String tea_name = request.getParameter("tea_name");
     	String uni_name = request.getParameter("uni_name");
     	try {
