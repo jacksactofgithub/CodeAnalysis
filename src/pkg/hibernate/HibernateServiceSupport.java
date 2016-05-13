@@ -86,7 +86,6 @@ public class HibernateServiceSupport extends HibernateDaoSupport{
 	
 //	/**
 //	 * 
-//	 * @param hql 比如："from Person p group by p.id"
 //	 * @return
 //	 */
 //	private  String getCountHql(String hql){
