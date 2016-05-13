@@ -13,7 +13,6 @@ import pkg.hibernate.HibernateServiceSupport;
 @Repository
 public class DBOperation extends HibernateServiceSupport{
 
-	//增
 	public int save(Object entity){
 		
 		try{
@@ -27,7 +26,6 @@ public class DBOperation extends HibernateServiceSupport{
 		
 	}
 	
-	//改
 	public int update(Object entity){
 		
 		try{
@@ -41,7 +39,6 @@ public class DBOperation extends HibernateServiceSupport{
 		
 	}
 	
-	//删
 	public int delete(Object entity){
 		
 		try{
@@ -55,7 +52,6 @@ public class DBOperation extends HibernateServiceSupport{
 		
 	}
 	
-	//查
 	@SuppressWarnings("rawtypes")
 	public ArrayList findList(String hql,Object... args){
 		Session session = getSession();

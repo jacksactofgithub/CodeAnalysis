@@ -12,7 +12,6 @@ public interface RunDAO {
 	public List<Run> queryRuns(int student_id , String proName , int exam);
 	
 	/**
-	 * 查询做了某一题的所有学生的id
 	 * @param proName
 	 * @return
 	 */

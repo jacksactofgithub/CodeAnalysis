@@ -17,7 +17,6 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 
 /**
- * 业务类的基类
  * @author wangzm
  *
  */
@@ -28,7 +27,6 @@ public class HibernateServiceSupport extends HibernateDaoSupport{
 		super.setSessionFactory(sessionFactory);
 	}
 	/**
-	 * 根据ID查询实体
 	 * @param classType
 	 * @param id
 	 * @return
@@ -39,14 +37,11 @@ public class HibernateServiceSupport extends HibernateDaoSupport{
 	}
 	
 	/**
-	 * 根据实体类名字查询所有的实体对象
 	 * @param <T>
 	 * @param classType
 	 * @return
 	 */
 	
-	//value 表示采用哪种缓存策略（ehcache.xml）。key:缓存的key。condition：是缓存的条件
-	@SuppressWarnings("unchecked")
 	public <T> List<T> findAllEntity(Class<T> classType){
 		String hql=" from "+getEntityName(classType);
 		HibernateTemplate h = this.getHibernateTemplate();
@@ -55,7 +50,6 @@ public class HibernateServiceSupport extends HibernateDaoSupport{
 	}
 	
 	/**
-	 * 执行hql语句返回单个实体对象，可以可以返回单个其他类型对象
 	 * @param <T>
 	 * @param hql
 	 * @param classType

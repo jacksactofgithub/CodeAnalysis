@@ -24,7 +24,6 @@ public class StuCodeExhibition {
 	@RequestMapping("/stuCodeExh")
 	public String showResult(HttpServletRequest request,@RequestParam("exam_id")int exam_id,
 			@RequestParam("problem_name")String problem_name, HttpSession session) {
-		//得到学生id 考试id 题目名称
 		int stu_id = (int) session.getAttribute("stu_id");
 		request.setAttribute("stu_id", stu_id);
 		request.setAttribute("code_exam_id", exam_id);

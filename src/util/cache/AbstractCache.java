@@ -126,7 +126,7 @@ public abstract class AbstractCache<K,V> implements Cache<K,V>{
 	public abstract int eliminateCache();
 
 	public boolean isFull(){
-		if(cacheSize == 0){		//0代表无cache大小
+		if(cacheSize == 0){	 
 			return false;
 		}
 		

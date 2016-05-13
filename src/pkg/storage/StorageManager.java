@@ -32,7 +32,6 @@
 //	private static RunService runService;
 //	
 //	/**
-//	 * 将参加某一场考试的所有的学生的考试分析数据进行存储
 //	 * @param examID
 //	 */
 //	public static void startStore(int examID , int tea_id){
@@ -40,7 +39,6 @@
 //	}
 //	
 //	/**
-//	 * 对参加一次考试的某一个学生的数据进行存储
 //	 * @param examID
 //	 * @param stu_id
 //	 */

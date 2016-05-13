@@ -20,20 +20,18 @@ public class ExamDetail {
 	ExamService service;
 
 	/**
-	 * 教师查看一次考试的学生答题情况
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping("/examDetail")
 	public String studentAnalysis(HttpServletRequest request,HttpSession session) {
 		
-		int exam_id =Integer.parseInt(request.getParameter("exam_id"));//考试id
+		int exam_id =Integer.parseInt(request.getParameter("exam_id")); 
 		JSONObject exam = service.getExamInfo(exam_id);
 		request.setAttribute("exam", exam);
 		
 		JSONArray studentArray = service.getExamPapers(exam_id);
-		request.setAttribute("studentArray", studentArray);//score-1 代表没考
-		//再此处确定题目数量
+		request.setAttribute("studentArray", studentArray);//score-1  
 
 		return "view/teacher/examDetail";
 	}
@@ -51,7 +49,7 @@ public class ExamDetail {
 		for (int i = 0; i < len; i++) {
 			JSONObject staObj = stasArray.getJSONObject(i);
 			timestamp[i] = staObj.getInt("timestamp");
-			lineCount[i] = staObj.getInt("lineCount");//除以十
+			lineCount[i] = staObj.getInt("lineCount"); 
 			noteCount[i] = staObj.getInt("noteCount");
 			methodCount[i] = staObj.getInt("methodCount");
 			varCount[i] = staObj.getInt("varyCount");

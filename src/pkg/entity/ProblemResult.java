@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 辅助类，对一次考试的一道题进行统计运行情况
- * 含有运行时间和总运行人数以及通过人数
  * @author Ray Liu
  *
  */

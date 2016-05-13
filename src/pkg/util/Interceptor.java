@@ -19,7 +19,7 @@ public class Interceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {
-		return true;  //继续执行action
+		return true; 
 	}
 
 }

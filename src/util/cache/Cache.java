@@ -5,7 +5,6 @@ public interface Cache<K , V> {
 	public int size();
 	
 	/**
-	 * 返回缓存时间
 	 * @return
 	 */
 	public long getDefaultExpire();

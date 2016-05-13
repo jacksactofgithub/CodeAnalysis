@@ -34,7 +34,6 @@ public class LRUCache<K , V> extends AbstractCache<K, V>{
     }
 
 	/**
-	 * LinkedHashMap 已经实现了LRU
 	 */
 	@Override
 	public int eliminateCache() {

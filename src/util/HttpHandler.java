@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- * 进行http调用的辅助类
  * @author Ray Liu
  *
  */
@@ -74,8 +73,6 @@ public class HttpHandler {
 	}
 	
 	/**
-	 * 将所有参数转为一个String，中间用&链接
-	 * @param params
 	 * @return
 	 */
 	private String formParams(Map<String , String> params){

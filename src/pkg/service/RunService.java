@@ -15,8 +15,6 @@ public interface RunService {
 	public JSONObject getRuns(int stuID , String proName , int exam) throws JSONException;
 	
 	/**
-	 * 找到某一到题的最小公共测试用例集
-	 * 返回测试用例的名称集合
 	 * @param proName
 	 * @return
 	 */

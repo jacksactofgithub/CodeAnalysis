@@ -21,7 +21,6 @@ public interface CodeDAO {
 	public List<String> queryStuFileNames(int examId , int stu_id , String proName);
 	
 	/**
-	 * 获取code记录的总量
 	 * @param examId
 	 * @return
 	 */
