@@ -73,9 +73,5 @@
       <taglib-location>/WEB-INF/pager-taglib.tld</taglib-location>
     </taglib>
   </jsp-config>
-  
-   <error-page> 
-        <error-code>500</error-code> 
-        <location>/view/errorPage.jsp</location> 
-    </error-page> 
+ 
 </web-app>

@@ -25,6 +25,7 @@
 	href="http://mooctest.net/public/css/others/introjs.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/highlight.github.css">
+<link href="view/css/prism.css" rel="stylesheet" />
 <style>
 .scale_panel{
 	font-size:12px;
@@ -135,7 +136,7 @@
         })();
         </script>
 <body>
-
+<script src="view/js/prism.js"></script>
 <div id="header" class="wrapper">
     <div id="loginInfo">
         <img src="http://mooctest.net/public/images/userPic.png" alt=""/>
