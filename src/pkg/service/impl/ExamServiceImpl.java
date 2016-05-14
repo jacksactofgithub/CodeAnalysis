@@ -83,6 +83,15 @@ public class ExamServiceImpl implements ExamService{
 			String exams = http.postHttpInvocation(URLNameFormat.GET_STUDENT_EXAMS, params);
 			JSONArray array = new JSONArray(exams);
 			
+			for(int i=0 ; i<array.length() ; ++i){
+				
+				JSONObject obj = array.getJSONObject(i);
+				if(!obj.has("description")){
+					obj.put("description", "");
+				}
+				
+			}
+			
 			return array;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

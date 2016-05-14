@@ -22,6 +22,10 @@ public interface RunService {
 	 */
 	public List<String> findCommonTestCases(String proName , int exam);
 	
+	public List<String> findOneStudentCommon(int stuID , String proName , int exam);
+	
+	public List<String> findOneStudentCommonByClassMemId(int stuID , String proName , int exam);
+	
 	public JSONObject getAvgPassResult(String proName , int exam) throws JSONException;
 	
 	public void saveCommonTests(int examID , String proName);

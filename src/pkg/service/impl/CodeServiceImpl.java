@@ -1,5 +1,6 @@
 package pkg.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -250,14 +251,18 @@ public class CodeServiceImpl implements CodeService {
 	public List<String> getStuFileNamesByClassMemId(int classMemId, int exam_id, String problem_name) {
 		// TODO Auto-generated method stub
 		List<String> result = codeDAO.queryStuFileNames(exam_id, classMemId, problem_name);
+		List<String> names = new ArrayList<String>();
 		
 		for(int i=0 ; i<result.size() ; ++i){
 			String str = result.get(i);
 			str = str.split("/" , 2)[1];
-			result.set(i, str);
+//			result.set(i, str);
+			if(str.contains(".java")){
+				names.add(str);
+			}
 		}
 		
-		return result;
+		return names;
 	}
 
 	@Override

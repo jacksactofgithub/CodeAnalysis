@@ -34,7 +34,7 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		String code = service.getStuCode(stu_id, time, exam_id, problem_name,file_name);
 		try {
-			byte[] bytes = code.getBytes("UTF-8");
+			byte[] bytes = code.getBytes("GBK");
 			
 			code = new String(bytes , "unicode");
 			
@@ -80,7 +80,7 @@ public class ShowCodeController {
 	public String getCodeStas(@RequestParam("stu_id")int stu_id,@RequestParam("exam_id")int exam_id,	@RequestParam("problem_name")String problem_name,
 			@RequestParam("file_name")String file_name,HttpServletRequest request, HttpSession session) {
 		//String code = service.getStuCode(stu_id, time, exam_id, problem_name);
-		JSONArray codeJson = service.getCodeRecord(stu_id, problem_name, exam_id,file_name); 
+		JSONArray codeJson = service.getCodeRecordByClassMemId(stu_id, problem_name, exam_id,file_name); 
 		
 		JSONObject stasJson = null;
 		try {
