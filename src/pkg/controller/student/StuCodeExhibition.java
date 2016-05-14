@@ -29,7 +29,7 @@ public class StuCodeExhibition {
 		request.setAttribute("code_exam_id", exam_id);
 		request.setAttribute("code_problem_name", problem_name);
 		
-		ArrayList<String>testCases = (ArrayList<String>) runService.findCommonTestCases(problem_name, exam_id);
+		ArrayList<String>testCases = (ArrayList<String>) runService.findOneStudentCommon(stu_id, problem_name, exam_id);
 		ArrayList<String>files = (ArrayList<String>) codeService.getStuFileNamesByStuId(stu_id, exam_id, problem_name);
 		
 		request.setAttribute("testCases", testCases);

@@ -102,7 +102,7 @@ public class RunServiceImpl implements RunService{
 	}
 	
 	public JSONObject getRunJSON(Map<Integer , Run> timeMap , String proName , int stuID , int exam) throws JSONException{
-		List<String> testNames = findCommonTestCases(proName , exam);
+		List<String> testNames = findOneStudentCommon(stuID, proName, exam);
 		JSONObject runJSON = new JSONObject();
 		
 		runJSON.put("stuid",stuID);
@@ -254,21 +254,10 @@ public class RunServiceImpl implements RunService{
 	 * @param proName 
 	 * @return
 	 */
-	private List<String> findOneStudentCommon(int stuID , String proName , int exam){
-		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
-		List<String> common = new LinkedList<String>();
+	public List<String> findOneStudentCommon(int stuID , String proName , int exam){
+		int classMemberId = examService.getClassMemberId(stuID, exam);
 		
-		List<Test> temp = testDAO.queryTests(runs.get(0));
-		List<String> strTemp = transList(temp);
-		common.addAll(strTemp);
-		
-		for(int i=1 ; i<runs.size() ; ++i){
-			temp = testDAO.queryTests(runs.get(i)); 
-			strTemp = transList(temp);
-			findCommon(common , strTemp);
-		}
-		
-		return common;
+		return findOneStudentCommonByClassMemId(classMemberId, proName, exam);
 	}
 	
 	/**
@@ -350,6 +339,25 @@ public class RunServiceImpl implements RunService{
 //		}
 		
 		return getRunJSON(runMap , proName , classMemId , exam);
+	}
+
+	@Override
+	public List<String> findOneStudentCommonByClassMemId(int stuID, String proName, int exam) {
+		// TODO Auto-generated method stub
+		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
+		List<String> common = new LinkedList<String>();
+		
+		List<Test> temp = testDAO.queryTests(runs.get(0));
+		List<String> strTemp = transList(temp);
+		common.addAll(strTemp);
+		
+		for(int i=1 ; i<runs.size() ; ++i){
+			temp = testDAO.queryTests(runs.get(i)); 
+			strTemp = transList(temp);
+			findCommon(common , strTemp);
+		}
+		
+		return common;
 	}
 	
 }
