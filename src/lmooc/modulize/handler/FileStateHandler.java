@@ -86,8 +86,6 @@ public class FileStateHandler {
 			
 		}
 
-
-
 		return stampList.iterator();
 	}
 

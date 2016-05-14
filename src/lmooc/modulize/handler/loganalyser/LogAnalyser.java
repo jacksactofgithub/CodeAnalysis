@@ -87,13 +87,13 @@ public class LogAnalyser {
 	 * @throws JSONException 
 	 */
 	private void addOneRun(String log , List<RunResult> run) throws JSONException{
-		String[] logInfo = log.split(SPLIT_TAG , 3);
+		String[] logInfo = log.split(SPLIT_TAG , 4);
 		String tempDate = logInfo[1];
-		String report = logInfo[2];
+		String report = logInfo[3];
 		
-		String last = report.substring(report.lastIndexOf(" ")+1);
+		String last = report.substring(report.lastIndexOf("\t")+1);
 		if((last.equals("Run"))||(last.equals("Submit"))){
-			report = report.substring(0, report.lastIndexOf(" "));
+			report = report.substring(0, report.lastIndexOf("\t"));
 		}
 		
 		Date date = DateParser.string2Date(tempDate); 
