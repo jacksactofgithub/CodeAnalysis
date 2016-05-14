@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%@ page import="org.json.JSONException"%>
 <%@ page import="org.json.JSONObject"%>
 <%@ page import="org.json.JSONArray"%>
@@ -205,7 +205,7 @@
 								id="files" onchange="changeFile()">
 								<%
 									@SuppressWarnings("unchecked")
-									ArrayList<String> files = (ArrayList<String>)request.getAttribute("files");
+									List<String> files = (List<String>)request.getAttribute("files");
 									for(int i=0;i<files.size();i++){
 										String file = files.get(i);
 								%>
@@ -255,18 +255,6 @@
 		<div class="widget">
 			<div class="head">
 				<h5 class="iInfo">运行信息</h5>
-			</div>
-			<div class="body">
-				<%
-					@SuppressWarnings("unchecked")
-					ArrayList<String> testCases = (ArrayList<String>) request.getAttribute("testCases");
-					for (int i = 0; i < testCases.size(); i++) {
-						String testCase = testCases.get(i);
-				%>
-					<span style="margin-top: 1px;"><%=testCase%></span><br>
-				<%
-					}
-				%>
 			</div>
 		</div>
 	</div>
