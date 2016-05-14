@@ -197,7 +197,7 @@
 		</div>
 		
 
-			<div class="widget" style="overflow:scroll;height:500px;">
+			<div class="widget" style="overflow:scroll;height:600px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 					<div class="analysis-block" id="coverageBlock"
