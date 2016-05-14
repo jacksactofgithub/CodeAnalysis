@@ -57,21 +57,21 @@ public class ShowCodeController {
 	public String showResultByClassMemId(@RequestParam("class_member_id")int class_member_id,@RequestParam("time")int time,@RequestParam("exam_id")int exam_id,
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		String code = service.getStuCodeByClassMemId(class_member_id, time, exam_id, problem_name,file_name);
-//		try {
-//			byte[] bytes = code.getBytes("UTF-8");
-//			
-//			code = new String(bytes , "ISO-8859-1");
-//			
-//			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
-//			
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
-//		try {
-//			code = URLEncoder.encode(code, "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			byte[] bytes = code.getBytes("UTF-8");
+			
+			code = new String(bytes , "ISO-8859-1");
+			
+			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		try {
+			code = URLEncoder.encode(code, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return code;
 	}
 	
