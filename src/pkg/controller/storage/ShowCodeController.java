@@ -34,11 +34,11 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		String code = service.getStuCode(stu_id, time, exam_id, problem_name,file_name);
 		try {
-			byte[] bytes = code.getBytes("GBK");
+			byte[] bytes = code.getBytes("UTF-8");
 			
-			code = new String(bytes , "unicode");
+			code = new String(bytes , "ISO-8859-1");
 			
-			code = new String(code.getBytes("unicode") , "UTF-8");
+			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

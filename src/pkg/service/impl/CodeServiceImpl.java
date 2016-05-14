@@ -47,7 +47,7 @@ public class CodeServiceImpl implements CodeService {
 		if ((code == null) || (!code.hasNext())) {
 			return map;
 		}
-
+		
 		int count = 0; 
 		Code former = null;
 		Code current = null;
@@ -56,6 +56,7 @@ public class CodeServiceImpl implements CodeService {
 			if (former == null) {
 				Code temp = code.next();
 				map.put(count, temp);
+				System.out.println(count+ "  " + temp.getSecond() + "  1");
 				former = temp;
 				if (code.hasNext()) {
 					current = code.next();
@@ -87,12 +88,14 @@ public class CodeServiceImpl implements CodeService {
 				}
 			} else {
 				map.put(count, former);
+				System.out.println(count+ "  " + former.getSecond()+"   2");
 				count++;
 				interval = (count * 60) - former.getSecond();
 			}
 
 			if ((!code.hasNext()) && ((count * 60 > current.getSecond()))) { 
 				map.put(count, current);
+				System.out.println(count+ "  " + former.getSecond()+"  3");
 			}
 
 		}
@@ -277,6 +280,8 @@ public class CodeServiceImpl implements CodeService {
 //		Map<Integer , Code> codeMap = codeCache.get(key);
 		Code code = codeMap.get(time);
 		long timestamp = code.getTimestamp();
+		
+		System.out.println("time:"+time + "  timestamp:"+code.getTimestamp());
 		
 		Iterator<String> codes = reader.readJava(timestamp,problem_name+"/"+fileName, classMemId, exam_id);
 		

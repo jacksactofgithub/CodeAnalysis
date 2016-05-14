@@ -35,4 +35,12 @@ public class StorageController {
 		return null;
 	}
 	
+	@RequestMapping("/testStore")
+	public String testStore(HttpServletRequest request,HttpSession session){
+		
+		storageService.storeOne(423, 12268, 12268);
+		
+		return null;
+	}
+	
 }

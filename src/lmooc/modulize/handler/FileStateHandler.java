@@ -54,6 +54,7 @@ public class FileStateHandler {
 		String currentPath = "";
 		while(states.hasNext()){
 			FileState state = states.next();
+			System.out.println("state time:"+state.getMillisecond());
 			
 			StateType type = state.getType();
 			long startTime;
