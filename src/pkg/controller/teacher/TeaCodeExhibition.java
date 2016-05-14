@@ -2,6 +2,7 @@ package pkg.controller.teacher;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,8 +30,8 @@ public class TeaCodeExhibition {
 		request.setAttribute("code_exam_id", exam_id);
 		request.setAttribute("code_problem_name", problem_name);
 		
-		ArrayList<String>testCases = (ArrayList<String>) runService.findOneStudentCommonByClassMemId(stu_id, problem_name, exam_id);
-		ArrayList<String>files = (ArrayList<String>) codeService.getStuFileNamesByClassMemId(stu_id, exam_id, problem_name);
+		List<String>testCases = runService.findOneStudentCommonByClassMemId(stu_id, problem_name, exam_id);
+		List<String>files = (List<String>) codeService.getStuFileNamesByClassMemId(stu_id, exam_id, problem_name);
 		
 		request.setAttribute("testCases", testCases);
 		request.setAttribute("files", files);

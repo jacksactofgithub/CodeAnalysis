@@ -102,7 +102,7 @@ public class RunServiceImpl implements RunService{
 	}
 	
 	public JSONObject getRunJSON(Map<Integer , Run> timeMap , String proName , int stuID , int exam) throws JSONException{
-		List<String> testNames = findOneStudentCommon(stuID, proName, exam);
+		List<String> testNames = findOneStudentCommonByClassMemId(stuID, proName, exam);
 		JSONObject runJSON = new JSONObject();
 		
 		runJSON.put("stuid",stuID);
@@ -344,9 +344,13 @@ public class RunServiceImpl implements RunService{
 	@Override
 	public List<String> findOneStudentCommonByClassMemId(int stuID, String proName, int exam) {
 		// TODO Auto-generated method stub
+		System.out.println("finding student common, classMemberId:"+stuID);
 		List<Run> runs = runDAO.queryRuns(stuID, proName , exam);
 		List<String> common = new LinkedList<String>();
 		
+		if(runs.size() == 0){
+			return common;
+		}
 		List<Test> temp = testDAO.queryTests(runs.get(0));
 		List<String> strTemp = transList(temp);
 		common.addAll(strTemp);
