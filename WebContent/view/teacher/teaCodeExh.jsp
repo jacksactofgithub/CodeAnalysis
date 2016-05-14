@@ -195,7 +195,7 @@
 			</div>
 		</div>
 		
-			<div class="widget" style="overflow:scroll;height:400px;">
+			<div class="widget" style="overflow:scroll;height:500px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 					<div class="analysis-block" id="coverageBlock"
@@ -215,9 +215,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="body">
+				<div class="body" style="float:left;margin-left:-350px">
 				<pre id="stuCode" >
-						<code class="language-java" id="prismCode">
+						<code  id="prismCode">
 							<%=request.getAttribute("code") %>
 						</code>
 					</pre>
@@ -250,6 +250,7 @@
 		</div>
 	</div>
 
+<!-- 
 	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
 		<div class="widget">
 			<div class="head">
@@ -269,7 +270,7 @@
 			</div>
 		</div>
 	</div>
-
+ -->
 <script>
 
 scale=function (btn,bar,title){
@@ -326,9 +327,11 @@ function showCode(time){
   	 		 problem_name :problem_name,
   	 		 file_name :files.val()
            },
+           
            success : function (data){
-        	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+        	   //data = decodeURIComponent(data.replace(/\+/g, '%20'));
         	   data = data.replace(/</g,"&lt;");
+        	   alert(1);
         	   $("#stuCode").html(data);
            }
    	 });   
@@ -350,9 +353,10 @@ function changeFile(){
   	 		 file_name :files.val()
           },
           success : function (data){
-	       	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+	       	   //data = decodeURIComponent(data.replace(/\+/g, '%20'));
 	    	   data = data.replace(/</g,"&lt;");
-	    	   $("#stuCode").html(data);
+	    	   alert("changefile");
+	    	   $("#prismCode").html(data);
           }
   	 });
 }

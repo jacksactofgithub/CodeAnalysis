@@ -41,14 +41,16 @@ public class StudentAnalysis {
     	}
     	String stu_name = request.getParameter("stu_name");
     	String uni_name = request.getParameter("uni_name");
-    	try {
-			stu_name = new String(stu_name.getBytes("ISO-8859-1") , "UTF-8");
-			uni_name = new String(uni_name.getBytes("ISO-8859-1") , "UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
     	
     	if(stu_id!=-1&&stu_name!=null){
+    		
+    		try {
+    			stu_name = new String(stu_name.getBytes("ISO-8859-1") , "UTF-8");
+    			uni_name = new String(uni_name.getBytes("ISO-8859-1") , "UTF-8");
+    		} catch (UnsupportedEncodingException e1) {
+    			e1.printStackTrace();
+    		}
+    		
         	session.setAttribute("stu_name", stu_name);
         	session.setAttribute("uni_name", uni_name);
         	session.setAttribute("stu_id", stu_id);

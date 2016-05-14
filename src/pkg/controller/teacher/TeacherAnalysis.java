@@ -43,14 +43,14 @@ public class TeacherAnalysis {
     	
     	String tea_name = request.getParameter("tea_name");
     	String uni_name = request.getParameter("uni_name");
-    	try {
-			tea_name = new String(tea_name.getBytes("ISO-8859-1") , "UTF-8");
-			uni_name = new String(uni_name.getBytes("ISO-8859-1") , "UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
     	
-		if(tea_id!=0&&tea_name!=null){
+		if(tea_id!=-1&&tea_name!=null){
+			try {
+    			tea_name = new String(tea_name.getBytes("ISO-8859-1") , "UTF-8");
+    			uni_name = new String(uni_name.getBytes("ISO-8859-1") , "UTF-8");
+    		} catch (UnsupportedEncodingException e1) {
+    			e1.printStackTrace();
+    		}
         	session.setAttribute("tea_name", tea_name);
         	session.setAttribute("uni_name", uni_name);
         	session.setAttribute("tea_id", tea_id);

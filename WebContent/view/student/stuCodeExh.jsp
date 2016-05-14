@@ -197,7 +197,7 @@
 		</div>
 		
 
-			<div class="widget" style="overflow:scroll;height:400px;">
+			<div class="widget" style="overflow:scroll;height:500px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 					<div class="analysis-block" id="coverageBlock"
@@ -250,7 +250,7 @@
 			</div>
 		</div>
 	</div>
-	
+	<!-- 
 	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
 		<div class="widget">
 			<div class="head">
@@ -269,7 +269,7 @@
 				%>
 			</div>
 		</div>
-	</div>
+	</div> -->
 <script>
 scale=function (btn,bar,title){
 	this.btn=document.getElementById(btn);
@@ -347,9 +347,9 @@ function changeFile(){
   	 		 file_name :files.val()
           },
           success : function (data){
-	       	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
+	       	   //data = decodeURIComponent(data.replace(/\+/g, '%20'));
 	    	   data = data.replace(/</g,"&lt;");
-	    	   $("#stuCode").html(data);
+	    	   $("#prismCode").html(data);
           }
   	 });
 }
