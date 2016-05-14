@@ -215,8 +215,10 @@
 					</div>
 				</div>
 				<div class="body">
-					<pre  style="font-family:Consolas;font-size:15px" id="stuCode">
-						<%=request.getAttribute("code") %>
+				<pre id="stuCode" >
+						<code class="language-java" id="prismCode">
+							<%=request.getAttribute("code") %>
+						</code>
 					</pre>
 				</div>
 			</div>

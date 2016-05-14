@@ -1,5 +1,6 @@
 package pkg.controller.teacher;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,11 @@ public class TeaCodeExhibition {
 		
 		String code = codeService.getStuCodeByClassMemId(stu_id, 0, exam_id, problem_name,files.get(0)); 
 		code = code.replaceAll("<", "&lt;");
+//		try {
+//			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
 		request.setAttribute("code", code);
 		
 		return "view/teacher/teaCodeExh";
