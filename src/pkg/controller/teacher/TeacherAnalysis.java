@@ -70,9 +70,12 @@ public class TeacherAnalysis {
 	 public JSONArray deleteUnAnalysis(JSONArray array) throws JSONException{
 	    	JSONArray newArray = new JSONArray();
 	    	for(int i=0;i<array.length();i++){
+
 	    	  	int state = storageService.getAnalyseState(array.getJSONObject(i).getInt("exam_id"));
 	    	  	if(state==1){
-	    	  		newArray.put(array.get(i));
+		    		if(array.getJSONObject(i).getInt("exam_id")!=423){
+		    			newArray.put(array.get(i));
+		    		}
 	    	  	}
 	    	}
 	    	return newArray;
