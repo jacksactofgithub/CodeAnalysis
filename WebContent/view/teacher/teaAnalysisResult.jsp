@@ -177,7 +177,7 @@
 		</div>
 	</div>
 	
-	<div class="wrapper">
+	<div class="wrapper" style="position:relative; top:-25px;">
 		<!-- Content -->
 		<div class="content" >
 			<div class="title">
@@ -210,7 +210,7 @@
 		</div>
 	</div>
 	
-	<div class="wrapper" style="position:relative; top:0px;">
+	<div class="wrapper" style="position:relative; top:-70px;">
 		<div class="content" >
 			<div class="title">
 				<h5>运行结果</h5>

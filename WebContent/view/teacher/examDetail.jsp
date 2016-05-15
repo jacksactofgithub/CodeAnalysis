@@ -27,7 +27,6 @@
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/tablesorter/jquery.tablesorter.pager.css">
  <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
  <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
- <script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
 <style type="text/css">
 .problem-analysis-link {
     background-color: #9ff;

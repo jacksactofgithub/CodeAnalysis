@@ -177,7 +177,7 @@
 		</div>
 	</div>
 	
-	<div class="wrapper">
+	<div class="wrapper" style="position:relative; top:-25px;">
 		<!-- Content -->
 		<div class="content" >
 			<div class="title">
@@ -211,7 +211,7 @@
 			</div>
 		</div>
 	</div>
-<div class="wrapper" style="position:relative; top:0px;">
+<div class="wrapper" style="position:relative; top:-70px;">
 		<!-- Content -->
 		<div class="content" >
 			<div class="title">

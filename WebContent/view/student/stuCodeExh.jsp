@@ -25,7 +25,7 @@
 	href="http://mooctest.net/public/css/others/introjs.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/highlight.github.css">
-<link href="view/css/prism.css" rel="stylesheet" />
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/default.css" rel="stylesheet">  
 <style>
 .scale_panel{
 	font-size:12px;
@@ -136,7 +136,8 @@
         })();
         </script>
 <body>
-	<script src="view/js/prism.js"></script>
+	<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
 	<div id="header" class="wrapper">
 		<div id="loginInfo">
 			<img src="http://mooctest.net/public/images/userPic.png" alt="" /> <span>Welcome,
@@ -197,7 +198,7 @@
 		</div>
 		
 
-			<div class="widget" style="overflow:scroll;height:600px;">
+			<div class="widget" style="height:600px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 					<div class="analysis-block" id="coverageBlock"
@@ -217,9 +218,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="body" style="float:left;margin-left:-350px">
-					<pre id="stuCode" >
-						<code class="language-java" id="prismCode">
+				<div class="body" style="overflow:scroll;height:520px;width:770px;float:left;margin-left:180px">
+					<pre id="stuCode" style="width:600px;">
+						<code class="java" id="prismCode">
 							<%=request.getAttribute("code") %>
 						</code>
 					</pre>
@@ -330,6 +331,9 @@ function showCode(time){
         	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
         	   data = data.replace(/</g,"&lt;");
         	   $("#prismCode").html(data);
+        	   $('pre code').each(function(i, block) {
+       		    hljs.highlightBlock(block);
+       			});
            }
    	 });   
 }
@@ -347,9 +351,12 @@ function changeFile(){
   	 		 file_name :files.val()
           },
           success : function (data){
-	       	   //data = decodeURIComponent(data.replace(/\+/g, '%20'));
+	       	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
 	    	   data = data.replace(/</g,"&lt;");
 	    	   $("#prismCode").html(data);
+	    	   $('pre code').each(function(i, block) {
+	       		    hljs.highlightBlock(block);
+	       	   });
           }
   	 });
 }

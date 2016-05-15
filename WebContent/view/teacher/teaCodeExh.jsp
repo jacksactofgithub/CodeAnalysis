@@ -25,8 +25,7 @@
 	href="http://mooctest.net/public/css/others/introjs.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/chosen-1.2.0.min.css">
 <link rel="stylesheet" type="text/css" href="http://mooctest.net/public/css/others/highlight.github.css">
-<link href="view/css/prism.css" rel="stylesheet" />
-<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  
+<link href="http://cdn.bootcss.com/highlight.js/8.0/styles/default.css" rel="stylesheet">  
 
 <style>
 .scale_panel{
@@ -139,6 +138,7 @@
         </script>
 <body>
 <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script src="view/js/prism.js"></script>
 <div id="header" class="wrapper">
     <div id="loginInfo">
@@ -191,14 +191,14 @@
 					<ul id="breadCrumbList">
 						<li class="firstB"><a href="http://mooctest.net/tea/home" title="主页">主页</a></li>
 						<!-- 这里是stuanalysis页面 参数可能更改 -->
-						<li ><a href="<%=request.getContextPath() %>/teaAnalysis" title="编程分析">编程分析</a></li><!-- 同一工程下的链接跳转 -->
+						<li ><a href="<%=request.getContextPath() %>/teacherAnalysis" title="编程分析">编程分析</a></li><!-- 同一工程下的链接跳转 -->
 						<li class="firstB">CalculateMatrix</li>
 					</ul>
 				</div>
 			</div>
 		</div>
 		
-			<div class="widget" style="overflow:scroll;height:600px;">
+			<div class="widget" style="height:600px;">
 				<div class="head">
 					<h5 class="iInfo">学生代码</h5>
 					<div class="analysis-block" id="coverageBlock"
@@ -218,10 +218,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="body" style="float:left;margin-left:-350px">
+				<div class="body" style="overflow:scroll;height:520px;width:770px;float:left;margin-left:180px">
 				
-				<pre id="stuCode" >
-						<code id="prismCode" class="language-java">
+				<pre id="stuCode" style="width:600px;">
+						<code id="prismCode" class="java">
 							<%=request.getAttribute("code") %>
 						</code>
 					</pre>
@@ -254,15 +254,6 @@
 		</div>
 	</div>
 
-<!-- 
-	<div class="wrapper" style="position:relative; top:-80px;height:300px;">
-		<div class="widget">
-			<div class="head">
-				<h5 class="iInfo">运行信息</h5>
-			</div>
-		</div>
-	</div>
- -->
 <script>
 
 scale=function (btn,bar,title){
@@ -324,6 +315,9 @@ function showCode(time){
         	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
         	   data = data.replace(/</g,"&lt;");
         	   $("#prismCode").html(data);
+        	   $('pre code').each(function(i, block) {
+        		    hljs.highlightBlock(block);
+        		});
            }
    	 });   
 }
@@ -347,6 +341,10 @@ function changeFile(){
 	       	   data = decodeURIComponent(data.replace(/\+/g, '%20'));
 	    	   data = data.replace(/</g,"&lt;");
 	    	   $("#prismCode").html(data);
+	    	   //$("#stuCode").html("<code id='prismCode' class='java'>"+data+"</code>");
+	    	   $('pre code').each(function(i, block) {
+       		    hljs.highlightBlock(block);
+       			});
           }
   	 });
 }

@@ -1,8 +1,10 @@
 package pkg.controller.teacher;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,12 @@ public class TeaCodeExhibition {
 	
 	@RequestMapping("/teaCodeExh")
 	public String showResult(@RequestParam("exam_id")int exam_id,@RequestParam("stu_id")int stu_id,
-			@RequestParam("problem_name")String problem_name,HttpServletRequest request, HttpSession session) {
+			@RequestParam("problem_name")String problem_name,HttpServletRequest request, HttpServletResponse response,HttpSession session) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
 		request.setAttribute("code_stu_id", stu_id);
 		request.setAttribute("code_exam_id", exam_id);
 		request.setAttribute("code_problem_name", problem_name);
@@ -36,12 +43,13 @@ public class TeaCodeExhibition {
 		
 		String code = codeService.getStuCodeByClassMemId(stu_id, 0, exam_id, problem_name,files.get(0)); 
 		code = code.replaceAll("<", "&lt;");
-//		try {
-//			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("code", code);
+		response.setContentType("text/html; charset=UTF-8");
 		
 		return "view/teacher/teaCodeExh";
 	}
