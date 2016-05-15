@@ -58,11 +58,9 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		String code = service.getStuCodeByClassMemId(class_member_id, time, exam_id, problem_name,file_name);
 		try {
-			byte[] bytes = code.getBytes("GBK");
+			byte[] bytes = code.getBytes("GB2312");
 			
-			code = new String(bytes , "ISO-8859-1");
-			
-			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
+			code = new String(bytes , "UTF-8");
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
