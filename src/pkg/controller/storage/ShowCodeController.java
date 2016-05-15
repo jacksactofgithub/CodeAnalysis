@@ -34,7 +34,7 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		String code = service.getStuCode(stu_id, time, exam_id, problem_name,file_name);
 		try {
-			byte[] bytes = code.getBytes("UTF-8");
+			byte[] bytes = code.getBytes("GBK");
 			
 			code = new String(bytes , "ISO-8859-1");
 			
@@ -58,7 +58,7 @@ public class ShowCodeController {
 			@RequestParam("problem_name")String problem_name,@RequestParam("file_name")String file_name, HttpServletRequest request, HttpSession session) {
 		String code = service.getStuCodeByClassMemId(class_member_id, time, exam_id, problem_name,file_name);
 		try {
-			byte[] bytes = code.getBytes("UTF-8");
+			byte[] bytes = code.getBytes("GBK");
 			
 			code = new String(bytes , "ISO-8859-1");
 			
