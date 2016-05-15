@@ -1,5 +1,7 @@
 package pkg.controller.student;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,16 @@ public class StuCodeExhibition {
 		
 		String code = codeService.getStuCode(stu_id, 0, exam_id, problem_name,files.get(0)); 
 		code = code.replaceAll("<", "&lt;");
+		try {
+			byte[] bytes = code.getBytes("UTF-8");
+			
+			code = new String(bytes , "ISO-8859-1");
+			
+			code = new String(code.getBytes("ISO-8859-1") , "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("code", code);
 		
 		return "view/student/stuCodeExh";
