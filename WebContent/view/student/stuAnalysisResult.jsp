@@ -288,7 +288,7 @@ function changeFile(){
 	$.ajax({
 		type : "POST",
 		dataType:'json',
-        url : "getCodeStas",
+        url : "StuGetCodeStas",
         data : {
         	stu_id:stu_id,
        	 	exam_id:exam_id,
