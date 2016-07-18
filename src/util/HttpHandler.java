@@ -49,6 +49,8 @@ public class HttpHandler {
 	          buffer.append(line);  
 	        }  
 	        String str = buffer.toString(); 
+	        
+//	        System.out.println(str);
 			
 			return str;
 			

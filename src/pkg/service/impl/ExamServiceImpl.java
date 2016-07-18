@@ -45,6 +45,8 @@ public class ExamServiceImpl implements ExamService{
 			String exams = http.postHttpInvocation(URLNameFormat.GET_TEACHER_FINISHED_EXAMS, params);
 			JSONArray array = new JSONArray(exams);
 			
+			System.out.println(array.toString());
+			
 			return array;
 		} catch (Exception e) {
 			e.printStackTrace();

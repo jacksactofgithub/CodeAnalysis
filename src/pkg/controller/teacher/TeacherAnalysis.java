@@ -73,9 +73,7 @@ public class TeacherAnalysis {
 
 	    	  	int state = storageService.getAnalyseState(array.getJSONObject(i).getInt("exam_id"));
 	    	  	if(state==1){
-		    		if(array.getJSONObject(i).getInt("exam_id")!=423){
-		    			newArray.put(array.get(i));
-		    		}
+	    			newArray.put(array.get(i));
 	    	  	}
 	    	}
 	    	return newArray;
